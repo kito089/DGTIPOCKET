@@ -293,8 +293,19 @@ INICIO
 
 
 
-<button class="registro" > Registrate
-  <span href="/registro" ></span>
+<button class="registro" id="registro"> Registrate
+  <span  ></span>
 </button>
+
+<script>
+  // Selecciona el botón por su ID
+  var boton = document.getElementById("registro");
+
+  // Agrega un event listener para escuchar el clic en el botón
+  boton.addEventListener("click", function() {
+      // Redirige a la página deseada
+      window.location.href = "/registro"; // Reemplaza con la URL deseada
+  });
+</script>
 {% endblock %}
 

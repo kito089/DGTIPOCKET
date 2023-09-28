@@ -18,6 +18,9 @@ def sesion():
 @app.route('/registro')
 def registro():
     return render_template('Registro.html')
+@app.route('/planteles')
+def planteles():
+    return render_template('palnteles.html')
 
 
 if __name__ == '__main__':

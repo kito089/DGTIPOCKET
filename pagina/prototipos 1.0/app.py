@@ -20,8 +20,15 @@ def registro():
     return render_template('Registro.html')
 @app.route('/planteles')
 def planteles():
-    return render_template('palnteles.html')
+    return render_template('planteles.html')
 
+@app.route('/noticias')
+def noticias():
+    return render_template('noticias.html')
+
+@app.route('/funciones')
+def funciones():
+    return render_template('funciones.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

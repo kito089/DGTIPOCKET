@@ -6,20 +6,26 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
+        android:id="@+id/nav_func"
+        android:name="com.example.dgtipocket.ui.func.FuncFragment"
+        android:label="@string/menu_func" />
+    <fragment
+        android:id="@+id/nav_iniS"
+        android:name="com.example.dgtipocket.ui.iniS.IniSFragment"
+        android:label="@string/menu_iniS" />
+    <fragment
         android:id="@+id/nav_home"
         android:name="com.example.dgtipocket.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.dgtipocket.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_plan"
+        android:name="com.example.dgtipocket.ui.plan.PlanFragment"
+        android:label="@string/menu_plan" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.dgtipocket.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_news"
+        android:name="com.example.dgtipocket.ui.news.NewsFragment"
+        android:label="@string/menu_news" />
 </navigation>

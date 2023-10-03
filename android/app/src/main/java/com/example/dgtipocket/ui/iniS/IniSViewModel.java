@@ -1,16 +1,16 @@
-package com.example.dgtipocket.ui.slideshow;
+package com.example.dgtipocket.ui.iniS;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+public class IniSViewModel extends ViewModel{
 
-public class SlideshowViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public IniSViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is IniS fragment");
     }
 
     public LiveData<String> getText() {

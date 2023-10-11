@@ -24,8 +24,6 @@ public class FuncFragment extends Fragment{
         binding = FragmentFuncBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textFunc;
-        FuncViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

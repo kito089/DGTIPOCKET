@@ -4,109 +4,82 @@
 INICIO
 {% endblock %}
 {% block style %}
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-/* Estilo para las celdas */
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-/* Estilo para las filas impares (cambia el color de fondo) */
-tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
-
-/* Estilo para las filas pares (sin fondo de color) */
-tr:nth-child(even) {
-    background-color: #ffffff;
-}
-
-
-/* Estilo para el contenedor de los cuadros */
-.contenedor {
-    display: grid;
-    
-    grid-gap: 20px; /* Espacio entre los cuadros */
-    padding: 20px; /* Espacio interior */
-}
-
-/* Estilo para cada cuadro */
-.cuadro {
-    text-align: center;
-    background-color: #f2f2f2; /* Fondo gris */
-    weight:50%;
-    border: 1px solid #ccc;
-    border-radius: 10px; /* Borde redondeado */
-    padding: 20px; /* Espacio interior */
-}
-
-/* Estilo para las imágenes dentro de los cuadros */
-.cuadro img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%; /* Imagen redondeada */
-    margin-bottom: 10px;
-}
-
-/* Estilo para los títulos dentro de los cuadros */
-.cuadro h3 {
-    font-size: 16px;
-    margin: 0;
-}
-
-/* Estilo para los botones dentro de los cuadros */
-.cuadro button {
-    background-color: #007bff; /* Color de fondo del botón */
-    color: white;
-    border: none;
-    border-radius: 5px;
+.card {
+    max- height:50% ;
+    background-color: #fff;
+    border: 4px solid #659AD2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 30px 20px;
+    color: #659AD2;
+    border-radius: 45px;
+  }
+  
+  .App-logo {
+    pointer-events: none;
+    width: 140px;
+    margin-bottom: 20px;
+  }
+  
+  .App-button {
     padding: 10px 20px;
-    cursor: pointer;
-}
-.icono{
-width:50%;
-}
-
+    background-color: transparent;
+    color: #659AD2;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    border: 3px solid #659AD2;
+    border-radius: 5em;
+    margin-top: 20px;
+    transition: 0.2s;
+  }
+  
+  .App-button:hover {
+    color: #282c34;
+    background-color: #659AD2;
+  }
+  
 {% endblock %}
 
 {% block content %}
 <div class="item">
-    
-<div class="contenedor">
-    <div class="cuadro">
-        <li><a href="/">
-            <span class="icono"><i class="fas fa-user"></i></span>
-        </a></li>
-
-
-        <h3>Título 1</h3>
-        <button>Botón 1</button>
-    </div>
-
-    <div class="cuadro">
-        <img src="imagen2.jpg" alt="Imagen 2">
-        <h3>Título 2</h3>
-        <button>Botón 2</button>
-    </div>
-
-    <div class="cuadro">
-        <img src="imagen3.jpg" alt="Imagen 3">
-        <h3>Título 3</h3>
-        <button>Botón 3</button>
-    </div>
-
-    <div class="cuadro">
-        <img src="imagen4.jpg" alt="Imagen 4">
-        <h3>Título 4</h3>
-        <button>Botón 4</button>
-    </div>
+    <div class="card">
+       
+      
+      </svg>
+        <div class="header">Agenda</div>
+        <button class="App-button">Visitar</button>
+      </div>
 </div>
-
-
+<div class="item">
+    <div class="card">
+       
+      
+      </svg>
+        <div class="header">Pagos</div>
+        <button class="App-button">Visitar</button>
+      </div>
+</div>
+<div class="item">
+    <div class="card">
+       
+      
+      </svg>
+        <div class="header">Cuadernillo</div>
+        <button class="App-button">Visitar</button>
+      </div>
+</div>
+<div class="item">
+    <div class="card">
+       
+      
+      </svg>
+        <div class="header">Cafeteria</div>
+        <button class="App-button">Visitar</button>
+      </div>
 </div>
 {% endblock %}

@@ -14,4 +14,12 @@
     <string name="menu_news">Noticias</string>
     <string name="menu_func">Funciones</string>
     <string name="menu_iniS">Iniciar Sesion</string>
+
+    <string name="func_calendar">Agenda</string>
+    <string name="func_coffe">Cafeteria</string>
+    <string name="func_notes">Cuadernos</string>
+    <string name="func_pays">Pagos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

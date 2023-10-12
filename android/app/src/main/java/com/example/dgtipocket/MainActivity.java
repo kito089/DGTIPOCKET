@@ -62,4 +62,10 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    /*@Override
+    public boolean agenda(){
+        NavController navController = Navigation.findNavController(this, R.id);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
+    }*/
 }

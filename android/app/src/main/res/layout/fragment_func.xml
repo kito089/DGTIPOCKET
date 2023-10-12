@@ -6,17 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".ui.func.FuncFragment">
 
-    <TextView
-        android:id="@+id/text_func"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.64">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            android:textAlignment="center">
+
+            <Button
+                android:id="@+id/func_calendar"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:text="@string/func_calendar" />
+
+            <Button
+                android:id="@+id/func_notes"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:text="@string/func_notes" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:textAlignment="center">
+
+            <Button
+                android:id="@+id/func_coffe"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginEnd="0dp"
+                android:text="@string/func_coffe" />
+
+            <Button
+                android:id="@+id/func_pays"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginEnd="0dp"
+                android:text="@string/func_pays" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_func"
+        android:layout_width="335dp"
+        android:layout_height="71dp"
+        android:text="@string/menu_func"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.web4edu.edulifepocketweb"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.web4edu.edulifepocketweb"
         minSdk = 22
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

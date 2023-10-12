@@ -173,3 +173,10 @@ body{
   width: (100% - 70px);
   margin-left: 70px;
 }
+@media (max-width: 768px) {
+    body {
+      font-size: 50px; /* Cambia el tamaño de fuente base para pantallas pequeñas */
+    
+    }
+    /* Puedes agregar reglas CSS adicionales para elementos específicos en pantallas pequeñas */
+  }

@@ -13,22 +13,24 @@ def index():
 
 @app.route('/sesion')
 def sesion():
-    return render_template('inicioS.html')
+    return render_template('inicioSapp.html')
 
 @app.route('/registro')
 def registro():
-    return render_template('Registro.html')
+    return render_template('Registroapp.html')
 @app.route('/planteles')
 def planteles():
-    return render_template('planteles.html')
+    return render_template('plantelesapp.html')
 
 @app.route('/noticias')
 def noticias():
-    return render_template('noticias.html')
+    return render_template('noticiasapp.html')
 
 @app.route('/funciones')
 def funciones():
-    return render_template('funciones.html')
-
+    return render_template('funcionesapp.html')
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
 if __name__ == '__main__':
     app.run(debug=True)

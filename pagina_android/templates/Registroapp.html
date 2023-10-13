@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layoutapp.html" %}
 
 {% block title %}
 INICIO
@@ -201,6 +201,7 @@ INICIO
   right: 0;
   width: 0;
 }
+
 .registro {
   margin: 10px;
   border: none;
@@ -260,15 +261,28 @@ INICIO
 {% endblock %}
 
 
-{% block content %}
-<form class="form">
+{% block content %}<form class="form">
   <label>
-    <span >Iniciar sesion</span>
+    <span>Registrarte</span>
   </label>
 
-  
+  <div class="flex">
+    
+      <label>
+          <input class="input" type="text" placeholder="" required="">
+          <span>Nombres</span>
+      </label>
 
+      <label>
+          <input class="input" type="text" placeholder="" required="">
+          <span>Apellidos</span>
+      </label>
+  </div> 
 
+<label>
+    <input class="input" type="email" placeholder="" required="">
+    <span>Numero de Control</span>
+</label> 
 
   <label>
       <input class="input" type="email" placeholder="" required="">
@@ -288,12 +302,9 @@ INICIO
     <span class="bottom-key-2"></span>
   </button>
 
+
 </form>
-
-
-
-
-<button class="registro" id="registro"> Registrate
+<button class="registro" id="registro"> Iniciar Sesion
   <span  ></span>
 </button>
 
@@ -304,7 +315,7 @@ INICIO
   // Agrega un event listener para escuchar el clic en el botón
   boton.addEventListener("click", function() {
       // Redirige a la página deseada
-      window.location.href = "/registro"; // Reemplaza con la URL deseada
+      window.location.href = "/sesion"; // Reemplaza con la URL deseada
   });
 </script>
 {% endblock %}

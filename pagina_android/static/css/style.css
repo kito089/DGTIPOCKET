@@ -20,6 +20,14 @@ body {
 .navbar {
   width: 100%;
   box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
+  position: fixed ;
+  background: #fff;
+  z-index: 2; 
+}
+
+.log{
+  width: 200px;
+  height: auto;
 }
 
 .nav-container {
@@ -31,6 +39,7 @@ body {
 
 .navbar .menu-items {
   display: flex;
+  background: #fff;
 }
 
 .navbar .nav-container li {
@@ -150,10 +159,10 @@ body {
   display: none;
 }
 
-.wrapper .main_container{
-  width: (100% - 200px);
-  margin-top: 70px;
-  margin-left: 200px;
-  padding: 15px;
-  transition: all 0.3s ease;
+.contenedor{
+  
+  padding-top: 20%;
+  z-index: 1; 
+
+
 }

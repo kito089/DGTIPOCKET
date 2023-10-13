@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <title>Barra de Navegación Vertical</title>
+    <title>{% block title %}Edulife{% endblock %}</title>
+    <style>{% block style %}{% endblock %}</style>
 </head>
 
   <body>
@@ -19,21 +20,20 @@
               <span class="line line2"></span>
               <span class="line line3"></span>
             </div>  
-          <div class="logo">
-            <h1>Navbar</h1>
-          </div>
+            <div class="logo"><img class='log' src="https://i.ibb.co/LvSSpTX/eDULIFE.png" alt="eDULIFE" border="0"></div>
+
           <div class="menu-items">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">about</a></li>
-            <li><a href="#">blogs</a></li>
-            <li><a href="#">portfolio</a></li>
-            <li><a href="#">contact</a></li>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/funciones">Funciones</a></li>
+            <li><a href="/planteles">Plantel</a></li>
+            <li><a href="/noticias">Noticias</a></li>
+            <li><a href="/sesion">Iniciar Sesion</a></li>
           </div>
         </div>
       </div>
     </nav>
 
-    <div class="main_container">
+    <div class="contenedor">
     
         {% block content %}{% endblock %}	
     </div>

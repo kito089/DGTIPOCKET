@@ -41,15 +41,19 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+     background-color: rgba(255, 255, 255, 0.5); 
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYu7kM3805OTLDNdDdFbi7IX-Exwyf4u7nfA&usqp=CAU');
+   
+   
+    
+
 }
 
 h1, h2 {
     text-align: center;
     color: #2e4ead;
+    background-color:#fff;
+    border-radius:10px;
 }
 
 ul {
@@ -69,14 +73,18 @@ h2 {
 }
 
 /* Estilos para los productos y precios */
-li {
+.product li {
     display: flex;
     justify-content: space-between;
+    background-color:#a5a5a5;
+    border-radius:10px;
+
 }
 
 /* Cambiar el color del precio */
 li span {
     color: #2e4ead;
+    background-color:#fff;
 }
 
 /* Estilo para resaltar las categorías */
@@ -95,7 +103,7 @@ h2 {
             <div id="header">
                 <h1>Cafeteria Cetis 155</h1>
             </div>
-            <ul>
+            <ul class="product">
                 <li>Taco - $15</li>
                 <li>Burrito - $20</li>
                 <li>Mollete - $20</li>
@@ -120,7 +128,7 @@ h2 {
             </ul>
         
             <h2>Bebidas</h2>
-            <ul>
+            <ul class="product">
                 <li>Agua 500ml - $7</li>
                 <li>Té - $15</li>
                 <li>Agua Fresca 1/2 - $15</li>
@@ -141,7 +149,7 @@ h2 {
             </ul>
         
             <h2>Panadería y Postres</h2>
-            <ul>
+            <ul class="product">
                 <li>Pan - $10</li>
                 <li>Galletas - $10</li>
                 <li>Donas - $10</li>
@@ -160,7 +168,7 @@ h2 {
         </div>
         <div class="column">
             <h2>Dulces</h2>
-            <ul>
+            <ul class="product">
                 <li>Picafres - $1</li>
                 <li>Tamborcito - $1</li>
                 <li>Mentos - $2</li>
@@ -204,7 +212,7 @@ h2 {
             </ul>
         
             <h2>Comida Rápida</h2>
-            <ul>
+            <ul class="product">
                 <li>Papa a la Francesa - $25</li>
                 <li>Salchipupo - $30</li>
                 <li>Papa Gajo - $35</li>

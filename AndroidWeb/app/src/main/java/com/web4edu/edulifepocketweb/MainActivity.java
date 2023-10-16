@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         myWebSettings = myWebView.getSettings();
         myWebSettings.setJavaScriptEnabled(true);
         myWebSettings.setDomStorageEnabled(true);
-        myWebView.loadUrl("https://3frk4xdm-5000.usw3.devtunnels.ms/");
+        myWebView.loadUrl("https://m58jj8n6-5000.usw3.devtunnels.ms/");
         myWebView.setWebViewClient(new WebViewClient());
     }
 }

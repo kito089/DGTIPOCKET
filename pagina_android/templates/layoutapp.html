@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>{% block title %}Edulife{% endblock %}</title>
+    <style>{% block style %}{% endblock %}</style>
+</head>
+
+  <body>
+    <nav>
+      <div class="navbar">
+        <div class="container nav-container">
+            <input class="checkbox" type="checkbox" name="" id="" />
+            <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+            </div>  
+            <div class="logo"><img class='log' src="https://i.ibb.co/LvSSpTX/eDULIFE.png" alt="eDULIFE" border="0"></div>
+
+          <div class="menu-items">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/funciones">Funciones</a></li>
+            <li><a href="/planteles">Plantel</a></li>
+            <li><a href="/noticias">Noticias</a></li>
+            <li><a href="/sesion">Iniciar Sesion</a></li>
+            <li><a href="/insnot">insert</a></li>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="contenedor">
+    
+        {% block content %}{% endblock %}	
+    </div>
+  </body>
+</html>

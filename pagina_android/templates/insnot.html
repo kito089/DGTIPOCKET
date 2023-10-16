@@ -1,0 +1,27 @@
+{% extends "layoutapp.html" %}
+
+{% block title %}
+insert noticias
+{% endblock %}
+
+
+
+{% block content %}
+  
+
+<h1>Insertar Noticia</h1>
+<form action="/insnot" method="POST">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required><br>
+
+    <label for="descripcion">Descripción:</label>
+    <textarea id="text" name="descripcion" required></textarea><br>
+
+    <label for="img">URL de la imagen:</label>
+    <input type="text" id="img" name="img"><br>
+
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha"><br>
+
+    <input type="submit" value="Guardar">
+{% endblock %}

@@ -30,5 +30,16 @@ tr:nth-child(even) {
 {% endblock %}
 
 {% block content %}
-
+<div class="noticias">
+    {% for noticia in noticias %}
+    <div class="noticia">
+        <h2>{{ noticia.titulo }}</h2>
+        <p>{{ noticia.descripcion }}</p>
+        {% if noticia.img %}
+            <img src="{{ noticia.img }}" alt="Imagen de la noticia">
+        {% endif %}
+        <p>Fecha: {{ noticia.fecha }}</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

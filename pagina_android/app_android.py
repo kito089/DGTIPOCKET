@@ -1,5 +1,24 @@
-from flask import Flask, render_template
-import sqlite3
+from flask import Flask, render_template,redirect,url_for, request
+import pymysql
+
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
+# Configuración de la base de datos
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'prototipos'
+
+# Crear una conexión a la base de datos
+db = pymysql.connect(
+    host=app.config['MYSQL_HOST'],
+    user=app.config['MYSQL_USER'],
+    password=app.config['MYSQL_PASSWORD'],
+    db=app.config['MYSQL_DB']
+)
+
 
 
 
@@ -22,9 +41,7 @@ def registro():
 def planteles():
     return render_template('plantelesapp.html')
 
-@app.route('/noticias')
-def noticias():
-    return render_template('noticiasapp.html')
+
 
 @app.route('/funciones')
 def funciones():
@@ -32,5 +49,32 @@ def funciones():
 @app.route('/menu')
 def menu():
     return render_template('menu.html')
+
+@app.route('/noticias')
+def noticias():
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM noticias")
+    noticias = cursor.fetchall()
+    return render_template('noticiasapp.html', noticias=noticias)
+
+@app.route('/insnot', methods=['GET', 'POST'])
+def agregar_noticia():
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        descripcion = request.form['descripcion']
+        img = request.form['img']
+        fecha = request.form['fecha']
+
+        cursor  = db.cursor()
+        cursor.execute("INSERT INTO noticias (titulo, descripcion, img, fecha) VALUES (%s, %s, %s, %s)",
+                       (titulo, descripcion, img, fecha))
+        db.commit()
+        
+
+        return redirect(url_for('noticias'))
+    return render_template('insnot.html')
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

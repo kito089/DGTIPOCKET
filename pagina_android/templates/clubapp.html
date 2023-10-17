@@ -6,61 +6,99 @@ INICIO
 {% block style %}
 .tarjeta {
     width: 300px;
-    border: 1px solid #ddd;
+    border: 2px solid #3498db; /* Contorno azul */
     margin: 10px;
     padding: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 5px #888888;
-    display: inline-block;
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 10px; /* Márgenes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sutil sombra */
     text-align: center;
+    margin-left: 10%;
+
   }
 
   .imagen {
     width: 100%;
-    max-height: 150px;
+    padding: 0;
+    border: 0;
+  }
+
+  .imagen img {
+    width: 100%; /* Asegura que la imagen sea cuadrada */
+    height: 100%;
+    object-fit: cover;
   }
 
   .titulo {
     font-size: 18px;
     font-weight: bold;
+    color: #333; /* Texto negro */
   }
 
   .informacion {
     font-size: 14px;
     margin-top: 10px;
+    color: #333; /* Texto negro */
   }
+
+  .area-trabajo {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #333
 {% endblock %}
 
 {% block content %}
 
-
+<div class="item">
 <div class="tarjeta">
-    <img class="imagen" src="club1.jpg" alt="Club 1">
+    <img class="imagen" src="https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/ajedrez.png?raw=true" alt="Club 1">
     <div class="titulo">Club de Ajedrez</div>
     <div class="informacion">
       <p>Horarios: Martes y Jueves 5:00 PM - 7:00 PM</p>
       <p>Encargado: Profesor X</p>
     </div>
+    <div class="area-trabajo">
+      <p>Área de Trabajo: Sala 1</p>
+    </div>
   </div>
   
   <div class="tarjeta">
-    <img class="imagen" src="club2.jpg" alt="Club 2">
-    <div class="titulo">Club de Baile</div>
+    <img class="imagen" src="https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/cumbia.png?raw=true" alt="Club 2">
+    <div class "titulo">Club de Baile</div>
     <div class="informacion">
       <p>Horarios: Miércoles y Viernes 6:30 PM - 8:30 PM</p>
       <p>Encargado: Instructor Y</p>
     </div>
-  </div>
-  
-  <div class="tarjeta">
-    <img class="imagen" src="club3.jpg" alt="Club 3">
-    <div class="titulo">Club de Robotica</div>
-    <div class="informacion">
-      <p>Horarios: Sábados 10:00 AM - 12:00 PM</p>
-      <p>Encargado: Martin contreraz</p>
+    <div class="area-trabajo">
+      <p>Área de Trabajo: Sala de Danza</p>
     </div>
   </div>
   
+  <div class="tarjeta">
+    <img class="imagen" src="https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/robotica.png?raw=true" alt="Club 3">
+    <div class="titulo">Club de Robotica</div>
+    <div class="informacion">
+      <p>Horarios: Sábados 10:00 AM - 12:00 PM</p>
+      <p>Encargado: Fotógrafo Z</p>
+    </div>
+    <div class="area-trabajo">
+      <p>Área de Trabajo: Estudio de Robotica</p>
+    </div>
+  </div>
 
+
+  <div class="tarjeta">
+    <img class="imagen" src="https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/robotica.png?raw=true" alt="Club 3">
+    <div class="titulo">Club de Volley</div>
+    <div class="informacion">
+      <p>Horarios: Sábados 10:00 AM - 12:00 PM</p>
+      <p>Encargado: Julio</p>
+    </div>
+    <div class="area-trabajo">
+      <p>Área de Trabajo: Cancha 1</p>
+    </div>
+  </div>
+  
+</div>
 
 {% endblock %}

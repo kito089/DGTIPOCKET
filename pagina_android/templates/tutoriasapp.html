@@ -1,0 +1,68 @@
+{% extends "layoutapp.html" %}
+
+{% block title %}
+INICIO
+{% endblock %}
+{% block style %}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+  .titulo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #2e4ead;
+    color: #fff;
+    padding: 10px;
+  }
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="titulo">Tutorías</div>
+<table>
+    <tr>
+      <th>Clase</th>
+      <th>Maestro</th>
+      <th>Salón</th>
+      <th>Horarios</th>
+    </tr>
+    <tr>
+      <td>Matemáticas</td>
+      <td>Profesor A</td>
+      <td>Aula 101</td>
+      <td>Lunes 9:00 AM - 10:30 AM</td>
+    </tr>
+    <tr>
+      <td>Ciencias</td>
+      <td>Profesor B</td>
+      <td>Aula 102</td>
+      <td>Miércoles 2:00 PM - 3:30 PM</td>
+    </tr>
+    <tr>
+      <td>Historia</td>
+      <td>Profesor C</td>
+      <td>Aula 103</td>
+      <td>Viernes 11:00 AM - 12:30 PM</td>
+    </tr>
+  </table>
+
+
+
+{% endblock %}

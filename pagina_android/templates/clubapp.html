@@ -1,0 +1,66 @@
+{% extends "layoutapp.html" %}
+
+{% block title %}
+INICIO
+{% endblock %}
+{% block style %}
+.tarjeta {
+    width: 300px;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 5px #888888;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .imagen {
+    width: 100%;
+    max-height: 150px;
+  }
+
+  .titulo {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .informacion {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+{% endblock %}
+
+{% block content %}
+
+
+<div class="tarjeta">
+    <img class="imagen" src="club1.jpg" alt="Club 1">
+    <div class="titulo">Club de Ajedrez</div>
+    <div class="informacion">
+      <p>Horarios: Martes y Jueves 5:00 PM - 7:00 PM</p>
+      <p>Encargado: Profesor X</p>
+    </div>
+  </div>
+  
+  <div class="tarjeta">
+    <img class="imagen" src="club2.jpg" alt="Club 2">
+    <div class="titulo">Club de Baile</div>
+    <div class="informacion">
+      <p>Horarios: Miércoles y Viernes 6:30 PM - 8:30 PM</p>
+      <p>Encargado: Instructor Y</p>
+    </div>
+  </div>
+  
+  <div class="tarjeta">
+    <img class="imagen" src="club3.jpg" alt="Club 3">
+    <div class="titulo">Club de Robotica</div>
+    <div class="informacion">
+      <p>Horarios: Sábados 10:00 AM - 12:00 PM</p>
+      <p>Encargado: Martin contreraz</p>
+    </div>
+  </div>
+  
+
+
+{% endblock %}

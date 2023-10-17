@@ -41,6 +41,10 @@ def registro():
 def planteles():
     return render_template('plantelesapp.html')
 
+@app.route('/tutorias')
+def tutorias():
+    return render_template('tutoriasapp.html')
+
 
 
 @app.route('/funciones')

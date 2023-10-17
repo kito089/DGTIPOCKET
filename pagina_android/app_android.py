@@ -25,6 +25,9 @@ def planteles():
 def tutorias():
     return render_template('tutoriasapp.html')
 
+@app.route('/clubs')
+def clubs():
+    return render_template('clubapp.html')
 @app.route('/funciones')
 def funciones():
     return render_template('funcionesapp.html')

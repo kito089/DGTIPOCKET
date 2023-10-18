@@ -165,3 +165,31 @@ body {
   z-index: 1; 
 
 }
+
+/* Estilos específicos para la sección de avisos */
+.avisos-list {
+  list-style-type: square; /* Utiliza viñetas cuadradas para los elementos de la lista */
+  margin-left: 20px; /* Añade un margen a la izquierda de la lista */
+}
+
+.avisos-list li {
+  margin: 5px 0; /* Espacio entre elementos de la lista */
+  font-weight: bold; /* Texto en negrita */
+  color: #006699; /* Color de texto personalizado */
+}
+h1{
+  text-align: center; 
+  color:#006699;
+}
+
+/* Estilos específicos para la sección de concursos */
+.concursos-list {
+  list-style-type: square;
+  margin-left: 20px;
+}
+
+.concursos-list li {
+  margin: 5px 0;
+  font-weight: bold;
+  color: #e74c3c; /* Color de texto personalizado */
+}

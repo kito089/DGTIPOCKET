@@ -81,7 +81,9 @@ def agregar_noticia():
         return redirect(url_for('noticias'))
     return render_template('insnot.html')
 
-
+@app.route('/a')
+def pruebas():
+    return render_template('prueba.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

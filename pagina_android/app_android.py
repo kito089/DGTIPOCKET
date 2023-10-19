@@ -3,7 +3,7 @@ from authlib.integrations.flask_client import OAuth
 import os
 from python.bd import *
 from datetime import timedelta
-
+#pendejo
 # decorator for routes that should be accessible only by logged in users
 #from auth_decorator import login_required
 

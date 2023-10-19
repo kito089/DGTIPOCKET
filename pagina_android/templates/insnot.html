@@ -24,4 +24,29 @@ insert noticias
     <input type="date" id="fecha" name="fecha"><br>
 
     <input type="submit" value="Guardar">
+
+
+    <h1 class="center">Inserción de Avisos</h1>
+
+    <div class="container">
+        <form action="/insertar_aviso" method="post">
+            <div class="form-group">
+                <label for="descripcion">Descripción del Aviso:</label>
+                <textarea name="descripcion" id="descripcion" class="input-text" rows="4" cols="50"></textarea>
+            </div>
+            <button type="submit" class="button">Insertar Aviso</button>
+        </form>
+    </div>
+
+    <h1 class="center">Inserción de Concursos</h1>
+
+    <div class="container">
+        <form action="/insertar_concurso" method="post">
+            <div class="form-group">
+                <label for="descripcion">Descripción del Concurso:</label>
+                <textarea name="descripcion" id="descripcion" class="input-text" rows="4" cols="50"></textarea>
+            </div>
+            <button type="submit" class="button">Insertar Concurso</button>
+        </form>
+    </div>
 {% endblock %}

@@ -6,6 +6,20 @@ INICIO
 
 <div class="g-singnin2" data-onsuccess="onSignIn"></div>
 
+
+
 {% block content %}
-  
+  <h1>Avisos</h1>
+<ul class="avisos-list">
+    {% for aviso in avisos %}
+        <li>{{ aviso[0] }}</li>
+    {% endfor %}
+</ul>
+
+<h1 class="center">Concursos</h1>
+<ul class="concursos-list">
+    {% for concurso in concursos %}
+        <li>{{ concurso[0] }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

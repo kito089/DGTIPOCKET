@@ -19,7 +19,16 @@ public class MainActivity extends AppCompatActivity {
         myWebSettings = myWebView.getSettings();
         myWebSettings.setJavaScriptEnabled(true);
         myWebSettings.setDomStorageEnabled(true);
-        myWebView.loadUrl("https://m58jj8n6-5000.usw3.devtunnels.ms/");
+        myWebView.loadUrl("https://patotipo.pythonanywhere.com/");
         myWebView.setWebViewClient(new WebViewClient());
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (myWebView.canGoBack()){
+            myWebView.goBack();
+        }else{
+            super.onBackPressed();
+        }
     }
 }

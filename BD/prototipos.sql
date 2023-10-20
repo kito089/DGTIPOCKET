@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2023 a las 19:11:44
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Host: localhost
+-- Generation Time: Oct 20, 2023 at 06:31 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,15 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `prototipos`
+-- Database: `prototipos`
 --
-CREATE DATABASE IF NOT EXISTS `prototipos` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `prototipos` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `prototipos`;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `noticias`
+-- Table structure for table `noticias`
 --
 
 DROP TABLE IF EXISTS `noticias`;
@@ -37,7 +37,14 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `img` varchar(255) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `noticias`
+--
+
+INSERT INTO `noticias` (`id`, `titulo`, `descripcion`, `img`, `fecha`) VALUES
+(1, 'noticia 1', 'sfjhsdhf gsmbgvkjsdbgvkhdbgv', 'https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/cumbia.png?raw=true', '2023-10-17');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

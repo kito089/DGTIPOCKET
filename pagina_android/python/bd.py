@@ -5,11 +5,11 @@ class Coneccion:
     def __init__(self):
         try:
             self.conexion = pymysql.connect(  #Se conecta a la base de datos
-                host='127.0.0.1',
-                port=3306,
-                user='root',
-                password='',
-                db='prototipos'
+                host='patotipo.mysql.pythonanywhere-services.com',
+                #port=3306,
+                user='patotipo',
+                password='ZDHY155P',
+                db='patotipo$prototipos'
             )
             self.cursor = self.conexion.cursor()
         except pymysql.Error as e:

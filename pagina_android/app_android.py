@@ -13,6 +13,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# XDDDDDDDD
 # Session config
 app.secret_key = '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'
 ##app.config['SESSION_COOKIE_NAME'] = 'google-login-session'

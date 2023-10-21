@@ -38,12 +38,18 @@ google = oauth.register(
 # Definir una ruta para la página principal
 @app.route('/')
 def index():
+    bd = Coneccion()
+    avisos = bd.obtenerTablas("noticias")
+    concursos = bd.obtenerTablas("noticias")
+
+    bd.exit()
     if 'google_token' in session:
         resp = oauth.google.get('userinfo')
         user_info = resp.json()
         print(user_info)
         return 'Hola, ' + user_info['name']
-    return render_template('indexapp.html')
+    
+    return render_template('indexapp.html',avisos=avisos,concursos=concursos)
 
 @app.route("/prueba")
 def prueba():
@@ -103,7 +109,7 @@ def funciones():
 def menu():
     return render_template('menu.html')
 
-@app.route('/noticias')
+@app.route('/noticias')                            #pendiente css
 def noticias():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
@@ -125,6 +131,22 @@ def agregar_noticia():
         return redirect(url_for('noticias'))
     return render_template('insnot.html')
 
+@app.route('/instaviso', methods=['GET', 'POST'])
+def agregar_aviso():
+    if request.method == 'POST':
+        datos = []
+        datos.append(request.form['id'])
+        datos.append(request.form['titulo'])
+        datos.append(request.form['descripcion'])
+        datos.append(request.form['fecha'])
+
+        bd = Coneccion()
+        bd.insertarRegistro("avisos", datos)
+        bd.exit()
+        return redirect(url_for('index'))
+    return render_template('insnot.html')
+    
+    
 @app.route('/a')
 def pruebas():
     return render_template('prueba.html')

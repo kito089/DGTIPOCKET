@@ -36,7 +36,7 @@ google = oauth.register(
 )
 
 # Definir una ruta para la página principal
-'''@app.route('/')
+@app.route('/')
 @login_required
 def index():
     bd = Coneccion()
@@ -49,9 +49,9 @@ def index():
         user_info = resp.json()
         print(user_info)
         return 'Hola, ' + user_info['name']
-    return render_template('indexapp.html')'''
+    return render_template('indexapp.html')
 
-@app.route("/")
+@app.route("/inisiar")
 @login_required
 def prueba():
     correo = dict(session).get('email', None)

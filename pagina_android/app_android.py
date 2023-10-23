@@ -108,6 +108,12 @@ def funciones():
 @app.route('/menu')
 def menu():
     return render_template('menu.html')
+@app.route('/servicio')
+def servicio():
+    return render_template('servicio.html')
+@app.route('/historial')
+def historial():
+    return render_template('historial.html')
 
 @app.route('/noticias')                            #pendiente css
 def noticias():

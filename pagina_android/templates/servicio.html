@@ -1,0 +1,45 @@
+{% extends "layoutapp.html" %}
+
+{% block title %}
+INICIO
+{% endblock %}
+{% block style %}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Estilo para las celdas */
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Estilo para las filas impares (cambia el color de fondo) */
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para las filas pares (sin fondo de color) */
+tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="noticias">
+    {% for noticia in noticias %}
+    <div class="noticia">
+        <h2>{{ noticia.1 }}</h2>
+        <p>{{ noticia.2 }}</p>
+        {% if noticia.3 %}
+            <img src="{{ noticia.3 }}" alt="Imagen de la noticia">
+        {% endif %}
+        <p>Fecha: {{ noticia.4 }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

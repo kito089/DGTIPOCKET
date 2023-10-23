@@ -37,7 +37,6 @@ google = oauth.register(
 
 # Definir una ruta para la página principal
 @app.route('/')
-@login_required
 def index():
     bd = Coneccion()
     avisos = bd.obtenerTablas("noticias")

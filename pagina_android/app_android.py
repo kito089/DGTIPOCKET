@@ -15,16 +15,16 @@ app = Flask(__name__)
 
 # XDDDDDDDD
 # Session config
-app.secret_key = os.getenv("APP_SECRET_KEY")
-app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+app.secret_key = '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'
+#app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
+#app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 oauth = OAuth(app)
 
 google = oauth.register(
     name='google',
-    client_id= os.getenv("GOOGLE_CLIENT_ID"),
-    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
+    client_id= '1092101831178-qmrflc090f71mb558vd9865cp70sfgpf.apps.googleusercontent.com',
+    client_secret='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',
     #access_token_url='https://accounts.google.com/o/oauth2/token',
     #access_token_params=None,
     #authorize_url='https://accounts.google.com/o/oauth2/auth',

@@ -42,11 +42,11 @@ def index():
     avisos = bd.obtenerTablas("noticias")
     concursos = bd.obtenerTablas("noticias")
     bd.exit()
-    if 'google_token' in session:
+    '''if 'google_token' in session:
         resp = oauth.google.get('userinfo')
         user_info = resp.json()
         print(user_info)
-        return 'Hola, ' + user_info['name']
+        return 'Hola, ' + user_info['name']'''
     return render_template('indexapp.html')
 
 @app.route("/inisiar")

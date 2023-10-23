@@ -5,7 +5,7 @@ from python.bd import *
 from datetime import timedelta
 #pendejo q va
 # decorator for routes that should be accessible only by logged in users
-#from auth_decorator import login_required
+from python.funciones_auth import login_required
 
 # dotenv setup
 from dotenv import load_dotenv
@@ -15,28 +15,29 @@ app = Flask(__name__)
 
 # XDDDDDDDD
 # Session config
-app.secret_key = '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'
-##app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
-##app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+app.secret_key = os.getenv("APP_SECRET_KEY")
+app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 oauth = OAuth(app)
 
 google = oauth.register(
     name='google',
-    client_id='1092101831178-qmrflc090f71mb558vd9865cp70sfgpf.apps.googleusercontent.com',
-    client_secret='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',
-    #access_token_url='https://accounts.google.com/o/oauth2/token',
-    #access_token_params=None,
-    #authorize_url='https://accounts.google.com/o/oauth2/auth',
-    #authorize_params=None,
+    client_id= os.getenv("GOOGLE_CLIENT_ID"),
+    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
     api_base_url='https://www.googleapis.com/oauth2/v1/',
-    #userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
-    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
+    #--server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     client_kwargs={'scope': 'openid email profile'}
 )
 
 # Definir una ruta para la página principal
-@app.route('/')
+'''@app.route('/')
+@login_required
 def index():
     bd = Coneccion()
     avisos = bd.obtenerTablas("noticias")
@@ -48,17 +49,13 @@ def index():
         user_info = resp.json()
         print(user_info)
         return 'Hola, ' + user_info['name']
-    
-    return render_template('indexapp.html',avisos=avisos,concursos=concursos)
+    return render_template('indexapp.html')'''
 
-@app.route("/prueba")
+@app.route("/")
+@login_required
 def prueba():
     correo = dict(session).get('email', None)
     return 'Hola '+str(correo)
-
-@app.route('/sesion')
-def sesion():
-    return render_template('inicioSapp.html')
 
 @app.route('/login')
 def login():
@@ -68,7 +65,8 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('google_token', None)
+    for key in list(session.keys()):
+        session.pop(key)
     return redirect(url_for('index'))
 
 @app.route('/authorize')

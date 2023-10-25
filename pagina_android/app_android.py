@@ -16,50 +16,47 @@ app = Flask(__name__)
 # XDDDDDDDD
 # Session config
 app.secret_key = os.getenv("APP_SECRET_KEY")
-#app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
-#app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+##app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
+##app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 oauth = OAuth(app)
 
 google = oauth.register(
     name='google',
-    client_id= os.getenv("GOOGLE_CLIENT_ID"),
-    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
+    client_id='1092101831178-qmrflc090f71mb558vd9865cp70sfgpf.apps.googleusercontent.com',
+    client_secret='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',
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
     #access_token_url='https://accounts.google.com/o/oauth2/token',
     #access_token_params=None,
     #authorize_url='https://accounts.google.com/o/oauth2/auth',
     #authorize_params=None,
     api_base_url='https://www.googleapis.com/oauth2/v1/',
+    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     #userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
-    #--server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     client_kwargs={'scope': 'openid email profile'}
 )
 
 # Definir una ruta para la página principal
 @app.route('/')
 def index():
-    bd = Coneccion()
-    avisos = bd.obtenerTablas("noticias")
-    concursos = bd.obtenerTablas("noticias")
-    bd.exit()
-    '''if 'google_token' in session:
+    if 'google_token' in session:
         resp = oauth.google.get('userinfo')
         user_info = resp.json()
-        print(user_info)
-        return 'Hola, ' + user_info['name']'''
+        return 'Hola, ' + user_info['name']
     return render_template('indexapp.html')
 
-@app.route("/inisiar")
-#@login_required
+@app.route("/prueba")
 def prueba():
-    user = dict(session).get('profile', None)
-    if user:
-        resp = oauth.google.get('userinfo')
-        user_info = resp.json()
-        print(user_info)
-        return 'Hola, ' + user_info['name']
-    else:
-        return redirect(url_for("login"))
+    correo = dict(session).get('email', None)
+    return 'Hola '+str(correo)
+
+@app.route('/sesion')
+def sesion():
+    return render_template('inicioSapp.html')
 
 @app.route('/login')
 def login():
@@ -69,8 +66,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    for key in list(session.keys()):
-        session.pop(key)
+    session.pop('google_token', None)
     return redirect(url_for('index'))
 
 @app.route('/authorize')
@@ -82,10 +78,9 @@ def authorize():
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
-    session['email'] = user_info['email']
     session['profile'] = user_info
-    session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    return redirect(url_for('prueba'))
+    #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
+    return redirect('/')
 
 @app.route('/registro')
 def registro():

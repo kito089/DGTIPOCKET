@@ -3,9 +3,9 @@ from authlib.integrations.flask_client import OAuth
 import os
 from python.bd import *
 from datetime import timedelta
-#pendejo q va
+
 # decorator for routes that should be accessible only by logged in users
-#from python.funciones_auth import login_required
+from python.funciones_auth import login_required
 
 # dotenv setup
 from dotenv import load_dotenv
@@ -15,9 +15,9 @@ app = Flask(__name__)
 
 # XDDDDDDDD
 # Session config
-app.secret_key = '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'
-#app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
-#app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+app.secret_key = os.getenv("APP_SECRET_KEY")
+app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 oauth = OAuth(app)
 
@@ -25,12 +25,12 @@ google = oauth.register(
     name='google',
     client_id= '1092101831178-qmrflc090f71mb558vd9865cp70sfgpf.apps.googleusercontent.com',
     client_secret='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',
-    #access_token_url='https://accounts.google.com/o/oauth2/token',
-    #access_token_params=None,
-    #authorize_url='https://accounts.google.com/o/oauth2/auth',
-    #authorize_params=None,
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
     api_base_url='https://www.googleapis.com/oauth2/v1/',
-    #userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
+    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     #--server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     client_kwargs={'scope': 'openid email profile'}
 )
@@ -50,7 +50,7 @@ def index():
     return render_template('indexapp.html')
 
 @app.route("/inisiar")
-#@login_required
+@login_required
 def prueba():
     correo = dict(session).get('email', None)
     return 'Hola '+str(correo)
@@ -77,10 +77,9 @@ def authorize():
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
     session['email'] = user_info['email']
-    #session['profile'] = user_info
+    session['profile'] = user_info
     session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/prueba')
-
 
 @app.route('/registro')
 def registro():
@@ -104,9 +103,11 @@ def funciones():
 @app.route('/menu')
 def menu():
     return render_template('menu.html')
+
 @app.route('/servicio')
 def servicio():
     return render_template('servicio.html')
+
 @app.route('/historial')
 def historial():
     return render_template('historial.html')

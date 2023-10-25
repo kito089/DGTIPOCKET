@@ -5,7 +5,7 @@ from python.bd import *
 from datetime import timedelta
 
 # decorator for routes that should be accessible only by logged in users
-from functools import wraps
+from python.funciones_auth import login_required
 
 # dotenv setup
 from dotenv import load_dotenv
@@ -35,17 +35,6 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'}
 )
 
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        user = dict(session).get('profile', None)
-        # You would add a check here and usethe user id or something to fetch
-        # the other data for that user/check if they exist
-        if user:
-            return f(*args, **kwargs)
-        return redirect(url_for("login"))#'You aint logged in, no page for u!'
-    return decorated_function
-
 # Definir una ruta para la página principal
 @app.route('/')
 def index():
@@ -61,10 +50,15 @@ def index():
     return render_template('indexapp.html')
 
 @app.route("/inisiar")
-@login_required
+#@login_required
 def prueba():
-    correo = dict(session).get('email', None)
-    return 'Hola '+str(correo)
+    if 'google_token' in session:
+        resp = oauth.google.get('userinfo')
+        user_info = resp.json()
+        print(user_info)
+        return 'Hola, ' + user_info['name']
+    else:
+        return redirect(url_for("login"))
 
 @app.route('/login')
 def login():

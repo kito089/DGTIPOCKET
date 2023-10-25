@@ -23,8 +23,8 @@ oauth = OAuth(app)
 
 google = oauth.register(
     name='google',
-    client_id= '1092101831178-qmrflc090f71mb558vd9865cp70sfgpf.apps.googleusercontent.com',
-    client_secret='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',
+    client_id= os.getenv("GOOGLE_CLIENT_ID"),
+    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
     #access_token_url='https://accounts.google.com/o/oauth2/token',
     #access_token_params=None,
     #authorize_url='https://accounts.google.com/o/oauth2/auth',
@@ -52,7 +52,8 @@ def index():
 @app.route("/inisiar")
 #@login_required
 def prueba():
-    if 'google_token' in session:
+    user = dict(session).get('profile', None)
+    if user:
         resp = oauth.google.get('userinfo')
         user_info = resp.json()
         print(user_info)

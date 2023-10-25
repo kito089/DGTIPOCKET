@@ -5,7 +5,7 @@ from python.bd import *
 from datetime import timedelta
 
 # decorator for routes that should be accessible only by logged in users
-from python.funciones_auth import login_required
+from functools import wraps
 
 # dotenv setup
 from dotenv import load_dotenv
@@ -34,6 +34,17 @@ google = oauth.register(
     #--server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     client_kwargs={'scope': 'openid email profile'}
 )
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user = dict(session).get('profile', None)
+        # You would add a check here and usethe user id or something to fetch
+        # the other data for that user/check if they exist
+        if user:
+            return f(*args, **kwargs)
+        return redirect(url_for("login"))#'You aint logged in, no page for u!'
+    return decorated_function
 
 # Definir una ruta para la página principal
 @app.route('/')
@@ -79,7 +90,7 @@ def authorize():
     session['email'] = user_info['email']
     session['profile'] = user_info
     session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    return redirect('/prueba')
+    return redirect(url_for('prueba'))
 
 @app.route('/registro')
 def registro():

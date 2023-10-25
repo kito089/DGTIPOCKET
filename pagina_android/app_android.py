@@ -4,9 +4,6 @@ import os
 from python.bd import *
 from datetime import timedelta
 
-# decorator for routes that should be accessible only by logged in users
-from python.funciones_auth import login_required
-
 # dotenv setup
 from dotenv import load_dotenv
 load_dotenv()
@@ -15,7 +12,7 @@ app = Flask(__name__)
 
 # XDDDDDDDD
 # Session config
-app.secret_key = os.getenv("APP_SECRET_KEY")
+app.secret_key = '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'
 ##app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
 ##app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 

@@ -13,8 +13,8 @@ app = Flask(__name__)
 # XDDDDDDDD
 # Session config
 app.secret_key = os.getenv("APP_SECRET_KEY")
-app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+#app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
+#app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 oauth = OAuth(app)
 

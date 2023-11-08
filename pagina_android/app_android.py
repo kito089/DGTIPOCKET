@@ -40,6 +40,7 @@ google = oauth.register(
 # Definir una ruta para la página principal
 @app.route('/')
 def index():
+    print("-------------------------------XD?")
     print("\n\n\n\n\ntengo fe: \n\n\n\n\n")
     #print(os.getenv("APP_SECRET_KEY"))
     return render_template('indexapp.html')

@@ -43,6 +43,8 @@ def index():
     print("-------------------------------XD?")
     print("----------tengo fe:")
     print(os.getenv("APP_SECRET_KEY"))
+    direccion_actual = os.getcwd()
+    print("La dirección actual es:", direccion_actual)
     return render_template('indexapp.html')
 
 @app.route("/prueba")

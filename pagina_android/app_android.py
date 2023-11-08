@@ -18,8 +18,6 @@ app.secret_key = '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'
 
 oauth = OAuth(app)
 
-print("prueba XD")
-
 google = oauth.register(
     name='google',
     client_id='1092101831178-qmrflc090f71mb558vd9865cp70sfgpf.apps.googleusercontent.com',
@@ -37,14 +35,11 @@ google = oauth.register(
 # Definir una ruta para la página principal
 @app.route('/')
 def index():
-    if 'google_token' in session:
-        resp = oauth.google.get('userinfo')
-        user_info = resp.json()
-        return 'Hola, ' + user_info['name']
     return render_template('indexapp.html')
 
 @app.route("/prueba")
 def prueba():
+    print("aki: ")
     parametros = session.get('profile', {})
     print(parametros)
     return 'Hola ' + parametros

@@ -10,7 +10,7 @@ from datetime import timedelta
 # dotenv setup
 from dotenv import load_dotenv
 
-project_folder = os.path.expanduser('~/DGTIPOCKET')  # adjust as appropriate
+project_folder = os.path.expanduser('~/home/patotipo/DGTIPOCKET')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)

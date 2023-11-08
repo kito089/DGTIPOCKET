@@ -42,7 +42,8 @@ def prueba():
     print("aki: ")
     parametros = session.get('profile', {})
     print(parametros)
-    return 'Hola ' + parametros
+    print(parametros['email'])
+    return 'Hola ' + parametros['name']
 
 @app.route('/sesion')
 def sesion():

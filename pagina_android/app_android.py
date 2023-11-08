@@ -4,10 +4,6 @@ import os
 from python.bd import *
 from datetime import timedelta
 
-# dotenv setup
-from dotenv import load_dotenv
-load_dotenv()
-
 app = Flask(__name__)
 
 # XDDDDDDDD
@@ -15,6 +11,9 @@ app = Flask(__name__)
 app.secret_key = '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'
 #app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
 #app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+
+print("tengo fe: ")
+print(os.getenv("APP_SECRET_KEY"))
 
 oauth = OAuth(app)
 

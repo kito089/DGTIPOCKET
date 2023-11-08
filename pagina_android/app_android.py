@@ -5,7 +5,7 @@ from python.bd import *
 from datetime import timedelta
 
 # decorator for routes that should be accessible only by logged in users
-from funciones_auth import login_required
+from python.funciones_auth import login_required
 
 # dotenv setup
 from dotenv import load_dotenv

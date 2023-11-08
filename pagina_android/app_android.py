@@ -8,10 +8,10 @@ from datetime import timedelta
 #from auth_decorator import login_required
 
 # dotenv setup
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-#project_folder = os.path.expanduser('~/DGTIPOCKET')  # adjust as appropriate
-#load_dotenv(os.path.join(project_folder, '.env'))
+project_folder = os.path.expanduser('~/DGTIPOCKET')  # adjust as appropriate
+load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
 
@@ -42,7 +42,7 @@ google = oauth.register(
 def index():
     print("-------------------------------XD?")
     print("----------tengo fe:")
-    #print(os.getenv("APP_SECRET_KEY"))
+    print(os.getenv("APP_SECRET_KEY"))
     return render_template('indexapp.html')
 
 @app.route("/prueba")

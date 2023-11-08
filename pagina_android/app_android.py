@@ -10,8 +10,8 @@ from auth_decorator import login_required
 # dotenv setup
 from dotenv import load_dotenv
 
-project_folder = os.path.expanduser('~/DGTIPOCKET')  # adjust as appropriate
-load_dotenv(os.path.join(project_folder, '.env'))
+#project_folder = os.path.expanduser('~/DGTIPOCKET')  # adjust as appropriate
+#load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
 

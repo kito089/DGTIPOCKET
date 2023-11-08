@@ -59,11 +59,6 @@ def login():
     redirect_uri = url_for('authorize', _external=True)
     return google.authorize_redirect(redirect_uri)
 
-@app.route('/logout')
-def logout():
-    session.pop('google_token', None)
-    return redirect(url_for('index'))
-
 @app.route('/authorize')
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
@@ -77,6 +72,12 @@ def authorize():
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/prueba')
 
+@app.route('/logout')
+def logout():
+    for key in list(session.keys()):
+        session.pop(key)
+    return redirect(url_for('index'))
+    
 @app.route('/registro')
 def registro():
     return render_template('Registroapp.html')

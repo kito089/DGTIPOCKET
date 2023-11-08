@@ -44,7 +44,7 @@ def index():
 @app.route("/prueba")
 def prueba():
     correo = dict(session).get('email', None)
-    return os.getenv("APP_SECRET_KEY")
+    return 'Hola '+str(correo)
 
 @app.route('/sesion')
 def sesion():

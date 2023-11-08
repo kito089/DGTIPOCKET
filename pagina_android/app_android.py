@@ -43,8 +43,9 @@ def index():
 
 @app.route("/prueba")
 def prueba():
-    correo = dict(session).get('email', None)
-    return 'Hola '+str(correo)
+    resp = oauth.google.get('userinfo')
+    user_info = resp.json()
+    return 'Hola '+ user_info['name']
 
 @app.route('/sesion')
 def sesion():

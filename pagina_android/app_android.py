@@ -22,7 +22,7 @@ app.secret_key = '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'
 #app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 print("tengo fe: ")
-print(os.getenv["APP_SECRET_KEY"])
+print(os.getenv("APP_SECRET_KEY"))
 
 oauth = OAuth(app)
 

@@ -5,8 +5,8 @@ from python.bd import *
 from datetime import timedelta
 
 # dotenv setup
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 app = Flask(__name__)
 
@@ -37,16 +37,16 @@ google = oauth.register(
 # Definir una ruta para la página principal
 @app.route('/')
 def index():
-    if 'google_token' in session:
-        resp = oauth.google.get('userinfo')
-        user_info = resp.json()
-        return 'Hola, ' + user_info['name']
+    #if 'google_token' in session:
+    #    resp = oauth.google.get('userinfo')
+    #    user_info = resp.json()
+    #    return 'Hola, ' + user_info['name']
     return render_template('indexapp.html')
 
 @app.route("/prueba")
 def prueba():
     user = session.get('user')
-    return render_template('home.html', user=user)
+    return 'Hola, ' + user
 
 @app.route('/sesion')
 def sesion():
@@ -67,13 +67,13 @@ def authorize():
     #google = oauth.create_client('google')  # create the google oauth client
     token = oauth.google.authorize_access_token()  # Access token from google (needed to get user info)
     resp = token['userinfo']  # userinfo contains stuff u specificed in the scrope
-    user_info = resp.json()
-    user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
+    #user_info = resp.json()
+    #user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
-    session['profile'] = user_info
+    session['profile'] = resp
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    return redirect('/')
+    return redirect('/prueba')
 
 @app.route('/registro')
 def registro():

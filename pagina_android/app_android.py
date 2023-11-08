@@ -5,10 +5,10 @@ from python.bd import *
 from datetime import timedelta
 
 # decorator for routes that should be accessible only by logged in users
-from auth_decorator import login_required
+#from auth_decorator import login_required
 
 # dotenv setup
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 #project_folder = os.path.expanduser('~/DGTIPOCKET')  # adjust as appropriate
 #load_dotenv(os.path.join(project_folder, '.env'))
@@ -21,8 +21,8 @@ app.secret_key = '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'
 #app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
 #app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
-print("tengo fe: ")
-print(os.getenv("APP_SECRET_KEY"))
+print("\n\n\n\n\ntengo fe: \n\n\n\n\n")
+#print(os.getenv("APP_SECRET_KEY"))
 
 oauth = OAuth(app)
 

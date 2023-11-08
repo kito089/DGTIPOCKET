@@ -41,7 +41,7 @@ google = oauth.register(
 @app.route('/')
 def index():
     print("-------------------------------XD?")
-    print("\n\n\n\n\ntengo fe: \n\n\n\n\n")
+    print("----------tengo fe:")
     #print(os.getenv("APP_SECRET_KEY"))
     return render_template('indexapp.html')
 

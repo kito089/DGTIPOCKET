@@ -1,15 +1,20 @@
 import pymysql 
 import numpy as np
+import os
+from dotenv import load_dotenv
+
+project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')  # adjust as appropriate
+load_dotenv(os.path.join(project_folder, '.env'))
+
 
 class Coneccion:
     def __init__(self):
         try:
             self.conexion = pymysql.connect(  #Se conecta a la base de datos
-                host='patotipo.mysql.pythonanywhere-services.com',
-                #port=3306,
-                user='patotipo',
-                password='ZDHY155P',
-                db='patotipo$prototipos'
+                host=os.getenv("HOST"),
+                user=os.getenv("USER"),
+                password=os.getenv("PASSWORD"),
+                db=os.getenv("DB")
                 
                 #host='localhost',
                 #port=3306,

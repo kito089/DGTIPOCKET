@@ -65,4 +65,3 @@ convert(inputFile, outputFile)
 #eliminar el documento de docx despues de haberlo escrito en pdf
 import os
 os.remove(nombre+'.docx')
-

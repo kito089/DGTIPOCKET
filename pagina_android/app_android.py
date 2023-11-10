@@ -41,17 +41,15 @@ google = oauth.register(
 @app.route('/')
 @login_required
 def index():
-    return render_template('indexapp.html')
+    parametros = dict(session)['profile']
+    print(parametros)
+    return render_template('indexapp.html', parametros = parametros)
 
-@app.route("/prueba")
-def prueba():
-    print("aki: ")
-    email = dict(session)['profile']['email']
-    return 'Hola ' + email
-
-@app.route('/sesion')
-def sesion():
-    return render_template('inicioSapp.html')
+# @app.route("/prueba")
+# def prueba():
+#     print("aki: ")
+#     email = dict(session)['profile']['email']
+#     return 'Hola ' + email
 
 @app.route('/login')
 def login():
@@ -77,44 +75,49 @@ def logout():
     for key in list(session.keys()):
         session.pop(key)
     return redirect(url_for('index'))
-    
-@app.route('/registro')
-def registro():
-    return render_template('Registroapp.html')
 
 @app.route('/planteles')
 def planteles():
-    return render_template('plantelesapp.html')
+    parametros = dict(session)['profile']
+    return render_template('plantelesapp.html', parametros = parametros)
 
 @app.route('/tutorias')
 def tutorias():
-    return render_template('tutoriasapp.html')
+    parametros = dict(session)['profile']
+    return render_template('tutoriasapp.html', parametros = parametros)
 
 @app.route('/clubs')
 def clubs():
-    return render_template('clubapp.html')
+    parametros = dict(session)['profile']
+    return render_template('clubapp.html', parametros = parametros)
+
 @app.route('/funciones')
 def funciones():
-    return render_template('funcionesapp.html')
+    parametros = dict(session)['profile']
+    return render_template('funcionesapp.html', parametros = parametros)
 
 @app.route('/menu')
 def menu():
-    return render_template('menu.html')
+    parametros = dict(session)['profile']
+    return render_template('menu.html', parametros = parametros)
 
 @app.route('/servicio')
 def servicio():
-    return render_template('servicio.html')
+    parametros = dict(session)['profile']
+    return render_template('servicio.html', parametros = parametros)
 
 @app.route('/historial')
 def historial():
-    return render_template('historial.html')
+    parametros = dict(session)['profile']
+    return render_template('historial.html', parametros = parametros)
 
 @app.route('/noticias')                            #pendiente css
 def noticias():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     bd.exit()
-    return render_template('noticiasapp.html', noticias=noticias)
+    parametros = dict(session)['profile']
+    return render_template('noticiasapp.html', noticias=noticias, parametros = parametros)
 
 @app.route('/insnot', methods=['GET', 'POST'])
 def agregar_noticia():
@@ -129,7 +132,8 @@ def agregar_noticia():
         bd.insertarRegistro("noticias", datos)
         bd.exit()
         return redirect(url_for('noticias'))
-    return render_template('insnot.html')
+    parametros = dict(session)['profile']
+    return render_template('insnot.html', parametros = parametros)
 
 @app.route('/instaviso', methods=['GET', 'POST'])
 def agregar_aviso():
@@ -144,12 +148,14 @@ def agregar_aviso():
         bd.insertarRegistro("avisos", datos)
         bd.exit()
         return redirect(url_for('index'))
-    return render_template('insnot.html')
+    parametros = dict(session)['profile']
+    return render_template('insnot.html', parametros = parametros)
     
     
 @app.route('/a')
 def pruebas():
-    return render_template('prueba.html')
+    parametros = dict(session)['profile']
+    return render_template('prueba.html', parametros = parametros)
 
 if __name__ == '__main__':
     app.run(debug=True)

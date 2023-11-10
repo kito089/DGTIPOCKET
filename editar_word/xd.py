@@ -1,12 +1,10 @@
 from docx import Document
-from docx.shared import Pt
 import os
 # import module
-from pdf2image import convert_from_path
 
 
 # 1. Abre el archivo existente
-doc = Document('/editar_word/plantilla_boleta.docx')
+doc = Document('plantilla_boleta.docx')
 nombre="A"
 # 2. Realiza las modificaciones que desees
 for paragraph in doc.paragraphs:

@@ -12,8 +12,8 @@
     <style>{% block style %}{% endblock %}</style>
 </head>
 
-  <body class='hidden'>
-    <div class='centra'><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
+  <body class="hidden">
+    <div class='centra' id="onload"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     
 
     <nav>
@@ -54,4 +54,14 @@
       console.log('Email: '+profile.getEmail());
     }
   </script>
+  <script>
+    window.onload=function(){
+      $('#onload').fadeOut();
+      $('body').removeClass('hidden');
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js">
+    
+  </script>
+  
 </html>

@@ -105,6 +105,10 @@ def menu():
 def servicio():
     parametros = dict(session)['profile']
     return render_template('servicio.html', parametros = parametros)
+@app.route('/agenda')
+def agenda():
+    parametros = dict(session)['profile']
+    return render_template('agenda.html', parametros = parametros)
 
 @app.route('/historial')
 def historial():

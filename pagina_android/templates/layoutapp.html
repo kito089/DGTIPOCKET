@@ -35,7 +35,7 @@
             <li><a href="/login">Configuracion</a></li>
             <li><a href="/insnot">insert</a></li>
             <li><a href="/configuracion"><img src="{{parametros['picture']}}" class="Avatar"></a></li>
-            <li><p class="usuario"> <strong>{{parametros['name']}}</strong></p></p>
+            <li><p class="usuario"> <strong>{{parametros['name']}}</strong></p></li>
 
           </div>
         </div>
@@ -43,8 +43,10 @@
     </nav>
 
     <div class="contenedor">
-      <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
-        {% block content %}{% endblock %}	
+      
+        {% block content %}
+        <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
+        {% endblock %}	
     </div>
   </body>
   <script>

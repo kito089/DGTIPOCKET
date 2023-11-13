@@ -1,5 +1,10 @@
+.hidden
+{
+  overflow: hidden;
+}
 .centra{
   height: 100vh;
+  background-color: #0076b1;
   display: flex;
   justify-content: center;
   align-items: center;

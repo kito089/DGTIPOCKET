@@ -74,7 +74,7 @@ def authorize():
 def logout():
     for key in list(session.keys()):
         session.pop(key)
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/planteles')
 def planteles():

@@ -35,20 +35,20 @@ google = oauth.register(
     name='google',
     client_id= os.getenv("GOOGLE_CLIENT_ID"),
     client_secret= os.getenv("GOOGLE_CLIENT_SECRET"),
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-    authorize_params=None,
-    authorize_callback=None,
-    authorize_response=None,
-    token_url='https://accounts.google.com/o/oauth2/token',
-    token_params=None,
-    token_response=None,
-    #api_base_url='https://www.googleapis.com/oauth2/v1/',
+    #authorize_url='https://accounts.google.com/o/oauth2/auth',
+    #authorize_params=None,
+    #authorize_callback=None,
+    #authorize_response=None,
+    #token_url='https://accounts.google.com/o/oauth2/token',
+    #token_params=None,
+    #token_response=None,
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
     #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
-    #server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     #client_kwargs={'scope': 'openid email profile'}
 
-    redirect_uri=lambda: url_for('auth', _external=True),
-    client_kwargs={'scope': 'https://www.googleapis.com/auth/calendar.readonly'},
+    #redirect_uri=lambda: url_for('auth', _external=True),
+    client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar.readonly'},
 )
 
 # Definir una ruta para la página principal

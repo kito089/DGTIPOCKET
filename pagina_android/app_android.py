@@ -46,7 +46,7 @@ google = oauth.register(
     #client_kwargs={'scope': 'openid email profile'}
 
     #redirect_uri=lambda: url_for('auth', _external=True),
-    client_kwargs={'scope': 'https://www.googleapis.com/auth/calendar.readonly'},
+    client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar.readonly'},
 )
 
 # Definir una ruta para la página principal

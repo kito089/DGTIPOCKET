@@ -1,125 +1,188 @@
-/* Reset de estilos para evitar problemas de compatibilidad entre navegadores */
+/* de aqui hasta el otro comentario es sobre la pantalla de carga  */
+.hidden
+{
+  overflow: hidden;
+}
+.centra{
+  height: 100vh;
+  background-color: #0076b1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #cef;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+/* de aqui en adelante es la pagina ============================================================================================================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Estilos básicos del cuerpo de la página */
-  body {
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Encabezado y barra de navegación */
-  nav {
-    background-color: #3498db;
-    padding: 10px;
-  }
-  
-  .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .menu-items {
-    list-style: none;
-    display: flex;
-  }
-  
-  .menu-items li {
-    margin: 0 10px;
-  }
-  
-  .menu-items a {
-    text-decoration: none;
-    color: #ecf0f1;
-  }
-  
-  /* Contenedor principal */
-  .contenedor {
-    padding: 20px;
-  }
-  
-  /* Loader */
-  #onload {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  .lds-ellipsis {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-  }
-  
-  .lds-ellipsis div {
-    position: absolute;
-    top: 33px;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: #3498db;
-    animation-timing-function: cubic-bezier(0, 1, 1, 0);
-  }
-  
-  .lds-ellipsis div:nth-child(1) {
-    left: 8px;
-    animation: lds-ellipsis1 0.6s infinite;
-  }
-  
-  .lds-ellipsis div:nth-child(2) {
-    left: 8px;
-    animation: lds-ellipsis2 0.6s infinite;
-  }
-  
-  .lds-ellipsis div:nth-child(3) {
-    left: 32px;
-    animation: lds-ellipsis2 0.6s infinite;
-  }
-  
-  .lds-ellipsis div:nth-child(4) {
-    left: 56px;
-    animation: lds-ellipsis3 0.6s infinite;
-  }
-  
-  @keyframes lds-ellipsis1 {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  
-  @keyframes lds-ellipsis3 {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-    }
-  }
-  
-  @keyframes lds-ellipsis2 {
-    0% {
-      transform: translate(0, 0);
-    }
-    100% {
-      transform: translate(24px, 0);
-    }
-  }
-  
-  /* Ocultar el cuerpo hasta que la página esté completamente cargada */
-  body.hidden {
-    display: none;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f2f2f2; /* Cambiado a un tono más claro */
+}
+
+.container {
+  max-width: 1200px; /* Aumentado el ancho máximo */
+  width: 90%;
+  margin: auto;
+}
+
+.navbar {
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Cambiado el color de la sombra */
+  position: fixed;
+  background: #4CAF50; /* Cambiado a un tono verde */
+  z-index: 2;
+}
+
+.log {
+  width: 150px; /* Reducido el ancho del logotipo */
+  height: auto;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px; /* Aumentado el alto de la barra de navegación */
+}
+
+.navbar .menu-items {
+  display: none; /* Oculto inicialmente el menú */
+  background: #4CAF50;
+}
+
+.navbar .nav-container a {
+  text-decoration: none;
+  color: #fff; /* Cambiado a texto blanco */
+  font-weight: 600; /* Aumentada la negrita */
+  font-size: 1.1rem; /* Reducido el tamaño de fuente */
+  padding: 1rem;
+  transition: color 0.3s ease-in-out; /* Agregada animación de transición de color */
+}
+
+.navbar .nav-container a:hover {
+  color: #2ecc71; /* Cambiado a un tono verde más claro en hover */
+}
+
+.nav-container .hamburger-lines .line {
+  background: #fff; /* Cambiado el color de las líneas del menú hamburguesa a blanco */
+}
+
+.nav-container .hamburger-lines .line1 {
+  transition: transform 0.4s ease-in-out, background 0.3s ease-in-out; /* Ajustadas las animaciones */
+}
+
+.nav-container .hamburger-lines .line2 {
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line3 {
+  transition: transform 0.4s ease-in-out, background 0.3s ease-in-out;
+}
+
+.nav-container input[type="checkbox"]:checked ~ .menu-items {
+  display: flex; /* Mostrar el menú al hacer clic en el icono de hamburguesa */
+  transform: translateX(0);
+}
+
+.contenedor {
+  padding-top: 10%; /* Reducido el espacio superior */
+}
+
+.avisos-list {
+  list-style-type: disc; /* Cambiado a viñetas redondas */
+  margin-left: 30px; /* Aumentado el margen izquierdo */
+}
+
+h1 {
+  text-align: center;
+  color: #4CAF50; /* Cambiado a un tono verde */
+}
+
+.concursos-list {
+  list-style-type: disc;
+  margin-left: 30px;
+}
+
+.Avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #4CAF50; /* Cambiado a un tono verde */
+}
+
+.usuario {
+  font-family: "Poppins", sans-serif; /* Cambiada la fuente */
+  font-size: 14px; /* Reducido el tamaño de fuente */
+  color: #555; /* Cambiado a un tono más oscuro */
+  background-color: #fff; /* Cambiado a fondo blanco */
+  padding: 8px;
+  border-radius: 5px;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.usuario strong {
+  font-weight: 600; /* Aumentada la negrita */
+  color: #4CAF50;
+}

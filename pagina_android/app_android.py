@@ -1,5 +1,11 @@
 from flask import Flask, render_template,redirect,url_for, request, session
 from authlib.integrations.flask_client import OAuth
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from google.auth.transport.requests import Request
+import google.auth.transport.requests
+import google.auth.exceptions
 import os
 from python.bd import *
 from datetime import timedelta
@@ -27,14 +33,20 @@ google = oauth.register(
     name='google',
     client_id= os.getenv("GOOGLE_CLIENT_ID"),
     client_secret= os.getenv("GOOGLE_CLIENT_SECRET"),
-    #access_token_url='https://accounts.google.com/o/oauth2/token',
-    #access_token_params=None,
-    #authorize_url='https://accounts.google.com/o/oauth2/auth',
-    #authorize_params=None,
-    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    authorize_callback=None,
+    authorize_response=None,
+    token_url='https://accounts.google.com/o/oauth2/token',
+    token_params=None,
+    token_response=None,
+    #api_base_url='https://www.googleapis.com/oauth2/v1/',
     #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
-    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={'scope': 'openid email profile'}
+    #server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    #client_kwargs={'scope': 'openid email profile'}
+
+    redirect_uri=lambda: url_for('auth', _external=True),
+    client_kwargs={'scope': 'https://www.googleapis.com/auth/calendar.readonly'},
 )
 
 # Definir una ruta para la página principal

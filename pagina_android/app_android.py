@@ -43,10 +43,10 @@ google = oauth.register(
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={'scope': 'openid email profile'}
+    #client_kwargs={'scope': 'openid email profile'}
 
     #redirect_uri=lambda: url_for('auth', _external=True),
-    #client_kwargs={'scope': 'https://www.googleapis.com/auth/calendar.readonly'},
+    client_kwargs={'scope': 'https://www.googleapis.com/auth/calendar.readonly'},
 )
 
 # Definir una ruta para la página principal

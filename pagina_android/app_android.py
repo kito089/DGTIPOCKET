@@ -41,9 +41,12 @@ google = oauth.register(
 @app.route('/')
 @login_required
 def index():
+    bd = Coneccion()
+    noticias = bd.obtenerTablas("noticias")
+    bd.exit()
     parametros = dict(session)['profile']
     print(parametros)
-    return render_template('indexapp.html', parametros = parametros)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 
 # @app.route("/prueba")
 # def prueba():

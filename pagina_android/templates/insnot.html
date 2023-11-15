@@ -73,10 +73,10 @@ input[type="submit"]:hover {
     <input type="text" id="titulo" name="titulo" ><br>
 
     <label for="descripcion">Descripción:</label>
-    <textarea id="text" name="descripcion" ></textarea><br>
+    <textarea id="contenidoN" name="descripcion" ></textarea><br>
 
     <label for="img">URL de la imagen:</label>
-    <input type="text" id="img" name="img"><br>
+    <input type="text" id="imgN" name="img"><br>
 
     <label for="fecha">Fecha:</label>
     <input type="date" id="fecha" name="fecha"><br>
@@ -129,9 +129,10 @@ input[type="submit"]:hover {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js"></script>
     <script>
     function push(){
+        var contenido = document.getElementById('contenidoN').value;
         Push.Permission.request();
-        Push.create('antonio',{
-            body: 'No mames alv esto ya esta perro no se que hacer ',
+        Push.create('Noticias',{
+            body: contenido,
             icon:"",
             timeout:1500000,
             vibrate:[100,100,100],

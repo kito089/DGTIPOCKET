@@ -81,7 +81,7 @@ input[type="submit"]:hover {
     <label for="fecha">Fecha:</label>
     <input type="date" id="fecha" name="fecha"><br>
 
-    <input type="submit" value="Guardar">
+    <input type="submit" value="Guardar" onclick="push();">
 </fomr>
 
     <h1 class="center">Inserción de Avisos</h1>
@@ -126,4 +126,17 @@ input[type="submit"]:hover {
              </form>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js"></script>
+    <script>
+    function push(){
+        Push.Permission.request();
+        Push.create('antonio',{
+            body: 'notificacion',
+            icon:"",
+            timeout:1500000,
+            vibrate:[100,100,100],
+
+        });
+    }
+</script>
 {% endblock %}

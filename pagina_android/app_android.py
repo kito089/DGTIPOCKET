@@ -10,6 +10,7 @@ import os
 import os.path
 from python.bd import *
 import datetime
+import json
 
 # decorator for routes that should be accessible only by logged in users
 from python.funciones_auth import login_required
@@ -122,6 +123,10 @@ def login():
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
+
+    token_dict = token.as_dict()
+    token_json = json.dumps(token_dict, indent=2)
+
     #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
@@ -136,7 +141,7 @@ def authorize():
     print("---------------token")
     print(token)
     with open("token.json", "w") as tok:
-        tok.write(token.to_json())
+        tok.write(token_json)
     print("---------------user_info")
     print(user_info)
     #print(info)

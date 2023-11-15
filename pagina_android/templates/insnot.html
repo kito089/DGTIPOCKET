@@ -68,7 +68,7 @@ input[type="submit"]:hover {
 <a class="a" href="/instabla">insertar tablas </a>
 
 <h1>Insertar Noticia</h1>
-<form action="/insnot" method="POST">
+<form action="/insnot" method="POST" id="noticias">
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" ><br>
 
@@ -81,7 +81,7 @@ input[type="submit"]:hover {
     <label for="fecha">Fecha:</label>
     <input type="date" id="fecha" name="fecha"><br>
 
-    <input type="submit" value="Guardar" onclick="push();">
+    <input  value="Guardar" onclick="push();">
 </fomr>
 
     <h1 class="center">Inserción de Avisos</h1>
@@ -130,6 +130,7 @@ input[type="submit"]:hover {
     <script>
     function push(){
         var contenido = document.getElementById('contenidoN').value;
+        var formulario = document.getElementById('noticias');
         Push.Permission.request();
         Push.create('Noticias',{
             body: contenido,
@@ -138,6 +139,7 @@ input[type="submit"]:hover {
             vibrate:[100,100,100],
 
         });
+        formulario.submit();
     }
 </script>
 {% endblock %}

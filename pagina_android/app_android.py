@@ -58,7 +58,36 @@ def index():
     bd.exit()
     parametros = dict(session)['profile']
     print(parametros)
+    credentials = Credentials.from_authorized_user_info(parametros)
+    if not credentials.valid:
+        if credentials.expired and credentials.refresh_token:
+            try:
+                credentials.refresh(Request())
+            except google.auth.exceptions.RefreshError:
+                return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
+    # Crear un servicio de la API de Google Calendar con las credenciales
+    service = build('calendar', 'v3', credentials=credentials)
+
+    # Obtener la lista de eventos del calendario
+    events_result = service.events().list(calendarId='primary', maxResults=10, singleEvents=True,
+                                          orderBy='startTime').execute()
+    events = events_result.get('items', [])
+
+    # Procesar y mostrar los eventos (puedes adaptar esta parte según tus necesidades)
+    if not events:
+        return 'No hay eventos próximos.'
+    else:
+        event_list = []
+        for event in events:
+            start_time = event['start'].get('dateTime', event['start'].get('date'))
+            event_list.append(f"{event['summary']} ({start_time})")
+
+    print(event_list)
+
     return render_template('indexapp.html', parametros = parametros,noticias=noticias)
+
 
 # @app.route("/prueba")
 # def prueba():

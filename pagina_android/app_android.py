@@ -60,7 +60,7 @@ def index():
     parametros = dict(session)['profile']
     print(parametros)
     user_info = dict(session)['user_info']
-    credentials = Credentials.from_authorized_user_info(parametros)
+    credentials = Credentials.from_authorized_user_info(user_info)
     if not credentials.valid:
         if credentials.expired and credentials.refresh_token:
             try:
@@ -113,7 +113,7 @@ def authorize():
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
     session['profile'] = user_info
-    
+
     token = oauth.google.authorize_access_token()
     info = oauth.google.parse_id_token(token)
     session['user_info'] = info

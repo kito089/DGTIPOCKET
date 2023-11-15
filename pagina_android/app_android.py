@@ -9,6 +9,8 @@ import google.auth.exceptions
 import os
 from python.bd import *
 from datetime import timedelta
+import secrets
+
 
 # decorator for routes that should be accessible only by logged in users
 from python.funciones_auth import login_required
@@ -16,9 +18,10 @@ from python.funciones_auth import login_required
 # dotenv setup
 from dotenv import load_dotenv
 
-
 project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
+
+nonce = secrets.token_urlsafe(16)
 
 app = Flask(__name__)
 
@@ -107,9 +110,9 @@ def login():
 @app.route('/authorize')
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
-    token = google.authorize_access_token()  # Access token from google (needed to get user info)
-    info = google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
+    token = google.authorize_access_token()  # Access token from google (needed to get user info)
+    info = google.parse_id_token(token,nonce=nonce)
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     # Here you use the profile/user data that you got and query your database find/register the user

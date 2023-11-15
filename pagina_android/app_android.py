@@ -124,8 +124,8 @@ def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
 
-    token_dict = token.as_dict()
-    token_json = json.dumps(token_dict, indent=2)
+    #token_dict = token.as_dict()
+    #token_json = json.dumps(token_dict, indent=2)
 
     #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
@@ -140,8 +140,8 @@ def authorize():
     print(user)
     print("---------------token")
     print(token)
-    with open("token.json", "w") as tok:
-        tok.write(token_json)
+    with open("token.txt", "w") as tok:
+        tok.write(token)
     print("---------------user_info")
     print(user_info)
     #print(info)

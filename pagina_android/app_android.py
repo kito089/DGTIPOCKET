@@ -21,8 +21,6 @@ from dotenv import load_dotenv
 project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
 
-nonce = secrets.token_urlsafe(16)
-
 app = Flask(__name__)
 
 # XDDDDDDDD
@@ -111,7 +109,8 @@ def login():
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
-    info = google.parse_id_token(token,nonce=nonce)
+    nonce = secrets.token_urlsafe(16)
+    info = oauth.google.parse_id_token(token,nonce=nonce)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info

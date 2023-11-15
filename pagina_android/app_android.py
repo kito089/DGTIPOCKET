@@ -9,7 +9,6 @@ import google.auth.exceptions
 import os
 from python.bd import *
 from datetime import timedelta
-import secrets
 
 
 # decorator for routes that should be accessible only by logged in users
@@ -61,8 +60,8 @@ def index():
     parametros = dict(session)['profile']
     print("sesion")
     print(dict(session))
-    user_info = dict(session)['user_info']
-    credentials = Credentials.from_authorized_user_info(user_info)
+    #user_info = dict(session)['user_info']
+    credentials = Credentials.from_authorized_user_info(parametros)
     if not credentials.valid:
         if credentials.expired and credentials.refresh_token:
             try:
@@ -109,19 +108,18 @@ def login():
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
-    nonce = secrets.token_urlsafe(16)
-    info = oauth.google.parse_id_token(token,nonce=nonce)
+    #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
     session['profile'] = user_info
-    session['user_info'] = info
+    #session['user_info'] = info
     print("--------------datos")
     print(user)
     print(token)
-    print(info)
+    #print(info)
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/')

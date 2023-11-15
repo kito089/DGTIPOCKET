@@ -141,7 +141,7 @@ def authorize():
     print("---------------token")
     print(token)
     with open("token.txt", "w") as tok:
-        tok.write(token)
+        tok.write(str(token))
     print("---------------user_info")
     print(user_info)
     #print(info)

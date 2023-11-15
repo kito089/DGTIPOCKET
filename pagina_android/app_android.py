@@ -58,8 +58,38 @@ def index():
     noticias = bd.obtenerTablas("noticias")
     bd.exit()
     parametros = dict(session)['profile']
-    print(parametros)
+    print(dict(session))
+    user_info = dict(session)['user_info']
+    credentials = Credentials.from_authorized_user_info(user_info)
+    if not credentials.valid:
+        if credentials.expired and credentials.refresh_token:
+            try:
+                credentials.refresh(Request())
+            except google.auth.exceptions.RefreshError:
+                return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
+    # Crear un servicio de la API de Google Calendar con las credenciales
+    service = build('calendar', 'v3', credentials=credentials)
+
+    # Obtener la lista de eventos del calendario
+    events_result = service.events().list(calendarId='primary', maxResults=10, singleEvents=True,
+                                          orderBy='startTime').execute()
+    events = events_result.get('items', [])
+
+    # Procesar y mostrar los eventos (puedes adaptar esta parte según tus necesidades)
+    if not events:
+        return 'No hay eventos próximos.'
+    else:
+        event_list = []
+        for event in events:
+            start_time = event['start'].get('dateTime', event['start'].get('date'))
+            event_list.append(f"{event['summary']} ({start_time})")
+
+    print(event_list)
+
     return render_template('indexapp.html', parametros = parametros,noticias=noticias)
+
 
 # @app.route("/prueba")
 # def prueba():
@@ -83,6 +113,10 @@ def authorize():
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
     session['profile'] = user_info
+
+    token = oauth.google.authorize_access_token()
+    info = oauth.google.parse_id_token(token)
+    session['user_info'] = info
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/')
 

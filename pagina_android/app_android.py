@@ -60,43 +60,38 @@ def index():
     parametros = dict(session)['profile']
     print("sesion")
     print(dict(session))
+
     #user_info = dict(session)['user_info']
-    # credentials = Credentials.from_authorized_user_info(parametros)
-    # if not credentials.valid:
-    #     if credentials.expired and credentials.refresh_token:
-    #         try:
-    #             credentials.refresh(Request())
-    #         except google.auth.exceptions.RefreshError:
-    #             return redirect(url_for('login'))
-    #     else:
-    #         return redirect(url_for('login'))
-    # # Crear un servicio de la API de Google Calendar con las credenciales
-    # service = build('calendar', 'v3', credentials=credentials)
 
-    # # Obtener la lista de eventos del calendario
-    # events_result = service.events().list(calendarId='primary', maxResults=10, singleEvents=True,
-    #                                       orderBy='startTime').execute()
-    # events = events_result.get('items', [])
+    credentials = Credentials.from_authorized_user_info(parametros)
+    if not credentials.valid:
+        if credentials.expired and credentials.refresh_token:
+            try:
+                credentials.refresh(Request())
+            except google.auth.exceptions.RefreshError:
+                return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
+    # Crear un servicio de la API de Google Calendar con las credenciales
+    service = build('calendar', 'v3', credentials=credentials)
 
-    # Procesar y mostrar los eventos (puedes adaptar esta parte según tus necesidades)
-    # if not events:
-    #     return 'No hay eventos próximos.'
-    # else:
-    #     event_list = []
-    #     for event in events:
-    #         start_time = event['start'].get('dateTime', event['start'].get('date'))
-    #         event_list.append(f"{event['summary']} ({start_time})")
+    # Obtener la lista de eventos del calendario
+    events_result = service.events().list(calendarId='primary', maxResults=10, singleEvents=True,
+                                          orderBy='startTime').execute()
+    events = events_result.get('items', [])
 
-    # print(event_list)
+    #Procesar y mostrar los eventos (puedes adaptar esta parte según tus necesidades)
+    if not events:
+        return 'No hay eventos próximos.'
+    else:
+        event_list = []
+        for event in events:
+            start_time = event['start'].get('dateTime', event['start'].get('date'))
+            event_list.append(f"{event['summary']} ({start_time})")
+
+    print(event_list)
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias)
-
-
-# @app.route("/prueba")
-# def prueba():
-#     print("aki: ")
-#     email = dict(session)['profile']['email']
-#     return 'Hola ' + email
 
 @app.route('/login')
 def login():
@@ -110,7 +105,12 @@ def authorize():
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
     #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
-    user_info = resp.json()
+    user_info = {
+        'client_id' : os.getenv("GOOGLE_CLIENT_ID"),
+        'refresh_token' : token.get('refresh_token'),
+        'client_secret' : os.getenv("GOOGLE_CLIENT_SECRET"),
+    }
+    user_info.update(resp.json())
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
@@ -119,6 +119,7 @@ def authorize():
     print("--------------datos")
     print(user)
     print(token)
+    print(user_info)
     #print(info)
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed

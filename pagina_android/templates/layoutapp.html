@@ -56,14 +56,18 @@
       console.log('Email: '+profile.getEmail());
     }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js"></script>
+
   <script>
     window.onload=function(){
       $('#onload').fadeOut();
       $('body').removeClass('hidden');
+      Push.Permission.request();
     }
   </script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js">  </script>
     
-  </script>
+  
+
   
 </html>

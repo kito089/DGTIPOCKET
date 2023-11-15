@@ -58,7 +58,7 @@ def index():
     noticias = bd.obtenerTablas("noticias")
     bd.exit()
     parametros = dict(session)['profile']
-    print(parametros)
+    print(dict(session))
     user_info = dict(session)['user_info']
     credentials = Credentials.from_authorized_user_info(user_info)
     if not credentials.valid:

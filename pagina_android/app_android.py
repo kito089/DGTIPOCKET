@@ -107,7 +107,7 @@ def authorize():
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = {
         'client_id' : os.getenv("GOOGLE_CLIENT_ID"),
-        'refresh_token' : token.get('refresh_token'),
+        #'refresh_token' : token.get('refresh_token'),
         'client_secret' : os.getenv("GOOGLE_CLIENT_SECRET"),
     }
     user_info.update(resp.json())

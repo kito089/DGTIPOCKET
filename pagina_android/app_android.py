@@ -117,6 +117,7 @@ def authorize():
     session['profile'] = user_info
     session['user_info'] = info
     print("--------------datos")
+    print(user)
     print(token)
     print(info)
     print("fin")

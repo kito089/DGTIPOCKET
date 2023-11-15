@@ -110,11 +110,11 @@ def authorize():
         'refresh_token' : token,
         'client_secret' : os.getenv("GOOGLE_CLIENT_SECRET"),
     }
-    #user_info = resp.json()
+    user_info.update(resp.json())
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     # Here you use the profile/user data that you got and query your database find/register the user
     # and set ur own data in the session not the profile from google
-    session['profile'] = user_info+resp.json()
+    session['profile'] = user_info
     #session['user_info'] = info
     print("--------------datos")
     print(user)

@@ -110,9 +110,9 @@ def login():
 @app.route('/authorize')
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
-    resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
     info = google.parse_id_token(token,nonce=nonce)
+    resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     # Here you use the profile/user data that you got and query your database find/register the user

@@ -116,7 +116,7 @@ def authorize():
     # and set ur own data in the session not the profile from google
     session['profile'] = user_info
     session['user_info'] = info
-    print("datos")
+    print("--------------datos")
     print(token)
     print(info)
     print("fin")

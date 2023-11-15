@@ -55,7 +55,7 @@ google = oauth.register(
 @login_required
 def index():
     bd = Coneccion()
-    noticias = bd.seleccion("noticias","*","true order by desc")
+    noticias = bd.obtenerTablas("noticias")
     bd.exit()
     parametros = dict(session)['profile']
     print("sesion")

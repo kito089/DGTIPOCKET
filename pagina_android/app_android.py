@@ -147,7 +147,7 @@ def authorize():
     #     tok.write(str(token))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    return redirect('/')
+    return redirect('/terminar')
 
 @app.route('/logout')
 def logout():
@@ -156,9 +156,15 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/planteles')
-def planteles():
+def planteles1():
     parametros = dict(session)['profile']
     return render_template('plantelesapp.html', parametros = parametros)
+
+@app.route('/terminar')
+@login_required
+def terinar():
+    parametros = dict(session)['profile']
+    return render_template('terminarR.html', parametros = parametros)
 
 @app.route('/tutorias')
 def tutorias():

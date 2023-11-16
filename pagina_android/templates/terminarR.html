@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        form {
+            width: 80%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            text-decoration: none;
+            color: #3498db;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <h1>Registro de Usuario</h1>
+
+    <form action="#" method="post">
+        <label for="nombre">BIENVENIDO {{parametros['name']}}</label>
+        <label for="nombre">Ayudanos a terminar de completar tu registro </label>
+        <br>
+        <input type="text" id="nombre" name="{{parametros['name']}}" readonly>
+        <br>
+        <input type="text" id="nombre" name="{{parametros['email']}}" readonly>
+        <br>
+        <label for="curp">CURP:</label>
+        <input type="text" id="curp" name="curp" required>
+        <br>
+
+        <label for="grado">Grado:</label>
+        <input type="text" id="grado" name="grado" required>
+        <br>
+
+        <label for="grupo">Grupo:</label>
+        <input type="text" id="grupo" name="grupo" required>
+        <br>
+
+        <input type="submit" value="Registrar">
+    </form>
+
+    <br>
+
+    <a href="/login">Cambiar cuenta</a>
+
+</body>
+</html>

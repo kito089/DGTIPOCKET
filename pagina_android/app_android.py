@@ -248,5 +248,9 @@ def pruebas():
     parametros = dict(session)['profile']
     return render_template('prueba.html', parametros = parametros)
 
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

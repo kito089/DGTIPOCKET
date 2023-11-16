@@ -33,19 +33,16 @@ google = oauth.register(
     name='google',
     client_id= os.getenv("GOOGLE_CLIENT_ID"),
     client_secret= os.getenv("GOOGLE_CLIENT_SECRET"),
-    #authorize_url='https://accounts.google.com/o/oauth2/auth',
-    #authorize_params=None,
-    #authorize_callback=None,
-    #authorize_response=None,
-    #token_url='https://accounts.google.com/o/oauth2/token',
-    #token_params=None,
-    #token_response=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    authorize_callback=None,
+    authorize_response=None,
+    token_url='https://accounts.google.com/o/oauth2/token',
+    token_params=None,
+    token_response=None,
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    #client_kwargs={'scope': 'openid email profile'}
-
-    #redirect_uri=lambda: url_for('auth', _external=True),
     client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar'},
 )
 
@@ -77,47 +74,47 @@ def index():
     if not creds.valid:
         print("----------------not creds valid")
 
-    if not creds or not creds.valid:
-        print("token no valido por alguna razon :v")
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            # flow = InstalledAppFlow.from_client_secrets_file(
-            #     "credentials.json", SCOPES
-            # )
-            # creds = flow.run_local_server(port=0)
-            print("no hay un refresh token")        
+    # if not creds or not creds.valid:
+    #     print("token no valido por alguna razon :v")
+    #     if creds and creds.expired and creds.refresh_token:
+    #         creds.refresh(Request())
+    #     else:
+    #         # flow = InstalledAppFlow.from_client_secrets_file(
+    #         #     "credentials.json", SCOPES
+    #         # )
+    #         # creds = flow.run_local_server(port=0)
+    #         print("no hay un refresh token")        
 
-    try:
-        service = build("calendar", "v3", credentials=creds)
+    # try:
+    #     service = build("calendar", "v3", credentials=creds)
 
-        # Call the Calendar API
-        now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-        print("Getting the upcoming 10 events")
-        events_result = (
-            service.events().list(
-                calendarId="primary",
-                timeMin=now,
-                maxResults=10,
-                singleEvents=True,
-                orderBy="startTime",
-            ).execute()
-        )
-        events = events_result.get("items", [])
+    #     # Call the Calendar API
+    #     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+    #     print("Getting the upcoming 10 events")
+    #     events_result = (
+    #         service.events().list(
+    #             calendarId="primary",
+    #             timeMin=now,
+    #             maxResults=10,
+    #             singleEvents=True,
+    #             orderBy="startTime",
+    #         ).execute()
+    #     )
+    #     events = events_result.get("items", [])
 
-        if not events:
-            print("No upcoming events found.")
+    #     if not events:
+    #         print("No upcoming events found.")
 
-        # Prints the start and name of the next 10 events
-        for event in events:
-            start = event["start"].get("dateTime", event["start"].get("date"))
-            print(start, event["summary"])
+    #     # Prints the start and name of the next 10 events
+    #     for event in events:
+    #         start = event["start"].get("dateTime", event["start"].get("date"))
+    #         print(start, event["summary"])
 
-        print("---------------events?")
-        print(events)
+    #     print("---------------events?")
+    #     print(events)
 
-    except HttpError as error:
-        print(f"An error occurred: {error}")
+    # except HttpError as error:
+    #     print(f"An error occurred: {error}")
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 
@@ -131,7 +128,7 @@ def login():
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
-    tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token')}
+    tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token'), 'token_uri': 'https://accounts.google.com/o/oauth2/token'}
     #token_dict = token.as_dict()
     #token_json = json.dumps(token_dict, indent=2)
 

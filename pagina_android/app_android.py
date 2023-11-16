@@ -61,6 +61,29 @@ def index():
     print("session token")
     print(toks)
 
+    FLOW_SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
+    CLIENT_SECRETS_FILE = '~/DGTIPOCKET/pagina_android/credentials.json'
+
+    flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, FLOW_SCOPES)
+
+    # Obtén la URL de autorización
+    auth_url, _ = flow.authorization_url(prompt='consent')
+
+    # Imprime la URL de autorización y solicita al usuario que la visite
+    print(f'-----------Por favor, visita esta URL para autorizar la aplicación: {auth_url}')
+    # authorization_response = input('Pega aquí la URL de redirección después de autorizar: ')
+
+    # # Intercambia el código de autorización por tokens de acceso y actualiza
+    # flow.fetch_token(authorization_response=authorization_response)
+
+    # Imprime y devuelve el Refresh Token
+    # credentials = flow.credentials
+    # print("-------credentials")
+    # print(credentials)
+    # if not credentials.valid:
+    #     print("----------------not creds valid")
+    # print(f'Refresh Token: {credentials.refresh_token}')
+
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first

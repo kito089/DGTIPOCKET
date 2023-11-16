@@ -60,6 +60,7 @@ def index():
     bd.exit()
     parametros = dict(session)['profile']
     toks = dict(session)['tok_info']
+
     print("session token")
     print(toks)
 
@@ -70,11 +71,12 @@ def index():
     creds = Credentials.from_authorized_user_info(toks, SCOPES)
     print("----------creds")
     print(creds)
-    # If there are no (valid) credentials available, let the user log in.
+
     if not creds:
         print("-------------not creds")
     if not creds.valid:
         print("----------------not creds valid")
+
     if not creds or not creds.valid:
         print("token no valido por alguna razon :v")
         if creds and creds.expired and creds.refresh_token:
@@ -93,15 +95,13 @@ def index():
         now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
         print("Getting the upcoming 10 events")
         events_result = (
-            service.events()
-            .list(
+            service.events().list(
                 calendarId="primary",
                 timeMin=now,
                 maxResults=10,
                 singleEvents=True,
                 orderBy="startTime",
-            )
-            .execute()
+            ).execute()
         )
         events = events_result.get("items", [])
 

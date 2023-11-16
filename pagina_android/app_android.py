@@ -132,10 +132,8 @@ def authorize():
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
-
     session['profile'] = user_info
-    del token['userinfo']
-    session['tok_info'] = token
+    session['tok_info'] = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token')}
     #session['user_info'] = info
     print("--------------datos")
     print("--------------resp")
@@ -144,6 +142,8 @@ def authorize():
     print(user)
     print("---------------token")
     print(token)
+    print("---------------toks")
+    print(tok)
     with open("token.txt", "w") as tok:
         tok.write(str(token))
     print("---------------user_info")

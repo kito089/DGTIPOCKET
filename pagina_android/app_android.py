@@ -44,7 +44,7 @@ google = oauth.register(
     # authorize_params=None,
     # authorize_callback=None,
     # authorize_response=None,
-    token_url='https://accounts.google.com/o/oauth2/token',
+    token_url='https://oauth2.googleapis.com/token',
     # token_params=None,
     # token_response=None,
     api_base_url='https://www.googleapis.com/oauth2/v1/',
@@ -133,7 +133,7 @@ def login():
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
-    tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token'), 'token_uri': 'https://accounts.google.com/o/oauth2/token'}
+    tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token'), 'token_uri': 'https://oauth2.googleapis.com/token'}
     #token_dict = token.as_dict()
     #token_json = json.dumps(token_dict, indent=2)
 

@@ -137,7 +137,6 @@ def authorize():
 
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
-
     session['profile'] = user_info
     session['tok_info'] = tokens
     print("---------------toks")
@@ -146,20 +145,7 @@ def authorize():
     #     tok.write(str(token))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    authorization_url, _ = flow.authorization_url(prompt='consent')
-    return redirect(authorization_url)
-
-@app.route('/oauth2callback')
-def oauth2callback():
-    authorization_response = request.url
-    flow.fetch_token(authorization_response=authorization_response)
-    credentials = flow.credentials
-    print("-------------access_token")
-    print(credentials.token)
-    print("--------------refresh_token")
-    print(credentials.refresh_token)
-
-    return redirect(url_for("index"))
+    return redirect('/')
 
 @app.route('/logout')
 def logout():
@@ -201,6 +187,7 @@ def menu():
 def servicio():
     parametros = dict(session)['profile']
     return render_template('servicio.html', parametros = parametros)
+
 @app.route('/agenda')
 def agenda():
     parametros = dict(session)['profile']
@@ -254,15 +241,10 @@ def agregar_aviso():
     parametros = dict(session)['profile']
     return render_template('insnot.html', parametros = parametros)
     
-    
 @app.route('/a')
 def pruebas():
     parametros = dict(session)['profile']
     return render_template('prueba.html', parametros = parametros)
-
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

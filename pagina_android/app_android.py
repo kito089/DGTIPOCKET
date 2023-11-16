@@ -27,29 +27,31 @@ app = Flask(__name__)
 # Session config
 app.secret_key = os.getenv("APP_SECRET_KEY")
 
+FLOW_SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
+CLIENT_SECRETS_FILE = os.path.expanduser('~/DGTIPOCKET/pagina_android/credentials.json')
+SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
+
+flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, FLOW_SCOPES)
+auth_url, _ = flow.authorization_url(prompt='consent')
+
 oauth = OAuth(app)
 
 google = oauth.register(
     name='google',
     client_id= os.getenv("GOOGLE_CLIENT_ID"),
     client_secret= os.getenv("GOOGLE_CLIENT_SECRET"),
-    #authorize_url='https://accounts.google.com/o/oauth2/auth',
-    #authorize_params=None,
-    #authorize_callback=None,
-    #authorize_response=None,
-    #token_url='https://accounts.google.com/o/oauth2/token',
-    #token_params=None,
-    #token_response=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',#auth_url,
+    # authorize_params=None,
+    # authorize_callback=None,
+    # authorize_response=None,
+    token_url='https://oauth2.googleapis.com/token',
+    # token_params=None,
+    # token_response=None,
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    #client_kwargs={'scope': 'openid email profile'}
-
-    #redirect_uri=lambda: url_for('auth', _external=True),
     client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar'},
 )
-
-SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 # Definir una ruta para la página principal
 @app.route('/')
@@ -59,12 +61,35 @@ def index():
     noticias = bd.obtenerTablas("noticias")
     bd.exit()
     parametros = dict(session)['profile']
-    print("sesion")
-    print(dict(session))
+    toks = dict(session)['tok_info']
 
-    # creds = None
-    # creds = Credentials.from_authorized_user_file(token, SCOPES)
- 
+    print("session token")
+    print(toks)
+
+    creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    creds = Credentials.from_authorized_user_info(toks, SCOPES)
+    print("----------creds")
+    print(creds)
+
+    if not creds:
+        print("-------------not creds")
+    if not creds.valid:
+        print("----------------not creds valid")
+
+    # if not creds or not creds.valid:
+    #     print("token no valido por alguna razon :v")
+    #     if creds and creds.expired and creds.refresh_token:
+    #         creds.refresh(Request())
+    #     else:
+    #         # flow = InstalledAppFlow.from_client_secrets_file(
+    #         #     "credentials.json", SCOPES
+    #         # )
+    #         # creds = flow.run_local_server(port=0)
+    #         print("no hay un refresh token")        
+
     # try:
     #     service = build("calendar", "v3", credentials=creds)
 
@@ -72,15 +97,13 @@ def index():
     #     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
     #     print("Getting the upcoming 10 events")
     #     events_result = (
-    #         service.events()
-    #         .list(
+    #         service.events().list(
     #             calendarId="primary",
     #             timeMin=now,
     #             maxResults=10,
     #             singleEvents=True,
     #             orderBy="startTime",
-    #         )
-    #         .execute()
+    #         ).execute()
     #     )
     #     events = events_result.get("items", [])
 
@@ -91,6 +114,9 @@ def index():
     #     for event in events:
     #         start = event["start"].get("dateTime", event["start"].get("date"))
     #         print(start, event["summary"])
+
+    #     print("---------------events?")
+    #     print(events)
 
     # except HttpError as error:
     #     print(f"An error occurred: {error}")
@@ -108,12 +134,14 @@ def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
 
+    #token_dict = token.as_dict()
+    #token_json = json.dumps(token_dict, indent=2)
+
+    #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
-    user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
-    # Here you use the profile/user data that you got and query your database find/register the user
-    # and set ur own data in the session not the profile from google
     session['profile'] = user_info
+    #session['user_info'] = info
     print("--------------datos")
     print("--------------user")
     print(user)
@@ -144,6 +172,11 @@ def tutorias():
     parametros = dict(session)['profile']
     return render_template('tutoriasapp.html', parametros = parametros)
 
+@app.route('/pagos')
+def pagos():
+    parametros = dict(session)['profile']
+    return render_template('pagos.html', parametros = parametros)
+
 @app.route('/clubs')
 def clubs():
     parametros = dict(session)['profile']
@@ -163,6 +196,7 @@ def menu():
 def servicio():
     parametros = dict(session)['profile']
     return render_template('servicio.html', parametros = parametros)
+
 @app.route('/agenda')
 def agenda():
     parametros = dict(session)['profile']
@@ -215,7 +249,6 @@ def agregar_aviso():
         return redirect(url_for('index'))
     parametros = dict(session)['profile']
     return render_template('insnot.html', parametros = parametros)
-    
     
 @app.route('/a')
 def pruebas():

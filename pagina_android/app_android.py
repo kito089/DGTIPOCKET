@@ -134,25 +134,10 @@ def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
     tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token'), 'token_uri': 'https://oauth2.googleapis.com/token'}
-    #token_dict = token.as_dict()
-    #token_json = json.dumps(token_dict, indent=2)
-
-    # authorization_response = input('Pega aquí la URL de redirección después de autorizar: ')
-
-    # # Intercambia el código de autorización por tokens de acceso y actualiza
-    # flow.fetch_token(authorization_response=authorization_response)
-
-    # Imprime y devuelve el Refresh Token
-    # credentials = flow.credentials
-    # print("-------credentials")
-    # print(credentials)
-    # if not credentials.valid:
-    #     print("----------------not creds valid")
-    # print(f'Refresh Token: {credentials.refresh_token}')
 
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
-    user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
+
     session['profile'] = user_info
     session['tok_info'] = tokens
     print("---------------toks")
@@ -161,7 +146,20 @@ def authorize():
     #     tok.write(str(token))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    return redirect('/')
+    authorization_url, _ = flow.authorization_url(prompt='consent')
+    return redirect(authorization_url)
+
+@app.route('/oauth2callback')
+def oauth2callback():
+    authorization_response = request.url
+    flow.fetch_token(authorization_response=authorization_response)
+    credentials = flow.credentials
+    print("-------------access_token")
+    print(credentials.token)
+    print("--------------refresh_token")
+    print(credentials.refresh_token)
+
+    return redirect(url_for("index"))
 
 @app.route('/logout')
 def logout():

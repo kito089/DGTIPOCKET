@@ -145,14 +145,18 @@
 </head>
 <body>
 
-    <h1>Registro de Usuario</h1>
+   
 
     <form action="#" method="post">
+         <h1>Registro de Usuario</h1>
         <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
         <label for="nombre">Ayudanos a terminar de completar tu registro </label>
         <br>
+        <label for="curp">NOMBRE:</label><br>
+
         <input type="text" id="nombre" name="xs" value="{{parametros['name']}}" readonly>
         <br>
+        <label for="curp">CORREO:</label><br>
         <input type="text" id="nombre" name="xd" value="{{parametros['email']}}" readonly>
         <br>
         <label for="curp">CURP:</label>
@@ -168,11 +172,12 @@
         <br>
 
         <input type="submit" value="Registrar">
+        <a href="/login">Cambiar cuenta</a>
     </form>
 
     <br>
 
-    <a href="/login">Cambiar cuenta</a>
+    
 
 </body>
 </html>

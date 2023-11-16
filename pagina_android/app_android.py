@@ -69,7 +69,7 @@ def index():
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    creds = Credentials.from_authorized_user_file(toks, SCOPES)
+    creds = Credentials.from_authorized_user_info(toks, SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         print("token no valido por alguna razon :v")

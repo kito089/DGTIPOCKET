@@ -131,11 +131,14 @@ def authorize():
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
-    # Here you use the profile/user data that you got and query your database find/register the user
-    # and set ur own data in the session not the profile from google
+    
     session['profile'] = user_info
+    del token['userinfo']
+    session['tok_info'] = token
     #session['user_info'] = info
     print("--------------datos")
+    print("--------------resp")
+    print(resp)
     print("--------------user")
     print(user)
     print("---------------token")

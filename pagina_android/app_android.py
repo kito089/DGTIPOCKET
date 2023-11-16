@@ -62,7 +62,7 @@ def index():
     print(toks)
 
     FLOW_SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
-    CLIENT_SECRETS_FILE = '~/DGTIPOCKET/pagina_android/credentials.json'
+    CLIENT_SECRETS_FILE = os.path.expanduser('~/DGTIPOCKET/pagina_android/credentials.json')
 
     flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, FLOW_SCOPES)
 

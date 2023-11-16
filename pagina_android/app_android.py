@@ -133,25 +133,16 @@ def login():
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
+    tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token'), 'token_uri': 'https://oauth2.googleapis.com/token'}
 
-    #token_dict = token.as_dict()
-    #token_json = json.dumps(token_dict, indent=2)
-
-    #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     session['profile'] = user_info
-    #session['user_info'] = info
-    print("--------------datos")
-    print("--------------user")
-    print(user)
-    print("---------------token")
-    print(token)
-    with open("token.txt", "w") as tok:
-        tok.write(str(token))
-    print("---------------user_info")
-    print(user_info)
-    #print(info)
+    session['tok_info'] = tokens
+    print("---------------toks")
+    print(tokens)
+    # with open("token.txt", "w") as tok:
+    #     tok.write(str(token))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/')

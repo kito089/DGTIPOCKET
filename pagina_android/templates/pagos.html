@@ -1,0 +1,35 @@
+{% extends "layoutapp.html" %}
+
+{% block title %}
+INICIO
+{% endblock %}
+{% block style %}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#anuncio {
+    text-align: center;
+}
+
+#mensaje {
+    font-size: 24px;
+    color: #3498db;
+    margin-top: 20px;
+}
+{% endblock %}
+
+
+
+{% block content %}
+<div id="anuncio">
+    <h1>¡Página en Desarrollo!</h1>
+    <p id="mensaje">"Construyendo experiencias web asombrosas para ti."</p>
+</div>
+{% endblock %}

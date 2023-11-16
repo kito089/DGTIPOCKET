@@ -141,6 +141,11 @@ def tutorias():
     parametros = dict(session)['profile']
     return render_template('tutoriasapp.html', parametros = parametros)
 
+@app.route('/pagos')
+def pagos():
+    parametros = dict(session)['profile']
+    return render_template('pagos.html', parametros = parametros)
+
 @app.route('/clubs')
 def clubs():
     parametros = dict(session)['profile']

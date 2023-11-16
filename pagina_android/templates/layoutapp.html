@@ -69,44 +69,5 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js">  </script>
     
 
-
-
-
-  
-  <!-- Agrega el SDK de Firebase a tu página -->
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-messaging.js"></script>
-
-
-<!-- Configura tu aplicación Firebase -->
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyDofXAA-Fbmo1SX2aKszjjJjVwOR16isV0",
-    authDomain: "patotipo.pythonanywhere.com",
-    projectId: "dgtipocket",
-    storageBucket: "gs://dgtipocket.appspot.com",
-    messagingSenderId: "1092101831178",
-    appId: "1:1092101831178:android:b6f1746cec222a7411bdf3"
-  };
-
-  // Inicializa Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  // Obtén una instancia del servicio de mensajería (FCM)
-  const messaging = firebase.messaging();
-
-  // TODO: Aquí puedes agregar lógica para manejar el token del dispositivo
-  // Por ejemplo, puedes enviar el token al servidor para registrar el dispositivo
-  messaging.getToken().then((token) => {
-    console.log("Token del dispositivo:", token);
-    // Aquí puedes enviar el token al servidor para registrarlo en tu base de datos
-  }).catch((error) => {
-    console.error("Error al obtener el token:", error);
-  });
-</script>
-
-
-  
-
   
 </html>

@@ -60,8 +60,6 @@ def index():
     bd.exit()
     parametros = dict(session)['profile']
     toks = dict(session)['tok_info']
-    print("sesion")
-    print(dict(session))
     print("session token")
     print(toks)
 
@@ -70,6 +68,8 @@ def index():
     # created automatically when the authorization flow completes for the first
     # time.
     creds = Credentials.from_authorized_user_info(toks, SCOPES)
+    print("----------creds")
+    print(creds)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         print("token no valido por alguna razon :v")
@@ -128,21 +128,15 @@ def authorize():
     #token_dict = token.as_dict()
     #token_json = json.dumps(token_dict, indent=2)
 
-    #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
     session['profile'] = user_info
     session['tok_info'] = tokens
-    #session['user_info'] = info
-    print("--------------datos")
     print("---------------toks")
     print(tokens)
-    with open("token.txt", "w") as tok:
-        tok.write(str(token))
-    print("---------------user_info")
-    print(user_info)
-    #print(info)
+    # with open("token.txt", "w") as tok:
+    #     tok.write(str(token))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/')

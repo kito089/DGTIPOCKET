@@ -71,6 +71,10 @@ def index():
     print("----------creds")
     print(creds)
     # If there are no (valid) credentials available, let the user log in.
+    if not creds:
+        print("-------------not creds")
+    if not creds.valid:
+        print("----------------not creds valid")
     if not creds or not creds.valid:
         print("token no valido por alguna razon :v")
         if creds and creds.expired and creds.refresh_token:

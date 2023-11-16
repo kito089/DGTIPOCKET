@@ -60,6 +60,8 @@ def index():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     bd.exit()
+    print("---------------sesion")
+    print(dict(session))
     parametros = dict(session)['profile']
     toks = dict(session)['tok_info']
 

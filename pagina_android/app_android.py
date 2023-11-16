@@ -59,57 +59,65 @@ def index():
     noticias = bd.obtenerTablas("noticias")
     bd.exit()
     parametros = dict(session)['profile']
-    print("sesion")
-    print(dict(session))
+    toks = dict(session)['tok_info']
 
-    # creds = None
-    # # The file token.json stores the user's access and refresh tokens, and is
-    # # created automatically when the authorization flow completes for the first
-    # # time.
-    # if os.path.exists("token.json"):
-    #     creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    # # If there are no (valid) credentials available, let the user log in.
-    # if not creds or not creds.valid:
-    #     if creds and creds.expired and creds.refresh_token:
-    #         creds.refresh(Request())
-    #     else:
-    #         flow = InstalledAppFlow.from_client_secrets_file(
-    #             "credentials.json", SCOPES
-    #         )
-    #         creds = flow.run_local_server(port=0)
-    #     # Save the credentials for the next run
-    #     with open("token.json", "w") as token:
-    #         token.write(creds.to_json())
+    print("session token")
+    print(toks)
 
-    # try:
-    #     service = build("calendar", "v3", credentials=creds)
+    creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    creds = Credentials.from_authorized_user_info(toks, SCOPES)
+    print("----------creds")
+    print(creds)
 
-    #     # Call the Calendar API
-    #     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-    #     print("Getting the upcoming 10 events")
-    #     events_result = (
-    #         service.events()
-    #         .list(
-    #             calendarId="primary",
-    #             timeMin=now,
-    #             maxResults=10,
-    #             singleEvents=True,
-    #             orderBy="startTime",
-    #         )
-    #         .execute()
-    #     )
-    #     events = events_result.get("items", [])
+    if not creds:
+        print("-------------not creds")
+    if not creds.valid:
+        print("----------------not creds valid")
 
-    #     if not events:
-    #         print("No upcoming events found.")
+    if not creds or not creds.valid:
+        print("token no valido por alguna razon :v")
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            # flow = InstalledAppFlow.from_client_secrets_file(
+            #     "credentials.json", SCOPES
+            # )
+            # creds = flow.run_local_server(port=0)
+            print("no hay un refresh token")        
 
-    #     # Prints the start and name of the next 10 events
-    #     for event in events:
-    #         start = event["start"].get("dateTime", event["start"].get("date"))
-    #         print(start, event["summary"])
+    try:
+        service = build("calendar", "v3", credentials=creds)
 
-    # except HttpError as error:
-    #     print(f"An error occurred: {error}")
+        # Call the Calendar API
+        now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+        print("Getting the upcoming 10 events")
+        events_result = (
+            service.events().list(
+                calendarId="primary",
+                timeMin=now,
+                maxResults=10,
+                singleEvents=True,
+                orderBy="startTime",
+            ).execute()
+        )
+        events = events_result.get("items", [])
+
+        if not events:
+            print("No upcoming events found.")
+
+        # Prints the start and name of the next 10 events
+        for event in events:
+            start = event["start"].get("dateTime", event["start"].get("date"))
+            print(start, event["summary"])
+
+        print("---------------events?")
+        print(events)
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 
@@ -123,28 +131,19 @@ def login():
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
-
+    tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token')}
     #token_dict = token.as_dict()
     #token_json = json.dumps(token_dict, indent=2)
 
-    #info = oauth.google.parse_id_token(token)
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     user = oauth.google.userinfo()  # uses openid endpoint to fetch user info
-    # Here you use the profile/user data that you got and query your database find/register the user
-    # and set ur own data in the session not the profile from google
     session['profile'] = user_info
-    #session['user_info'] = info
-    print("--------------datos")
-    print("--------------user")
-    print(user)
-    print("---------------token")
-    print(token)
-    with open("token.txt", "w") as tok:
-        tok.write(str(token))
-    print("---------------user_info")
-    print(user_info)
-    #print(info)
+    session['tok_info'] = tokens
+    print("---------------toks")
+    print(tokens)
+    # with open("token.txt", "w") as tok:
+    #     tok.write(str(token))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/')

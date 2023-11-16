@@ -70,7 +70,8 @@ def index():
     auth_url, _ = flow.authorization_url(prompt='consent')
 
     # Imprime la URL de autorización y solicita al usuario que la visite
-    print(f'-----------Por favor, visita esta URL para autorizar la aplicación: {auth_url}')
+    print('-----------Por favor, visita esta URL para autorizar la aplicación: ')
+    print(auth_url)
     # authorization_response = input('Pega aquí la URL de redirección después de autorizar: ')
 
     # # Intercambia el código de autorización por tokens de acceso y actualiza

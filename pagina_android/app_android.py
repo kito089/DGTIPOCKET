@@ -27,13 +27,20 @@ app = Flask(__name__)
 # Session config
 app.secret_key = os.getenv("APP_SECRET_KEY")
 
+FLOW_SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
+CLIENT_SECRETS_FILE = os.path.expanduser('~/DGTIPOCKET/pagina_android/credentials.json')
+SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
+
+flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, FLOW_SCOPES)
+auth_url, _ = flow.authorization_url(prompt='consent')
+
 oauth = OAuth(app)
 
 google = oauth.register(
     name='google',
     client_id= os.getenv("GOOGLE_CLIENT_ID"),
     client_secret= os.getenv("GOOGLE_CLIENT_SECRET"),
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_url=auth_url,
     authorize_params=None,
     authorize_callback=None,
     authorize_response=None,
@@ -45,8 +52,6 @@ google = oauth.register(
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar'},
 )
-
-SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 # Definir una ruta para la página principal
 @app.route('/')
@@ -60,30 +65,6 @@ def index():
 
     print("session token")
     print(toks)
-
-    FLOW_SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
-    CLIENT_SECRETS_FILE = os.path.expanduser('~/DGTIPOCKET/pagina_android/credentials.json')
-
-    flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, FLOW_SCOPES)
-
-    # Obtén la URL de autorización
-    auth_url, _ = flow.authorization_url(prompt='consent')
-
-    # Imprime la URL de autorización y solicita al usuario que la visite
-    print('-----------Por favor, visita esta URL para autorizar la aplicación: ')
-    print(auth_url)
-    # authorization_response = input('Pega aquí la URL de redirección después de autorizar: ')
-
-    # # Intercambia el código de autorización por tokens de acceso y actualiza
-    # flow.fetch_token(authorization_response=authorization_response)
-
-    # Imprime y devuelve el Refresh Token
-    # credentials = flow.credentials
-    # print("-------credentials")
-    # print(credentials)
-    # if not credentials.valid:
-    #     print("----------------not creds valid")
-    # print(f'Refresh Token: {credentials.refresh_token}')
 
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -155,6 +136,19 @@ def authorize():
     tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),'refresh_token':token.get('refresh_token'), 'access_token':token.get('access_token'), 'token_uri': 'https://accounts.google.com/o/oauth2/token'}
     #token_dict = token.as_dict()
     #token_json = json.dumps(token_dict, indent=2)
+
+    # authorization_response = input('Pega aquí la URL de redirección después de autorizar: ')
+
+    # # Intercambia el código de autorización por tokens de acceso y actualiza
+    # flow.fetch_token(authorization_response=authorization_response)
+
+    # Imprime y devuelve el Refresh Token
+    # credentials = flow.credentials
+    # print("-------credentials")
+    # print(credentials)
+    # if not credentials.valid:
+    #     print("----------------not creds valid")
+    # print(f'Refresh Token: {credentials.refresh_token}')
 
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()

@@ -74,47 +74,47 @@ def index():
     if not creds.valid:
         print("----------------not creds valid")
 
-    if not creds or not creds.valid:
-        print("token no valido por alguna razon :v")
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            # flow = InstalledAppFlow.from_client_secrets_file(
-            #     "credentials.json", SCOPES
-            # )
-            # creds = flow.run_local_server(port=0)
-            print("no hay un refresh token")        
+    # if not creds or not creds.valid:
+    #     print("token no valido por alguna razon :v")
+    #     if creds and creds.expired and creds.refresh_token:
+    #         creds.refresh(Request())
+    #     else:
+    #         # flow = InstalledAppFlow.from_client_secrets_file(
+    #         #     "credentials.json", SCOPES
+    #         # )
+    #         # creds = flow.run_local_server(port=0)
+    #         print("no hay un refresh token")        
 
-    try:
-        service = build("calendar", "v3", credentials=creds)
+    # try:
+    #     service = build("calendar", "v3", credentials=creds)
 
-        # Call the Calendar API
-        now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-        print("Getting the upcoming 10 events")
-        events_result = (
-            service.events().list(
-                calendarId="primary",
-                timeMin=now,
-                maxResults=10,
-                singleEvents=True,
-                orderBy="startTime",
-            ).execute()
-        )
-        events = events_result.get("items", [])
+    #     # Call the Calendar API
+    #     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+    #     print("Getting the upcoming 10 events")
+    #     events_result = (
+    #         service.events().list(
+    #             calendarId="primary",
+    #             timeMin=now,
+    #             maxResults=10,
+    #             singleEvents=True,
+    #             orderBy="startTime",
+    #         ).execute()
+    #     )
+    #     events = events_result.get("items", [])
 
-        if not events:
-            print("No upcoming events found.")
+    #     if not events:
+    #         print("No upcoming events found.")
 
-        # Prints the start and name of the next 10 events
-        for event in events:
-            start = event["start"].get("dateTime", event["start"].get("date"))
-            print(start, event["summary"])
+    #     # Prints the start and name of the next 10 events
+    #     for event in events:
+    #         start = event["start"].get("dateTime", event["start"].get("date"))
+    #         print(start, event["summary"])
 
-        print("---------------events?")
-        print(events)
+    #     print("---------------events?")
+    #     print(events)
 
-    except HttpError as error:
-        print(f"An error occurred: {error}")
+    # except HttpError as error:
+    #     print(f"An error occurred: {error}")
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 

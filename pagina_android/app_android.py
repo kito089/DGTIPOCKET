@@ -164,6 +164,8 @@ def planteles1():
 @login_required
 def terinar():
     parametros = dict(session)['profile']
+    print("-----------------------para")
+    print(parametros)
     return render_template('terminarR.html', parametros = parametros)
 
 

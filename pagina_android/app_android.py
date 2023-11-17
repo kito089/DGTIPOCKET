@@ -128,7 +128,7 @@ def index():
     # print("---------------events?")
     # print(events)
 
-    # return render_template('indexapp.html', parametros = parametros,noticias=noticias)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 
 @app.route('/login')
 def login():

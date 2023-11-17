@@ -171,7 +171,7 @@
         <input type="text" id="grupo" name="grupo" required>
         <br>
 
-        <input class="submit" value="Registrar" onclick="subir();">
+        <input class="submit" value="Registrar" onclick="subir();"readonly>
         <a href="/login">Cambiar cuenta</a>
     </form>
 
@@ -183,7 +183,6 @@
 
 <script>
     function subir(){
-        
         formulario.submit();
         window.location.href ="/"
     }

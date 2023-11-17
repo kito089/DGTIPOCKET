@@ -30,7 +30,7 @@ app.secret_key = os.getenv("APP_SECRET_KEY")
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 flow = Flow.from_client_secrets_file(
-    '~/DGTIPOCKET/pagina_android/credentialsLocal.json',
+    os.path.expanduser('~/DGTIPOCKET/pagina_android/credentialsLocal.json'),
     scopes=['https://www.googleapis.com/auth/calendar.readonly'],
     redirect_uri='https://patotipo.pythonanywhere.com/',
 )

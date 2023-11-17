@@ -201,6 +201,8 @@ def insertainfo():
         parametros = dict(session)['profile']
         print("=========== nuevos parametros")
         print(parametros)
+        print("-----------la autorrizacion")
+        print(authorization_url)
         return redirect(authorization_url)
 
     return redirect(authorization_url)

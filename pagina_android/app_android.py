@@ -1,7 +1,7 @@
 from flask import Flask, render_template,redirect,url_for, request, session
 from authlib.integrations.flask_client import OAuth
 from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
+from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 from googleapiclient.errors import HttpError
@@ -27,12 +27,12 @@ app = Flask(__name__)
 # Session config
 app.secret_key = os.getenv("APP_SECRET_KEY")
 
-FLOW_SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
-CLIENT_SECRETS_FILE = os.path.expanduser('~/DGTIPOCKET/pagina_android/credentials.json')
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
-
-flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, FLOW_SCOPES)
-auth_url, _ = flow.authorization_url(prompt='consent')
+flow = Flow.from_client_secrets_file(
+    'ruta/a/tu/client_secret.json',
+    scopes=['https://www.googleapis.com/auth/calendar.readonly'],
+    redirect_uri='https://patotipo.pythonanywhere.com/',
+)
 
 oauth = OAuth(app)
 
@@ -50,7 +50,7 @@ google = oauth.register(
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar'},
+    client_kwargs={'scope': 'openid email profile'},
 )
 
 # Definir una ruta para la página principal
@@ -68,60 +68,61 @@ def index():
     print("session token")
     print(toks)
 
-    creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    creds = Credentials.from_authorized_user_info(toks, SCOPES)
-    print("----------creds")
-    print(creds)
+    flow.fetch_token(authorization_response=request.url)
+    credentials = flow.credentials
 
-    if not creds:
-        print("-------------not creds")
-    if not creds.valid:
-        print("----------------not creds valid")
+    # Aquí puedes usar las credenciales para interactuar con la API de Google Calendar
+    service = build('calendar', 'v3', credentials=credentials)
+
+    # creds = None
+    # # The file token.json stores the user's access and refresh tokens, and is
+    # # created automatically when the authorization flow completes for the first
+    # # time.
+    # creds = Credentials.from_authorized_user_info(toks, SCOPES)
+    # print("----------creds")
+    # print(creds)
+
+    # if not creds.valid:
+    #     print("----------------not creds valid")
 
     # if not creds or not creds.valid:
     #     print("token no valido por alguna razon :v")
     #     if creds and creds.expired and creds.refresh_token:
     #         creds.refresh(Request())
     #     else:
-    #         # flow = InstalledAppFlow.from_client_secrets_file(
-    #         #     "credentials.json", SCOPES
-    #         # )
-    #         # creds = flow.run_local_server(port=0)
-    #         print("no hay un refresh token")        
+    #         flow = InstalledAppFlow.from_client_secrets_file(
+    #             "credentials.json", SCOPES
+    #         )
+    #         creds = flow.run_local_server(port=0) 
 
-    # try:
-    #     service = build("calendar", "v3", credentials=creds)
+    # creds = None
 
-    #     # Call the Calendar API
-    #     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-    #     print("Getting the upcoming 10 events")
-    #     events_result = (
-    #         service.events().list(
-    #             calendarId="primary",
-    #             timeMin=now,
-    #             maxResults=10,
-    #             singleEvents=True,
-    #             orderBy="startTime",
-    #         ).execute()
-    #     )
-    #     events = events_result.get("items", [])
+    # if os.path.exists("token.json"):
+    #     creds = Credentials.from_authorized_user_file("token.json", SCOPES)
 
-    #     if not events:
-    #         print("No upcoming events found.")
+    now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+    print("Getting the upcoming 10 events")
+    events_result = (
+        service.events().list(
+            calendarId="primary",
+            timeMin=now,
+            maxResults=10,
+            singleEvents=True,
+            orderBy="startTime",
+        ).execute()
+    )
+    events = events_result.get("items", [])
 
-    #     # Prints the start and name of the next 10 events
-    #     for event in events:
-    #         start = event["start"].get("dateTime", event["start"].get("date"))
-    #         print(start, event["summary"])
+    if not events:
+        print("No upcoming events found.")
 
-    #     print("---------------events?")
-    #     print(events)
+    # Prints the start and name of the next 10 events
+    for event in events:
+        start = event["start"].get("dateTime", event["start"].get("date"))
+        print(start, event["summary"])
 
-    # except HttpError as error:
-    #     print(f"An error occurred: {error}")
+    print("---------------events?")
+    print(events)
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 
@@ -135,6 +136,16 @@ def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
     tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"), 'token_uri': 'https://oauth2.googleapis.com/token'}
+    # tokens = {
+    #     'token': token['access_token'],
+    #     'refresh_token': 'your_refresh_token',
+    #     'token_uri': 'https://oauth2.googleapis.com/token',
+    #     'client_id': os.getenv("GOOGLE_CLIENT_ID"),
+    #     'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),
+    #     'scopes': token['scope'].split(),
+    #     'expiry': 'expiry_timestamp',
+    #     'id_token': token['id_token'],
+    # }
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     session['profile'] = user_info
@@ -172,8 +183,10 @@ def terinar():
 @app.route('/insertainfo', methods=['GET', 'POST'])
 @login_required
 def insertainfo():
-    print("----------- rquest")
-    print(request.method)
+    authorization_url, state = flow.authorization_url(
+        access_type='offline',
+        include_granted_scopes='true',
+    )
     if request.method == 'POST':
         
         curp=request.form['curp']
@@ -187,9 +200,9 @@ def insertainfo():
         parametros = dict(session)['profile']
         print("=========== nuevos parametros")
         print(parametros)
-        return redirect(url_for("index"))
+        return redirect(authorization_url)
 
-    return redirect(url_for("index"))
+    return redirect(authorization_url)
 
 @app.route('/a')
 def a():

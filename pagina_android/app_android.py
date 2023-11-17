@@ -147,7 +147,7 @@ def authorize():
     #     tok.write(str(token))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    return redirect('/terminar')
+    return redirect('/')
 
 @app.route('/logout')
 def logout():

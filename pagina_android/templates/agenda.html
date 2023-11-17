@@ -28,9 +28,9 @@ INICIO
 
 
 {% block content %}
-<h1>Archivos PDF encontrados:</h1>
+<h1>Horaio <strong>{{parametros['grado']}}{{parametros['grupo']}}</strong></h1>
     <ul>
-        <iframe id="FramePDF" src="{{archivo}}" width="700" height="400" style="border: 1px solid black;"/>
+        <iframe id="FramePDF" src=" https://github.com/kito089/DGTIPOCKET/blob/master/horarios/{{archivo}}.pdf" width="700" height="400" style="border: 1px solid black;"/>
 
     </ul>
 <div class="calendario-responsive">

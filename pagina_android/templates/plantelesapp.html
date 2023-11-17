@@ -4,119 +4,95 @@
 INICIO
 {% endblock %}
 {% block style %}
-table {
-    border-collapse: collapse;
-    width: 100%;
+body {
+  margin: 0;
+  overflow: hidden;
 }
 
-/* Estilo para las celdas */
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
 }
 
-/* Estilo para las filas impares (cambia el color de fondo) */
-tr:nth-child(odd) {
-    background-color: #f2f2f2;
+#contenedor-imagen {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 50px);
+  overflow: hidden;
 }
 
-/* Estilo para las filas pares (sin fondo de color) */
-tr:nth-child(even) {
-    background-color: #ffffff;
+#imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  touch-action: none; /* Evita el desplazamiento en dispositivos táctiles para mejorar la experiencia de zoom */
 }
 
-.card {
-    max- height:50% ;
-    background-color: #fff;
-    border: 4px solid #659AD2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    font-weight: 700;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding: 30px 20px;
-    color: #659AD2;
-    border-radius: 45px;
-    margin:10px;
-  }
-  
-  .App-logo {
-    pointer-events: none;
-    width: 140px;
-    margin-bottom: 20px;
-  }
-  
-  .App-button {
-    padding: 10px 20px;
-    background-color: transparent;
-    color: #659AD2;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 15px;
-    border: 3px solid #659AD2;
-    border-radius: 5em;
-    margin-top: 20px;
-    transition: 0.2s;
-  }
-  
-  .App-button:hover {
-    color: #282c34;
-    background-color: #659AD2;
-  }
-  .fuc{
-    width:200px;
-    height:auto;
-    margin:20px;
-  }
+/* Estilos para el zoom */
+#imagen {
+  cursor: zoom-in;
+}
 
+#imagen.zoom {
+  cursor: zoom-out;
+}
 
 {% endblock %}
 
 
 {% block content %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/panzoom/5.3.0/panzoom.min.js"></script>
 
 {% if "155" in parametros['hd']%}
-<div id="zoom-container" style="width: 100vw; height: 100vh; overflow: hidden;">
-  <!-- Imagen a la que se le aplicará zoom y pan -->
-  <img id="zoom-image" src="https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/Croquis%202023%20Agosto23-Enero2024B210823_page-0001.jpg?raw=true" alt="Imagen para hacer zoom" style="width: 100%; height: auto;">
+<div id="contenedor-imagen">
+  <img id="imagen" src="ruta-de-tu-imagen.jpg" alt="Imagen">
 </div>
 
 {% endif %}
 
-<!-- Script para inicializar panzoom en la imagen -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      var zoomContainer = document.getElementById('zoom-container');
-      var zoomImage = document.getElementById('zoom-image');
+  var imagen = document.getElementById('imagen');
+  var initialTouch = null;
 
-      // Inicializar panzoom en la imagen
-      var instance = panzoom(zoomImage, {
-          zoomSpeed: 0.065,
-          maxZoom: 5,
-          minZoom: 1,
-          contain: 'invert',
-      });
+  imagen.addEventListener('click', function(e) {
+    if (e.touches && e.touches.length === 2) {
+      // Manejar el evento de doble toque para el zoom en dispositivos táctiles
+      e.preventDefault();
+      this.classList.toggle('zoom');
+      initialTouch = null;
+    }
+  });
 
-      // Permitir hacer zoom con gestos táctiles
-      zoomContainer.addEventListener('touchstart', function(e) {
-          if (e.touches.length === 2) {
-              instance.pause(); // Pausar para evitar conflictos con el zoom táctil nativo
-          }
-      });
+  imagen.addEventListener('touchstart', function(e) {
+    // Almacenar la posición inicial del toque para el zoom en dispositivos táctiles
+    if (e.touches && e.touches.length === 1) {
+      initialTouch = e.touches[0];
+    }
+  });
 
-      zoomContainer.addEventListener('touchend', function(e) {
-          if (e.touches.length === 0) {
-              instance.resume(); // Continuar después de los gestos táctiles
-          }
-      });
+  imagen.addEventListener('touchmove', function(e) {
+    // Manejar el movimiento táctil para el zoom en dispositivos táctiles
+    if (e.touches && e.touches.length === 2 && initialTouch) {
+      e.preventDefault();
+      var touch1 = e.touches[0];
+      var touch2 = e.touches[1];
 
-      // Permitir hacer zoom con pellizco en gestos táctiles
-      zoomContainer.addEventListener('gesturechange', function(e) {
-          instance.zoom(e.scale);
-      });
+      var distance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+      var initialDistance = Math.hypot(initialTouch.clientX - touch1.clientX, initialTouch.clientY - touch1.clientY);
+
+      var delta = distance - initialDistance;
+
+      if (delta > 10) {
+        this.classList.add('zoom');
+      } else if (delta < -10) {
+        this.classList.remove('zoom');
+      }
+    }
   });
 </script>
+
 {% endblock %}

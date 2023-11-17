@@ -69,9 +69,10 @@ def index():
     print("session token")
     print(toks)
 
+    authorization_response = request.url.split('?')[1]
     print("-------------------request.url")
-    print(request.url)
-    flow.fetch_token(authorization_response=request.url)
+    print(authorization_response)
+    flow.fetch_token(authorization_response=authorization_response)
     credentials = flow.credentials
 
     # Aquí puedes usar las credenciales para interactuar con la API de Google Calendar

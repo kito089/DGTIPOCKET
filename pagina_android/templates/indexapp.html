@@ -120,6 +120,14 @@ INICIO
     color: #777; /* Color de texto gris */
     margin: 5px 0; /* Espaciado interno superior e inferior */
 }
+/* Estilo básico para la horario */
+.horario {
+  width: 100%;
+  height: auto; /* Para mantener la proporción de la imagen */
+  display: block; /* Elimina el espacio adicional debajo de la imagen */
+  margin: 0 auto; /* Centra la imagen en su contenedor si es necesario */
+  max-width: 100%; /* Garantiza que la imagen no sea más grande que su contenedor */
+}
 
 
 {% endblock %}
@@ -141,6 +149,8 @@ INICIO
     {% endfor %}
 </div>
 
+<img  class="horario"  src="https://github.com/kito089/DGTIPOCKET/blob/master/horarios/img/{{archivo}}.pdf.png?raw=true">
+
 <div class='item'>
     <div class="noticias">
         {% for noticia in noticias[-3::][::-1] %}
@@ -156,15 +166,6 @@ INICIO
     </div>
 </div>
 
-<div class="avisos">
-    {% for aviso in avisos[-3::][::-1] %}
-    <div class="aviso">
-        <h2 class='h2'>{{ aviso.1 }}</h2>
-        <p class="p"> {{ aviso.2 }}</p>
-        <p class="p">{{ aviso.3 }}</p>
-    </div>
-    {% endfor %}
-</div>
 
 <h1 class="center">Concursos</h1>
 <ul class="concursos-list">

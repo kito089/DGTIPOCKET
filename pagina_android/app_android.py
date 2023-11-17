@@ -266,21 +266,19 @@ def noticias():
     parametros = dict(session)['profile']
     return render_template('noticiasapp.html', noticias=noticias, parametros = parametros)
 
-@app.route('/insnot', methods=['GET', 'POST'])
-def agregar_noticia():
+@app.route('/insnot/<string:nom>', methods=['GET', 'POST'])
+def agregar_noticia(nom):
     if request.method == 'POST':
         datos = []
         datos.append(request.form['titulo'])
         datos.append(request.form['descripcion'])
-        datos.append(request.form['img'])
+        if nom == "noticias":
+            datos.append(request.form['img'])
         datos.append(request.form['fecha'])
         
-
         bd = Coneccion()
-        bd.insertarRegistro("noticias", datos)
+        bd.insertarRegistro(nom, datos)
         bd.exit()
-        
-        return redirect(url_for('noticias'))
     
     parametros = dict(session)['profile']
     return render_template('insnot.html', parametros = parametros)

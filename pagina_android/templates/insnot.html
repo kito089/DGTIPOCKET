@@ -68,7 +68,7 @@ input[type="submit"]:hover {
 <a class="a" href="/instabla">insertar tablas </a>
 
 <h1>Insertar Noticia</h1>
-<form action="/insnot" method="POST" id="noticias">
+<form action="/insnot/noticias" method="POST" id="noticias">
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" ><br>
 
@@ -87,17 +87,14 @@ input[type="submit"]:hover {
     <h1 class="center">Inserción de Avisos</h1>
 
     <div class="container">
-        <form action="/instaviso" method="post">
+        <form action="/insnot/avisos" method="post">
             <div class="form-group">
-                <label for="titulo">Id notivia:</label>
-                <input type="text" id="id" name="id" ><br>
 
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" ><br>
             
                 <label for="descripcion">Contenido:</label>
                 <textarea id="text" name="descripcion" ></textarea><br>
-            
             
                 <label for="fecha">Fecha:</label>
                 <input type="date" id="fecha" name="fecha"><br>

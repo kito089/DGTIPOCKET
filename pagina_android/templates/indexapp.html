@@ -108,7 +108,7 @@ INICIO
 </div>
 
 <div class="avisos">
-    {% for aviso in avisos %}
+    {% for aviso in avisos[-3::][::-1] %}
     <div class="aviso">
         <h2 class='h2'>{{ aviso.1 }}</h2>
         <p class="p"> {{ aviso.2 }}</p>

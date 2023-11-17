@@ -14,8 +14,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema prototipos
 -- -----------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `prototipos` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `prototipos` ;
 
 -- -----------------------------------------------------
 -- Table `prototipos`.`grupo`

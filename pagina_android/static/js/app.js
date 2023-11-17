@@ -1,17 +1,18 @@
-document.addEventListener('DOMContentLoaded', function() {
-	let index = 0;
-	const noticias = document.querySelectorAll('.noticia');
-  
-	function mostrarSiguienteNoticia() {
-	  noticias[index].classList.remove('active');
-	  noticias[index].classList.add('anterior');
-  
-	  index = (index + 1) % noticias.length;
-  
-	  noticias[index].classList.add('active');
-	  noticias[index].classList.remove('anterior');
+document.addEventListener("DOMContentLoaded", function () {
+	const carousel = document.querySelector(".carousel");
+	const cards = document.querySelectorAll(".card");
+
+	let currentIndex = 0;
+
+	function showCard(index) {
+		const newPosition = -index * 100 + "%";
+		carousel.style.transform = "translateX(" + newPosition + ")";
 	}
-  
-	setInterval(mostrarSiguienteNoticia, 3000); // Cambiar de noticia cada 3 segundos
-  });
-  
+
+	function nextCard() {
+		currentIndex = (currentIndex + 1) % cards.length;
+		showCard(currentIndex);
+	}
+
+	setInterval(nextCard, 3000); // Cambia la tarjeta cada 3 segundos (ajusta según sea necesario)
+});

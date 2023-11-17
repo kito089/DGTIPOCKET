@@ -68,39 +68,36 @@ input[type="submit"]:hover {
 <a class="a" href="/instabla">insertar tablas </a>
 
 <h1>Insertar Noticia</h1>
-<form action="/insnot" method="POST" id="noticias">
+<form action="/insnot/noticias" method="POST" id="noticias">
     <label for="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" ><br>
+    <input type="text" id="titulo" name="titulonoticias" ><br>
 
     <label for="descripcion">Descripción:</label>
-    <textarea id="contenidoN" name="descripcion" ></textarea><br>
+    <textarea id="contenidoN" name="descripcionnoticias" ></textarea><br>
 
     <label for="img">URL de la imagen:</label>
-    <input type="text" id="imgN" name="img"><br>
+    <input type="text" id="imgN" name="imgnoticias"><br>
 
     <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" name="fecha"><br>
+    <input type="date" id="fecha" name="fechanoticias"><br>
 
     <input  value="Guardar" onclick="push();">
-</fomr>
+</form>
 
     <h1 class="center">Inserción de Avisos</h1>
 
     <div class="container">
-        <form action="/instaviso" method="post">
+        <form action="/insnot/avisos" method="post">
             <div class="form-group">
-                <label for="titulo">Id notivia:</label>
-                <input type="text" id="id" name="id" ><br>
 
                 <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" ><br>
+                <input type="text" id="titulo" name="tituloavisos" ><br>
             
                 <label for="descripcion">Contenido:</label>
-                <textarea id="text" name="descripcion" ></textarea><br>
-            
+                <textarea id="text" name="descripcionavisos" ></textarea><br>
             
                 <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha"><br>
+                <input type="date" id="fecha" name="fechaavisos"><br>
             
                 <input type="submit" value="Guardar"> 
         </form>
@@ -109,18 +106,18 @@ input[type="submit"]:hover {
     <h1 class="center">Inserción de Concursos</h1>
 
     <div class="container">
-        <form action="/insertar_concurso" method="post">
+        <form action="/insnot/concursos" method="post">
                 <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" ><br>
+                <input type="text" id="titulo" name="tituloconcursos" ><br>
             
                 <label for="descripcion">Descripción:</label>
-                <textarea id="text" name="descripcion" requred></textarea><br>
+                <textarea id="text" name="descripcionconcursos" requred></textarea><br>
             
                 <label for="img">URL de la imagen:</label>
-                <input type="text" id="img" name="img"><br>
+                <input type="text" id="img" name="imgconcursos"><br>
             
                 <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha"><br>
+                <input type="date" id="fecha" name="fechaconcursos"><br>
             
                 <input type="submit" value="Guardar">
              </form>

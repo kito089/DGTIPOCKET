@@ -128,7 +128,7 @@ def index():
     # print("---------------events?")
     # print(events)
 
-    # return render_template('indexapp.html', parametros = parametros,noticias=noticias)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 
 @app.route('/login')
 def login():
@@ -187,10 +187,11 @@ def terinar():
 @app.route('/insertainfo', methods=['GET', 'POST'])
 @login_required
 def insertainfo():
-    authorization_url, state = flow.authorization_url(
-        access_type='offline',
-        include_granted_scopes='true',
-    )
+    # authorization_url, state = flow.authorization_url(
+    #     access_type='offline',
+    #     include_granted_scopes='true',
+    # )
+    authorization_url = "index"
     if request.method == 'POST':
         
         curp=request.form['curp']
@@ -206,9 +207,9 @@ def insertainfo():
         print(parametros)
         print("-----------la autorrizacion")
         print(authorization_url)
-        return redirect(authorization_url)
+        return redirect(url_for(authorization_url))
 
-    return redirect(authorization_url)
+    return redirect(url_for(authorization_url))
 
 @app.route('/a')
 def a():
@@ -265,21 +266,20 @@ def noticias():
     parametros = dict(session)['profile']
     return render_template('noticiasapp.html', noticias=noticias, parametros = parametros)
 
-@app.route('/insnot', methods=['GET', 'POST'])
-def agregar_noticia():
+@app.route('/insnot/<string:nom>', methods=['GET', 'POST'])
+def agregar_noticia(nom=None):
     if request.method == 'POST':
         datos = []
-        datos.append(request.form['titulo'])
-        datos.append(request.form['descripcion'])
-        datos.append(request.form['img'])
-        datos.append(request.form['fecha'])
-        
-
+        datos.append(request.form['titulo'+nom])
+        datos.append(request.form['descripcion'+nom])
+        if nom == "noticias" or nom == "concursos":
+            datos.append(request.form['img'+nom])
+        datos.append(request.form['fecha'+nom])
+        print("----------nom")
+        print(nom)
         bd = Coneccion()
-        bd.insertarRegistro("noticias", datos)
+        bd.insertarRegistro(nom, datos)
         bd.exit()
-        
-        return redirect(url_for('noticias'))
     
     parametros = dict(session)['profile']
     return render_template('insnot.html', parametros = parametros)

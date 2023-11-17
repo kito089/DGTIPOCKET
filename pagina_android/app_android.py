@@ -128,8 +128,7 @@ def index():
 @app.route('/login')
 def login():
     google = oauth.create_client('google')  # create the google oauth client
-    redirect_uri = url_for('authorize', _external=True)
-    return google.authorize_redirect(redirect_uri)
+    return google.authorize_redirect(url_for('authorize', _external=True), access_type='offline', prompt='consent')
 
 @app.route('/authorize')
 def authorize():

@@ -170,6 +170,8 @@ def terinar():
 @app.route('/insertainfo', methods=['GET', 'POST'])
 @login_required
 def insertainfo():
+    print("----------- rquest")
+    print(request.method)
     if request.method == 'POST':
         
         curp=request.form['curp']

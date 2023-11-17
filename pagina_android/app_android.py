@@ -250,12 +250,12 @@ def agenda():
     parametros = dict(session)['profile']
     suma_parametros = parametros['grupo'] + parametros['grado']
     
-    directorio_pdf = os.path.expanduser("~/DGTIPOCKET/DGTIPOCKET/horarios")
-    archivos_pdf = os.listdir(directorio_pdf)
+    directorio_pdf = os.path.expanduser("~/DGTIPOCKET/DGTIPOCKET/horarios"+suma_parametros+".pdf")
+   
     
-    archivos_filtrados = [archivo for archivo in archivos_pdf if str(suma_parametros) in archivo]
+    
 
-    return render_template('agenda.html', parametros = parametros,archivos=archivos_filtrados)
+    return render_template('agenda.html', parametros = parametros,archivo=directorio_pdf)
 
 @app.route('/historial')
 def historial():

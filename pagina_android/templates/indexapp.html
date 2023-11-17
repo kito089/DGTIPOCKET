@@ -150,7 +150,7 @@ INICIO
 </div>
 
 
-{% comment %} 
+
 <div class='item'>
     <div class="noticias">
         {% for noticia in noticias[-3::][::-1] %}
@@ -169,7 +169,7 @@ INICIO
     <div class="calendario-responsive">
         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FMexico_City&showTitle=1&showNav=1&showPrint=0&showTabs=0&showCalendars=0&hl=es&showTz=0&src=OTkyY2NlYzZjZWUyYTBhY2M3OGE1MjU2MmRmZGU5MGQwYzMwOGE1ODI5ZTYyNjI0MmU3ZDEzMjdkMDBlZWZkMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
-</div> {% endcomment %}
+</div> 
 
 <h1 class="center">Concursos</h1>
 <ul class="concursos-list">
@@ -177,6 +177,11 @@ INICIO
         <li>{{ concurso[0] }}</li>
     {% endfor %}
 </ul>
+
+
+
+
+
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 

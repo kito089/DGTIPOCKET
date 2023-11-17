@@ -250,7 +250,7 @@ def agenda():
     parametros = dict(session)['profile']
     suma_parametros = parametros['grupo'] + parametros['grado']
     
-    directorio_pdf = os.path.expanduser("~/DGTIPOCKET/DGTIPOCKET/horarios/"+suma_parametros+".pdf")
+    directorio_pdf = os.path.expanduser("~/DGTIPOCKET/DGTIPOCKET/horarios"+suma_parametros+".pdf")
    
     
     

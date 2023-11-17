@@ -177,8 +177,10 @@ def insertainfo():
         grupo=request.form['grupo']
         parametros = dict(session)['profile']
         session['profile'] = parametros.update({'curp': curp,'grado':grado,'grupo':grupo})
+        parametros = dict(session)['profile']
         print("=========== nuevos parametros")
         print(parametros)
+        return render_template('index.html', parametros = parametros)
 
         
     

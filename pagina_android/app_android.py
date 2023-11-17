@@ -180,12 +180,12 @@ def insertainfo():
         parametros = dict(session)['profile']
         print("=========== nuevos parametros")
         print(parametros)
-        return render_template('indexapp.html', parametros = parametros)
+        return redirect(url_for("index"))
 
         
     
     para = dict(session)['profile']
-    return render_template('indexapp.html', parametros = para)
+    return redirect(url_for("index"))
 
 @app.route('/a')
 def a():

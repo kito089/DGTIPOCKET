@@ -54,6 +54,54 @@ INICIO
     background-color: #fff;
 }
 
+.container{
+    width: 90%;
+  
+    padding: 10px 40px;
+  }
+  .container .swiper-container{
+    width: 100%;
+    height: 100%;
+  }
+  .container .swiper-slide {
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    border-radius: 15px;
+    text-align: start;
+    box-shadow: 0px 4px 4px rgba(196, 196, 196, 0.25);
+   
+  }
+  .container .swiper-slide img{
+     display: block;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+  
+  }
+  .container .swiper-slide .card-description{
+      padding:1rem 1rem;
+  }
+  .container .swiper-slide .card-title,.container .swiper-slide .card-text{
+     margin-bottom: .5rem;
+  }
+  .container .swiper-slide .card-link{
+     text-align: center;
+    
+  }
+  .container .swiper-slide .card-link a{
+      text-decoration: none;
+      color: #1d6ce2;
+  }
+  .swiper-button-next{
+      right: 26px !important;
+  }
+  .swiper-button-prev{
+      left: 26px !important;
+  }
 
 {% endblock %}
 
@@ -64,6 +112,45 @@ INICIO
 {% block content %}
 <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
 
+<div class="container">
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-container mySwiper">
+     
+        <div class="swiper-wrapper">
+         
+        {% for noticia in noticias[-3::][::-1] %}
+            <div class="swiper-slide">
+                {% if noticia.3 %}
+                <img src="{{ noticia.3 }}"
+                    alt="">{% endif %}
+                <div class="card-description">
+                    <div class="card-title">
+                        <h4>{{ noticia.1 }}Descripción</h4>
+                    </div>
+                    <div class="card-title">
+                        <h4>{{ noticia.2 }}Descripción</h4>
+                    </div>
+                    <div class="card-text">
+                        <p>{{ noticia.4 }}</p>
+                    </div>
+                    
+                </div>
+
+            </div>
+            {% endfor %}
+            
+   
+        </div>
+     
+     
+
+    </div>
+
+</div>
+
+
+{% comment %} 
 <div class='item'>
     <div class="noticias">
         {% for noticia in noticias[-3::][::-1] %}
@@ -82,7 +169,7 @@ INICIO
     <div class="calendario-responsive">
         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FMexico_City&showTitle=1&showNav=1&showPrint=0&showTabs=0&showCalendars=0&hl=es&showTz=0&src=OTkyY2NlYzZjZWUyYTBhY2M3OGE1MjU2MmRmZGU5MGQwYzMwOGE1ODI5ZTYyNjI0MmU3ZDEzMjdkMDBlZWZkMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
-</div>
+</div> {% endcomment %}
 
 <h1 class="center">Concursos</h1>
 <ul class="concursos-list">
@@ -90,5 +177,7 @@ INICIO
         <li>{{ concurso[0] }}</li>
     {% endfor %}
 </ul>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 {% endblock %}

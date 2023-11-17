@@ -54,59 +54,6 @@ INICIO
     background-color: #fff;
 }
 
-
-
-
-
-.container{
-    width: 90%;
-  
-    padding: 10px 40px;
-  }
-  .container .swiper-container{
-    width: 100%;
-    height: 100%;
-  }
-  .container .swiper-slide {
-    position: relative;
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    border-radius: 15px;
-    text-align: start;
-    box-shadow: 0px 4px 4px rgba(196, 196, 196, 0.25);
-   
-  }
-  .container .swiper-slide img{
-     display: block;
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-  
-  }
-  .container .swiper-slide .card-description{
-      padding:1rem 1rem;
-  }
-  .container .swiper-slide .card-title,.container .swiper-slide .card-text{
-     margin-bottom: .5rem;
-  }
-  .container .swiper-slide .card-link{
-     text-align: center;
-    
-  }
-  .container .swiper-slide .card-link a{
-      text-decoration: none;
-      color: #1d6ce2;
-  }
-  .swiper-button-next{
-      right: 26px !important;
-  }
-  .swiper-button-prev{
-      left: 26px !important;
-  }
-
 {% endblock %}
 
 <div class="g-singnin2" data-onsuccess="onSignIn"></div>
@@ -115,45 +62,6 @@ INICIO
 
 {% block content %}
 <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
-
-<div class="container">
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-container mySwiper">
-     
-        <div class="swiper-wrapper">
-         
-        {% for noticia in noticias[-3::][::-1] %}
-            <div class="swiper-slide">
-                {% if noticia.3 %}
-                <img src="{{ noticia.3 }}"
-                    alt="">
-                {% endif %}
-                <div class="card-description">
-                    <div class="card-title">
-                        <h4>{{ noticia.1 }}</h4>
-                    </div>
-                    <div class="card-title">
-                        <h4>{{ noticia.4 }}</h4>
-                    </div>
-                    <div class="card-text">
-                        <p>{{ noticia.2 }}</p>
-                    </div>
-                    
-                </div>
-
-            </div>
-            {% endfor %}
-            
-   
-        </div>
-     
-     
-
-    </div>
-
-</div>
-
 
 
 <div class='item'>

@@ -138,7 +138,7 @@ def authorize():
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     session['profile'] = user_info
-    tokens.pop('userinfo')
+    token.pop('userinfo')
     tokens.update(token)
     session['tok_info'] = tokens
     print("---------------toks")

@@ -182,9 +182,6 @@ def insertainfo():
         print(parametros)
         return redirect(url_for("index"))
 
-        
-    
-    para = dict(session)['profile']
     return redirect(url_for("index"))
 
 @app.route('/a')

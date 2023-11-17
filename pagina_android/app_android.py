@@ -168,6 +168,7 @@ def terinar():
 
 
 @app.route('/insertainfo', methods=['GET', 'POST'])
+@login_required
 def insertainfo():
     if request.method == 'POST':
         
@@ -179,7 +180,7 @@ def insertainfo():
         print("=========== nuevos parametros")
         print(parametros)
 
-        return redirect(url_for('index'))
+        
     
     parametros = dict(session)['profile']
     return render_template('index.html', parametros = parametros)

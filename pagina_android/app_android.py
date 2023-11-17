@@ -185,7 +185,7 @@ def insertainfo():
         
     
     para = dict(session)['profile']
-    return render_template('index.html', parametros = para)
+    return render_template('indexapp.html', parametros = para)
 
 @app.route('/a')
 def a():

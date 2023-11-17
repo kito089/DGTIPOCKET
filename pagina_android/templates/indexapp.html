@@ -82,6 +82,46 @@ INICIO
 }
 
 
+/* Estilo para el título h1 con la clase center */
+.center {
+    text-align: center; /* Centrar el texto */
+    color: #333; /* Color de texto oscuro */
+}
+
+/* Estilo para la lista ul con la clase concursos-list */
+.concursos-list {
+    list-style: none; /* Elimina los estilos de lista (viñetas) */
+    padding: 0; /* Elimina el espaciado interno predeterminado de la lista */
+    margin: 0; /* Elimina el margen externo predeterminado de la lista */
+}
+
+/* Estilo para cada elemento div con la clase concurso */
+.concurso {
+    border: 1px solid #ddd; /* Borde gris claro */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado inferior entre concursos */
+}
+
+/* Estilo para el título h2 dentro de la clase concurso */
+.concurso h2 {
+    color: #555; /* Color de texto gris oscuro */
+}
+
+/* Estilo para la imagen img dentro de la clase concurso */
+.concurso img {
+    max-width: 100%; /* Ajustar la imagen al ancho del contenedor */
+    height: auto; /* Mantener la proporción original de la imagen */
+    display: block; /* Eliminar el espacio inferior adicional */
+    margin: 10px 0; /* Espaciado interno superior e inferior */
+}
+
+/* Estilo para los párrafos p dentro de la clase concurso */
+.concurso p {
+    color: #777; /* Color de texto gris */
+    margin: 5px 0; /* Espaciado interno superior e inferior */
+}
+
+
 {% endblock %}
 
 <div class="g-singnin2" data-onsuccess="onSignIn"></div>
@@ -90,7 +130,16 @@ INICIO
 
 {% block content %}
 <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
-
+<br>
+<div class="avisos">
+    {% for aviso in avisos %}
+    <div class="aviso">
+        <h2 class='h2'>{{ aviso.1 }}</h2>
+        <p class="p"> {{ aviso.2 }}</p>
+        <p class="p">{{ aviso.3 }}</p>
+    </div>
+    {% endfor %}
+</div>
 
 <div class='item'>
     <div class="noticias">

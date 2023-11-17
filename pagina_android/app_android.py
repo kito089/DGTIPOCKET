@@ -30,8 +30,8 @@ app.secret_key = os.getenv("APP_SECRET_KEY")
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 flow = Flow.from_client_secrets_file(
-    os.path.expanduser('~/DGTIPOCKET/pagina_android/credentialsInst.json'),
-    scopes=['https://www.googleapis.com/auth/calendar.readonly'],
+    os.path.expanduser('~/DGTIPOCKET/pagina_android/credentialsLocal.json'),
+    scopes=["openid", "email", "profile", 'https://www.googleapis.com/auth/calendar.readonly'],
     redirect_uri='https://patotipo.pythonanywhere.com',
 )
 
@@ -51,7 +51,7 @@ google = oauth.register(
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={'scope': 'openid email profile'},
+    client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar.readonly'},
 )
 
 # Definir una ruta para la página principal

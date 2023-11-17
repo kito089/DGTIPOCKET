@@ -272,7 +272,7 @@ def agregar_noticia(nom=None):
         datos = []
         datos.append(request.form['titulo'+nom])
         datos.append(request.form['descripcion'+nom])
-        if nom == "noticias":
+        if nom == "noticias" or nom == "concursos":
             datos.append(request.form['img'+nom])
         datos.append(request.form['fecha'+nom])
         print("----------nom")

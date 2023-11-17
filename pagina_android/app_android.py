@@ -182,10 +182,9 @@ def insertainfo():
         parametros = dict(session)['profile']
         print("=========== antiguos parametros")
         print(parametros)
-        paraN = parametros.update({'curp': curp,'grado':grado,'grupo':grupo})
-        print("----------paran")
-        print(paraN)
-        session['profile'] = paraN
+        dat = {'curp': curp,'grado':grado,'grupo':grupo}
+        parametros.update(dat)
+        session['profile'] = parametros
         parametros = dict(session)['profile']
         print("=========== nuevos parametros")
         print(parametros)

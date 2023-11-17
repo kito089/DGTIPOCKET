@@ -135,21 +135,21 @@ INICIO
 
 
 
-.carrusel {
+.noticias {
     width: 100%;
     overflow: hidden;
     position: relative;
   }
   
-  .card {
-    opacity: 0;
+  .noticia {
+    display: none;
     transition: opacity 0.5s ease-in-out;
   }
   
   .active {
+    display: block;
     opacity: 1;
   }
-
 
 {% endblock %}
 

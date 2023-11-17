@@ -4,42 +4,29 @@
 INICIO
 {% endblock %}
 {% block style %}
-body {
-  margin: 0;
-  overflow: hidden;
+
+.img {
+  width: 100vw; /* Ancho completo de la ventana */
+  height: auto; /* Mantiene la proporción original de la imagen */
+  display: block;
+  border-radius:10%;
+  margin-bottom: 20px; /* Espaciado entre la imagen y la tabla */
 }
 
-nav {
-  position: fixed;
-  top: 0;
+table {
+  border-collapse: collapse;
   width: 100%;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
+  margin-top: 20px;
 }
 
-#contenedor-imagen {
-  position: relative;
-  width: 100vw;
-  height: calc(100vh - 50px);
-  overflow: hidden;
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
 
-#imagen {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  touch-action: none; /* Evita el desplazamiento en dispositivos táctiles para mejorar la experiencia de zoom */
-}
-
-/* Estilos para el zoom */
-#imagen {
-  cursor: zoom-in;
-}
-
-#imagen.zoom {
-  cursor: zoom-out;
+th {
+  background-color: #f2f2f2;
 }
 
 {% endblock %}
@@ -49,50 +36,41 @@ nav {
 
 {% if "155" in parametros['hd']%}
 <div id="contenedor-imagen">
-  <img id="imagen" src="https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/Croquis%202023%20Agosto23-Enero2024B210823_page-0001.jpg?raw=true" alt="Imagen">
+  <img id="imagen" class="img" src="https://github.com/kito089/DGTIPOCKET/blob/master/imagenes/Croquis%202023%20Agosto23-Enero2024B210823_page-0001.jpg?raw=true" alt="Imagen">
 </div>
+
+<h2>Información del Aula</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aula</th>
+      <th>Directivo</th>
+      <th>Contacto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Aula 101</td>
+      <td>John Doe</td>
+      <td>john.doe@example.com</td>
+    </tr>
+    <tr>
+      <td>Aula 202</td>
+      <td>Jane Smith</td>
+      <td>jane.smith@example.com</td>
+    </tr>
+    <tr>
+      <td>Aula 303</td>
+      <td>Carlos Rodriguez</td>
+      <td>carlos.rodriguez@example.com</td>
+    </tr>
+    <!-- Puedes agregar más filas según sea necesario -->
+  </tbody>
+</table>
+
 
 {% endif %}
 
-<script>
-  var imagen = document.getElementById('imagen');
-  var initialTouch = null;
-
-  imagen.addEventListener('click', function(e) {
-    if (e.touches && e.touches.length === 2) {
-      // Manejar el evento de doble toque para el zoom en dispositivos táctiles
-      e.preventDefault();
-      this.classList.toggle('zoom');
-      initialTouch = null;
-    }
-  });
-
-  imagen.addEventListener('touchstart', function(e) {
-    // Almacenar la posición inicial del toque para el zoom en dispositivos táctiles
-    if (e.touches && e.touches.length === 1) {
-      initialTouch = e.touches[0];
-    }
-  });
-
-  imagen.addEventListener('touchmove', function(e) {
-    // Manejar el movimiento táctil para el zoom en dispositivos táctiles
-    if (e.touches && e.touches.length === 2 && initialTouch) {
-      e.preventDefault();
-      var touch1 = e.touches[0];
-      var touch2 = e.touches[1];
-
-      var distance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
-      var initialDistance = Math.hypot(initialTouch.clientX - touch1.clientX, initialTouch.clientY - touch1.clientY);
-
-      var delta = distance - initialDistance;
-
-      if (delta > 10) {
-        this.classList.add('zoom');
-      } else if (delta < -10) {
-        this.classList.remove('zoom');
-      }
-    }
-  });
-</script>
 
 {% endblock %}

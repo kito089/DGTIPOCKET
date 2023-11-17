@@ -59,10 +59,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js"></script>
 
   <script>
-    Push.Permission.request();
+    
     window.onload=function(){
+
       $('#onload').fadeOut();
       $('body').removeClass('hidden');
+      
       Push.Permission.request();
     }
   </script>

@@ -69,6 +69,8 @@ def index():
     print("session token")
     print(toks)
 
+    print("-------------------request.url")
+    print(request.url)
     flow.fetch_token(authorization_response=request.url)
     credentials = flow.credentials
 

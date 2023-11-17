@@ -147,7 +147,7 @@
 
    
 
-    <form action="/insertainfo" method="post">
+    <form action="/insertainfo" method="post" id="form">
          <h1>Registro de Usuario</h1>
         <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
         <label for="nombre">Ayudanos a terminar de completar tu registro </label>
@@ -178,6 +178,7 @@
     <br>
 <script>
     function subir(){
+        var formulario = document.getElementById("form");
         formulario.submit();
         window.location.href ="/"
     }

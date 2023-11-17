@@ -229,7 +229,14 @@ def servicio():
 @app.route('/agenda')
 def agenda():
     parametros = dict(session)['profile']
-    return render_template('agenda.html', parametros = parametros)
+    suma_parametros = parametros['grupo'] + parametros['grado']
+    
+    directorio_pdf = "\DGTIPOCKET\DGTIPOCKET\horarios"
+    archivos_pdf = os.listdir(directorio_pdf)
+    
+    archivos_filtrados = [archivo for archivo in archivos_pdf if str(suma_parametros) in archivo]
+
+    return render_template('agenda.html', parametros = parametros,archivos=archivos_filtrados)
 
 @app.route('/historial')
 def historial():

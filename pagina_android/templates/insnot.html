@@ -70,19 +70,19 @@ input[type="submit"]:hover {
 <h1>Insertar Noticia</h1>
 <form action="/insnot/noticias" method="POST" id="noticias">
     <label for="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" ><br>
+    <input type="text" id="titulo" name="titulonoticias" ><br>
 
     <label for="descripcion">Descripción:</label>
-    <textarea id="contenidoN" name="descripcion" ></textarea><br>
+    <textarea id="contenidoN" name="descripcionnoticias" ></textarea><br>
 
     <label for="img">URL de la imagen:</label>
-    <input type="text" id="imgN" name="img"><br>
+    <input type="text" id="imgN" name="imgnoticias"><br>
 
     <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" name="fecha"><br>
+    <input type="date" id="fecha" name="fechanoticias"><br>
 
     <input  value="Guardar" onclick="push();">
-</fomr>
+</form>
 
     <h1 class="center">Inserción de Avisos</h1>
 
@@ -91,13 +91,13 @@ input[type="submit"]:hover {
             <div class="form-group">
 
                 <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" ><br>
+                <input type="text" id="titulo" name="tituloavisos" ><br>
             
                 <label for="descripcion">Contenido:</label>
-                <textarea id="text" name="descripcion" ></textarea><br>
+                <textarea id="text" name="descripcionavisos" ></textarea><br>
             
                 <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha"><br>
+                <input type="date" id="fecha" name="fechaavisos"><br>
             
                 <input type="submit" value="Guardar"> 
         </form>

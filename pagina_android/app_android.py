@@ -270,11 +270,11 @@ def noticias():
 def agregar_noticia(nom=None):
     if request.method == 'POST':
         datos = []
-        datos.append(request.form['titulo'])
-        datos.append(request.form['descripcion'])
+        datos.append(request.form['titulo'+nom])
+        datos.append(request.form['descripcion'+nom])
         if nom == "noticias":
-            datos.append(request.form['img'])
-        datos.append(request.form['fecha'])
+            datos.append(request.form['img'+nom])
+        datos.append(request.form['fecha'+nom])
         print("----------nom")
         print(nom)
         bd = Coneccion()

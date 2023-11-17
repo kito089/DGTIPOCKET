@@ -60,6 +60,7 @@ google = oauth.register(
 def index():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
+    avisos = bd.obtenerTablas("avisos")
     bd.exit()
     print("---------------sesion")
     print(dict(session))
@@ -128,7 +129,7 @@ def index():
     # print("---------------events?")
     # print(events)
 
-    return render_template('indexapp.html', parametros = parametros,noticias=noticias)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos)
 
 @app.route('/login')
 def login():

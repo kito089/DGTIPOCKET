@@ -251,8 +251,9 @@ def servicio():
 @app.route('/agenda')
 def agenda():
     parametros = dict(session)['profile']
-    suma_parametros = parametros['grupo'] + parametros['grado']
-
+    suma_parametros = str(parametros['grado']) + str(parametros['grupo']) 
+    print("------------------")
+    print(suma_parametros)
     return render_template('agenda.html', parametros = parametros,archivo=suma_parametros)
 
 @app.route('/historial')

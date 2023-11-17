@@ -14,13 +14,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema prototipos
 -- -----------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `prototipos` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `prototipos` ;
+-- CREATE DATABASE IF NOT EXISTS `prototipos` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+-- USE `prototipos` ;
 
 -- -----------------------------------------------------
--- Table `prototipos`.`grupo`
+-- Table `grupo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prototipos`.`grupo` (
+CREATE TABLE IF NOT EXISTS `grupo` (
   `idgrupo` INT NOT NULL AUTO_INCREMENT,
   `grado` VARCHAR(1) NOT NULL,
   `letra` VARCHAR(1) NOT NULL,
@@ -31,9 +31,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `prototipos`.`alumnos`
+-- Table `alumnos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prototipos`.`alumnos` (
+CREATE TABLE IF NOT EXISTS `alumnos` (
   `idalumnos` INT NOT NULL AUTO_INCREMENT,
   `no_control` VARCHAR(14) NOT NULL,
   `curp` VARCHAR(18) NOT NULL,
@@ -42,16 +42,16 @@ CREATE TABLE IF NOT EXISTS `prototipos`.`alumnos` (
   INDEX `fk_alumnos_grupo_idx` (`grupo_idgrupo`),
   CONSTRAINT `fk_alumnos_grupo`
     FOREIGN KEY (`grupo_idgrupo`)
-    REFERENCES `prototipos`.`grupo` (`idgrupo`)
+    REFERENCES `grupo` (`idgrupo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `prototipos`.`modulos`
+-- Table `modulos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prototipos`.`modulos` (
+CREATE TABLE IF NOT EXISTS `modulos` (
   `idmodulos` INT NOT NULL AUTO_INCREMENT,
   `uac` VARCHAR(20) NOT NULL,
   `nombre` VARCHAR(300) NOT NULL,
@@ -64,21 +64,21 @@ CREATE TABLE IF NOT EXISTS `prototipos`.`modulos` (
   INDEX `fk_modulos_grupo2_idx` (`grupo_idgrupo_v`),
   CONSTRAINT `fk_modulos_grupo1`
     FOREIGN KEY (`grupo_idgrupo_m`)
-    REFERENCES `prototipos`.`grupo` (`idgrupo`)
+    REFERENCES `grupo` (`idgrupo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_modulos_grupo2`
     FOREIGN KEY (`grupo_idgrupo_v`)
-    REFERENCES `prototipos`.`grupo` (`idgrupo`)
+    REFERENCES `grupo` (`idgrupo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `prototipos`.`submodulos`
+-- Table `submodulos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prototipos`.`submodulos` (
+CREATE TABLE IF NOT EXISTS `submodulos` (
   `idsubmodulos` INT NOT NULL AUTO_INCREMENT,
   `uac` VARCHAR(20) NOT NULL,
   `nombre` VARCHAR(300) NOT NULL,
@@ -88,16 +88,16 @@ CREATE TABLE IF NOT EXISTS `prototipos`.`submodulos` (
   INDEX `fk_submodulos_modulos1_idx` (`modulos_idmodulos`),
   CONSTRAINT `fk_submodulos_modulos1`
     FOREIGN KEY (`modulos_idmodulos`)
-    REFERENCES `prototipos`.`modulos` (`idmodulos`)
+    REFERENCES `modulos` (`idmodulos`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `prototipos`.`materias`
+-- Table `materias`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prototipos`.`materias` (
+CREATE TABLE IF NOT EXISTS `materias` (
   `idmaterias` INT NOT NULL AUTO_INCREMENT,
   `uac` VARCHAR(20) NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
@@ -108,9 +108,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `prototipos`.`evaluacion_tc`
+-- Table `evaluacion_tc`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prototipos`.`evaluacion_tc` (
+CREATE TABLE IF NOT EXISTS `evaluacion_tc` (
   `idevaluacion_tc` INT NOT NULL AUTO_INCREMENT,
   `parcial1` DECIMAL(2,2) NULL,
   `parcial2` DECIMAL(2,2) NULL,
@@ -125,21 +125,21 @@ CREATE TABLE IF NOT EXISTS `prototipos`.`evaluacion_tc` (
   INDEX `fk_evaluacion_tc_alumnos1_idx` (`alumnos_idalumnos`),
   CONSTRAINT `fk_evaluacion_tc_materias1`
     FOREIGN KEY (`materias_idmaterias`)
-    REFERENCES `prototipos`.`materias` (`idmaterias`)
+    REFERENCES `materias` (`idmaterias`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_evaluacion_tc_alumnos1`
     FOREIGN KEY (`alumnos_idalumnos`)
-    REFERENCES `prototipos`.`alumnos` (`idalumnos`)
+    REFERENCES `alumnos` (`idalumnos`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `prototipos`.`evaluacion_e`
+-- Table `evaluacion_e`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prototipos`.`evaluacion_e` (
+CREATE TABLE IF NOT EXISTS `evaluacion_e` (
   `idevaluacion_e` INT NOT NULL AUTO_INCREMENT,
   `parcial1` DECIMAL(2,2) NULL,
   `parcial2` DECIMAL(2,2) NULL,
@@ -154,12 +154,12 @@ CREATE TABLE IF NOT EXISTS `prototipos`.`evaluacion_e` (
   INDEX `fk_evaluacion_e_alumnos1_idx` (`alumnos_idalumnos`),
   CONSTRAINT `fk_evaluacion_e_submodulos1`
     FOREIGN KEY (`submodulos_idsubmodulos`)
-    REFERENCES `prototipos`.`submodulos` (`idsubmodulos`)
+    REFERENCES `submodulos` (`idsubmodulos`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_evaluacion_e_alumnos1`
     FOREIGN KEY (`alumnos_idalumnos`)
-    REFERENCES `prototipos`.`alumnos` (`idalumnos`)
+    REFERENCES `alumnos` (`idalumnos`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -168,7 +168,7 @@ ENGINE = InnoDB;
 -- Estructura de tabla para la tabla `avisos`
 --
 
-CREATE TABLE IF NOT EXISTS `prototipos`.`avisos` (
+CREATE TABLE IF NOT EXISTS `avisos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) NOT NULL,
   `descripcion` text DEFAULT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `prototipos`.`avisos` (
 -- Estructura de tabla para la tabla `concursos`
 --
 
-CREATE TABLE IF NOT EXISTS `prototipos`.`concursos` (
+CREATE TABLE IF NOT EXISTS `concursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) NOT NULL,
   `descripcion` text DEFAULT NULL,
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `prototipos`.`concursos` (
 -- Estructura de tabla para la tabla `noticias`
 --
 
-CREATE TABLE IF NOT EXISTS `prototipos`.`noticias` (
+CREATE TABLE IF NOT EXISTS `noticias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
   `descripcion` varchar(255) NOT NULL,

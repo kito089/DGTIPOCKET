@@ -275,7 +275,8 @@ def agregar_noticia(nom=None):
         if nom == "noticias":
             datos.append(request.form['img'])
         datos.append(request.form['fecha'])
-        
+        print("----------nom")
+        print(nom)
         bd = Coneccion()
         bd.insertarRegistro(nom, datos)
         bd.exit()

@@ -69,14 +69,14 @@ def index():
     print("session token")
     print(toks)
 
-    authorization_response = request.url.split('?')[1]
-    print("-------------------request.url")
-    print(authorization_response)
-    flow.fetch_token(authorization_response=request.url)
-    credentials = flow.credentials
+    # authorization_response = request.url.split('?')[1]
+    # print("-------------------request.url")
+    # print(authorization_response)
+    # flow.fetch_token(authorization_response=request.url)
+    # credentials = flow.credentials
 
-    # Aquí puedes usar las credenciales para interactuar con la API de Google Calendar
-    service = build('calendar', 'v3', credentials=credentials)
+    # # Aquí puedes usar las credenciales para interactuar con la API de Google Calendar
+    # service = build('calendar', 'v3', credentials=credentials)
 
     # creds = None
     # # The file token.json stores the user's access and refresh tokens, and is
@@ -104,31 +104,31 @@ def index():
     # if os.path.exists("token.json"):
     #     creds = Credentials.from_authorized_user_file("token.json", SCOPES)
 
-    now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-    print("Getting the upcoming 10 events")
-    events_result = (
-        service.events().list(
-            calendarId="primary",
-            timeMin=now,
-            maxResults=10,
-            singleEvents=True,
-            orderBy="startTime",
-        ).execute()
-    )
-    events = events_result.get("items", [])
+    # now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+    # print("Getting the upcoming 10 events")
+    # events_result = (
+    #     service.events().list(
+    #         calendarId="primary",
+    #         timeMin=now,
+    #         maxResults=10,
+    #         singleEvents=True,
+    #         orderBy="startTime",
+    #     ).execute()
+    # )
+    # events = events_result.get("items", [])
 
-    if not events:
-        print("No upcoming events found.")
+    # if not events:
+    #     print("No upcoming events found.")
 
-    # Prints the start and name of the next 10 events
-    for event in events:
-        start = event["start"].get("dateTime", event["start"].get("date"))
-        print(start, event["summary"])
+    # # Prints the start and name of the next 10 events
+    # for event in events:
+    #     start = event["start"].get("dateTime", event["start"].get("date"))
+    #     print(start, event["summary"])
 
-    print("---------------events?")
-    print(events)
+    # print("---------------events?")
+    # print(events)
 
-    return render_template('indexapp.html', parametros = parametros,noticias=noticias)
+    # return render_template('indexapp.html', parametros = parametros,noticias=noticias)
 
 @app.route('/login')
 def login():

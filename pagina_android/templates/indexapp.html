@@ -120,13 +120,16 @@ INICIO
 <h1 class="center">Concursos</h1>
 <ul class="concursos-list">
     {% for concurso in concursos %}
-        <li>{{ concurso[0] }}</li>
+    <div class="concurso">
+        <h2 class='h2'>{{ concurso.1 }}</h2>
+        {% if concurso.3 %}
+            <img class='img' src="{{ concurso.3 }}" alt="Imagen del concurso">
+        {% endif %}
+        <p class="p"> {{ concurso.4 }}</p>
+        <p class="p">{{ concurso.2 }}</p>
+    </div>
     {% endfor %}
 </ul>
-
-
-
-
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>

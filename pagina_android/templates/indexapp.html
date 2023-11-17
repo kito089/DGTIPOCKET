@@ -136,19 +136,23 @@ INICIO
 
 
 .noticias {
-    width: 100%;
+    width: 300px;
     overflow: hidden;
     position: relative;
   }
   
   .noticia {
     display: none;
-    transition: opacity 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out;
   }
   
   .active {
     display: block;
-    opacity: 1;
+    transform: translateX(0); /* Inicia en la posición 0 (sin desplazamiento) */
+  }
+  
+  .anterior {
+    transform: translateX(-100%); /* Desplazamiento completo hacia la izquierda */
   }
 
 {% endblock %}

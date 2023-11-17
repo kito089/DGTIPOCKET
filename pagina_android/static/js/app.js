@@ -4,15 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
   
 	function mostrarSiguienteNoticia() {
 	  noticias[index].classList.remove('active');
-	  noticias[index].style.opacity = 0;
-	  
+	  noticias[index].classList.add('anterior');
+  
 	  index = (index + 1) % noticias.length;
-	  
+  
 	  noticias[index].classList.add('active');
-	  noticias[index].style.opacity = 1;
+	  noticias[index].classList.remove('anterior');
 	}
   
-	setInterval(mostrarSiguienteNoticia, 2000); // Cambiar de noticia cada 3 segundos
+	setInterval(mostrarSiguienteNoticia, 3000); // Cambiar de noticia cada 3 segundos
   });
-  
   

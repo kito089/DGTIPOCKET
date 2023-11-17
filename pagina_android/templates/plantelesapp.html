@@ -76,11 +76,47 @@ tr:nth-child(even) {
 
 
 {% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/panzoom/5.3.0/panzoom.min.js"></script>
 
 {% if "155" in parametros['hd']%}
-<iframe src="https://docs.google.com/presentation/d/1F7sOlDLCZzvf0Vfo9izUmR7aMbOM7ZeAbhxwfkYVdU8/edit?usp=sharing" width="100%" height="600" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div id="zoom-container" style="width: 100vw; height: 100vh; overflow: hidden;">
+  <!-- Imagen a la que se le aplicará zoom y pan -->
+  <img id="zoom-image" src="ruta/a/tu/imagen.jpg" alt="Imagen para hacer zoom" style="width: 100%; height: auto;">
+</div>
 
 {% endif %}
 
+<!-- Script para inicializar panzoom en la imagen -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var zoomContainer = document.getElementById('zoom-container');
+      var zoomImage = document.getElementById('zoom-image');
 
+      // Inicializar panzoom en la imagen
+      var instance = panzoom(zoomImage, {
+          zoomSpeed: 0.065,
+          maxZoom: 5,
+          minZoom: 1,
+          contain: 'invert',
+      });
+
+      // Permitir hacer zoom con gestos táctiles
+      zoomContainer.addEventListener('touchstart', function(e) {
+          if (e.touches.length === 2) {
+              instance.pause(); // Pausar para evitar conflictos con el zoom táctil nativo
+          }
+      });
+
+      zoomContainer.addEventListener('touchend', function(e) {
+          if (e.touches.length === 0) {
+              instance.resume(); // Continuar después de los gestos táctiles
+          }
+      });
+
+      // Permitir hacer zoom con pellizco en gestos táctiles
+      zoomContainer.addEventListener('gesturechange', function(e) {
+          instance.zoom(e.scale);
+      });
+  });
+</script>
 {% endblock %}

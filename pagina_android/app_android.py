@@ -207,9 +207,9 @@ def insertainfo():
         print(parametros)
         print("-----------la autorrizacion")
         print(authorization_url)
-        return redirect(authorization_url)
+        return redirect(url_for(authorization_url))
 
-    return redirect(authorization_url)
+    return redirect(url_for(authorization_url))
 
 @app.route('/a')
 def a():

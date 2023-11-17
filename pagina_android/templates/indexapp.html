@@ -54,6 +54,10 @@ INICIO
     background-color: #fff;
 }
 
+
+
+
+
 .container{
     width: 90%;
   
@@ -123,16 +127,17 @@ INICIO
             <div class="swiper-slide">
                 {% if noticia.3 %}
                 <img src="{{ noticia.3 }}"
-                    alt="">{% endif %}
+                    alt="">
+                {% endif %}
                 <div class="card-description">
                     <div class="card-title">
-                        <h4>{{ noticia.1 }}Descripción</h4>
+                        <h4>{{ noticia.1 }}</h4>
                     </div>
                     <div class="card-title">
-                        <h4>{{ noticia.2 }}Descripción</h4>
+                        <h4>{{ noticia.4 }}</h4>
                     </div>
                     <div class="card-text">
-                        <p>{{ noticia.4 }}</p>
+                        <p>{{ noticia.2 }}</p>
                     </div>
                     
                 </div>

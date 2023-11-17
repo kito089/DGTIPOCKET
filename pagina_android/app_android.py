@@ -176,6 +176,7 @@ def insertainfo():
         grupo=request.form['grupo']
         parametros = dict(session)['profile']
         session['profile'] = parametros.update({'curp': curp,'grado':grado,'grupo':grupo})
+        print("=========== nuevos parametros")
         print(parametros)
 
         return redirect(url_for('index'))

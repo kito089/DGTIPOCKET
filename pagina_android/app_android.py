@@ -166,6 +166,23 @@ def terinar():
     parametros = dict(session)['profile']
     return render_template('terminarR.html', parametros = parametros)
 
+
+@app.route('/insertainfo', methods=['GET', 'POST'])
+def insertainfo():
+    if request.method == 'POST':
+        
+        curp=request.form['curp']
+        grado=request.form['grado']
+        grupo=request.form['grupo']
+        parametros = dict(session)['profile']
+        session['profile'] = parametros.update({'curp': curp,'grado':grado,'grupo':grupo})
+        print(parametros)
+
+        return redirect(url_for('index'))
+    
+    parametros = dict(session)['profile']
+    return render_template('terminarR.html', parametros = parametros)
+
 @app.route('/tutorias')
 def tutorias():
     parametros = dict(session)['profile']

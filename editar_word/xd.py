@@ -1,8 +1,19 @@
 from docx import Document
 import os
 # import module
+def agregar_fila(tabla, datos):
+    # Añadir una nueva fila a la tabla
+    nueva_fila = tabla.add_row().cells
+    # Llenar la nueva fila con los datos proporcionados
+    for i in range(len(datos)):
+        nueva_fila[i].text = str(datos[i])
+        
 
-
+def borrar_fila(tabla, indice):
+    # Borrar la fila en el índice especificado
+    tabla._element.remove(tabla._element[indice])
+    
+         
 # 1. Abre el archivo existente
 doc = Document('plantilla_boleta.docx')
 nombre="A"

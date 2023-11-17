@@ -77,10 +77,9 @@ tr:nth-child(even) {
 
 {% block content %}
 
-{% if 155 in parametros['email'] %}
-    <p>155</p>
-{% elif 168 in parametros['email'] %}
-    <p>168</p>
+{% if 155 in {{parametros['email']}}%}
+    <p>{{parametros['name']}}</p>
+
 {% endif %}
 
 

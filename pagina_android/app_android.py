@@ -250,7 +250,7 @@ def agenda():
     parametros = dict(session)['profile']
     suma_parametros = parametros['grupo'] + parametros['grado']
     
-    directorio_pdf = "\DGTIPOCKET\DGTIPOCKET\horarios"
+    directorio_pdf = os.path.expanduser("~/DGTIPOCKET/DGTIPOCKET/horarios")
     archivos_pdf = os.listdir(directorio_pdf)
     
     archivos_filtrados = [archivo for archivo in archivos_pdf if str(suma_parametros) in archivo]

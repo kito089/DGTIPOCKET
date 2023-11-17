@@ -187,6 +187,11 @@ def insertainfo():
     para = dict(session)['profile']
     return render_template('index.html', parametros = para)
 
+@app.route('/a')
+def a():
+    parametros = dict(session)['profile']
+    return render_template('a.html', parametros = parametros)
+
 @app.route('/tutorias')
 def tutorias():
     parametros = dict(session)['profile']

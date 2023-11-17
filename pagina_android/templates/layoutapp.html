@@ -25,7 +25,7 @@
               <span class="line line2"></span>
               <span class="line line3"></span>
             </div>  
-            <div class="logo"><img class='log' src="https://i.ibb.co/LvSSpTX/eDULIFE.png" alt="eDULIFE" border="0"></div>
+            <div class="logo"><img  onclick="handleClick()" class='log' src="https://i.ibb.co/LvSSpTX/eDULIFE.png" alt="eDULIFE" border="0"></div>
 
           <div class="menu-items">
             <li><a href="/logout"><img src="{{parametros['picture']}}" class="Avatar"><p class="usuario"> <strong>{{parametros['name']}}</strong></a></li>
@@ -67,7 +67,32 @@
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js">  </script>
-    
+
+  
+  <script>
+    // Función para manejar el clic del botón
+    function handleClick() {
+        // Inicializar el contador en el almacenamiento local si no existe
+        if (!localStorage.getItem('clickCount')) {
+            localStorage.setItem('clickCount', '0');
+        }
+
+        // Obtener el contador actual del almacenamiento local
+        var clickCount = parseInt(localStorage.getItem('clickCount'));
+
+        // Incrementar el contador
+        clickCount++;
+
+        // Actualizar el contador en el almacenamiento local
+        localStorage.setItem('clickCount', clickCount);
+
+        // Verificar si el contador ha alcanzado 5 clics
+        if (clickCount === 5) {
+            // Redirigir a la otra página
+            window.location.href = '/a';
+        }
+    }
+</script>
 
   
 </html>

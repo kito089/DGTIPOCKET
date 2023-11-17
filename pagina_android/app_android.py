@@ -267,7 +267,7 @@ def noticias():
     return render_template('noticiasapp.html', noticias=noticias, parametros = parametros)
 
 @app.route('/insnot/<string:nom>', methods=['GET', 'POST'])
-def agregar_noticia(nom):
+def agregar_noticia(nom=None):
     if request.method == 'POST':
         datos = []
         datos.append(request.form['titulo'])

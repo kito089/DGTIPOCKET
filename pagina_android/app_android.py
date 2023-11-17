@@ -182,8 +182,8 @@ def insertainfo():
 
         
     
-    parametros = dict(session)['profile']
-    return render_template('index.html', parametros = parametros)
+    para = dict(session)['profile']
+    return render_template('index.html', parametros = para)
 
 @app.route('/tutorias')
 def tutorias():

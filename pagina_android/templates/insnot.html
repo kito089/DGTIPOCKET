@@ -68,21 +68,23 @@ input[type="submit"]:hover {
 <a class="a" href="/instabla">insertar tablas </a>
 
 <h1>Insertar Noticia</h1>
-<form action="/insnot/noticias" method="POST" id="noticias">
-    <label for="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulonoticias" ><br>
+<div class="container">
+    <form action="/insnot/noticias" method="POST" id="noticias">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulonoticias" ><br>
 
-    <label for="descripcion">Descripción:</label>
-    <textarea id="contenidoN" name="descripcionnoticias" ></textarea><br>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="contenidoN" name="descripcionnoticias" ></textarea><br>
 
-    <label for="img">URL de la imagen:</label>
-    <input type="text" id="imgN" name="imgnoticias"><br>
+        <label for="img">URL de la imagen:</label>
+        <input type="text" id="imgN" name="imgnoticias"><br>
 
-    <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" name="fechanoticias"><br>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fechanoticias"><br>
 
-    <input  value="Guardar" onclick="push();">
-</form>
+        <input  value="Guardar" onclick="push();">
+    </form>
+</div>
 
     <h1 class="center">Inserción de Avisos</h1>
 
@@ -134,7 +136,6 @@ input[type="submit"]:hover {
             icon:"",
             timeout:1500000,
             vibrate:[100,100,100],
-
         });
         formulario.submit();
     }

@@ -77,7 +77,7 @@ tr:nth-child(even) {
 
 {% block content %}
 
-{% if 155 in {{parametros['email']}}%}
+{% if str(155) in parametros['hd']%}
     <p>{{parametros['name']}}</p>
 
 {% endif %}

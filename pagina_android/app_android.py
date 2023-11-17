@@ -61,6 +61,7 @@ def index():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     avisos = bd.obtenerTablas("avisos")
+    concursos = bd.obtenerTablas("concursos")
     bd.exit()
     print("---------------sesion")
     print(dict(session))
@@ -129,7 +130,7 @@ def index():
     # print("---------------events?")
     # print(events)
 
-    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)
 
 @app.route('/login')
 def login():

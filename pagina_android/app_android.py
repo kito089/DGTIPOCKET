@@ -187,10 +187,11 @@ def terinar():
 @app.route('/insertainfo', methods=['GET', 'POST'])
 @login_required
 def insertainfo():
-    authorization_url, state = flow.authorization_url(
-        access_type='offline',
-        include_granted_scopes='true',
-    )
+    # authorization_url, state = flow.authorization_url(
+    #     access_type='offline',
+    #     include_granted_scopes='true',
+    # )
+    authorization_url = "index"
     if request.method == 'POST':
         
         curp=request.form['curp']

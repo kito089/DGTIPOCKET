@@ -251,9 +251,6 @@ def agenda():
     suma_parametros = parametros['grupo'] + parametros['grado']
     
     directorio_pdf = os.path.expanduser("~/DGTIPOCKET/DGTIPOCKET/horarios"+suma_parametros+".pdf")
-   
-    
-    
 
     return render_template('agenda.html', parametros = parametros,archivo=directorio_pdf)
 

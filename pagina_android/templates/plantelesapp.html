@@ -77,12 +77,11 @@ tr:nth-child(even) {
 
 {% block content %}
 
-<div class="item">
-    <div class="card">
-        <div class="header">168</div>
-        <button class="App-button">Visitar</button>
-      </div>
-</div>
+{% if 155 in parametros['hd'] %}
+    <p>155</p>
+{% elif 168 in parametros['hd'] %}
+    <p>168</p>
+{% endif %}
 
 
 {% endblock %}

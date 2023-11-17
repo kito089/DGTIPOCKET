@@ -143,8 +143,8 @@ def authorize():
     session['tok_info'] = tokens
     print("---------------toks")
     print(tokens)
-    # with open("token.txt", "w") as tok:
-    #     tok.write(str(token))
+    with open("token.txt", "w") as tok:
+        tok.write(str(tokens))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     return redirect('/terminar')

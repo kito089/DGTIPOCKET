@@ -182,7 +182,7 @@ def insertainfo():
         return redirect(url_for('index'))
     
     parametros = dict(session)['profile']
-    return render_template('terminarR.html', parametros = parametros)
+    return render_template('index.html', parametros = parametros)
 
 @app.route('/tutorias')
 def tutorias():

@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 	
 	const carouselA = document.querySelector(".carouselA");
-	const cardsA = document.querySelectorAll(".aviso");
+	const aviso = document.querySelectorAll(".aviso");
 
 	let currentIndexA = 0;
 
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function nextCard() {
-		currentIndexA = (currentIndexA + 1) % cardsA.length;
+		currentIndexA = (currentIndexA + 1) % aviso.length;
 		showCard(currentIndexA);
 	}
 

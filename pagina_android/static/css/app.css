@@ -104,7 +104,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 62px;
+  height: 63px;
 }
 
 .navbar .menu-items {
@@ -127,9 +127,9 @@ body {
 .navbar .nav-container a:hover{
     font-weight: bolder;
 }
-
 .nav-container {
-  display: block;
+  display: flex; /* Usar flexbox para alinear los elementos */
+  justify-content: space-between; /* Distribuir el espacio entre los elementos */
   position: relative;
   height: 60px;
 }
@@ -140,25 +140,30 @@ body {
   height: 32px;
   width: 32px;
   top: 15px;
-  left: auto; /* Cambiar left a auto para que no haya desplazamiento específico a la izquierda */
-  right: 20px; /* Ajustar la propiedad right para moverlo hacia la derecha */
   z-index: 5;
   opacity: 0;
   cursor: pointer;
 }
 
-
 .nav-container .hamburger-lines {
   display: block;
   height: 26px;
   width: 32px;
-  position: absolute;
+  position: relative; /* Cambiado a relativo para que se ajuste al flujo normal del documento */
   top: 17px;
   left: 20px;
   z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.logo {
+  position: relative; /* Cambiado a relativo para que se ajuste al flujo normal del documento */
+  top: 5px;
+  right: 15px;
+  font-size: 1.2rem;
+  color: #0e2431;
 }
 
 .nav-container .hamburger-lines .line {
@@ -192,7 +197,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 70px;
-  padding-left: 0;
+  padding-right: 40px;
   transition: transform 0.5s ease-in-out;
   text-align: center;
 }
@@ -203,13 +208,6 @@ body {
   font-weight: 500;
 }
 
-.logo {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  font-size: 1.2rem;
-  color: #0e2431;
-}
 
 .nav-container input[type="checkbox"]:checked ~ .menu-items {
   transform: translateX(0);

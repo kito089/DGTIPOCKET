@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	setInterval(nextCard, 4000); // Cambia la tarjeta cada 3 segundos (ajusta según sea necesario)
 
 
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+	
 	const carouselA = document.querySelector(".carouselA");
 	const cardsA = document.querySelectorAll(".cardA");
 

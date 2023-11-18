@@ -71,7 +71,7 @@ def index():
     print("session token")
     print(toks)
     
-    horario = str(parametros['grado']) + str(parametros['grupo']) 
+    archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
 
     # authorization_response = request.url.split('?')[1]
@@ -133,7 +133,7 @@ def index():
     # print("---------------events?")
     # print(events)
 
-    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos,archivo=horario)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos,archivo=archivo)
 
 @app.route('/login')
 def login():

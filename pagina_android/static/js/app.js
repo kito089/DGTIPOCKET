@@ -15,22 +15,21 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	setInterval(nextCard, 4000); // Cambia la tarjeta cada 3 segundos (ajusta según sea necesario)
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-	const carousel = document.querySelector(".carouselA");
-	const cards = document.querySelectorAll(".cardA");
 
-	let currentIndex = 0;
+	const carouselA = document.querySelector(".carouselA");
+	const cardsA = document.querySelectorAll(".cardA");
+
+	let currentIndexA = 0;
 
 	function showCard(index) {
 		const newPosition = -index * 100 + "%";
-		carousel.style.transform = "translateX(" + newPosition + ")";
+		carouselA.style.transform = "translateX(" + newPosition + ")";
 	}
 
 	function nextCard() {
-		currentIndex = (currentIndex + 1) % cards.length;
-		showCard(currentIndex);
+		currentIndexA = (currentIndexA + 1) % cardsA.length;
+		showCard(currentIndexA);
 	}
 
 	setInterval(nextCard, 5000); // Cambia la tarjeta cada 3 segundos (ajusta según sea necesario)

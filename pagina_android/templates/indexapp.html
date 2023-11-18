@@ -38,17 +38,6 @@ INICIO
 
 
 
-/* Estilo para el título h2 dentro de la clase aviso */
-.aviso h2 {
-    color: #000080; /* Color del texto azul oscuro */
-}
-
-/* Estilo para los párrafos p dentro de la clase aviso */
-.aviso p {
-    color: #0000cd; /* Color del texto azul medio */
-    margin: 5px 0; /* Espaciado interno superior e inferior */
-}
-
 
 /* Estilo para el título h1 con la clase center */
 .center {
@@ -140,7 +129,8 @@ INICIO
 .p {
     color: #fafbfd;
 }
-carousel-containerA {
+
+.carousel-containerA {
     width: 100%;
     height:auto;
     overflow: hidden;
@@ -152,11 +142,11 @@ carousel-containerA {
 }
 
 .cardA {
-    background-color: #f0f8ff; /* Color de fondo azul claro */
-    padding: 15px; /* Espaciado interno */
-    margin-bottom: 15px; /* Espaciado inferior entre avisos */
-    border: 1px solid #add8e6; /* Borde azul claro */
-    border-radius: 5px; /* Bordes redondeados */
+    min-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #0044d0;
+    border-radius: 10%;
+    overflow: hidden;
 }
 
 .cardA img {
@@ -167,6 +157,17 @@ carousel-containerA {
 
 .card-contentA {
     padding: 16px;
+}
+
+/* Estilo para el título h2 dentro de la clase aviso */
+.aviso h2 {
+    color: #000080; /* Color del texto azul oscuro */
+}
+
+/* Estilo para los párrafos p dentro de la clase aviso */
+.aviso p {
+    color: #0000cd; /* Color del texto azul medio */
+    margin: 5px 0; /* Espaciado interno superior e inferior */
 }
 
 {% endblock %}

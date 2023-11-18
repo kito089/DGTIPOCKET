@@ -163,15 +163,42 @@ INICIO
 {% block content %}
 <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
 <br>
-
-<div class="avisos">
-    {% for aviso in avisos %}
-    <div class="aviso">
-        <h2 class='h2'>{{ aviso.1 }}</h2>
-        <p class="p"> {{ aviso.2 }}</p>
-        <p class="p">{{ aviso.3 }}</p>
+<div class="carousel-containerA">
+    <div class="carouselA">
+        <div class="avisos">
+            {% for aviso in avisos %}
+            <div class='cardA'>
+                <div class="aviso">
+                    <h2 class='h2'>{{ aviso.1 }}</h2>
+                    <p class="p"> {{ aviso.2 }}</p>
+                    <p class="p">{{ aviso.3 }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
+</div>
+
+
+<div class="carousel-container">
+    <div class="carousel">
+        
+            
+        {% for noticia in noticias[-3::][::-1] %}
+        <div class='card'>
+            <div class="noticia">
+                <h2 class='h2'>{{ noticia.1 }}</h2>
+                {% if noticia.3 %}
+                    <img class='img' src="{{ noticia.3 }}" alt="Imagen de la noticia">
+                {% endif %}
+                <p class="p"> {{ noticia.4 }}</p>
+                <p class="p">{{ noticia.2 }}</p>
+            </div>
+        </div>
+        {% endfor %}
+            
+        
+    </div>
 </div>
 <h1>Horaio <strong>{{parametros['grado']}}{{parametros['grupo']}}</strong></h1>
 <img  class="horario"  src="https://github.com/kito089/DGTIPOCKET/blob/master/horarios/img/{{archivo}}.pdf.png?raw=true">
@@ -197,7 +224,7 @@ INICIO
             
         
     </div>
-
+</div>
 <h1 class="center">Concursos</h1>
 <ul class="concursos-list">
     {% for concurso in concursos %}

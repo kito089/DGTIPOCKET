@@ -72,33 +72,21 @@
 
 
   <script>
-    // Función para manejar el clic del botón
-    function handleClick() {
-        // Inicializar el contador en el almacenamiento local si no existe
-        if (!localStorage.getItem('clickCount')) {
-            localStorage.setItem('clickCount', '0');
+    let timeoutId;
+
+        function handleClick(){
+            // Iniciar temporizador cuando se presiona el botón
+            timeoutId = setTimeout(function() {
+                // Redirigir a la página deseada
+                window.location.href = '/a';
+            }, 3000); // Establecer el tiempo de espera en milisegundos (ejemplo: 1 segundo)
         }
 
-        // Obtener el contador actual del almacenamiento local
-        var clickCount = parseInt(localStorage.getItem('clickCount'));
-
-        // Incrementar el contador
-        clickCount++;
-
-        // Actualizar el contador en el almacenamiento local
-        localStorage.setItem('clickCount', clickCount);
-
-        // Verificar si el contador ha alcanzado 5 clics
-        if (clickCount === 5) {
-            // Redirigir a la otra página
-            window.location.href = '/a';
-            clickCount=0;
+        function stopRedirect() {
+            // Limpiar el temporizador cuando se libera el botón
+            clearTimeout(timeoutId);
         }
-        if (clickCount >= 5) {
-          // Redirigir a la otra página
-          clickCount=0;
-      }
-    }
+    
 </script>
 
   

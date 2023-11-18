@@ -155,13 +155,12 @@ INICIO
 }
 .aviso {
     min-width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #0044d0;
-    border-radius: 10px;
-    color: #fff;
+    background-color: #f0f8ff; /* Color de fondo azul claro */
+    padding: 15px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado inferior entre avisos */
+    border: 1px solid #add8e6; /* Borde azul claro */
+    border-radius: 5px; /* Bordes redondeados */
     overflow: hidden;
-    padding: 20px;
-    margin: 0 10px;
     text-align: left;
 }
 
@@ -185,8 +184,8 @@ INICIO
 <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
 <br>
 
-<div class="carousel-container">
-    <div class="carousel">
+<div class="carousel-containerA">
+    <div class="carouselA">
         {% for aviso in avisos %}
         <div class="aviso">
             <h2 class="h2">{{ aviso.1 }}</h2>

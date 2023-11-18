@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 	
 	const carouselA = document.querySelector(".carouselA");
-	const cardsA = document.querySelectorAll(".cardA");
+	const cardsA = document.querySelectorAll(".aviso");
 
 	let currentIndexA = 0;
 

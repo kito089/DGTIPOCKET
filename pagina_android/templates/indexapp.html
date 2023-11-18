@@ -153,6 +153,34 @@ INICIO
 .p {
     color: #fafbfd;
 }
+carousel-containerA {
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+}
+
+.carouselA {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.cardA {
+    min-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #0044d0;
+    border-radius: 10%;
+    overflow: hidden;
+}
+
+.cardA img {
+    width: 100%;
+    height: auto;
+    border-bottom: 3px solid #fff;
+}
+
+.card-contentA {
+    padding: 16px;
+}
 
 {% endblock %}
 
@@ -191,7 +219,7 @@ INICIO
         
             
         {% for noticia in noticias[-3::][::-1] %}
-        <div class='cardA'>
+        <div class='card'>
             <div class="noticia">
                 <h2 class='h2'>{{ noticia.1 }}</h2>
                 {% if noticia.3 %}

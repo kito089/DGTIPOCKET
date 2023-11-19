@@ -120,9 +120,11 @@ def terinar():
     no = parametros['email'].replace("@cetis155.edu.mx","")
     print("-----------Control")
     print(no)
+    curp =  bd.seleccion("alumnos", "curp","no_control = "+str(no))
     grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))
     bd.exit()
-    print("------------ grado y grupo")
+    print("------------ curp, grado y grupo")
+    print(curp)
     print(grado)
     if grado:
         grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
@@ -152,6 +154,8 @@ def insertainfo():
         print(datos)
         #bd.insertarRegistro("alumnos",datos)
         bd.exit()
+        parametros.update({'curp':datos[0],'grado':datos[1], 'grupo':datos[2]})
+        session['profile'] = parametros
         return redirect(url_for("index"))
 
     return redirect(url_for("index"))

@@ -13,7 +13,7 @@ insert noticias
     margin-bottom: 20px;
 }
 
-h1 {
+.h1 {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -31,7 +31,7 @@ form {
     margin-bottom: 20px;
 }
 
-label {
+.label {
     display: block;
     margin-bottom: 5px;
 }
@@ -67,58 +67,58 @@ input[type="submit"]:hover {
   
 <a class="a" href="/instabla">insertar tablas </a>
 
-<h1>Insertar Noticia</h1>
+<h1 class="h1">Insertar Noticia</h1>
 <div class="container">
     <form action="/insnot/noticias" method="POST" id="noticias">
-        <label for="titulo">Título:</label>
+        <label class="label"for="titulo">Título:</label>
         <input type="text" id="titulo" name="titulonoticias" required><br>
 
-        <label for="descripcion">Descripción:</label>
+        <label class="label"for="descripcion">Descripción:</label>
         <textarea id="contenidoN" name="descripcionnoticias" required></textarea><br>
 
-        <label for="img">URL de la imagen:</label>
+        <label class="label"for="img">URL de la imagen:</label>
         <input type="text" id="imgN" name="imgnoticias" required><br>
 
-        <label for="fecha">Fecha:</label>
+        <label class="label"for="fecha">Fecha:</label>
         <input type="date" id="fecha" name="fechanoticias" required><br>
 
         <input type="submit" value="Guardar">
     </form>
 </div>
 
-    <h1 class="center">Inserción de Avisos</h1>
+    <h1 class="h1">Inserción de Avisos</h1>
 
     <div class="container">
         <form action="/insnot/avisos" method="post">
             <div class="form-group">
 
-                <label for="titulo">Título:</label>
+                <label class="label"for="titulo">Título:</label>
                 <input type="text" id="titulo" name="tituloavisos" required><br>
             
-                <label for="descripcion">Contenido:</label>
+                <label class="label"for="descripcion">Contenido:</label>
                 <textarea id="text" name="descripcionavisos" required></textarea><br>
             
-                <label for="fecha">Fecha:</label>
+                <label class="label"for="fecha">Fecha:</label>
                 <input type="date" id="fecha" name="fechaavisos" required><br>
             
                 <input type="submit" value="Guardar"> 
         </form>
     </div>
 
-    <h1 class="center">Inserción de Concursos</h1>
+    <h1 class="h1">Inserción de Concursos</h1>
 
     <div class="container">
         <form action="/insnot/concursos" method="post">
-                <label for="titulo">Título:</label>
+                <label class="label"for="titulo">Título:</label>
                 <input type="text" id="titulo" name="tituloconcursos" required><br>
             
-                <label for="descripcion">Descripción:</label>
+                <label class="label"for="descripcion">Descripción:</label>
                 <textarea id="text" name="descripcionconcursos" requred></textarea><br>
             
                 <label for="img">URL de la imagen:</label>
                 <input type="text" id="img" name="imgconcursos" required><br>
             
-                <label for="fecha">Fecha:</label>
+                <label class="label"for="fecha">Fecha:</label>
                 <input type="date" id="fecha" name="fechaconcursos" required><br>
             
                 <input type="submit" value="Guardar">

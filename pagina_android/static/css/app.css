@@ -376,5 +376,9 @@ h1{
   color: #3498db;
   width: 100vh;
 }
+#miDiv {
+  width: 200px; /* Ancho deseado */
+  height: 10%; /* Altura deseada */
+}
 
 

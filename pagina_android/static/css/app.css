@@ -72,7 +72,7 @@
 
 /*=============== VARIABLES CSS ===============*/
 :root {
-  --header-height: 20%;
+  --header-height: 4rem;
 
   /*========== Colors ==========*/
   --hue: 174;

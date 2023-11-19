@@ -22,6 +22,14 @@ INICIO
     border: 0;
     border-radius:30px;
 }
+/* Estilo básico para la horario */
+.horario {
+  width: 100%;
+  height: auto; /* Para mantener la proporción de la imagen */
+  display: block; /* Elimina el espacio adicional debajo de la imagen */
+  margin: 0 auto; /* Centra la imagen en su contenedor si es necesario */
+  max-width: 100%; /* Garantiza que la imagen no sea más grande que su contenedor */
+}
 
 {% endblock %}
 
@@ -29,13 +37,11 @@ INICIO
 
 {% block content %}
 <h1>Horaio <strong>{{parametros['grado']}}{{parametros['grupo']}}</strong></h1>
-    <ul>
-        <iframe id="FramePDF" src=" https://github.com/kito089/DGTIPOCKET/blob/master/horarios/{{archivo}}.pdf" width="700" height="400" style="border: 1px solid black;"/>
-
-    </ul>
-<div class="calendario-responsive">
-    <iframe src="https://calendar.google.com/calendar/embed?height=601&wkst=1&bgcolor=%23ffffff&ctz=America%2FMexico_City&showTitle=1&showNav=1&showPrint=0&showTabs=0&showCalendars=0&hl=es&showTz=0&title=2023-2024&src=OTkyY2NlYzZjZWUyYTBhY2M3OGE1MjU2MmRmZGU5MGQwYzMwOGE1ODI5ZTYyNjI0MmU3ZDEzMjdkMDBlZWZkMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5" style="border-width:0" width="800" height="601" frameborder="0" scrolling="no"></iframe>
-</div>
+    <img  class="horario"  src="https://github.com/kito089/DGTIPOCKET/blob/master/pagina_android/horarios/img/{{archivo}}.pdf.png?raw=true">
+    <a href="\horarios\{{archivo}}" download="{{archivo}}.pdf">
+        
+        Descargar PDF
+    </a>
 
 <div class='item'>
     <div class="calendario-responsive">

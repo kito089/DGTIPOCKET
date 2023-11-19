@@ -1,33 +1,42 @@
-var swiper = new Swiper('.swiper-container', {
-	navigation: {
-	  nextEl: '.swiper-button-next',
-	  prevEl: '.swiper-button-prev'
-	},
-	slidesPerView: 1,
-	spaceBetween: 10,
-	// init: false,
-	pagination: {
-	  el: '.swiper-pagination',
-	  clickable: true,
-	},
+document.addEventListener("DOMContentLoaded", function () {
+	const carousel = document.querySelector(".carousel");
+	const cards = document.querySelectorAll(".card");
 
-  
-	breakpoints: {
-	  620: {
-		slidesPerView: 1,
-		spaceBetween: 20,
-	  },
-	  680: {
-		slidesPerView: 2,
-		spaceBetween: 40,
-	  },
-	  920: {
-		slidesPerView: 3,
-		spaceBetween: 40,
-	  },
-	  1240: {
-		slidesPerView: 4,
-		spaceBetween: 50,
-	  },
-	} 
-    });
+	let currentIndex = 0;
+
+	function showCard(index) {
+		const newPosition = -index * 100 + "%";
+		carousel.style.transform = "translateX(" + newPosition + ")";
+	}
+
+	function nextCard() {
+		currentIndex = (currentIndex + 1) % cards.length;
+		showCard(currentIndex);
+	}
+
+	setInterval(nextCard, 4000); // Cambia la tarjeta cada 3 segundos (ajusta según sea necesario)
+
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+	
+	const carouselA = document.querySelector(".carouselA");
+	const aviso = document.querySelectorAll(".aviso");
+
+	let currentIndexA = 0;
+
+	function showCard(index) {
+		const newPosition = -index * 100 + "%";
+		carouselA.style.transform = "translateX(" + newPosition + ")";
+	}
+
+	function nextCard() {
+		currentIndexA = (currentIndexA + 1) % aviso.length;
+		showCard(currentIndexA);
+	}
+
+	setInterval(nextCard, 5000); // Cambia la tarjeta cada 3 segundos (ajusta según sea necesario)
+});
+
+

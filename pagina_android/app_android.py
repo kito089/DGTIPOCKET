@@ -70,6 +70,9 @@ def index():
 
     print("session token")
     print(toks)
+    
+    archivo = str(parametros['grado']) + str(parametros['grupo']) 
+
 
     # authorization_response = request.url.split('?')[1]
     # print("-------------------request.url")
@@ -130,7 +133,7 @@ def index():
     # print("---------------events?")
     # print(events)
 
-    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos,archivo=archivo)
 
 @app.route('/login')
 def login():
@@ -251,10 +254,10 @@ def servicio():
 @app.route('/agenda')
 def agenda():
     parametros = dict(session)['profile']
-    suma_parametros = str(parametros['grado']) + str(parametros['grupo']) 
+    horario = str(parametros['grado']) + str(parametros['grupo']) 
     print("------------------")
-    print(suma_parametros)
-    return render_template('agenda.html', parametros = parametros,archivo=suma_parametros)
+    print(horario)
+    return render_template('agenda.html', parametros = parametros,archivo=horario)
 
 @app.route('/historial')
 def historial():

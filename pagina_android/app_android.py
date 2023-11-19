@@ -146,6 +146,8 @@ def insertainfo():
         datos.append(no)
         datos.append(request.form['curp'])
         datos.append(request.form['grado'])
+        print("------------------grupo :v")
+        print(str(bd.seleccion("grupo","idgrupo","letra = "+str(request.form['grupo']))[0][0]))
         datos.append(str(bd.seleccion("grupo","idgrupo","letra = "+str(request.form['grupo']))[0][0]))
         print(datos)
         #bd.insertarRegistro("alumnos",datos)

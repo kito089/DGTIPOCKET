@@ -204,10 +204,15 @@
     }
 
   function validarFormulario() {
-    var inputCodigo = document.getElementById('curp');
+    var inputValor = document.getElementById('curp');
     var regex = /^[A-Z0-9]{18}$/;
 
-    if (!regex.test(inputCodigo.value)) {
+    var may = /[A-Z]/.test(inputValor);
+    var num = /\d/.test(inputValor);
+    var car = inputValor.length === 18;
+    var min = !/[a-z]/.test(inputValor);
+
+    if (may && num && car && min) {
       alert('El curp ingresado no cumple con los requisitos.');
       return false;
     }

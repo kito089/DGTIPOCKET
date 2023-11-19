@@ -128,8 +128,6 @@ def terinar():
     print(grado)
     if len(grado)>0 and len(curp)>0:
         bd = Coneccion()
-        print("----------------- idgrupo")
-        print(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no)))
         grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
         bd.exit()
         print(grupo)

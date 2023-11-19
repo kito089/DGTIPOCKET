@@ -130,13 +130,13 @@ body {
 }
 
 .nav-container {
-  display: block;
+  display: fixed;
   position: relative;
   height: 60px;
 }
 
 .nav-container .checkbox {
-  position: absolute;
+  position: fixed;
   display: block;
   height: 32px;
   width: 32px;
@@ -151,7 +151,7 @@ body {
   display: block;
   height: 26px;
   width: 32px;
-  position: absolute;
+  position: fixed;
   top: 17px;
   left: 20px;
   z-index: 2;

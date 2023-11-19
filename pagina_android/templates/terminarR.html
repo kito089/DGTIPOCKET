@@ -108,7 +108,7 @@
             color: #2980b9; /* Azul más oscuro para etiquetas */
         }
         
-        input {
+        input , select {
             width: 100%;
             padding: 8px;
             margin-bottom: 16px;
@@ -162,18 +162,18 @@
         <label for="curp">CURP:</label>
         <input type="text" id="curp" name="curp" required>
         <br>
-        <label for="Grupo">CURP:</label>
-        <br>
-        <label for="Grado">CURP:</label>
-        <select id="opciones" name="grado" value='Grado'>
-            <option value="A">1</option>
-            <option value="B">2</option>
-            <option value="C">3</option>
-            <option value="D">4</option>
-            <option value="E">5</option>
-            <option value="F">6</option>
-        </select>
         
+        <label for="Grado">Grado:</label>
+        <select id="opciones" name="grado" value='Grado'>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+        <label for="Grupo">Grupo:</label>
+        <br>
         <select id="opciones" name="grupo" value="Grupo">
             <option value="A">A</option>
             <option value="B">B</option>

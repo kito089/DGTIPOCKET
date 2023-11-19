@@ -120,8 +120,8 @@ def terinar():
     no = parametros['email'].replace("@cetis155.edu.mx","")
     print("-----------Control")
     print(no)
-    grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))[0][0]
-    grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
+    grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))
+    #grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))))
     bd.exit()
     print("------------ grado y grupo")
     print(grado)

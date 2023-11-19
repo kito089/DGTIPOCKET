@@ -29,6 +29,49 @@ th {
   background-color: #f2f2f2;
 }
 
+
+
+.org-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.node {
+  position: relative;
+  box-sizing: border-box;
+  width: 120px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.node:before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid #3498db;
+  width: 0;
+  height: 20px;
+}
+
+.connector {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid #3498db;
+  width: 0;
+  height: 20px;
+}
+
 {% endblock %}
 
 
@@ -69,6 +112,22 @@ th {
   </tbody>
 </table>
 
+
+<div class="org-chart">
+  <div class="node">
+      <p>Jefe</p>
+      <div class="connector"></div>
+  </div>
+  <div class="node">
+      <p>Subordinado 1</p>
+      <div class="connector"></div>
+  </div>
+  <div class="node">
+      <p>Subordinado 2</p>
+      <div class="connector"></div>
+  </div>
+  <!-- Agrega más nodos según sea necesario -->
+</div>
 
 {% endif %}
 

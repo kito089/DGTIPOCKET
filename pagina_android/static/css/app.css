@@ -110,7 +110,6 @@ body {
 .navbar .menu-items {
   display: absolute;
   background: #f1f1f1;
-  position: fixed;
 }
 
 .navbar .nav-container li {

@@ -101,6 +101,7 @@ body {
 }
 
 .nav-container {
+  position: fixed;
   display: absolute;
   justify-content: space-between;
   align-items: center;
@@ -109,7 +110,7 @@ body {
 }
 
 .navbar .menu-items {
-  padding-top: 100vh;
+  padding-top: 200vh;
   display: absolute;
   background: #ffffff;
   position: fixed;

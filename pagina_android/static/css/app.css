@@ -67,7 +67,7 @@
 }
 
 
-/*=============== GOOGLE FONTS ===============*/
+/*=============== GOOGLE FONTS ===================================================================================*/
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 
 /*=============== VARIABLES CSS ===============*/
@@ -151,9 +151,7 @@ img {
   margin-bottom: 1.5rem;
 }
 
-.section__height {
-  height: 100vh;
-}
+
 
 /*=============== LAYOUT ===============*/
 .container {

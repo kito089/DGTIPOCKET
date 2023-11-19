@@ -105,11 +105,14 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 62px;
+  
 }
 
 .navbar .menu-items {
+  padding-top: 100vh;
   display: absolute;
   background: #ffffff;
+  position: fixed;
 }
 
 .navbar .nav-container li {

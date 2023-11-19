@@ -23,17 +23,7 @@ load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
 
-# XDDDDDDDD
-# Session config
 app.secret_key = os.getenv("APP_SECRET_KEY")
-
-SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
-
-flow = Flow.from_client_secrets_file(
-    os.path.expanduser('~/DGTIPOCKET/pagina_android/credentialsLocal.json'),
-    scopes=["https://www.googleapis.com/auth/calendar.readonly", "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/calendar openid"],
-    redirect_uri='https://patotipo.pythonanywhere.com',
-)
 
 oauth = OAuth(app)
 
@@ -72,66 +62,6 @@ def index():
     print(toks)
     
     archivo = str(parametros['grado']) + str(parametros['grupo']) 
-
-
-    # authorization_response = request.url.split('?')[1]
-    # print("-------------------request.url")
-    # print(authorization_response)
-    # flow.fetch_token(authorization_response=request.url)
-    # credentials = flow.credentials
-
-    # # Aquí puedes usar las credenciales para interactuar con la API de Google Calendar
-    # service = build('calendar', 'v3', credentials=credentials)
-
-    # creds = None
-    # # The file token.json stores the user's access and refresh tokens, and is
-    # # created automatically when the authorization flow completes for the first
-    # # time.
-    # creds = Credentials.from_authorized_user_info(toks, SCOPES)
-    # print("----------creds")
-    # print(creds)
-
-    # if not creds.valid:
-    #     print("----------------not creds valid")
-
-    # if not creds or not creds.valid:
-    #     print("token no valido por alguna razon :v")
-    #     if creds and creds.expired and creds.refresh_token:
-    #         creds.refresh(Request())
-    #     else:
-    #         flow = InstalledAppFlow.from_client_secrets_file(
-    #             "credentials.json", SCOPES
-    #         )
-    #         creds = flow.run_local_server(port=0) 
-
-    # creds = None
-
-    # if os.path.exists("token.json"):
-    #     creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-
-    # now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-    # print("Getting the upcoming 10 events")
-    # events_result = (
-    #     service.events().list(
-    #         calendarId="primary",
-    #         timeMin=now,
-    #         maxResults=10,
-    #         singleEvents=True,
-    #         orderBy="startTime",
-    #     ).execute()
-    # )
-    # events = events_result.get("items", [])
-
-    # if not events:
-    #     print("No upcoming events found.")
-
-    # # Prints the start and name of the next 10 events
-    # for event in events:
-    #     start = event["start"].get("dateTime", event["start"].get("date"))
-    #     print(start, event["summary"])
-
-    # print("---------------events?")
-    # print(events)
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos,archivo=archivo)
 
@@ -186,35 +116,41 @@ def terinar():
     parametros = dict(session)['profile']
     print("-----------------------para")
     print(parametros)
+    bd = Coneccion()
+    no = parametros['email'].replace("@cetis155.edu.mx","")
+    print("-----------Control")
+    print(no)
+    grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))[0][0]
+    grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
+    bd.exit()
+    print("------------ grado y grupo")
+    print(grado)
+    print(grupo)
+    if grado and grupo:
+        return redirect(url_for("index"))  
     return render_template('terminarR.html', parametros = parametros)
 
 
 @app.route('/insertainfo', methods=['GET', 'POST'])
 @login_required
 def insertainfo():
-    # authorization_url, state = flow.authorization_url(
-    #     access_type='offline',
-    #     include_granted_scopes='true',
-    # )
-    authorization_url = "index"
+    parametros = dict(session)['profile']
     if request.method == 'POST':
-        
-        curp=request.form['curp']
-        grado=request.form['grado']
-        grupo=request.form['grupo']
-        parametros = dict(session)['profile']
-        print("=========== antiguos parametros")
-        print(parametros)
-        parametros.update({'curp': curp,'grado':grado,'grupo':grupo})
-        session['profile'] = parametros
-        parametros = dict(session)['profile']
-        print("=========== nuevos parametros")
-        print(parametros)
-        print("-----------la autorrizacion")
-        print(authorization_url)
-        return redirect(url_for(authorization_url))
+        datos = []
+        bd = Coneccion()
+        no = parametros['email'].replace("@cetis155.edu.mx","")
+        print("-----------Control")
+        print(no)
+        datos.append(no)
+        datos.append(request.form['curp'])
+        datos.append(request.form['grado'])
+        datos.append(str(bd.seleccion("grupo","idgrupo","letra = "+str(request.form['grupo']))[0][0]))
+        print(datos)
+        #bd.insertarRegistro("alumnos",datos)
+        bd.exit()
+        return redirect(url_for("index"))
 
-    return redirect(url_for(authorization_url))
+    return redirect(url_for("index"))
 
 @app.route('/a')
 def a():

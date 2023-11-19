@@ -147,7 +147,7 @@
 
    
 
-    <form action="/insertainfo" method="POST" id="form">
+    <form action="/insertainfo" method="POST" id="form" onsubmit="return validarFormulario()">
          <h1>Registro de Usuario</h1>
         <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
         <label for="nombre">Ayudanos a terminar de completar tu registro </label>
@@ -160,7 +160,7 @@
         <input type="text" id="nombre" name="xd" value="{{parametros['email']}}" readonly>
         <br>
         <label for="curp">CURP:</label>
-        <input type="text" id="curp" name="curp" required>
+        <input type="text" id="curp" name="curp" maxlength="18" pattern="[A-Z0-9]{18}" required>
         <br>
         
         <label for="Grado">Grado:</label>
@@ -202,6 +202,22 @@
         formulario.submit();
        
     }
+
+  function validarFormulario() {
+    var inputValor = document.getElementById('curp');
+    var may = /[A-Z]/.test(inputValor);
+    var num = /\d/.test(inputValor);
+    var car = inputValor.length === 18;
+    var min = !/[a-z]/.test(inputValor);
+
+    // Verificar todas las condiciones
+    if (may && num && car && min) {
+        alert('El input cumple con las condiciones.');
+        return false;        
+    }
+
+    return true;
+  }
 </script>
 
     

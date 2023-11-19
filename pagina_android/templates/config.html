@@ -1,0 +1,41 @@
+{% extends "layoutapp.html" %}
+
+{% block style %}
+
+#container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#profile-picture {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+#logout-link {
+    color: #3498db; /* Azul */
+    text-decoration: none;
+    margin-top: 20px;
+    display: block;
+}
+{% endblock %}
+
+{% block content %}
+
+<div id="container">
+    <img id="profile-picture" src="{{parametros['picture']}}" alt="Foto de perfil">
+    <h2>Nombre: {{parametros['name']}}</h2>
+    <p>Correo:{{parametros['email']}}</p>
+    <p>Grado y Grupo: {{parametros['grado'],parametros['grupo'] }}</p>
+    <p>Plantel: {{parametros['hd']}}</p>
+    <p>CURP: {{parametros['curp']}}</p>
+    <a id="logout-link" href="/logout">Cerrar sesión (a)</a>
+</div>
+
+
+{% endblock %}

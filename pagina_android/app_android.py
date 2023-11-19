@@ -185,6 +185,11 @@ def funciones():
     parametros = dict(session)['profile']
     return render_template('funcionesapp.html', parametros = parametros)
 
+@app.route('/config')
+def config():
+    parametros = dict(session)['profile']
+    return render_template('config.html', parametros = parametros)
+
 @app.route('/menu')
 def menu():
     parametros = dict(session)['profile']

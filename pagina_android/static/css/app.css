@@ -78,7 +78,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: gainsboro;
+  background: linear-gradient(to bottom, #34aeff, rgb(60, 188, 231));
 }
 
 .container {
@@ -109,7 +109,7 @@ body {
 
 .navbar .menu-items {
   display: flex;
-  background: #fff;
+  background: #93d4ff;
 }
 
 .navbar .nav-container li {

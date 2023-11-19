@@ -71,16 +71,16 @@ input[type="submit"]:hover {
 <div class="container">
     <form action="/insnot/noticias" method="POST" id="noticias">
         <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulonoticias" ><br>
+        <input type="text" id="titulo" name="titulonoticias" required><br>
 
         <label for="descripcion">Descripción:</label>
-        <textarea id="contenidoN" name="descripcionnoticias" ></textarea><br>
+        <textarea id="contenidoN" name="descripcionnoticias" required></textarea><br>
 
         <label for="img">URL de la imagen:</label>
-        <input type="text" id="imgN" name="imgnoticias"><br>
+        <input type="text" id="imgN" name="imgnoticias" required><br>
 
         <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fechanoticias"><br>
+        <input type="date" id="fecha" name="fechanoticias" required><br>
 
         <input  value="Guardar" onclick="push();">
     </form>

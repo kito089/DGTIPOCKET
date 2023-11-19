@@ -154,7 +154,7 @@ def insertainfo():
         print(datos)
         #bd.insertarRegistro("alumnos",datos)
         bd.exit()
-        parametros.update({'curp':datos[0],'grado':datos[1], 'grupo':datos[2]})
+        parametros.update({'curp':datos[1],'grado':datos[2], 'grupo':datos[3]})
         session['profile'] = parametros
         return redirect(url_for("index"))
 

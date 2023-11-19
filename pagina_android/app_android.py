@@ -121,12 +121,14 @@ def terinar():
     print("-----------Control")
     print(no)
     grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))
-    #grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))))
     bd.exit()
     print("------------ grado y grupo")
     print(grado)
-    #print(grupo)
-    if grado:# and grupo:
+    if grado:
+        grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
+        print(grupo)
+        parametros.update({'grado':grado[0][0], 'grupo':grupo})
+        session['profile'] = parametros
         return redirect(url_for("index"))  
     return render_template('terminarR.html', parametros = parametros)
 

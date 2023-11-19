@@ -378,8 +378,7 @@ h1{
 }
 #miDiv {
   width: 200px; /* Ancho deseado */
-  height: 200px; /* Altura deseada */
-  border: 1px solid #000; /* Borde para visualización */
+  height: 10%; /* Altura deseada */
 }
 
 

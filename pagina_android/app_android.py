@@ -126,7 +126,8 @@ def terinar():
     print("------------ curp, grado y grupo")
     print(curp)
     print(grado)
-    if grado:
+    if len(grado)>0 and len(grupo)>1:
+        print("----------------- idgrupo")
         print(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0])
         grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
         print(grupo)

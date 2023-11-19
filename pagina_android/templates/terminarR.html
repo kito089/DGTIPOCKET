@@ -204,19 +204,19 @@
     }
 
   function validarFormulario() {
-    var inputValor = document.getElementById('curp');
+    var inputValor = document.getElementById('curp').value;
     var may = /[A-Z]/.test(inputValor);
     var num = /\d/.test(inputValor);
-    var car = inputValor.length === 18;
+    var car = inputValor.length == 18;
     var min = !/[a-z]/.test(inputValor);
 
     // Verificar todas las condiciones
     if (may && num && car && min) {
-        alert('El input cumple con las condiciones.');
-        return false;        
+        return true;        
+    } else {
+        alert('El curp no cumple con las condiciones especificadas.');
+        return false;
     }
-
-    return true;
   }
 </script>
 

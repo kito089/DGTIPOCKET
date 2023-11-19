@@ -126,8 +126,12 @@ def terinar():
     print("------------ curp, grado y grupo")
     print(curp)
     print(grado)
-    if grado:
+    if len(grado)>0 and len(curp)>0:
+        bd = Coneccion()
+        print("----------------- idgrupo")
+        print(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no)))
         grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
+        bd.exit()
         print(grupo)
         parametros.update({'curp': curp[0][0],'grado':grado[0][0], 'grupo':grupo})
         session['profile'] = parametros
@@ -152,9 +156,9 @@ def insertainfo():
         print(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
         datos.append(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
         print(datos)
-        #bd.insertarRegistro("alumnos",datos)
+        bd.insertarRegistro("alumnos",datos)
         bd.exit()
-        parametros.update({'curp':datos[0],'grado':datos[1], 'grupo':datos[2]})
+        parametros.update({'curp':datos[1],'grado':datos[2], 'grupo':request.form['grupo']})
         session['profile'] = parametros
         return redirect(url_for("index"))
 

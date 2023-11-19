@@ -108,7 +108,7 @@ body {
 }
 
 .navbar .menu-items {
-  display: flex;
+  display: absolute;
   background: #93d4ff;
 }
 

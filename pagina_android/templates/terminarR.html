@@ -160,7 +160,7 @@
         <input type="text" id="nombre" name="xd" value="{{parametros['email']}}" readonly>
         <br>
         <label for="curp">CURP:</label>
-        <input type="text" id="curp" name="curp" maxlength="18" pattern="[A-Z0-9]{18}" required>
+        <input type="text" id="curp" name="curp" maxlength="18" required>
         <br>
         
         <label for="Grado">Grado:</label>
@@ -205,7 +205,6 @@
 
   function validarFormulario() {
     var inputValor = document.getElementById('curp');
-    var regex = /^[A-Z0-9]{18}$/;
 
     var may = /[A-Z]/.test(inputValor);
     var num = /\d/.test(inputValor);

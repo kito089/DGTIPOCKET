@@ -161,6 +161,7 @@
         <br>
         <label for="curp">CURP:</label>
         <input type="text" id="curp" name="curp" required>
+        <input type="text" id="curp" name="curp" maxlength="18" pattern="[A-Z0-9]{18}" required>
         <br>
         
         <label for="Grado">Grado:</label>
@@ -202,6 +203,18 @@
         formulario.submit();
        
     }
+
+  function validarFormulario() {
+    var inputCodigo = document.getElementById('curp');
+    var regex = /^[A-Z0-9]{18}$/;
+
+    if (!regex.test(inputCodigo.value)) {
+      alert('El curp ingresado no cumple con los requisitos.');
+      return false;
+    }
+
+    return true;
+  }
 </script>
 
     

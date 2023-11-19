@@ -90,9 +90,9 @@ body {
 .navbar {
   width: 100%;
   box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
-  position: fixed ;
+  position: fixed;
   background: #ffffff;
-  z-index: 999; 
+  z-index: 3; 
 }
 
 .log{
@@ -101,7 +101,6 @@ body {
 }
 
 .nav-container {
-  position: fixed;
   display: absolute;
   justify-content: space-between;
   align-items: center;

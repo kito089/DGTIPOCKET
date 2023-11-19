@@ -127,9 +127,11 @@ def terinar():
     print(curp)
     print(grado)
     if len(grado)>0 and len(curp)>0:
+        bd = Coneccion()
         print("----------------- idgrupo")
         print(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no)))
         grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
+        bd.exit()
         print(grupo)
         parametros.update({'curp': curp[0][0],'grado':grado[0][0], 'grupo':grupo})
         session['profile'] = parametros

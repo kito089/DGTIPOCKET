@@ -91,7 +91,7 @@ body {
 .navbar {
   width: 100%;
   box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
-  position: fixed ;
+  position: absolute ;
   background: #ffffff;
   z-index: 2; 
 }
@@ -102,14 +102,14 @@ body {
 }
 
 .nav-container {
-  display: fixed;
+  display: absolute;
   justify-content: space-between;
   align-items: center;
   height: 62px;
 }
 
 .navbar .menu-items {
-  display: fixed;
+  display: absolute;
   background: #f1f1f1;
 }
 

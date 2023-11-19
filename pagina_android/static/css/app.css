@@ -109,7 +109,7 @@ body {
 }
 
 .navbar .menu-items {
-  padding-top: 200vh;
+  padding-top: 100%;
   display: absolute;
   background: #ffffff;
   position: fixed;

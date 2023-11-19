@@ -61,9 +61,9 @@ def index():
     print("session token")
     print(toks)
     
-    archivo = str(parametros['grado']) + str(parametros['grupo']) 
+    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
-    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos,archivo=archivo)
+    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
 @app.route('/login')
 def login():
@@ -125,8 +125,8 @@ def terinar():
     bd.exit()
     print("------------ grado y grupo")
     print(grado)
-    print(grupo)
-    if grado and grupo:
+    #print(grupo)
+    if grado:# and grupo:
         return redirect(url_for("index"))  
     return render_template('terminarR.html', parametros = parametros)
 

@@ -152,9 +152,9 @@ def insertainfo():
         print(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
         datos.append(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
         print(datos)
-        #bd.insertarRegistro("alumnos",datos)
+        bd.insertarRegistro("alumnos",datos)
         bd.exit()
-        parametros.update({'curp':datos[1],'grado':datos[2], 'grupo':datos[3]})
+        parametros.update({'curp':datos[1],'grado':datos[2], 'grupo':request.form['grupo']})
         session['profile'] = parametros
         return redirect(url_for("index"))
 

@@ -93,13 +93,13 @@ input[type="submit"]:hover {
             <div class="form-group">
 
                 <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="tituloavisos" ><br>
+                <input type="text" id="titulo" name="tituloavisos" required><br>
             
                 <label for="descripcion">Contenido:</label>
-                <textarea id="text" name="descripcionavisos" ></textarea><br>
+                <textarea id="text" name="descripcionavisos" required></textarea><br>
             
                 <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fechaavisos"><br>
+                <input type="date" id="fecha" name="fechaavisos" required><br>
             
                 <input type="submit" value="Guardar"> 
         </form>
@@ -110,16 +110,16 @@ input[type="submit"]:hover {
     <div class="container">
         <form action="/insnot/concursos" method="post">
                 <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="tituloconcursos" ><br>
+                <input type="text" id="titulo" name="tituloconcursos" required><br>
             
                 <label for="descripcion">Descripción:</label>
                 <textarea id="text" name="descripcionconcursos" requred></textarea><br>
             
                 <label for="img">URL de la imagen:</label>
-                <input type="text" id="img" name="imgconcursos"><br>
+                <input type="text" id="img" name="imgconcursos" required><br>
             
                 <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fechaconcursos"><br>
+                <input type="date" id="fecha" name="fechaconcursos" required><br>
             
                 <input type="submit" value="Guardar">
              </form>

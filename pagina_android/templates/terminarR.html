@@ -212,11 +212,11 @@
 
     // Verificar todas las condiciones
     if (may && num && car && min) {
-        alert('El input cumple con las condiciones.');
-        return false;        
+        return true;        
+    } else {
+        alert('El input no cumple con las condiciones especificadas.');
+        return false;
     }
-
-    return true;
   }
 </script>
 

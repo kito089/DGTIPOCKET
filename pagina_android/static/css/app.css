@@ -105,11 +105,12 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 62px;
+  position: flex;
   
 }
 
 .navbar .menu-items {
-  padding-top: 100%;
+  padding-top: 300hv;
   display: absolute;
   background: #ffffff;
   position: fixed;

@@ -33,6 +33,12 @@ a:hover {
 {% endblock %}
 
 {% block content %}
+    <h1>Calificaciones {{parametros['name']}}</h1>
+    
+    <!-- Mostrar el gráfico en la página -->
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico">
+    
+
     <a href="/boleta" class="enlace1">Boleta</a>
     <a href="#" class="enlace2">Historial academico</a>
 {% endblock %}

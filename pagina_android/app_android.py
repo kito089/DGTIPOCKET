@@ -330,8 +330,6 @@ def pruebas():
     parametros = dict(session)['profile']
     return render_template('prueba.html', parametros = parametros)
 
-
-
 def generate_plot():
     # Datos de ejemplo
     x = ['Fisica 2', 'CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL',
@@ -358,7 +356,6 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
-
 
 
 

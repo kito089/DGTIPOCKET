@@ -66,6 +66,11 @@ def index():
     print("session token")
     print(toks)
     
+    no = parametros['email'].replace("@cetis155.edu.mx","")
+    
+    session['profile'] = parametros.update({'correo':no})
+    
+    
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
@@ -125,12 +130,15 @@ def terinar():
     no = parametros['email'].replace("@cetis155.edu.mx","")
     print("-----------Control")
     print(no)
+    if not any(caracter.isdigit() for caracter in no):
+        return redirect(url_for("index"))
     curp =  bd.seleccion("alumnos", "curp","no_control = "+str(no))
     grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))
     bd.exit()
     print("------------ curp, grado y grupo")
     print(curp)
     print(grado)
+    
     if len(grado)>0 and len(curp)>0:
         bd = Coneccion()
         grupo = bd.seleccion("grupo","letra","idgrupo = "+str(bd.seleccion("alumnos","grupo_idgrupo","no_control = "+str(no))[0][0]))[0][0]
@@ -330,6 +338,7 @@ def pruebas():
     parametros = dict(session)['profile']
     return render_template('prueba.html', parametros = parametros)
 
+
 def generate_plot():
     # Datos de ejemplo
     x = ['Fisica 2', 'CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL',
@@ -341,10 +350,10 @@ def generate_plot():
     plt.plot(y)  # Solo necesitas los valores del eje y, no x
     plt.xlabel('Materias')
     plt.ylabel('Eje Y')
-    plt.title('Gráfico de ejemplo')
+    plt.title('Gráfico de ejemplo  Promedio')
 
-    # Personalizar etiquetas del eje x
-    plt.xticks(range(len(x)), x, rotation='vertical')
+    # Personalizar etiquetas del eje x con rotación diagonal
+    plt.xticks(range(len(x)), x, rotation=45, ha='right')
 
     # Guardar el gráfico en un BytesIO para mostrarlo en la página HTML
     img = BytesIO()
@@ -356,6 +365,7 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
+
 
 
 

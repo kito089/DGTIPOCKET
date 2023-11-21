@@ -2,7 +2,7 @@ from docxtpl import DocxTemplate
 from decimal import Decimal
 from docx import Document
 from weasyprint import HTML
-#import aspose.words as aw
+import aspose.words as aw
 import os
 
 def conv(tc,e,m):
@@ -53,8 +53,8 @@ def genboleta(datosC, datosG):
     print(nombre)
     doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
-# def word2pdf(dir):
-#     inputFile = dir+'.docx'
-#     outputFile = dir+'.pdf'
-#     doc = aw.Document(inputFile)
-#     doc.save(outputFile)
+def word2pdf(dir):
+    inputFile = dir+'.docx'
+    outputFile = dir+'.pdf'
+    doc = aw.Document(inputFile)
+    doc.save(outputFile)

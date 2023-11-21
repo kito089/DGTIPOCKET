@@ -52,10 +52,15 @@ h6 {
     text-align: right; /* Alinea el contenedor a la derecha */
     position: fixed;
 }
-.menu-btn {
-    
+.menu-btn-container {
     position: fixed;
-    position: relative;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+    padding: 20px;
+  }
+
+  .menu-btn {
     display: inline-block;
     background-color: #3498db;
     color: #fff;
@@ -67,12 +72,16 @@ h6 {
 
   .menu {
     display: none;
-    position: fixed;
-    top: 80px; /* Ajusta la distancia desde la parte superior según tus necesidades */
-    left: 50%; /* Ajusta la distancia desde la izquierda según tus necesidades */
+    position: absolute;
+    top: 40px;
+    right: 0;
     background-color: #3498db;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+  }
+
+  .menu.active {
+    display: block;
   }
 
   .menu a {
@@ -456,6 +465,13 @@ h6 {
     </div>
 </div>
 
+<script>
+    // JavaScript para agregar/eliminar la clase 'active' al hacer clic en el botón del menú
+    document.querySelector('.menu-btn').addEventListener('click', function() {
+        document.querySelector('.menu').classList.toggle('active');
+      });
+    </script>
+</script>
 
 
 {% endif %}

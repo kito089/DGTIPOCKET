@@ -17,32 +17,28 @@ iframe {
 
 
 {% block content %}
-<div id="miContenedor"></div>
+<div id="web-view-container"></div>
 
+<script>
+    // URL de la página web externa que quieres mostrar
+    var url = 'https://www.google.com';
 
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // URL de la página que deseas cargar
-            var url = 'https://google.google.com';
-
-            // Elemento donde se cargará el contenido
-            var contenedor = $('#miContenedor'); // Reemplaza 'miContenedor' con el ID de tu elemento
-
-            // Realiza la solicitud AJAX para obtener el contenido de la página
-            $.ajax({
-                url: url,
-                method: 'GET',
-                dataType: 'html',
-                success: function(data) {
-                    // Muestra el contenido en el elemento especificado
-                    contenedor.html(data);
-                },
-                error: function() {
-                    contenedor.html('Error al cargar la página.');
-                }
+    // Función para cargar el contenido de la página web externa y mostrarlo en tu página
+    function cargarWebView(url, contenedor) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                contenedor.innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error al cargar la página web:', error);
             });
-        });
-    </script>
+    }
+
+    // Obtén el contenedor donde deseas mostrar la página web
+    var contenedorWebView = document.getElementById('web-view-container');
+
+    // Llama a la función para cargar el contenido de la página web externa
+    cargarWebView(url, contenedorWebView);
+</script>
 {% endblock %}

@@ -254,9 +254,9 @@ def boleta():
     datosC = conv(tc,e,m)
 
     genboleta(datosC, datosG)
-    ruta_docx = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.docx'.format(nombr))
+    ruta_docx = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.docx'.format(nombr[3][0]+" "+nombr[3][1]))
     word2pdf(ruta_docx)
-    ruta_pdf = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.pdf'.format(nombr))
+    ruta_pdf = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.pdf'.format(nombr[3][0]+" "+nombr[3][1]))
     #ruta_pdf = os.path.join(os.path.dirname(__file__), pdf_bol)
 
     # Usa send_file para enviar el archivo PDF al navegador para su descarga

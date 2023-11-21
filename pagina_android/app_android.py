@@ -254,18 +254,18 @@ def boleta():
     datosC = conv(tc,e,m)
 
     genboleta(datosC, datosG)
-    ruta_docx = os.path.expanduser('~/DGTIPOCKET/editar_word/{0}.docx'.format(nombr[3][0]+"_"+nombr[3][1]))
-    word2pdf(ruta_docx)
-    ruta_pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/{0}.pdf'.format(nombr[3][0]+"_"+nombr[3][1]))
-    #ruta_pdf = os.path.join(os.path.dirname(__file__), pdf_bol)
+    #ruta_docx = os.path.expanduser('~/DGTIPOCKET/editar_word/{0}.docx'.format(nombr[3][0]+"_"+nombr[3][1]))
+    # word2pdf(ruta_docx)
+    # ruta_pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/{0}.pdf'.format(nombr[3][0]+"_"+nombr[3][1]))
+    # #ruta_pdf = os.path.join(os.path.dirname(__file__), pdf_bol)
 
-    # Usa send_file para enviar el archivo PDF al navegador para su descarga
-    return send_file(
-        ruta_pdf,
-        as_attachment=True,
-        download_name='{0}.pdf'.format(nombr),
-        mimetype='application/pdf'
-    )
+    # # Usa send_file para enviar el archivo PDF al navegador para su descarga
+    # return send_file(
+    #     ruta_pdf,
+    #     as_attachment=True,
+    #     download_name='{0}.pdf'.format(nombr),
+    #     mimetype='application/pdf'
+    # )
 
 
 @app.route('/cuadernillo')

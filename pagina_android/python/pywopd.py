@@ -2,6 +2,7 @@ from docxtpl import DocxTemplate
 from docx2pdf import convert
 from decimal import Decimal
 import os
+from flask import Flask, send_file
 
 def conv(tc,e,m):
     tcl = [list(tupla) for tupla in tc]
@@ -49,6 +50,7 @@ def genboleta(datosC, datosG):
         
     doc.render(context)
     doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
+    return send_file(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_"))+'.docx', as_attachment=True)
 
 def word2pdf(dir):
     inputFile = dir+'.docx'

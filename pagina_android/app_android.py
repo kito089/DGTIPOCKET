@@ -66,9 +66,6 @@ def index():
     print("session token")
     print(toks)
     
-    no = parametros['email'].replace("@cetis155.edu.mx","")
-    
-    session['profile'] = parametros.update({'correo':no})
     
     
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 

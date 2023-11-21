@@ -49,9 +49,11 @@ h6 {
     margin-bottom: 10px; /* Espacio inferior */
   }
 
-
-.menu-btn {
+.contenedor{
     text-align: right; /* Alinea el contenedor a la derecha */
+}
+.menu-btn {
+    
     position: fixed;
     position: relative;
     display: inline-block;
@@ -67,7 +69,7 @@ h6 {
     display: none;
     position: fixed;
     top: 80px; /* Ajusta la distancia desde la parte superior según tus necesidades */
-    left: 50%; /* Ajusta la distancia desde la izquierda según tus necesidades */
+    left: 70%; /* Ajusta la distancia desde la izquierda según tus necesidades */
     background-color: #3498db;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
@@ -97,27 +99,28 @@ h6 {
 {% if "155" in parametros['hd']%}
 
 
-
-<!-- Menú desplegable -->
-<div class="menu-btn">
-    Buscar
-    <div class="menu">
-        <a href="#direccion">Direccion</a>
-        <a href="#subdireccion">subdireccion</a>
-        <a href="#serviciosdocentes">serviciosdocentes</a>
-        <a href="#encargadoslavoratorios">encargadoslavoratorios</a>
-        <a href="#vinculacion">vinculacion</a>
-        <a href="#servicioescolar">servicioescolar</a>
-        <a href="#controlescolar">controlescolar</a>
-        <a href="#orientacioneducativa">orientacioneducativa</a>
-        <a href="#trabajosocial">trabajosocial</a>
-        <a href="#serviciosadministrativos">serviciosadministrativos</a>
-        <a href="#prefectura">prefectura</a>
-        <a href="#">recursosmateriales</a>
-        <a href="#recursosfinancieros">recursosfinancieros</a>
-        <a href="#planificacion">planificacion</a>
+<div class="contenedor">
+    <!-- Menú desplegable -->
+    <div class="menu-btn">
+        Buscar
+        <div class="menu">
+            <a href="#direccion">Direccion</a>
+            <a href="#subdireccion">subdireccion</a>
+            <a href="#serviciosdocentes">serviciosdocentes</a>
+            <a href="#encargadoslavoratorios">encargadoslavoratorios</a>
+            <a href="#vinculacion">vinculacion</a>
+            <a href="#servicioescolar">servicioescolar</a>
+            <a href="#controlescolar">controlescolar</a>
+            <a href="#orientacioneducativa">orientacioneducativa</a>
+            <a href="#trabajosocial">trabajosocial</a>
+            <a href="#serviciosadministrativos">serviciosadministrativos</a>
+            <a href="#prefectura">prefectura</a>
+            <a href="#">recursosmateriales</a>
+            <a href="#recursosfinancieros">recursosfinancieros</a>
+            <a href="#planificacion">planificacion</a>
+        </div>
     </div>
-  </div>
+    </div>
 </div>
 
 

@@ -17,16 +17,32 @@ iframe {
 
 
 {% block content %}
-<div id="google-content"></div>
+<div id="miContenedor"></div>
 
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        // Utilizamos la API Fetch para obtener el contenido de Google
-        fetch('https://www.classroom.com')
-            .then(response => response.text())
-            .then(data => {
-                // Insertamos el contenido en un div en nuestra página
-                document.getElementById('google-content').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar el contenido:', error));
+        $(document).ready(function() {
+            // URL de la página que deseas cargar
+            var url = 'https://www.classroom.com';
+
+            // Elemento donde se cargará el contenido
+            var contenedor = $('#miContenedor'); // Reemplaza 'miContenedor' con el ID de tu elemento
+
+            // Realiza la solicitud AJAX para obtener el contenido de la página
+            $.ajax({
+                url: url,
+                method: 'GET',
+                dataType: 'html',
+                success: function(data) {
+                    // Muestra el contenido en el elemento especificado
+                    contenedor.html(data);
+                },
+                error: function() {
+                    contenedor.html('Error al cargar la página.');
+                }
+            });
+        });
     </script>
 {% endblock %}

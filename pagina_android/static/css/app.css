@@ -376,8 +376,7 @@ h1{
   width: 100vh;
 }
 #miDiv {
-  width: 200px; /* Ancho deseado */
-  height: 10%; /* Altura deseada */
+  height:25%; /* Altura deseada */
 }
 
 

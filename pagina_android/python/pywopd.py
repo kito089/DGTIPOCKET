@@ -1,6 +1,7 @@
 from docxtpl import DocxTemplate
 from decimal import Decimal
-import subprocess
+from docx import Document
+from PIL import Image, ImageDraw, ImageFont
 import os
 
 def conv(tc,e,m):
@@ -54,5 +55,17 @@ def genboleta(datosC, datosG):
 def word2pdf(dir):
     inputFile = dir+'.docx'
     outputFile = dir+'.pdf'
-    comando = ['unoconv', '--output', outputFile, '--format', 'pdf', inputFile]
-    subprocess.run(comando)
+    # Leer el archivo DOCX
+    doc = Document(inputFile)
+
+    for i, para in enumerate(doc.paragraphs):
+        # Crear una nueva imagen para cada párrafo
+        img = Image.new('RGB', (800, 600), color='white')
+        draw = ImageDraw.Draw(img)
+        font = ImageFont.load_default()
+
+        # Escribir el texto del párrafo en la imagen
+        draw.text((10, 10), para.text, font=font, fill='black')
+
+        # Guardar la imagen como PNG
+        img.save(f'{dir}_{i + 1}.png')

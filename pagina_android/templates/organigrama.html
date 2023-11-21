@@ -55,7 +55,7 @@ h6 {
 .menu-btn-container {
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: 60%;
     text-align: right;
     padding: 20px;
   }
@@ -465,13 +465,23 @@ h6 {
     </div>
 </div>
 
-<script>
-    // JavaScript para agregar/eliminar la clase 'active' al hacer clic en el botón del menú
-    document.querySelector('.menu-btn').addEventListener('click', function() {
-        document.querySelector('.menu').classList.toggle('active');
-      });
-    </script>
-</script>
+
+    <script>
+        var menuBtn = document.querySelector('.menu-btn');
+        var menu = document.querySelector('.menu');
+    
+        // Abrir o cerrar el menú al hacer clic en el botón
+        menuBtn.addEventListener('click', function(event) {
+          menu.classList.toggle('active');
+          event.stopPropagation(); // Evitar que el clic se propague al documento
+        });
+    
+        // Cerrar el menú al hacer clic en cualquier parte del documento
+        document.addEventListener('click', function() {
+          menu.classList.remove('active');
+        });
+      </script>
+
 
 
 {% endif %}

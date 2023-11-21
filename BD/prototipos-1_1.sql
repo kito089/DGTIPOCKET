@@ -478,11 +478,7 @@ CREATE PROCEDURE `boleta_m` (in alu int)
 BEGIN
 	select m.uac, m.nombre 
 	from modulos m 
-	where semestre = 
-			(select grado from alumnos where idalumnos = alu) and
-		especialidad_idespecialidad = 
-			(select especialidad_idespecialidad from grupo where idgrupo = 
-			(select grupo_idgrupo from alumnos where idalumnos = alu))
+	where semestre = (select grado from alumnos where idalumnos = alu) and especialidad_idespecialidad = (select especialidad_idespecialidad from grupo where idgrupo = (select grupo_idgrupo from alumnos where idalumnos = alu))
 	group by m.uac;
 END$$
 
@@ -508,6 +504,11 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+select g.turno, e.nombre from grupo g, especialidad e
+    where idespecialidad = especialiad_idespecialidad and
+    idgrupo = 
+    (select grupo_idgrupo from alumnos where no_control = '21301061550046');
 
 COMMIT;
 

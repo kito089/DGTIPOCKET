@@ -1,6 +1,7 @@
 from docxtpl import DocxTemplate
 from docx2pdf import convert
 from decimal import Decimal
+import os
 
 def conv(tc,e,m):
     tcl = [list(tupla) for tupla in tc]
@@ -25,8 +26,7 @@ def conv(tc,e,m):
 
 
 def boleta(datosC, datosG):
-    doc = DocxTemplate('C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx')
-    #doc = DocxTemplate('C:/Users/jezar/Downloads/reportTmpl.docx')
+    doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
 
     nombre=datosG[3][0]+" "+datosG[3][1]
 
@@ -48,7 +48,7 @@ def boleta(datosC, datosG):
     }
         
     doc.render(context)
-    doc.save("C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/"+nombre+'.docx')
+    doc.save(os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/'+nombre+'.docx'))
 
 def word2pdf(dir):
     inputFile = dir+'.docx'

@@ -1,4 +1,4 @@
-from flask import Flask, render_template,redirect,url_for, request, session
+from flask import Flask, render_template,redirect,url_for, request, session, send_file
 from authlib.integrations.flask_client import OAuth
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
@@ -9,6 +9,7 @@ import google.auth.exceptions
 import os
 import os.path
 from python.bd import *
+from python.pywopd import *
 import datetime
 import json
 
@@ -186,6 +187,7 @@ def clubs():
 def funciones():
     parametros = dict(session)['profile']
     return render_template('funcionesapp.html', parametros = parametros)
+
 @app.route('/organigrama')
 def organigrama():
     parametros = dict(session)['profile']
@@ -218,6 +220,53 @@ def agenda():
 def historial():
     parametros = dict(session)['profile']
     return render_template('historial.html', parametros = parametros)
+
+@app.route('/boleta')
+def boleta():
+    parametros = dict(session)['profile']
+    nombre = parametros["name"]
+    if "�" in nombre:
+        nombre = nombre.replace("�","Ñ")
+    nom = nombre.split(" ")
+    nombr = []
+    nombr.append(nom[-2])
+    nombr.append(nom[-1])
+    if len(nom) == 4:
+        nombr.append(nom[-4])
+        nombr.append(nom[-3])
+    else:
+        nombr.append(nom[-3])
+
+    bd = Coneccion()
+
+    turesp = bd.llamar("turesp({0})".format(parametros["email"].replace("@cetis155.edu.mx")))
+
+    datosG = [parametros["email"],parametros["grado"]+parametros["grupo"],turesp[0][0],nombr,turesp[0][1]]
+
+    ida = bd.seleccion("alumnos","idalumnos","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx")))
+
+    tc = bd.llamar("boleta_tc({0})".format(ida[0][0]))
+    m = bd.llamar("boleta_m({0})".format(ida[0][0]))
+    e = bd.llamar("boleta_e({0})".format(ida[0][0]))
+
+    bd.exit()
+
+    datosC = conv(tc,e,m)
+
+    boleta(datosC, datosG)
+    ruta_docx = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.docx'.format(nombr))
+    word2pdf(ruta_docx)
+    ruta_pdf = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.pdf'.format(nombr))
+    #ruta_pdf = os.path.join(os.path.dirname(__file__), pdf_bol)
+
+    # Usa send_file para enviar el archivo PDF al navegador para su descarga
+    return send_file(
+        ruta_pdf,
+        as_attachment=True,
+        download_name='{0}.pdf'.format(nombr),
+        mimetype='application/pdf'
+    )
+
 
 @app.route('/cuadernillo')
 def cuadernillo():

@@ -4,7 +4,7 @@
 INICIO
 {% endblock %}
 {% block style %}
-a {
+.a {
     display: inline-block;
     text-decoration: none;
     padding: 10px 20px;
@@ -31,9 +31,7 @@ a:hover {
 
 
 
-h1 {
-    color: #333;
-}
+
 
 .grafico-img {
     width: 80%;
@@ -54,6 +52,6 @@ h1 {
     <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico">
 
 
-    <a href="/boleta" class="enlace1">Boleta</a>
-    <a href="/pagos" class="enlace2">Historial academico</a>
+    <a href="/boleta" class="enlace1 a">Boleta</a>
+    <a href="/pagos" class="enlace2 a">Historial academico</a>
 {% endblock %}

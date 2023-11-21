@@ -263,8 +263,6 @@ def boleta():
 
     genboleta(datosC, datosG)
     archivo = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
-
-    word2pdf(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]))
     
     return send_file(archivo, as_attachment=True)
     #ruta_docx = os.path.expanduser('~/DGTIPOCKET/editar_word/{0}.docx'.format(nombr[3][0]+"_"+nombr[3][1]))

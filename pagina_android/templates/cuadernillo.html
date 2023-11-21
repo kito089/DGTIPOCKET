@@ -7,11 +7,16 @@ INICIO
 
 
 {% block style %}
-
+iframe {
+    width: 100%;
+    height: 100vh; /* 100% de la altura de la ventana visible */
+    border: 0; /* Eliminar el borde del iframe */
+  }
 {% endblock %}
 
 
 
 {% block content %}
+<iframe src="https://classroom.google.com/u/1/calendar/2023-11-13/course/all" frameborder="0"></iframe>
 
 {% endblock %}

@@ -17,5 +17,16 @@ iframe {
 
 
 {% block content %}
-<iframe src="https://google.google.com" frameborder="0"></iframe>
+<div id="google-content"></div>
+
+    <script>
+        // Utilizamos la API Fetch para obtener el contenido de Google
+        fetch('https://www.classroom.com')
+            .then(response => response.text())
+            .then(data => {
+                // Insertamos el contenido en un div en nuestra página
+                document.getElementById('google-content').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar el contenido:', error));
+    </script>
 {% endblock %}

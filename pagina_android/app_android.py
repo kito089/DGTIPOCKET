@@ -253,7 +253,7 @@ def boleta():
 
     datosC = conv(tc,e,m)
 
-    boleta(datosC, datosG)
+    genboleta(datosC, datosG)
     ruta_docx = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.docx'.format(nombr))
     word2pdf(ruta_docx)
     ruta_pdf = os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/{0}.pdf'.format(nombr))

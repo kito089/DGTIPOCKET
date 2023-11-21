@@ -25,7 +25,7 @@ def conv(tc,e,m):
     return datosC
 
 
-def boleta(datosC, datosG):
+def genboleta(datosC, datosG):
     doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
 
     nombre=datosG[3][0]+" "+datosG[3][1]

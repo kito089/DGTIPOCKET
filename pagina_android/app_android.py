@@ -13,6 +13,8 @@ from python.pywopd import *
 import datetime
 import json
 import matplotlib.pyplot as plt
+
+
 from io import BytesIO
 import base64
 # decorator for routes that should be accessible only by logged in users
@@ -330,8 +332,8 @@ def pruebas():
 
 def generate_plot():
     # Datos de ejemplo
-    x = [1, 2, 3, 4, 5]
-    y = [2, 4, 6, 8, 10]
+    x = ['Fisica 2','CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL' ,'INGLÉS V', 'CONSTRUYE BASES DE DATOS PARA APLICACIONES WEB','DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
+    y = [5, 7, 9, 8, 10,9]
 
     # Crear el gráfico
     plt.plot(x, y)

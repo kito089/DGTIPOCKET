@@ -30,6 +30,21 @@ a:hover {
 }
 
 
+
+h1 {
+    color: #333;
+}
+
+.grafico-img {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ddd; /* Añadir un borde */
+    border-radius: 8px; /* Añadir esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra suave */
+}
+
+
 {% endblock %}
 
 {% block content %}
@@ -37,8 +52,8 @@ a:hover {
     
     <!-- Mostrar el gráfico en la página -->
     <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico">
-    
+
 
     <a href="/boleta" class="enlace1">Boleta</a>
-    <a href="#" class="enlace2">Historial academico</a>
+    <a href="/pagos" class="enlace2">Historial academico</a>
 {% endblock %}

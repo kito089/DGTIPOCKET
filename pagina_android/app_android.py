@@ -219,6 +219,11 @@ def historial():
     parametros = dict(session)['profile']
     return render_template('historial.html', parametros = parametros)
 
+@app.route('/cuadernillo')
+def cuadernillo():
+    parametros = dict(session)['profile']
+    return render_template('cuadernillo.html', parametros = parametros)
+
 @app.route('/noticias')                            #pendiente css
 def noticias():
     bd = Coneccion()

@@ -1,9 +1,33 @@
 from docxtpl import DocxTemplate
 from docx2pdf import convert
+from decimal import Decimal
+import os
+from flask import Flask, send_file
 
-def boleta(datosC, datosG):
-    doc = DocxTemplate('C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx')
-    #doc = DocxTemplate('C:/Users/jezar/Downloads/reportTmpl.docx')
+def conv(tc,e,m):
+    tcl = [list(tupla) for tupla in tc]
+    ml = [list(tupla) for tupla in m]
+    el = [list(tupla) for tupla in e]
+    for i in range(len(tcl)):
+        for j in range(len(tcl[i])):
+            if tcl[i][j] is None:
+                tcl[i][j] = ""
+    for i in range(len(ml)):
+        for j in range(len(ml[i])):
+            if ml[i][j] is None:
+                ml[i][j] = ""
+    for i in range(len(el)):
+        for j in range(len(el[i])):
+            if el[i][j] is None:
+                el[i][j] = ""
+    tcl = [[int(float(str(elemento))) if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
+    el = [[int(float(str(elemento))) if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
+    datosC = tcl+ml+el
+    return datosC
+
+
+def genboleta(datosC, datosG):
+    doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
 
     nombre=datosG[3][0]+" "+datosG[3][1]
 
@@ -25,7 +49,8 @@ def boleta(datosC, datosG):
     }
         
     doc.render(context)
-    doc.save("C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/"+nombre+'.docx')
+    print(nombre)
+    doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
 def word2pdf(dir):
     inputFile = dir+'.docx'

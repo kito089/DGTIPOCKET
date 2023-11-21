@@ -144,9 +144,9 @@ DEFAULT CHARACTER SET = latin1 COLLATE latin1_swedish_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `evaluacion_e` (
   `idevaluacion_e` INT(11) NOT NULL AUTO_INCREMENT,
-  `parcial1` DECIMAL(2,2) NULL DEFAULT NULL,
-  `parcial2` DECIMAL(2,2) NULL DEFAULT NULL,
-  `parcial3` DECIMAL(2,2) NULL DEFAULT NULL,
+  `parcial1` DECIMAL(4,2) NULL DEFAULT NULL,
+  `parcial2` DECIMAL(4,2) NULL DEFAULT NULL,
+  `parcial3` DECIMAL(4,2) NULL DEFAULT NULL,
   `asistencia1` INT(11) NULL DEFAULT NULL,
   `asistencia2` INT(11) NULL DEFAULT NULL,
   `asistencia3` INT(11) NULL DEFAULT NULL,
@@ -188,9 +188,9 @@ DEFAULT CHARACTER SET = latin1 COLLATE latin1_swedish_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `evaluacion_tc` (
   `idevaluacion_tc` INT(11) NOT NULL AUTO_INCREMENT,
-  `parcial1` DECIMAL(2,2) NULL DEFAULT NULL,
-  `parcial2` DECIMAL(2,2) NULL DEFAULT NULL,
-  `parcial3` DECIMAL(2,2) NULL DEFAULT NULL,
+  `parcial1` DECIMAL(4,2) NULL DEFAULT NULL,
+  `parcial2` DECIMAL(4,2) NULL DEFAULT NULL,
+  `parcial3` DECIMAL(4,2) NULL DEFAULT NULL,
   `asistencia1` INT(11) NULL DEFAULT NULL,
   `asistencia2` INT(11) NULL DEFAULT NULL,
   `asistencia3` INT(11) NULL DEFAULT NULL,
@@ -450,6 +450,65 @@ INSERT INTO `materias` (`idmaterias`, `uac`, `nombre`, `horas`, `semestre`) VALU
 INSERT INTO `materias` (`idmaterias`, `uac`, `nombre`, `horas`, `semestre`) VALUES (95, 'P-611-2023-6-7', 'Temas de física', 3, 6);
 INSERT INTO `materias` (`idmaterias`, `uac`, `nombre`, `horas`, `semestre`) VALUES (96, 'P-611-2023-6-8', 'Dibujo técnico', 3, 6);
 INSERT INTO `materias` (`idmaterias`, `uac`, `nombre`, `horas`, `semestre`) VALUES (97, 'P-611-2023-6-9', 'Matemáticas', 3, 6);
+
+INSERT INTO `alumnos` VALUES (1,'21301061550046','ZARJ061110HASRDLA3','5',1),(2,'21301061550024','MODH060220HASNRRA5','5',1);
+INSERT INTO `noticias` VALUES (1,'Ea ','Ea ','Arriba kicks fest ','2023-11-19');
+INSERT INTO `evaluacion_tc` VALUES (1,10.00,10.00,NULL,20,20,NULL,19,1),(2,10.00,10.00,NULL,20,20,NULL,20,1),(3,10.00,10.00,NULL,25,25,NULL,21,1),(4,10.00,10.00,NULL,25,25,NULL,22,1),(5,9.00,9.00,NULL,15,15,NULL,19,2),(6,9.00,9.00,NULL,15,15,NULL,20,2),(7,9.00,9.00,NULL,20,20,NULL,21,2),(8,9.00,9.00,NULL,20,20,NULL,22,2);
+INSERT INTO `evaluacion_e` VALUES (1,10.00,10.00,NULL,30,30,NULL,9,1),(2,10.00,10.00,NULL,30,30,NULL,10,1),(3,9.00,9.00,NULL,30,30,NULL,9,2),(4,9.00,9.00,NULL,30,30,NULL,10,2);
+INSERT INTO `concursos` VALUES (1,'2da COPA UTMA','e-SPORTS','https://web.whatsapp.com/f18e64f5-6049-49cb-ac28-9e0f971309a1','2023-11-17'),(2,'2da COPA UTMA','e-SPORTS','blob:https://web.whatsapp.com/f18e64f5-6049-49cb-ac28-9e0f971309a1','2023-11-17'),(3,'2da COPA UTMA','','blob:https://web.whatsapp.com/f18e64f5-6049-49cb-ac28-9e0f971309a1','2023-11-17'),(4,'2da COPA UTMA.','','https://drive.google.com/file/d/1yI7PPHwsTrdKnAhOpl3wVIg6lHQyiV3n/view?usp=drive_link','2023-11-17');
+INSERT INTO `avisos` VALUES (1,'Kicka fest aviso','NUEVA KICKS FEST 19 NOVIEMBRE ALGO BIEN ','2023-11-19'),(2,'CREDENCIAL DE ELECTOR','SE LES INFORMA QUE EL PRÓXIMO MARTES 21 DE NOVIEMBRE, ESTARÁ EL PERSONAL DEL INE, PARA REALIZAR LA ENTREGA DE LAS CREDENCIALES DE ELECTOR QUE SE TRAMITARON EN SU VISITA DE HACE UNOS DÍAS, EN EL MISMO LUGAR, EN UN HORARIO DE 10:00 A 17:00 HRS.\r\nATENTAMENTE\r\nDEPTO. DE VINCULACIÓN','2023-11-17');
+
+DELIMITER $$
+USE `prototipos`$$
+CREATE PROCEDURE `boleta_tc` (in alu int)
+BEGIN
+	select tc.uac, tc.nombre, etc.parcial1, etc.parcial2, etc.parcial3, 
+    etc.asistencia1, etc.asistencia2, etc.asistencia3
+	from materias tc, evaluacion_tc etc
+	where etc.alumnos_idalumnos = alu and 
+    etc.materias_idmaterias = tc.idmaterias and 
+    tc.semestre = (select grado from alumnos where idalumnos = alu);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `prototipos`$$
+CREATE PROCEDURE `boleta_m` (in alu int)
+BEGIN
+	select m.uac, m.nombre 
+	from modulos m 
+	where semestre = (select grado from alumnos where idalumnos = alu) and especialidad_idespecialidad = (select especialidad_idespecialidad from grupo where idgrupo = (select grupo_idgrupo from alumnos where idalumnos = alu))
+	group by m.uac;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `prototipos`$$
+CREATE PROCEDURE `boleta_e` (in alu int)
+BEGIN
+	select sb.uac, sb.nombre, ee.parcial1, ee.parcial2, ee.parcial3, 
+    ee.asistencia1, ee.asistencia2, ee.asistencia3
+	from submodulos sb, evaluacion_e ee
+	where 
+    ee.alumnos_idalumnos = alu and 
+	ee.submodulos_idsubmodulos = sb.idsubmodulos 
+	and sb.modulos_idmodulos = 
+		(select idmodulos from modulos where semestre = 
+		(select grado from alumnos where idalumnos = alu) and
+		especialidad_idespecialidad = 
+			(select especialidad_idespecialidad from grupo where idgrupo = 
+			(select grupo_idgrupo from alumnos where idalumnos = alu)));
+
+END$$
+
+DELIMITER ;
+
+select g.turno, e.nombre from grupo g, especialidad e
+    where idespecialidad = especialiad_idespecialidad and
+    idgrupo = 
+    (select grupo_idgrupo from alumnos where no_control = '21301061550046');
 
 COMMIT;
 

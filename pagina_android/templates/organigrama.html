@@ -71,10 +71,12 @@ h6 {
     background-color: #3498db;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    overflow: hidden; /* Permite el desplazamiento interno si el contenido es más grande */
+    overflow: auto; /* Permite el desplazamiento interno si el contenido es más grande */
 
   }
-  
+  .menu::-webkit-scrollbar {
+    width: 0.5em;
+  }
 .menu.active {
   display: block;
 }

@@ -1,6 +1,6 @@
 from docxtpl import DocxTemplate
-from docx2pdf import convert
 from decimal import Decimal
+import unoconv
 import os
 from flask import Flask, send_file
 
@@ -56,4 +56,4 @@ def word2pdf(dir):
     inputFile = dir+'.docx'
     outputFile = dir+'.pdf'
 
-    convert(inputFile, outputFile)
+    unoconv.convert(inputFile, outputFile)

@@ -239,11 +239,11 @@ def boleta():
 
     bd = Coneccion()
 
-    turesp = bd.llamar("turesp({0})".format(parametros["email"].replace("@cetis155.edu.mx")))
+    turesp = bd.llamar("turesp({0})".format(parametros["email"].replace("@cetis155.edu.mx","")))
 
     datosG = [parametros["email"],parametros["grado"]+parametros["grupo"],turesp[0][0],nombr,turesp[0][1]]
 
-    ida = bd.seleccion("alumnos","idalumnos","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx")))
+    ida = bd.seleccion("alumnos","idalumnos","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
 
     tc = bd.llamar("boleta_tc({0})".format(ida[0][0]))
     m = bd.llamar("boleta_m({0})".format(ida[0][0]))

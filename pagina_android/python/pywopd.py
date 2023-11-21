@@ -1,39 +1,7 @@
 from docxtpl import DocxTemplate
 from decimal import Decimal
-from docx import Document
-import comtypes.client
+import pypandoc
 import os
-import subprocess
-
-class ConvertDoc2Pdf:
-    def __init__(self, input_file):
-        self.input_file = input_file
-        
-    def init_word(self):
-        powerpoint = comtypes.client.CreateObject("Word.Application")
-        return powerpoint
-
-    def word_to_pdf(self, doc, inputFileName, formatType = 17):
-        deck = doc.Documents.Open(inputFileName)
-        outputFileName = inputFileName[:-5] + '.pdf'
-        deck.SaveAs(outputFileName, formatType) # formatType = 17 for word to pdf
-        deck.Close()
-        return outputFileName
-
-    def pdf_to_png(self, file):
-        PDFTOPPMPATH = r"poppler-0.67.0\bin\pdftoppm.exe"
-        PDFFILE = file
-
-        subprocess.Popen('"%s" -png %s %s' % (PDFTOPPMPATH, PDFFILE, PDFFILE[:-4]))
-
-    def convert(self):
-        comtypes.CoInitialize()
-        word_doc = self.init_word()
-        pdf = self.word_to_pdf(word_doc, self.input_file)
-        word_doc.Quit()
-        # comtypes.CoUninitialize()
-
-        self.pdf_to_png(pdf)    
 
 def conv(tc,e,m):
     tcl = [list(tupla) for tupla in tc]
@@ -82,3 +50,13 @@ def genboleta(datosC, datosG):
     doc.render(context)
     print(nombre)
     doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
+
+def word2pdf(dir):
+    inputFile = dir+'.docx'
+    outputFile = dir+'.pdf'
+    # Leer el archivo DOCX
+    try:
+        pypandoc.convert_file(inputFile, 'pdf', outputfile=outputFile)
+        print(f'Successfully converted {inputFile} to {outputFile}')
+    except Exception as e:
+        print(f'Error converting {inputFile} to PDF: {e}')

@@ -13,7 +13,7 @@ INICIO
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease;
-    margin-top:20px;
+    margin-top:50px;
 }
 
 .card:hover {
@@ -40,12 +40,76 @@ INICIO
         max-width: 100%;
     }
 }
+
+
+
+/* Estilo básico para el botón */
+button {
+  position: fixed;
+  top: 10px; /* Ajusta la posición vertical según sea necesario */
+  left: 10px; /* Ajusta la posición horizontal según sea necesario */
+  z-index: 2;
+}
+
+/* Estilo básico para el menú desplegable */
+#menu {
+  display: none;
+  position: fixed;
+  top: 50px; /* Ajusta la posición vertical según sea necesario */
+  left: 10px; /* Ajusta la posición horizontal según sea necesario */
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+#menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+#menu a:hover {
+  background-color: #f1f1f1;
+}
+
+
 {% endblock %}
 
 
 {% block content %}
 
 {% if "155" in parametros['hd']%}
+
+<!-- Botón que activa el menú -->
+<button onclick="toggleMenu()">Mostrar Menú</button>
+
+<!-- Menú desplegable -->
+<div id="menu">
+  <a href="#direccion">Direccion</a>
+  <a href="#subdireccion">subdireccion</a>
+  <a href="#serviciosdocentes">serviciosdocentes</a>
+  <a href="#encargadoslavoratorios">encargadoslavoratorios</a>
+  <a href="#vinculacion">vinculacion</a>
+  <a href="#servicioescolar">servicioescolar</a>
+  <a href="#controlescolar">controlescolar</a>
+  <a href="#orientacioneducativa">orientacioneducativa</a>
+  <a href="#trabajosocial">trabajosocial</a>
+  <a href="#serviciosadministrativos">serviciosadministrativos</a>
+  <a href="#prefectura">prefectura</a>
+  <a href="#">recursosmateriales</a>
+  <a href="#recursosfinancieros">recursosfinancieros</a>
+  <a href="#planificacion">planificacion</a>
+
+
+
+
+
+
+</div>
+
+
+
 
 <div class="card" id="direccion">
     <div class="card-body">
@@ -187,7 +251,7 @@ INICIO
 </div>
 
 
-<div class="card" id="trabajosocial">
+<div class="card" id="orientacioneducativa">
     <div class="card-body">
         <h2 class="h2">ORIENTADORA EDUCATIVA T.M. </h2>
         <p><strong>Nombre:</strong> GUERRERO RAMOS MARTHA GIANINA </p>
@@ -356,6 +420,19 @@ INICIO
         
     </div>
 </div>
+
+
+<script>
+    // Función para mostrar u ocultar el menú
+    function toggleMenu() {
+      var menu = document.getElementById("menu");
+      if (menu.style.display === "none") {
+        menu.style.display = "block";
+      } else {
+        menu.style.display = "none";
+      }
+    }
+  </script>
 {% endif %}
 
 

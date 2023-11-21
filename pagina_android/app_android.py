@@ -127,8 +127,6 @@ def terinar():
     no = parametros['email'].replace("@cetis155.edu.mx","")
     print("-----------Control")
     print(no)
-    if not any(caracter.isdigit() for caracter in no):
-        return redirect(url_for("index"))
     curp =  bd.seleccion("alumnos", "curp","no_control = "+str(no))
     grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))
     bd.exit()

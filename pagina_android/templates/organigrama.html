@@ -43,36 +43,36 @@ h6 {
 
   }
 
-
-.menu-btn-container {
-  position: fixed;
-  top: 60px;
-  right: 40px; /* Ajusta la distancia desde la derecha según tus necesidades */
-  text-align: right;
-  padding: 20px;
-}
-
-.menu-btn {
-  display: inline-block;
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.menu {
-  display: none;
-  position: absolute;
-  height:100vh;
-  top: 20px;
-  right: 0;
-  background-color: #3498db;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-}
-
+  .menu-btn-container {
+    position: fixed;
+    top: 60px;
+    right: 40px; /* Ajusta la distancia desde la derecha según tus necesidades */
+    text-align: right;
+    padding: 20px;
+    height: 100vh; /* Añade esta línea para que tenga el alto de la pantalla */
+  }
+  
+  .menu-btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .menu {
+    display: none;
+    position: absolute;
+    height: 100vh; /* Mantiene el alto completo de la pantalla */
+    top: 20px;
+    right: 0;
+    background-color: #3498db;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+  }
+  
 .menu.active {
   display: block;
 }

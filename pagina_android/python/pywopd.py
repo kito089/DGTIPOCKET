@@ -48,7 +48,7 @@ def genboleta(datosC, datosG):
     }
         
     doc.render(context)
-    doc.save(os.path.expanduser('~/DGTIPOCKET/pagina_android/static/boletas/'+nombre.replace(" ","_")+'.docx'))
+    doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
 def word2pdf(dir):
     inputFile = dir+'.docx'

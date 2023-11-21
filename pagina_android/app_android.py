@@ -12,7 +12,9 @@ from python.bd import *
 from python.pywopd import *
 import datetime
 import json
-
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 # decorator for routes that should be accessible only by logged in users
 from python.funciones_auth import login_required
 
@@ -218,8 +220,9 @@ def agenda():
 
 @app.route('/historial')
 def historial():
+    plot_url = generate_plot()
     parametros = dict(session)['profile']
-    return render_template('historial.html', parametros = parametros)
+    return render_template('historial.html', parametros = parametros,plot_url=plot_url)
 
 @app.route('/boleta')
 def boleta():
@@ -321,6 +324,34 @@ def agregar_aviso():
 def pruebas():
     parametros = dict(session)['profile']
     return render_template('prueba.html', parametros = parametros)
+
+
+
+def generate_plot():
+    # Datos de ejemplo
+    x = [1, 2, 3, 4, 5]
+    y = [2, 4, 6, 8, 10]
+
+    # Crear el gráfico
+    plt.plot(x, y)
+    plt.xlabel('Eje X')
+    plt.ylabel('Eje Y')
+    plt.title('Gráfico de ejemplo')
+
+    # Guardar el gráfico en un BytesIO para mostrarlo en la página HTML
+    img = BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    plt.close()
+
+    # Convertir la imagen a base64
+    plot_url = base64.b64encode(img.getvalue()).decode()
+
+    return plot_url
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, ssl_context='adhoc', threaded=True)

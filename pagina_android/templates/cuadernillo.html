@@ -7,7 +7,7 @@ INICIO
 
 
 {% block style %}
-iframe {
+meta {
     width: 100%;
     height: 100vh; /* 100% de la altura de la ventana visible */
     border: 0; /* Eliminar el borde del iframe */
@@ -17,6 +17,6 @@ iframe {
 
 
 {% block content %}
-<iframe src="https://classroom.google.com" frameborder="0"></iframe>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src https://classroom.google.com;">
 
 {% endblock %}

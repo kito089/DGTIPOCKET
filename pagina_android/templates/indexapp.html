@@ -243,7 +243,7 @@ INICIO
 
 <div class="carousel-containerA">
     <div class="carouselA">
-        {% for aviso in avisos %}
+        {% for aviso in avisos[-3::][::-1] %}
         <div class="aviso">
             <h2 class="h2">{{ aviso.1 }}</h2>
             <p class="p">{{ aviso.2 }}</p>
@@ -279,7 +279,7 @@ INICIO
 </div>
 <h1 class="center">Concursos</h1>
 <ul class="concursos-list">
-    {% for concurso in concursos %}
+    {% for concurso in concursos[-3::][::-1] %}
     <div class="concurso">
         <h2 class='h2'>{{ concurso.1 }}</h2>
         {% if concurso.3 %}

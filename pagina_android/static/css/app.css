@@ -380,3 +380,9 @@ h1{
 }
 
 
+.div-lado-a-lado {
+  width: 100%;
+  background-color: #3498db; /* Color azul (#3498db) */
+  height: 2px; /* Ajusta la altura según tus necesidades */
+}
+

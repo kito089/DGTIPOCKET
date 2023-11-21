@@ -93,6 +93,7 @@
   /*========== z index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
+
 }
 
 @media screen and (min-width: 968px) {
@@ -141,7 +142,7 @@ img {
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .section {
-  padding: 4.5rem 0 2rem;
+  padding: 2rem 0 2rem;
 }
 
 .section__title {
@@ -375,8 +376,13 @@ h1{
   width: 100vh;
 }
 #miDiv {
-  width: 200px; /* Ancho deseado */
-  height: 10%; /* Altura deseada */
+  height:25%; /* Altura deseada */
 }
 
+
+.div-lado-a-lado {
+  width: 100%;
+  background-color: #3498db; /* Color azul (#3498db) */
+  height: 2px; /* Ajusta la altura según tus necesidades */
+}
 

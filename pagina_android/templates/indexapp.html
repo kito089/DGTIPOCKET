@@ -202,10 +202,6 @@ INICIO
     padding: 16px;
 }
 
-.h2 {
-   
-}
-
 .p {
     color: #fafbfd;
 }
@@ -230,7 +226,16 @@ INICIO
     font-size: 1em;
     margin-bottom: 8px;
 }
-
+h1 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 2.5em; /* Ajusta el tamaño según tus necesidades */
+    color: #333; /* Color de texto, ajusta según tu diseño */
+    text-align: center; /* Ajusta la alineación según tus necesidades */
+  }
+  
+  /* Asegúrate de incluir la fuente Montserrat en tu proyecto */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  
 {% endblock %}
 
 <div class="g-singnin2" data-onsuccess="onSignIn"></div>
@@ -243,7 +248,7 @@ INICIO
 
 <div class="carousel-containerA">
     <div class="carouselA">
-        {% for aviso in avisos %}
+        {% for aviso in avisos[-3::][::-1] %}
         <div class="aviso">
             <h2 class="h2">{{ aviso.1 }}</h2>
             <p class="p">{{ aviso.2 }}</p>
@@ -252,10 +257,13 @@ INICIO
         {% endfor %}
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
 <h1>Horaio <strong>{{parametros['grado']}}{{parametros['grupo']}}</strong></h1>
 <img  class="horario"  src="https://github.com/kito089/DGTIPOCKET/blob/master/pagina_android/horarios/img/{{parametros['grado']}}{{parametros['grupo']}}.pdf.png?raw=true">
 
-
+<br>
+<div class="div-lado-a-lado"></div>
 <br>
 <div class="carousel-container">
     <div class="carousel">
@@ -277,9 +285,11 @@ INICIO
         
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
 <h1 class="center">Concursos</h1>
 <ul class="concursos-list">
-    {% for concurso in concursos %}
+    {% for concurso in concursos[-3::][::-1] %}
     <div class="concurso">
         <h2 class='h2'>{{ concurso.1 }}</h2>
         {% if concurso.3 %}

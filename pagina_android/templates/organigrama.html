@@ -6,19 +6,17 @@ INICIO
 {% block style %}
 
 .card {
-    max-width: 400px;
+    max-width: 100%;
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease;
-    margin-top:20px;
+    margin-top:50px;
 }
 
-.card:hover {
-    transform: scale(1.05);
-}
+
 
 .h2 {
     background-color: #3498db;
@@ -35,11 +33,69 @@ INICIO
     margin: 8px 0;
 }
 
-@media (max-width: 768px) {
-    .card {
-        max-width: 100%;
-    }
+
+
+h6 {
+    color: #3498db; /* Color azul */
+    font-size: 1.5em; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    margin-top: 10px; /* Espacio inferior */
+
+  }
+
+  .menu-btn-container {
+    position: fixed;
+    top: 70px;
+    right: 40px; /* Ajusta la distancia desde la derecha según tus necesidades */
+    text-align: right;
+    padding: 20px;
+    height: 100vh; /* Añade esta línea para que tenga el alto de la pantalla */
+  }
+  
+  .menu-btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .menu {
+    display: none;
+    position: absolute;
+    height: 80vh; /* Mantiene el alto completo de la pantalla */
+    top: 20px;
+    right: 0;
+    background-color: #3498db;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: auto; /* Permite el desplazamiento interno si el contenido es más grande */
+
+  }
+  .menu::-webkit-scrollbar {
+    width: 0.1em;
+  }
+.menu.active {
+  display: block;
 }
+
+.menu a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.menu a:hover {
+  background-color: #2980b9;
+}
+  .XD{
+    margin-top:10%;
+  }
+
+
 {% endblock %}
 
 
@@ -47,7 +103,33 @@ INICIO
 
 {% if "155" in parametros['hd']%}
 
-<div class="card" id="direccion">
+<div class="contenedor">
+    <div class="menu-btn-container">
+        <div class="menu-btn">Buscar
+        <div class="menu">
+            <a href="#direccion">Direccion</a>
+            <a href="#subdireccion">Subdireccion</a>
+            <a href="#serviciosdocentes">Servicios Docente</a>
+            <a href="#encargadoslavoratorios">Laboratorios</a>
+            <a href="#vinculacion">Vinculacion</a>
+            <a href="#servicioescolar">Servicio Escolar</a>
+            <a href="#controlescolar">Control Escolar</a>
+            <a href="#orientacioneducativa">Orientacion Academica</a>
+            <a href="#trabajosocial">Trabajo Social</a>
+            <a href="#serviciosadministrativos">Servicio Administrativo</a>
+            <a href="#prefectura">prefectura</a>
+            <a href="#">Recursos materiales</a>
+            <a href="#recursosfinancieros">Recusros inancieros</a>
+            <a href="#planificacion">planificacion</a>
+            <h6 id="direccion" class="XD">DIRECCION</h6>
+            
+        </div>
+        </div>
+    </div>
+</div>
+
+<h6 >DIRECCION</h6>
+<div class="card">
     <div class="card-body">
         <h2 class="h2">DIRECTORA</h2>
         <p><strong>Nombre:</strong> AMIRA IVETTE JAUREGUI PEREZ</p>
@@ -60,13 +142,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4492420401</p>
         <br>
         <h2 class="h2">SECRETARIA DE LA DIRECCION T.V. </h2>
-        <p><strong>Nombre:</strong> AZUA DELGADO FABIOLA HASSEL</p>
+        <p id="subdireccion"><strong>Nombre:</strong> AZUA DELGADO FABIOLA HASSEL</p>
         <p><strong>Correo:</strong> fabiolaheyssel.azua.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 44919911586</p>
     </div>
 </div>
 
-<div class="card" id="subdireccion">
+<div class="div-lado-a-lado"></div>
+  
+<h6 >SUBDIRECCION</h6>
+
+<div class="card">
     <div class="card-body">
         <h2 class="h2">SUBDIRECTORA ACADEMICA</h2>
         <p><strong>Nombre:</strong> FLORES RUIZ VERONICA DEL ROCIO BELEN</p>
@@ -79,13 +165,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4491881243</p>
         <br>
         <h2 class="h2">SECRETARIA DE LA SUBDIRECCION T.V. </h2>
-        <p><strong>Nombre:</strong> MARTINEZ LOPEZ KAREN LIZETTE</p>
+        <p id="serviciosdocentes"><strong>Nombre:</strong> MARTINEZ LOPEZ KAREN LIZETTE</p>
         <p><strong>Correo:</strong> karenlizeth.martinez.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 449156229</p>
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
 
-<div class="card" id="serviciosdocentes">
+<h6 >SERVICIOS DOCENTES</h6>
+
+<div class="card">
     <div class="card-body">
         <h2 class="h2">JEFE DE DEPARTAMENTO DE SERVICIOS DOCENTES T.M</h2>
         <p><strong>Nombre:</strong> REYES MEDINA SILVIA</p>
@@ -103,12 +193,16 @@ INICIO
         <p><strong>Teléfono:</strong> 4493971541</p>
         <br>
         <h2 class="h2">SECRETARIO DEL DEPARTAMENTO DE SERVICIOS DOCENTES T.V</h2>
-        <p><strong>Nombre:</strong> RAMOS ROSALES HUGO ALEJANDRO</p>
+        <p id="encargadoslavoratorios"><strong>Nombre:</strong> RAMOS ROSALES HUGO ALEJANDRO</p>
         <p><strong>Correo:</strong> hugoalejandro.ramos.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4491571322</p>
     </div>
 </div>
-<div class="card" id="encargadoslavoratorios">
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>ENCARGADOS LAVORATORIOS</h6>
+
+<div class="card">
     <div class="card-body">
         <h2 class="h2">ENCARGADA DE LABORATORIO NO. 2 Y 3 T.M</h2>
         <p><strong>Nombre:</strong> LUEVANO ZUÑIGA MARIA DOLORES</p>
@@ -126,13 +220,16 @@ INICIO
         <p><strong>Teléfono:</strong> 4491958704</p>
         <br>
         <h2 class="h2">SECRETARIO DEL DEPARTAMENTO DE SERVICIOS DOCENTES T.V</h2>
-        <p><strong>Nombre:</strong> RAMOS ROSALES HUGO ALEJANDRO</p>
+        <p id="servicioescolar"><strong>Nombre:</strong> RAMOS ROSALES HUGO ALEJANDRO</p>
         <p><strong>Correo:</strong> hugoalejandro.ramos.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4491571322</p>
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>SERVICIOS ESCOLARES</h6>
 
-<div class="card" id="servicioescolar">
+<div class="card">
     <div class="card-body">
         <h2 class="h2">JEFA DEL DEPARTAMENTO DE SERVICIOS ESCOLARES T.M. </h2>
         <p><strong>Nombre:</strong> HILDA LUEVANO ZÚÑIGA</p>
@@ -140,14 +237,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4495490439</p>
         <br>
         <h2 class="h2">JEFA DEL DEPARTAMENTO DE SERVICIOS ESCOLARES T.V  </h2>
-        <p><strong>Nombre:</strong> PAMELA VIRIDIANA ROBLEDO SAMANO</p>
+        <p id="controlescolar"><strong>Nombre:</strong> PAMELA VIRIDIANA ROBLEDO SAMANO</p>
         <p><strong>Correo:</strong> pamelaviridiana.robledo.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4491815589</p>
         
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>CONTROL ESCOLAR</h6>
 
-<div class="card" id="controlescolar">
+<div class="card">
     <div class="card-body">
         <h2 class="h2">JEFA DE LA OFICINA DE CONTROL ESCOLAR T.V</h2>
         <p><strong>Nombre:</strong> ANGÉLICA COLUNGA SALAZAR</p>
@@ -180,14 +280,16 @@ INICIO
         <p><strong>Teléfono:</strong> 4491081254</p>
         <br>
         <h2 class="h2">RESPONSABLE DE SEGUIMIENTO A GRUPOS 5°E Y 5°F</h2>
-        <p><strong>Nombre:</strong> ORNELAS URZUA OSCAR EDUARDO</p>
+        <p id="orientacioneducativa"><strong>Nombre:</strong> ORNELAS URZUA OSCAR EDUARDO</p>
         <p><strong>Correo:</strong> oscareduardo.ornelas.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4494363057</p>
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>ORIENTACION EDUCATIVA</h6>
 
-
-<div class="card" id="trabajosocial">
+<div class="card">
     <div class="card-body">
         <h2 class="h2">ORIENTADORA EDUCATIVA T.M. </h2>
         <p><strong>Nombre:</strong> GUERRERO RAMOS MARTHA GIANINA </p>
@@ -220,23 +322,30 @@ INICIO
         <p><strong>Teléfono:</strong> 4491988390</p>
         <br>
         <h2 class="h2">ENFERMERA T.V</h2>
-        <p><strong>Nombre:</strong> ARAUJO VERA KAREN DANIELA</p>
+        <p id="trabajosocial"><strong>Nombre:</strong> ARAUJO VERA KAREN DANIELA</p>
         <p><strong>Correo:</strong> karendaniela.araujo.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4493379047</p>
     </div>
 </div>
 
-<div class="card" id="trabajosocial">
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>TRABAJO SOCIAL</h6>
+
+<div class="card">
     <div class="card-body">
         <h2 class="h2">ENCARGADA DE SERVICIO SOCIAL Y PRÁCTICAS T.V.</h2>
-        <p><strong>Nombre:</strong> JAUREGUI BECERRA MARIA LETICIA </p>
+        <p id="vinculacion"><strong>Nombre:</strong> JAUREGUI BECERRA MARIA LETICIA </p>
         <p><strong>Correo:</strong> marialeticia.jauregui.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4492573536</p>
         
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>VINCULACION</h6>
 
-<div class="card" id="vinculacion">
+<div class="card">
     <div class="card-body">
         <h2 class="h2">JEFE DEL DEPARTAMENTO DE VICULACION CON EL SECTOR
             PRODUCTIVO T.V. </h2>
@@ -251,13 +360,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4491389126</p>
         <br>
         <h2 class="h2">ENCARGADA DE SERVICIO SOCIAL Y PRÁCTICAS T.M</h2>
-        <p><strong>Nombre:</strong>LUEVANO FIGUEROA SAN JUANA MARTINA</p>
+        <p id="serviciosadministrativos"><strong>Nombre:</strong>LUEVANO FIGUEROA SAN JUANA MARTINA</p>
         <p><strong>Correo:</strong> juanamartina.luevano.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4494521516</p>
         
     </div>
 </div>
-<div class="card" id="serviciosadministrativos">
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>SERVICIOS ADMINISTRATIVOS</h6>
+
+<div class="card">
     <div class="card-body">
         <h2 class="h2">JEFE DEL DEPARTAMENTO DE SERVICIOS
             ADMINISTRATIVOS</h2>
@@ -266,13 +379,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4491967855</p>
         <br>
         <h2 class="h2">JEFA DE LA OFICINA DE PERSONAL</h2>
-        <p><strong>Nombre:</strong>MONDRAGON LOPEZ CAELI</p>
+        <p id="prefectura"><strong>Nombre:</strong>MONDRAGON LOPEZ CAELI</p>
         <p><strong>Correo:</strong> caeli.mondragon.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4491920088</p>
         
     </div>
 </div>
-<div class="card" id="prefectura">
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>PREFECTURA</h6>
+
+<div class="card" >
     <div class="card-body">
         <h2 class="h2">PREFECTO T.M</h2>
         <p><strong>Nombre:</strong>MIRANDA GONZALEZ MANUEL</p>
@@ -290,14 +407,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4494970746</p>
         <br>
         <h2 class="h2">PREFECTO T.V</h2>
-        <p><strong>Nombre:</strong>GARCÍA GÓMEZ JOSÉ DE JESÚS</p>
+        <p id="recursosfinancieros"><strong>Nombre:</strong>GARCÍA GÓMEZ JOSÉ DE JESÚS</p>
         <p><strong>Correo:</strong> josedejesus.garcia.ce155@dgeti.sems.gob.mx</p>
         <p><strong>Teléfono:</strong> 4491730616</p>
         
     </div>
 </div>
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>RECURSOS FINANCIEROS</h6>
 
-<div class="card" id="recursosfinancieros">
+<div class="card" >
     <div class="card-body">
         <h2 class="h2">JEFA DE LA OFICINA DE RECURSOS FINANCIEROS T.V</h2>
         <p><strong>Nombre:</strong>GARCÍA GÓMEZ JIMENA</p>
@@ -315,13 +435,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4494970746</p>
         <br>
         <h2 class="h2">PREFECTO T.V</h2>
-        <p><strong>Nombre:</strong>GARCÍA GÓMEZ JOSÉ DE JESÚS</p>
+        <p id="recursosmateriales"><strong>Nombre:</strong>GARCÍA GÓMEZ JOSÉ DE JESÚS</p>
         <p><strong>Correo:</strong> monica.castaneda.ce155@uemstis.sems.gob.mx </p>
         <p><strong>Teléfono:</strong> 4491739967</p>
         
     </div>
 </div>
-<div class="card" id="recursosmateriales">
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>RECURSOS MATERIALES</h6>
+
+<div class="card">
     <div class="card-body">
         <h2 class="h2">JEFE DE LA OFICINA DE RECURSOS MATERIALES
             Y SERVICIOS GENERALES</h2>
@@ -340,13 +464,17 @@ INICIO
         <p><strong>Teléfono:</strong> 4492051241</p>
         <br>
         <h2 class="h2">AUXILIAR DE MANTENIMIENTO T.M.</h2>
-        <p><strong>Nombre:</strong>FELIPE GARCÍA CARDONA</p>
+        <p id="planificacion"><strong>Nombre:</strong>FELIPE GARCÍA CARDONA</p>
         <p><strong>Correo:</strong> felipe.garcia.ce155@dgeti.sems.gob.mx </p>
         <p><strong>Teléfono:</strong> 4651133582</p>
         
     </div>
 </div>
-<div class="card" id="planificacion">
+<br>
+<div class="div-lado-a-lado"></div>
+<h6>PLANIFICACION</h6>
+
+<div class="card" >
     <div class="card-body">
         <h2 class="h2">JEFA DEL DEPARTAMENTO DE PLANEACIÓN Y EVALUACIÓN</h2>
         <p><strong>Nombre:</strong>CAMPOS MÁRQUEZ JANETTE DEL ROSARIO</p>
@@ -356,6 +484,26 @@ INICIO
         
     </div>
 </div>
+
+
+    <script>
+        var menuBtn = document.querySelector('.menu-btn');
+        var menu = document.querySelector('.menu');
+    
+        // Abrir o cerrar el menú al hacer clic en el botón
+        menuBtn.addEventListener('click', function(event) {
+          menu.classList.toggle('active');
+          event.stopPropagation(); // Evitar que el clic se propague al documento
+        });
+    
+        // Cerrar el menú al hacer clic en cualquier parte del documento
+        document.addEventListener('click', function() {
+          menu.classList.remove('active');
+        });
+      </script>
+
+
+
 {% endif %}
 
 

@@ -1,10 +1,7 @@
 from docxtpl import DocxTemplate
-from docx import Document
 from decimal import Decimal
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+import subprocess
 import os
-from flask import Flask, send_file
 
 def conv(tc,e,m):
     tcl = [list(tupla) for tupla in tc]
@@ -57,15 +54,5 @@ def genboleta(datosC, datosG):
 def word2pdf(dir):
     inputFile = dir+'.docx'
     outputFile = dir+'.pdf'
-    # Leer el archivo DOCX
-    doc = Document(inputFile)
-
-    # Crear un objeto PDF
-    pdf = canvas.Canvas(outputFile, pagesize=letter)
-
-    # Recorrer cada párrafo en el documento DOCX y escribirlo en el PDF
-    for para in doc.paragraphs:
-        pdf.drawString(100, 800, para.text)  # Ajusta las coordenadas según tus necesidades
-
-    # Guardar el PDF
-    pdf.save()
+    comando = ['unoconv', '--output', outputFile, '--format', 'pdf', inputFile]
+    subprocess.run(comando)

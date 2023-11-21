@@ -1,6 +1,6 @@
 from docxtpl import DocxTemplate
 from decimal import Decimal
-import subprocess
+import pypandoc
 import os
 
 def conv(tc,e,m):
@@ -54,5 +54,9 @@ def genboleta(datosC, datosG):
 def word2pdf(dir):
     inputFile = dir+'.docx'
     outputFile = dir+'.pdf'
-    comando = ['unoconv', '--output', outputFile, '--format', 'pdf', inputFile]
-    subprocess.run(comando)
+    # Leer el archivo DOCX
+    try:
+        pypandoc.convert_file(inputFile, 'pdf', outputfile=outputFile)
+        print(f'Successfully converted {inputFile} to {outputFile}')
+    except Exception as e:
+        print(f'Error converting {inputFile} to PDF: {e}')

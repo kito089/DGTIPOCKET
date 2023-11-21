@@ -2,7 +2,7 @@ from docxtpl import DocxTemplate
 from decimal import Decimal
 from docx import Document
 from weasyprint import HTML
-import aspose.words as aw
+#import aspose.words as aw
 import os
 
 def conv(tc,e,m):
@@ -53,23 +53,8 @@ def genboleta(datosC, datosG):
     print(nombre)
     doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
-def docx2html(dir):
-    inputFile = dir+'.docx'
-    outputFile = dir+'.html'
-    try:
-        with open(inputFile, 'rb') as docx_file:
-            result = mammoth.extract_raw_text(docx_file)
-            html_content = result.value
-
-        with open(outputFile, 'w', encoding='utf-8') as html_file:
-            html_file.write(html_content)
-
-        print(f'Successfully converted {inputFile} to {outputFile}')
-    except Exception as e:
-        print(f'Error converting {inputFile} to HTML: {e}')
-
-def word2pdf(dir):
-    inputFile = dir+'.docx'
-    outputFile = dir+'.pdf'
-    doc = aw.Document(inputFile)
-    doc.save(outputFile)
+# def word2pdf(dir):
+#     inputFile = dir+'.docx'
+#     outputFile = dir+'.pdf'
+#     doc = aw.Document(inputFile)
+#     doc.save(outputFile)

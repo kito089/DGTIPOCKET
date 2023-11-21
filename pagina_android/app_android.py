@@ -334,14 +334,19 @@ def pruebas():
 
 def generate_plot():
     # Datos de ejemplo
-    x = ['Fisica 2','CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL' ,'INGLÉS V', 'CONSTRUYE BASES DE DATOS PARA APLICACIONES WEB','DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
-    y = [5, 7, 9, 8, 10,9]
+    x = ['Fisica 2', 'CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL',
+         'INGLÉS V', 'CONSTRUYE BASES DE DATOS PARA APLICACIONES WEB',
+         'DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
+    y = [5, 7, 9, 8, 10, 9]
 
     # Crear el gráfico
-    plt.plot(x, y)
-    plt.xlabel('Eje X')
+    plt.plot(y)  # Solo necesitas los valores del eje y, no x
+    plt.xlabel('Materias')
     plt.ylabel('Eje Y')
     plt.title('Gráfico de ejemplo')
+
+    # Personalizar etiquetas del eje x
+    plt.xticks(range(len(x)), x, rotation='vertical')
 
     # Guardar el gráfico en un BytesIO para mostrarlo en la página HTML
     img = BytesIO()
@@ -353,6 +358,7 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
+
 
 
 

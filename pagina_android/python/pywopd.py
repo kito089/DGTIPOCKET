@@ -50,7 +50,6 @@ def genboleta(datosC, datosG):
         
     doc.render(context)
     doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
-    return send_file(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_"))+'.docx', as_attachment=True)
 
 def word2pdf(dir):
     inputFile = dir+'.docx'

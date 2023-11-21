@@ -192,7 +192,7 @@ img {
 
 @media screen and (max-width: 767px) {
   .nav__menu {
-    position: relative;
+    position: fixed;
     bottom: 0;
     left: 0;
     background-color: var(--container-color);
@@ -278,7 +278,7 @@ img {
     margin: 0;
   }
   .section {
-    padding: 7rem 0 2rem;
+    padding: 3rem 0 2rem;
   }
   .nav {
     height: calc(var(--header-height) + 1.5rem); /* 4.5rem */

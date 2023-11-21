@@ -11,16 +11,16 @@ class Coneccion:
     def __init__(self):
         try:
             self.conexion = pymysql.connect(  #Se conecta a la base de datos
-                host=os.getenv("HOST"),
-                user=os.getenv("USER"),
-                password=os.getenv("PASSWORD"),
-                db=os.getenv("DB")
+                # host=os.getenv("HOST"),
+                # user=os.getenv("USER"),
+                # password=os.getenv("PASSWORD"),
+                # db=os.getenv("DB")
                 
-                #host='localhost',
-                #port=3306,
-                #user='root',
-                #password='',
-                #db='prototipos'
+                host='localhost',
+                port=3306,
+                user='root',
+                password='',
+                db='prototipos'
             )
             self.cursor = self.conexion.cursor()
         except pymysql.Error as e:
@@ -167,6 +167,17 @@ class Coneccion:
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
 
+    def llamar(self, nombre):
+        if self.conexion.open:
+            try:
+                query = "CALL "+nombre
+                print(query)
+                self.cursor.execute(query)
+                ejemplo = self.cursor.fetchall()
+                return ejemplo
+            except pymysql.Error as e:
+                print("Error en la conexión: {0}".format(e))
+
     def exit(self):
         if self.conexion.open:
             try:
@@ -174,4 +185,5 @@ class Coneccion:
                 self.conexion.close()
             except pymysql.Error as e:
                 print("Error en la conexión; {0}".format(e))
+
 #### ALTER TABLE (TABLA) AUTO_INCREMENT = 1

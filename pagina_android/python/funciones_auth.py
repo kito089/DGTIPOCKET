@@ -11,10 +11,6 @@ def login_required(f):
         # the other data for that user/check if they exist
         if user:
             print("---------usuario encontrado")
-            if str.isnumeric(user['email'][0]):
-                user.update({'persona':'alumno'})
-            else:
-                user.update({'persona':'maestro'})
             return f(*args, **kwargs)
         print("----------usuario no encontrado, rediriguendo a login")
         return redirect(url_for("login"))

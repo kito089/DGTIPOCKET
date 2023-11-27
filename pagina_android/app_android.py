@@ -94,7 +94,6 @@ def authorize():
     # }
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
-    session['profile'] = user_info
     token.pop('userinfo')
     tokens.update(token)
     session['tok_info'] = tokens
@@ -104,7 +103,14 @@ def authorize():
         tok.write(str(tokens))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    return redirect('/terminar')
+    if str.isnumeric(user_info['email'][0]):
+        user_info.update({'persona':'alumno'})
+        session['profile'] = user_info
+        return redirect('/terminar')
+    else:
+        user_info.update({'persona':'maestro'})
+        session['profile'] = user_info
+        return redirect('/')
 
 @app.route('/logout')
 def logout():

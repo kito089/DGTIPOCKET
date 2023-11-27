@@ -4,7 +4,7 @@
 }
 .centra{
   height: 100vh;
-  background-color: rgb(122, 5, 255);
+  background-color:#AA8F66;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,11 +77,11 @@
   /*========== Colors ==========*/
   --hue: 174;
   --sat: 63%;
-  --first-color:#0CAE4A;
+  --first-color:#AA8F66;
   --first-color-alt: hsl(var(--hue), var(--sat), 36%);
   --title-color: hsl(var(--hue), 12%, 15%);
   --text-color: hsl(var(--hue), 8%, 35%);
-  --body-color: #0C8442;
+  --body-color: #FFEEDB;
   --container-color: #FFF;
 
   /*========== Font and typography ==========*/

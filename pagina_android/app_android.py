@@ -132,7 +132,7 @@ def authorize():
     else:
         user_info.update({'persona':'maestro'})
         session['profile'] = user_info
-        return redirect('/')
+        return redirect('/m')
 
 @app.route('/logout')
 def logout():

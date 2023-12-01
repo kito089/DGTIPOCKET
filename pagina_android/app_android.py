@@ -71,6 +71,28 @@ def index():
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
     return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+# Definir una ruta para la página principal
+@app.route('/m')
+@login_required
+def index_maestros():
+    bd = Coneccion()
+    noticias = bd.obtenerTablas("noticias")
+    avisos = bd.obtenerTablas("avisos")
+    concursos = bd.obtenerTablas("concursos")
+    bd.exit()
+    print("---------------sesion")
+    print(dict(session))
+    parametros = dict(session)['profile']
+    toks = dict(session)['tok_info']
+
+    print("session token")
+    print(toks)
+    
+    
+    
+    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
+
+    return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
 @app.route('/login')
 def login():

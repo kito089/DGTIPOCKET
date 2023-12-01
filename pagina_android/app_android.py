@@ -65,12 +65,12 @@ def index():
 
     print("session token")
     print(toks)
-    
-    
-    
-    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
-    return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
+    if parametros['persona'] == 'maestro':
+        return render_template('indexMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
+    else:
+        return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 # Definir una ruta para la página principal
 @app.route('/m')
 @login_required

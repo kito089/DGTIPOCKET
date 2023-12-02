@@ -238,7 +238,7 @@ def config():
     return render_template('config.html', parametros = parametros)
 
 @app.route('/Mconfig')
-def config():
+def Mconfig():
     parametros = dict(session)['profile']
     return render_template('configMaestros.html', parametros = parametros)
 

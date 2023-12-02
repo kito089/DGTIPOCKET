@@ -222,6 +222,10 @@ def clubs():
 def funciones():
     parametros = dict(session)['profile']
     return render_template('funcionesapp.html', parametros = parametros)
+@app.route('/Mfunciones')
+def Mfunciones():
+    parametros = dict(session)['profile']
+    return render_template('funcionesD.html', parametros = parametros)
 
 @app.route('/organigrama')
 def organigrama():

@@ -225,7 +225,7 @@ def funciones():
 @app.route('/Mfunciones')
 def Mfunciones():
     parametros = dict(session)['profile']
-    return render_template('funcionesD.html', parametros = parametros)
+    return render_template('funcionesMaestros.html', parametros = parametros)
 
 @app.route('/organigrama')
 def organigrama():

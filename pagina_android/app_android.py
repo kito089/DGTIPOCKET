@@ -17,13 +17,12 @@ import matplotlib.pyplot as plt
 
 from io import BytesIO
 import base64
-# decorator for routes that should be accessible only by logged in users
+
 from python.funciones_auth import login_required
 
-# dotenv setup
 from dotenv import load_dotenv
 
-project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')  # adjust as appropriate
+project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')
 load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
@@ -49,7 +48,6 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar.readonly'},
 )
 
-# Definir una ruta para la página principal
 @app.route('/')
 @login_required
 def index():
@@ -71,28 +69,8 @@ def index():
         return render_template('indexMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
     else:
         return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
-# Definir una ruta para la página principal
-@app.route('/m')
-@login_required
-def index_maestros():
-    bd = Coneccion()
-    noticias = bd.obtenerTablas("noticias")
-    avisos = bd.obtenerTablas("avisos")
-    concursos = bd.obtenerTablas("concursos")
-    bd.exit()
-    print("---------------sesion")
-    print(dict(session))
-    parametros = dict(session)['profile']
-    toks = dict(session)['tok_info']
 
-    print("session token")
-    print(toks)
-    
-    
-    
-    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
-
-    return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+###         INISIO DE SESION        ###
 
 @app.route('/login')
 def login():
@@ -134,16 +112,7 @@ def authorize():
         session['profile'] = user_info
         return redirect('/m')
 
-@app.route('/logout')
-def logout():
-    for key in list(session.keys()):
-        session.pop(key)
-    return redirect(url_for('login'))
-
-@app.route('/planteles')
-def planteles1():
-    parametros = dict(session)['profile']
-    return render_template('plantelesapp.html', parametros = parametros)
+###         PRIMER REGISTRO DE SESION       ###
 
 @app.route('/terminar')
 @login_required
@@ -172,7 +141,6 @@ def terinar():
         return redirect(url_for("index"))  
     return render_template('terminarR.html', parametros = parametros)
 
-
 @app.route('/insertainfo', methods=['GET', 'POST'])
 @login_required
 def insertainfo():
@@ -198,20 +166,32 @@ def insertainfo():
 
     return redirect(url_for("index"))
 
-@app.route('/a')
-def a():
-    parametros = dict(session)['profile']
-    return render_template('a.html', parametros = parametros)
+###     CIERRE DE SESION        ###
 
-@app.route('/tutorias')
-def tutorias():
-    parametros = dict(session)['profile']
-    return render_template('tutoriasapp.html', parametros = parametros)
+@app.route('/logout')
+def logout():
+    for key in list(session.keys()):
+        session.pop(key)
+    return redirect(url_for('login'))
 
-@app.route('/pagos')
-def pagos():
+###         FUNCIONES DE SESION         ###
+
+@app.route('/config')
+def config():
     parametros = dict(session)['profile']
-    return render_template('pagos.html', parametros = parametros)
+    return render_template('config.html', parametros = parametros)
+
+@app.route('/menu')
+def menu():
+    parametros = dict(session)['profile']
+    return render_template('menu.html', parametros = parametros)
+
+###         FUNCIONES SIMPLES       ###
+
+@app.route('/planteles')
+def planteles1():
+    parametros = dict(session)['profile']
+    return render_template('plantelesapp.html', parametros = parametros)
 
 @app.route('/clubs')
 def clubs():
@@ -222,30 +202,21 @@ def clubs():
 def funciones():
     parametros = dict(session)['profile']
     return render_template('funcionesapp.html', parametros = parametros)
-@app.route('/Mfunciones')
-def Mfunciones():
-    parametros = dict(session)['profile']
-    return render_template('funcionesMaestros.html', parametros = parametros)
 
 @app.route('/organigrama')
 def organigrama():
     parametros = dict(session)['profile']
     return render_template('organigrama.html', parametros = parametros)
 
-@app.route('/config')
-def config():
+@app.route('/tutorias')
+def tutorias():
     parametros = dict(session)['profile']
-    return render_template('config.html', parametros = parametros)
+    return render_template('tutoriasapp.html', parametros = parametros)
 
-@app.route('/Mconfig')
-def Mconfig():
+@app.route('/pagos')
+def pagos():
     parametros = dict(session)['profile']
-    return render_template('configMaestros.html', parametros = parametros)
-
-@app.route('/menu')
-def menu():
-    parametros = dict(session)['profile']
-    return render_template('menu.html', parametros = parametros)
+    return render_template('pagos.html', parametros = parametros)
 
 @app.route('/servicio')
 def servicio():
@@ -265,6 +236,13 @@ def historial():
     plot_url = generate_plot()
     parametros = dict(session)['profile']
     return render_template('historial.html', parametros = parametros,plot_url=plot_url)
+
+@app.route('/cuadernillo')
+def cuadernillo():
+    parametros = dict(session)['profile']
+    return render_template('cuadernillo.html', parametros = parametros)
+
+###         FUNCIONES DETALLADAS        ###
 
 @app.route('/boleta')
 def boleta():
@@ -315,13 +293,7 @@ def boleta():
     #     mimetype='application/pdf'
     # )
 
-
-@app.route('/cuadernillo')
-def cuadernillo():
-    parametros = dict(session)['profile']
-    return render_template('cuadernillo.html', parametros = parametros)
-
-@app.route('/noticias')                            #pendiente css
+@app.route('/noticias')                         #pendiente css
 def noticias():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
@@ -329,7 +301,39 @@ def noticias():
     parametros = dict(session)['profile']
     return render_template('noticiasapp.html', noticias=noticias, parametros = parametros)
 
-@app.route('/insnot/<string:nom>', methods=['GET', 'POST'])
+####        AUTORIDADES         ####
+
+@app.route('/m')
+@login_required
+def index_maestros():
+    bd = Coneccion()
+    noticias = bd.obtenerTablas("noticias")
+    avisos = bd.obtenerTablas("avisos")
+    concursos = bd.obtenerTablas("concursos")
+    bd.exit()
+    print("---------------sesion")
+    print(dict(session))
+    parametros = dict(session)['profile']
+    toks = dict(session)['tok_info']
+
+    print("session token")
+    print(toks)
+    
+    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
+
+    return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+
+@app.route('/Mconfig')
+def Mconfig():
+    parametros = dict(session)['profile']
+    return render_template('configMaestros.html', parametros = parametros)
+
+@app.route('/Mfunciones')
+def Mfunciones():
+    parametros = dict(session)['profile']
+    return render_template('funcionesMaestros.html', parametros = parametros)
+
+@app.route('/insnot/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS
 def agregar_noticia(nom=None):
     if request.method == 'POST':
         datos = []
@@ -347,7 +351,7 @@ def agregar_noticia(nom=None):
     parametros = dict(session)['profile']
     return render_template('insnot.html', parametros = parametros)
 
-@app.route('/instaviso', methods=['GET', 'POST'])
+@app.route('/instaviso', methods=['GET', 'POST']) ### INSERTAR AVISOS
 def agregar_aviso():
     if request.method == 'POST':
         datos = []
@@ -362,12 +366,18 @@ def agregar_aviso():
         return redirect(url_for('index'))
     parametros = dict(session)['profile']
     return render_template('insnot.html', parametros = parametros)
-    
+
+####            PRUEBAS             ####
+
+@app.route('/a') ### ????
+def a():
+    parametros = dict(session)['profile']
+    return render_template('a.html', parametros = parametros)
+
 @app.route('/a')
 def pruebas():
     parametros = dict(session)['profile']
     return render_template('prueba.html', parametros = parametros)
-
 
 def generate_plot():
     # Datos de ejemplo
@@ -395,11 +405,6 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
-
-
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, ssl_context='adhoc', threaded=True)

@@ -386,8 +386,9 @@ def generate_plot():
          'DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
     y = [5, 7, 9, 8, 10, 9]
 
-    # Crear el gráfico de barras
-    plt.bar(range(len(x)), y, color='blue')  # Utiliza la función bar para crear barras
+    # Crear el gráfico de barras con color condicional
+    colors = ['red' if value < 6 else 'blue' for value in y]
+    plt.bar(range(len(x)), y, color=colors)
 
     plt.xlabel('Materias')
     plt.ylabel('Eje Y')
@@ -406,7 +407,6 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
-
 
 if __name__ == '__main__':
     app.run(debug=True, ssl_context='adhoc', threaded=True)

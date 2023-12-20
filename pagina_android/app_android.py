@@ -386,11 +386,12 @@ def generate_plot():
          'DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
     y = [5, 7, 9, 8, 10, 9]
 
-    # Crear el gráfico
-    plt.plot(y)  # Solo necesitas los valores del eje y, no x
+    # Crear el gráfico de barras
+    plt.bar(range(len(x)), y, color='blue')  # Utiliza la función bar para crear barras
+
     plt.xlabel('Materias')
     plt.ylabel('Eje Y')
-    plt.title('Gráfico de ejemplo  Promedio')
+    plt.title('Gráfico de barras Promedio')
 
     # Personalizar etiquetas del eje x con rotación diagonal
     plt.xticks(range(len(x)), x, rotation=45, ha='right')
@@ -405,6 +406,7 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
+
 
 if __name__ == '__main__':
     app.run(debug=True, ssl_context='adhoc', threaded=True)

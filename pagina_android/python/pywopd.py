@@ -58,11 +58,11 @@ def genboletapdf(datosC, datosG):
     template = Template(template_str)
     rendered_content = template.render(data)
 
-    with open('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.html', 'w', encoding='utf-8') as file:
+    with open(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.html'), 'w', encoding='utf-8') as file:
         file.write(rendered_content)
 
-    path = os.path.abspath('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.html')
-    converter.convert(f'file:///{path}', 'C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.pdf',  print_options={"landscape": True})
+    path = os.path.abspath(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.html'))
+    converter.convert(f'file:///{path}', os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.pdf'),  print_options={"landscape": True})
 
 def genboletadocx(datosC, datosG):
     doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))

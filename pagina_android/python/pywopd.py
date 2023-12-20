@@ -49,7 +49,7 @@ def genboletapdf(datosC, datosG):
     }
 
     # Plantilla Jinja2
-    with open('~/DGTIPOCKET/editar_word/algo.html', 'r', encoding='utf-8') as file:
+    with open(os.path.expanduser('~/DGTIPOCKET/editar_word/algo.html'), 'r', encoding='utf-8') as file:
         template_str = file.read()
 
     # Renderizar la plantilla

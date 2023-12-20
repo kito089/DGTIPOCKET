@@ -14,7 +14,6 @@ import datetime
 import json
 import matplotlib.pyplot as plt
 
-
 from io import BytesIO
 import base64
 
@@ -149,15 +148,10 @@ def insertainfo():
         datos = []
         bd = Coneccion()
         no = parametros['email'].replace("@cetis155.edu.mx","")
-        print("-----------Control")
-        print(no)
         datos.append(no)
         datos.append(request.form['curp'])
         datos.append(request.form['grado'])
-        print("------------------grupo :v")
-        print(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
         datos.append(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
-        print(datos)
         bd.insertarRegistro("alumnos",datos)
         bd.exit()
         parametros.update({'curp':datos[1],'grado':datos[2], 'grupo':request.form['grupo']})

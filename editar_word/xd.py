@@ -70,4 +70,4 @@ with open('C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/ejem.html', 'w', enco
     file.write(rendered_content)
 
 path = os.path.abspath('C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/ejem.html')
-converter.convert(f'file:///{path}', 'C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/sample.pdf')
+converter.convert(f'file:///{path}', 'C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/sample.pdf',  print_options={"landscape": True})

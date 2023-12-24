@@ -14,7 +14,6 @@ import datetime
 import json
 import matplotlib.pyplot as plt
 
-
 from io import BytesIO
 import base64
 
@@ -156,15 +155,10 @@ def insertainfo():
         datos = []
         bd = Coneccion()
         no = parametros['email'].replace("@cetis155.edu.mx","")
-        print("-----------Control")
-        print(no)
         datos.append(no)
         datos.append(request.form['curp'])
         datos.append(request.form['grado'])
-        print("------------------grupo :v")
-        print(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
         datos.append(str(bd.seleccion("grupo","idgrupo","letra = '"+str(request.form['grupo'])+"'")[0][0]))
-        print(datos)
         bd.insertarRegistro("alumnos",datos)
         bd.exit()
         parametros.update({'curp':datos[1],'grado':datos[2], 'grupo':request.form['grupo']})
@@ -193,6 +187,12 @@ def menu():
     parametros = dict(session)['profile']
     return render_template('menu.html', parametros = parametros)
 
+
+@app.route('/funciones')
+def funciones():
+    parametros = dict(session)['profile']
+    return render_template('funcionesapp.html', parametros = parametros)
+
 ###         FUNCIONES SIMPLES       ###
 
 @app.route('/planteles')
@@ -200,20 +200,15 @@ def planteles1():
     parametros = dict(session)['profile']
     return render_template('plantelesapp.html', parametros = parametros)
 
-@app.route('/clubs')
-def clubs():
-    parametros = dict(session)['profile']
-    return render_template('clubapp.html', parametros = parametros)
-
-@app.route('/funciones')
-def funciones():
-    parametros = dict(session)['profile']
-    return render_template('funcionesapp.html', parametros = parametros)
-
 @app.route('/organigrama')
 def organigrama():
     parametros = dict(session)['profile']
     return render_template('organigrama.html', parametros = parametros)
+
+@app.route('/clubs')
+def clubs():
+    parametros = dict(session)['profile']
+    return render_template('clubapp.html', parametros = parametros)
 
 @app.route('/tutorias')
 def tutorias():
@@ -283,7 +278,7 @@ def boleta():
 
     datosC = conv(tc,e,m)
 
-    genboleta(datosC, datosG)
+    genboletapdf(datosC, datosG)
     archivo = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
     
     return send_file(archivo, as_attachment=True)

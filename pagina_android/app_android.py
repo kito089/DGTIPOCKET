@@ -67,6 +67,8 @@ def index():
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 
     if parametros['persona'] == 'maestro':
         return render_template('indexMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
+    elif parametros['persona'] == 'programador':
+        return render_template('indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
     else:
         return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
@@ -103,10 +105,15 @@ def authorize():
         tok.write(str(tokens))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    if str.isnumeric(user_info['email'][0]):
+    if str.isnumeric(user_info['email'][0]):#============================ cambiar condicion para programadores
+        user_info.update({'persona':'programador'})
+        session['profile'] = user_info
+        return redirect('/p')
+    elif str.isnumeric(user_info['email'][0]):
         user_info.update({'persona':'alumno'})
         session['profile'] = user_info
         return redirect('/terminar')
+    
     else:
         user_info.update({'persona':'maestro'})
         session['profile'] = user_info
@@ -322,6 +329,25 @@ def index_maestros():
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
     return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+@app.route('/p')#+++++++++++++++++++++++++++++++++++++++++++++++index programador algo bien 
+@login_required
+def index_maestros():
+    bd = Coneccion()
+    noticias = bd.obtenerTablas("noticias")
+    avisos = bd.obtenerTablas("avisos")
+    concursos = bd.obtenerTablas("concursos")
+    bd.exit()
+    print("---------------sesion")
+    print(dict(session))
+    parametros = dict(session)['profile']
+    toks = dict(session)['tok_info']
+
+    print("session token")
+    print(toks)
+    
+    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
+
+    return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
 @app.route('/Mconfig')
 def Mconfig():
@@ -386,13 +412,11 @@ def generate_plot():
          'DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
     y = [5, 7, 9, 8, 10, 9]
 
-    # Crear el gráfico de barras con color condicional
-    colors = ['red' if value < 6 else 'blue' for value in y]
-    plt.bar(range(len(x)), y, color=colors)
-
+    # Crear el gráfico
+    plt.plot(y)  # Solo necesitas los valores del eje y, no x
     plt.xlabel('Materias')
     plt.ylabel('Eje Y')
-    plt.title('Gráfico de barras Promedio')
+    plt.title('Gráfico de ejemplo  Promedio')
 
     # Personalizar etiquetas del eje x con rotación diagonal
     plt.xticks(range(len(x)), x, rotation=45, ha='right')

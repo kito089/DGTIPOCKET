@@ -326,7 +326,7 @@ def index_maestros():
     return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 @app.route('/p')#+++++++++++++++++++++++++++++++++++++++++++++++index programador algo bien 
 @login_required
-def index_maestros():
+def index_Programadores():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     avisos = bd.obtenerTablas("avisos")
@@ -342,7 +342,7 @@ def index_maestros():
     
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
-    return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+    return render_template('indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
 @app.route('/Mconfig')
 def Mconfig():

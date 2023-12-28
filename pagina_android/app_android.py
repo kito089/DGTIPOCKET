@@ -104,7 +104,11 @@ def authorize():
         tok.write(str(tokens))
     print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    if str.isnumeric(user_info['email'][0]):
+    if user_info['given_name']=='JULIO ENRIQUE' or user_info['name']=='HIRAM YAEL' :
+        user_info.update({'persona':'programador'})
+        session['profile'] = user_info
+        return redirect('/p')
+    elif str.isnumeric(user_info['email'][0]):
         user_info.update({'persona':'alumno'})
         session['profile'] = user_info
         return redirect('/terminar')

@@ -3,8 +3,6 @@ sys.path.append('C:/Users/jezar/Downloads/DGTIPOCKET/')
 from pagina_android.python.pywopd import *
 from pagina_android.python.bd import *
 
-from jinja2 import Template
-
 nombre = "JULIO ENRIQUE ZARI�AN RODDRIGUEZ"
 if "�" in nombre:
     nombre = nombre.replace("�","Ñ")
@@ -31,9 +29,9 @@ bd.exit()
 
 datosG = ["21301061550046@cetis155.edu.mx","5A","MATUTINO",nombr,"PROGRAMACIÓN"]
 datosC = conv(tc,e,m)
+#print(datosC)
 
-#boleta(datosC, datosG)
-
+##########################################################################
 nombre=datosG[3][0]+" "+datosG[3][1]
 
 controlx = datosG[0].replace("@cetis155.edu.mx","")
@@ -43,31 +41,24 @@ for i in range(len(datosG[3])):
     nombr = nombr +datosG[3][i]+" "
 
 data = { 
-    'control' : controlx,
-    'nombre' : nombr,
-    'semestre' : datosG[1][0],
-    'carre' : datosG[4],
-    'turno' : datosG[2],
-    'grupo' : datosG[1],
-    'gen' : "20"+gen+"-"+"20"+str(int(gen)+3),
-    'boleta': datosC
+    '[control]' : str(controlx),
+    '[nombre]' : str(nombr),
+    '[semestre]' : str(datosG[1][0]),
+    '[carre]' : str(datosG[4]),
+    '[turno]' : str(datosG[2]),
+    '[grupo]' : str(datosG[1]),
+    '[gen]' : str("20"+gen+"-"+"20"+str(int(gen)+3)),
+    '[boleta]': str(datosC)
 }
+##########################################################################
 
-# Plantilla Jinja2
-with open('C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/algo.html', 'r', encoding='utf-8') as file:
-    template_str = file.read()
+import subprocess
 
-# Renderizar la plantilla
-print(template_str)
+def docx2pdf(input, output):
+    command = ['abiword', '--to=pdf', input]
 
-template = Template(template_str)
-rendered_content = template.render(data)
-
-import os
-from pyhtml2pdf import converter
-
-with open('C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/ejem.html', 'w', encoding='utf-8') as file:
-    file.write(rendered_content)
-
-path = os.path.abspath('C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/ejem.html')
-converter.convert(f'file:///{path}', 'C:/Users/jezar/Downloads/DGTIPOCKET/editar_word/sample.pdf',  print_options={"landscape": True})
+    try:
+        subprocess.run(command, check=True)
+        print(f'Se ha convertido "{input}" a "{output}" correctamente.')
+    except subprocess.CalledProcessError as e:
+        print(f'Error al convertir el archivo: {e}')

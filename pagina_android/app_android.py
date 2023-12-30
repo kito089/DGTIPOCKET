@@ -141,7 +141,7 @@ def terinar():
         parametros.update({'curp': curp[0][0],'grado':grado[0][0], 'grupo':grupo})
         session['profile'] = parametros
         return redirect(url_for("index"))  
-    return render_template('terminarR.html', parametros = parametros)
+    return render_template('inisioSesion/terminarR.html', parametros = parametros)
 
 @app.route('/insertainfo', methods=['GET', 'POST'])
 @login_required
@@ -176,50 +176,19 @@ def logout():
 @app.route('/config')
 def config():
     parametros = dict(session)['profile']
-    return render_template('config.html', parametros = parametros)
+    return render_template('inisioSesion/config.html', parametros = parametros)
 
 @app.route('/menu')
 def menu():
     parametros = dict(session)['profile']
-    return render_template('menu.html', parametros = parametros)
-
+    return render_template('inisioSesion/menu.html', parametros = parametros)
 
 @app.route('/funciones')
 def funciones():
     parametros = dict(session)['profile']
-    return render_template('funcionesapp.html', parametros = parametros)
+    return render_template('inisioSesion/funcionesapp.html', parametros = parametros)
 
 ###         FUNCIONES SIMPLES       ###
-
-@app.route('/planteles')
-def planteles1():
-    parametros = dict(session)['profile']
-    return render_template('plantelesapp.html', parametros = parametros)
-
-@app.route('/organigrama')
-def organigrama():
-    parametros = dict(session)['profile']
-    return render_template('organigrama.html', parametros = parametros)
-
-@app.route('/clubs')
-def clubs():
-    parametros = dict(session)['profile']
-    return render_template('clubapp.html', parametros = parametros)
-
-@app.route('/tutorias')
-def tutorias():
-    parametros = dict(session)['profile']
-    return render_template('tutoriasapp.html', parametros = parametros)
-
-@app.route('/pagos')
-def pagos():
-    parametros = dict(session)['profile']
-    return render_template('pagos.html', parametros = parametros)
-
-@app.route('/servicio')
-def servicio():
-    parametros = dict(session)['profile']
-    return render_template('servicio.html', parametros = parametros)
 
 @app.route('/agenda')
 def agenda():
@@ -227,19 +196,49 @@ def agenda():
     horario = str(parametros['grado']) + str(parametros['grupo']) 
     print("------------------")
     print(horario)
-    return render_template('agenda.html', parametros = parametros,archivo=horario)
+    return render_template('funciones/agenda.html', parametros = parametros,archivo=horario)
+
+@app.route('/cuadernillo')
+def cuadernillo():
+    parametros = dict(session)['profile']
+    return render_template('funciones/cuadernillo.html', parametros = parametros)
+
+@app.route('/pagos')
+def pagos():
+    parametros = dict(session)['profile']
+    return render_template('funciones/pagos.html', parametros = parametros)
+
+@app.route('/clubs')
+def clubs():
+    parametros = dict(session)['profile']
+    return render_template('funciones/clubapp.html', parametros = parametros)
+
+@app.route('/tutorias')
+def tutorias():
+    parametros = dict(session)['profile']
+    return render_template('funciones/tutoriasapp.html', parametros = parametros)
+
+@app.route('/servicio')
+def servicio():
+    parametros = dict(session)['profile']
+    return render_template('funciones/servicio.html', parametros = parametros)
 
 @app.route('/historial')
 def historial():
     plot_url = generate_plot()
     parametros = dict(session)['profile']
-    return render_template('historial.html', parametros = parametros,plot_url=plot_url)
-
-@app.route('/cuadernillo')
-def cuadernillo():
-    parametros = dict(session)['profile']
-    return render_template('cuadernillo.html', parametros = parametros)
-
+    return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
+#######################################################################################
+@app.route('/planteles')                                                              #
+def planteles1():                                                                     #
+    parametros = dict(session)['profile']                                             #
+    return render_template('funciones/plantelesapp.html', parametros = parametros)              #
+                                                                                      #
+@app.route('/organigrama')                                                            #
+def organigrama():                                                                    #
+    parametros = dict(session)['profile']                                             #
+    return render_template('funciones/organigrama.html', parametros = parametros)               #
+#######################################################################################
 ###         FUNCIONES DETALLADAS        ###
 
 @app.route('/boleta')
@@ -274,22 +273,12 @@ def boleta():
 
     datosC = conv(tc,e,m)
 
-    genboletapdf(datosC, datosG)
-    archivo = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
+    genboletadocx(datosC, datosG)
+    word = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
+    docx2pdf(word)
+    pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    return send_file(archivo, as_attachment=True)
-    #ruta_docx = os.path.expanduser('~/DGTIPOCKET/editar_word/{0}.docx'.format(nombr[3][0]+"_"+nombr[3][1]))
-    # word2pdf(ruta_docx)
-    # ruta_pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/{0}.pdf'.format(nombr[3][0]+"_"+nombr[3][1]))
-    # #ruta_pdf = os.path.join(os.path.dirname(__file__), pdf_bol)
-
-    # # Usa send_file para enviar el archivo PDF al navegador para su descarga
-    # return send_file(
-    #     ruta_pdf,
-    #     as_attachment=True,
-    #     download_name='{0}.pdf'.format(nombr),
-    #     mimetype='application/pdf'
-    # )
+    return send_file(pdf, as_attachment=True)
 
 @app.route('/noticias')                         #pendiente css
 def noticias():
@@ -297,7 +286,7 @@ def noticias():
     noticias = bd.obtenerTablas("noticias")
     bd.exit()
     parametros = dict(session)['profile']
-    return render_template('noticiasapp.html', noticias=noticias, parametros = parametros)
+    return render_template('funciones/noticiasapp.html', noticias=noticias, parametros = parametros)
 
 ####        AUTORIDADES         ####
 
@@ -319,7 +308,8 @@ def index_maestros():
     
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
-    return render_template('indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+    return render_template('autoridades/indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+
 @app.route('/p')#+++++++++++++++++++++++++++++++++++++++++++++++index programador algo bien 
 @login_required
 def index_Programadores():
@@ -338,17 +328,17 @@ def index_Programadores():
     
     #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
-    return render_template('indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+    return render_template('autoridades/indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
 @app.route('/Mconfig')
 def Mconfig():
     parametros = dict(session)['profile']
-    return render_template('configMaestros.html', parametros = parametros)
+    return render_template('autoridades/configMaestros.html', parametros = parametros)
 
 @app.route('/Mfunciones')
 def Mfunciones():
     parametros = dict(session)['profile']
-    return render_template('funcionesMaestros.html', parametros = parametros)
+    return render_template('autoridades/funcionesMaestros.html', parametros = parametros)
 
 @app.route('/insnot/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS
 def agregar_noticia(nom=None):
@@ -382,14 +372,38 @@ def agregar_aviso():
         bd.exit()
         return redirect(url_for('index'))
     parametros = dict(session)['profile']
-    return render_template('insnot.html', parametros = parametros)
+    return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
+
+@app.route('/insDat/<string:tabla>/<string:no>', methods=['GET', 'POST'])
+def insDat(tabla, no):
+    if request.method == 'POST':
+        datos = []
+        for i in range(int(no)):
+            datos.append(request.form['ins'+str(i)])
+        bd = Coneccion()
+        bd.insertarRegistro(tabla, datos)
+        bd.exit()
+        return render_template()
+    return render_template()
+
+@app.route('/edDat/<string:tabla>/<string:id>', methods=['GET', 'POST'])
+def edDat(tabla, id):
+    if request.method == 'POST':
+        datos = []
+
+@app.route("/delDat/<string:tabla>/<string:id>")
+def delDat(tabla, id):
+    bd = Coneccion()
+    bd.eliminarRegistro(tabla, id)
+    bd.exit()
+    return render_template()
 
 ####            PRUEBAS             ####
 
 @app.route('/a') ### ????
 def a():
     parametros = dict(session)['profile']
-    return render_template('a.html', parametros = parametros)
+    return render_template('pruebas/a.html', parametros = parametros)
 
 @app.route('/a')
 def pruebas():

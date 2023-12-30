@@ -50,6 +50,7 @@ google = oauth.register(
 @app.route('/')
 @login_required
 def index():
+    print("----------------------adadadadadad",os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     avisos = bd.obtenerTablas("avisos")

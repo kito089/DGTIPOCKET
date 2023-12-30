@@ -87,6 +87,11 @@
         <!--=============== MAIN JS ===============-->
         <script src="main.js"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script>
+            // Obtener la ruta actual desde el lado del cliente usando JavaScript
+            var currentDirectory = window.location.pathname;
+            console.log("Directorio Actual: " + currentDirectory);
+        </script>
 
         <script>
             function onSignIn(googleUser){

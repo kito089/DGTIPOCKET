@@ -223,7 +223,10 @@ def tutorias():
 def servicio():
     parametros = dict(session)['profile']
     return render_template('funciones/servicio.html', parametros = parametros)
-
+@app.route('/tabla')
+def tabla():
+    parametros = dict(session)['profile']
+    return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros)
 @app.route('/historial')
 def historial():
     plot_url = generate_plot()
@@ -401,7 +404,7 @@ def delDat(tabla, id):
 
 ####            PRUEBAS             ####
 
-@app.route('/a') ### ????
+@app.route('/a') ### ???? carlin epico papu
 def a():
     parametros = dict(session)['profile']
     return render_template('pruebas/a.html', parametros = parametros)

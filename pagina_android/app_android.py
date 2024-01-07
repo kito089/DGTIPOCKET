@@ -352,7 +352,7 @@ def agregar_noticia(nom=None):
         print("----------atr")
         print(atr)
         datos = []
-        for i in range(len(atr)):
+        for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
         bd.insertarRegistro(nom, datos)
         bd.exit()

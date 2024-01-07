@@ -360,7 +360,7 @@ def agregar_noticia(nom=None):
         bd.exit()
     
     parametros = dict(session)['profile']
-    return render_template('insnot.html', parametros = parametros)
+    return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
 
 @app.route('/instaviso', methods=['GET', 'POST']) ### INSERTAR AVISOS
 def agregar_aviso():

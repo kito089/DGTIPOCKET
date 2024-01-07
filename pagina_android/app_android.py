@@ -344,37 +344,20 @@ def Mfunciones():
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesMaestros.html', parametros = parametros)
 
-@app.route('/insnot', methods=['GET', 'POST']) ### INSERTAR NOTICIAS
+@app.route('/insnot/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
 def agregar_noticia(nom=None):
     if request.method == 'POST':
-        datos = []
-        datos.append(request.form['titulo'+nom])
-        datos.append(request.form['descripcion'+nom])
-        if nom == "noticias" or nom == "concursos":
-            datos.append(request.form['img'+nom])
-        datos.append(request.form['fecha'+nom])
-        print("----------nom")
-        print(nom)
         bd = Coneccion()
+        atr = bd.obtenerAtributos(nom)
+        print("----------atr")
+        print(atr)
+        datos = []
+        for i in range(len(atr)):
+            datos.append('A'+str(i))
         bd.insertarRegistro(nom, datos)
         bd.exit()
-    
-    parametros = dict(session)['profile']
-    return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
-
-@app.route('/instaviso', methods=['GET', 'POST']) ### INSERTAR AVISOS
-def agregar_aviso():
-    if request.method == 'POST':
-        datos = []
-        datos.append(request.form['id'])
-        datos.append(request.form['titulo'])
-        datos.append(request.form['descripcion'])
-        datos.append(request.form['fecha'])
-
-        bd = Coneccion()
-        bd.insertarRegistro("avisos", datos)
-        bd.exit()
         return redirect(url_for('index'))
+    
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
 

@@ -214,10 +214,12 @@ def tutorias():
 def servicio():
     parametros = dict(session)['profile']
     return render_template('funciones/servicio.html', parametros = parametros)
+
 @app.route('/tabla')
 def tabla():
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros)
+
 @app.route('/historial')
 def historial():
     plot_url = generate_plot()
@@ -342,7 +344,7 @@ def Mfunciones():
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesMaestros.html', parametros = parametros)
 
-@app.route('/insnot/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS
+@app.route('/insnot', methods=['GET', 'POST']) ### INSERTAR NOTICIAS
 def agregar_noticia(nom=None):
     if request.method == 'POST':
         datos = []

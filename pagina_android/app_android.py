@@ -50,7 +50,6 @@ google = oauth.register(
 @app.route('/')
 @login_required
 def index():
-    print("----------------------adadadadadad",os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     avisos = bd.obtenerTablas("avisos")
@@ -64,13 +63,12 @@ def index():
     print("session token")
     print(toks)
 
-    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
     if parametros['persona'] == 'maestro':
-        return render_template('indexMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
+        return render_template('autoridades/indexMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
     elif parametros['persona'] == 'programador':
-        return render_template('indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+        return render_template('autoridades/indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)
     else:
-        return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
+        return render_template('indexapp.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)
 
 ###         INISIO DE SESION        ###
 
@@ -121,18 +119,11 @@ def authorize():
 @login_required
 def terinar():
     parametros = dict(session)['profile']
-    print("-----------------------para")
-    print(parametros)
     bd = Coneccion()
     no = parametros['email'].replace("@cetis155.edu.mx","")
-    print("-----------Control")
-    print(no)
     curp =  bd.seleccion("alumnos", "curp","no_control = "+str(no))
     grado =  bd.seleccion("alumnos", "grado","no_control = "+str(no))
     bd.exit()
-    print("------------ curp, grado y grupo")
-    print(curp)
-    print(grado)
     
     if len(grado)>0 and len(curp)>0:
         bd = Coneccion()
@@ -223,26 +214,30 @@ def tutorias():
 def servicio():
     parametros = dict(session)['profile']
     return render_template('funciones/servicio.html', parametros = parametros)
+
 @app.route('/tabla')
 def tabla():
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros)
+
 @app.route('/historial')
 def historial():
     plot_url = generate_plot()
     parametros = dict(session)['profile']
     return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
+
 #######################################################################################
 @app.route('/planteles')                                                              #
 def planteles1():                                                                     #
     parametros = dict(session)['profile']                                             #
-    return render_template('funciones/plantelesapp.html', parametros = parametros)              #
+    return render_template('funciones/plantelesapp.html', parametros = parametros)    #
                                                                                       #
 @app.route('/organigrama')                                                            #
 def organigrama():                                                                    #
     parametros = dict(session)['profile']                                             #
-    return render_template('funciones/organigrama.html', parametros = parametros)               #
+    return render_template('funciones/organigrama.html', parametros = parametros)     #
 #######################################################################################
+
 ###         FUNCIONES DETALLADAS        ###
 
 @app.route('/boleta')
@@ -282,7 +277,12 @@ def boleta():
     docx2pdf(word)
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    return send_file(pdf, as_attachment=True)
+    try:
+        return send_file(pdf, as_attachment=True)
+    finally:
+        if os.path.exists(pdf):
+            os.remove(pdf)
+            print(f'Archivo {pdf} eliminado correctamente.')
 
 @app.route('/noticias')                         #pendiente css
 def noticias():
@@ -344,37 +344,20 @@ def Mfunciones():
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesMaestros.html', parametros = parametros)
 
-@app.route('/insnot/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS
+@app.route('/insnot/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
 def agregar_noticia(nom=None):
     if request.method == 'POST':
-        datos = []
-        datos.append(request.form['titulo'+nom])
-        datos.append(request.form['descripcion'+nom])
-        if nom == "noticias" or nom == "concursos":
-            datos.append(request.form['img'+nom])
-        datos.append(request.form['fecha'+nom])
-        print("----------nom")
-        print(nom)
         bd = Coneccion()
+        atr = bd.obtenerAtributos(nom)
+        print("----------atr")
+        print(atr)
+        datos = []
+        for i in range(len(atr)-1):
+            datos.append(request.form['A'+str(i)])
         bd.insertarRegistro(nom, datos)
         bd.exit()
-    
-    parametros = dict(session)['profile']
-    return render_template('insnot.html', parametros = parametros)
-
-@app.route('/instaviso', methods=['GET', 'POST']) ### INSERTAR AVISOS
-def agregar_aviso():
-    if request.method == 'POST':
-        datos = []
-        datos.append(request.form['id'])
-        datos.append(request.form['titulo'])
-        datos.append(request.form['descripcion'])
-        datos.append(request.form['fecha'])
-
-        bd = Coneccion()
-        bd.insertarRegistro("avisos", datos)
-        bd.exit()
         return redirect(url_for('index'))
+    
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
 

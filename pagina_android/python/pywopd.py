@@ -56,6 +56,7 @@ def docx2pdf(input):
 
     try:
         subprocess.run(command, check=True)
+        os.remove(input)
         print(f'Se ha convertido correctamente.')
     except subprocess.CalledProcessError as e:
         print(f'Error al convertir el archivo: {e}')

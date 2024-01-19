@@ -5,76 +5,51 @@ insert noticias
 {% endblock %}
 {% block style %}
 
-
-.a {
-    color: #000000;
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 20px;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0; /* Color de fondo general */
 }
 
-.h1 {
-    color: #000000;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-form {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input,
-textarea,
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
-    background-color: #4caf50;
-    color: #fff;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.center {
-    text-align: center;
-}
 table {
-    border-collapse: collapse;
-    width: 100%;
-  }
+  width: 80%;
+  margin: 20px auto; /* Centrar la tabla en la página */
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
 
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
+th, td {
+  padding: 12px;
+  text-align: left;
+}
 
-  th {
-    background-color: #f2f2f2;
-  }
+thead {
+  background-color: #333;
+  color: #fff;
+}
+
+tbody {
+  background-color: #fff; /* Color de fondo para filas pares */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Color de fondo para filas impares */
+}
+
+.verde a {
+  color: #fff;
+  background-color: #4caf50; /* Color de fondo verde */
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.rojo a {
+  color: #fff;
+  background-color: #f44336; /* Color de fondo rojo */
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+}
   .verde {
     background-color: green; /* Cambia el color de fondo a verde */
     color: white; /* Cambia el color del texto a blanco para mayor contraste */

@@ -9,7 +9,7 @@ insert noticias
 
 
 table {
-  width: 90%;
+  width: 70%;
   border-collapse: collapse;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -34,12 +34,17 @@ tbody tr:nth-child(odd) {
   background-color: #fff; /* Color de fila impar */
 }
 
+td.verde.a {
+  background-color: #BDECB6; /* Color de fondo para la clase verde */
+  color: #fff;
+}
+
 td.verde {
   background-color: #2ecc71; /* Color de fondo para la clase verde */
   color: #fff;
 }
 
-td.rojo {
+td.rojo.a {
   background-color: #e74c3c; /* Color de fondo para la clase rojo */
   color: #fff;
 }
@@ -63,12 +68,12 @@ td.rojo {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-    font-size: 16px; 
+    font-size: 10px; 
   }
 
   th, td {
     display: block;
-    width: 100%;
+    width: 80%;
     box-sizing: border-box;
   }
 }

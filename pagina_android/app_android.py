@@ -350,8 +350,8 @@ def Mfunciones():
 
 @app.route('/insDat/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
 def agregar_noticia(nom=None):
+    parametros = dict(session)['profile']
     if request.method == 'POST':
-        parametros = dict(session)['profile']
         bd = Coneccion()
         atr = bd.obtenerAtributos(nom)
         datos = []

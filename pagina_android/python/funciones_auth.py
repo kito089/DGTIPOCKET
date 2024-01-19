@@ -5,11 +5,10 @@ from functools import wraps
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        print("------entre")
         user = dict(session).get('profile', None)
         if user:
-            print("---------usuario encontrado")
+            #print("---------usuario encontrado")
             return f(*args, **kwargs)
-        print("----------usuario no encontrado, rediriguendo a login")
+        #print("----------usuario no encontrado, rediriguendo a login")
         return redirect(url_for("login"))
     return decorated_function

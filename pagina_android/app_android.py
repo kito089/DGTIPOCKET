@@ -55,13 +55,13 @@ def index():
     avisos = bd.obtenerTablas("avisos")
     concursos = bd.obtenerTablas("concursos")
     bd.exit()
-    print("---------------sesion")
-    print(dict(session))
+    #print("---------------sesion")
+    #print(dict(session))
     parametros = dict(session)['profile']
     toks = dict(session)['tok_info']
 
-    print("session token")
-    print(toks)
+    #print("session token")
+    #print(toks)
 
     if parametros['persona'] == 'maestro':
         return render_template('autoridades/indexMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
@@ -97,11 +97,11 @@ def authorize():
     token.pop('userinfo')
     tokens.update(token)
     session['tok_info'] = tokens
-    print("---------------toks")
-    print(tokens)
+    #print("---------------toks")
+    #print(tokens)
     with open("token.txt", "w") as tok:
         tok.write(str(tokens))
-    print("fin")
+    #print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     if str.isnumeric(user_info['email'][0]):
         user_info.update({'persona':'alumno'})
@@ -379,7 +379,7 @@ def edDat(tabla, ide):
             datos.append(request.form['A'+str(i)])
         bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
-        return redirect(url_for('/tabla/'+str(tabla)))
+        return redirect(url_for('tabla',table=tabla))
     try:
         ide = int(ide)
         datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))

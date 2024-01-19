@@ -6,11 +6,7 @@ insert noticias
 {% block style %}
 
 
-.table-container {
-  width: 80%;
-  margin: 20px auto;
-  overflow-x: auto;
-}
+
 
 table {
   width: 100%;
@@ -21,7 +17,7 @@ table {
 }
 
 thead {
-  background-color: #3498db; /* Color de encabezado */
+  background-color: #1e1e1e; /* Color de encabezado */
   color: #fff;
 }
 
@@ -48,7 +44,7 @@ td.rojo {
   color: #fff;
 }
 
-a {
+.a {
   text-decoration: none;
   color: inherit;
   display: inline-block;
@@ -57,7 +53,7 @@ a {
   transition: background-color 0.3s ease;
 }
 
-a:hover {
+.a:hover {
   background-color: #34495e; /* Cambiar color al pasar el ratón */
   color: #fff;
 }
@@ -97,8 +93,8 @@ a:hover {
           {% for dato in fila[1:] %}
             <td>{{ dato }}</td>
           {% endfor %}
-            <td class="verde"><a href="/edDat/{{table}}/{{fila[0]}}">Editar</a></td>
-            <td class="rojo"><a href="/delDat/{{table}}/{{fila[0]}}">Borrar</a></td>
+            <td class="verde"><a class="a" href="/edDat/{{table}}/{{fila[0]}}">Editar</a></td>
+            <td class="rojo"><a class="a" href="/delDat/{{table}}/{{fila[0]}}">Borrar</a></td>
         </tr>
       {% endfor %}
     </tbody>

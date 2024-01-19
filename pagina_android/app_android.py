@@ -220,7 +220,7 @@ def tabla(table):
     parametros = dict(session)['profile']
     bd = Coneccion()
     atributos = bd.obtenerAtributos(table)
-    datos = bd.obtenerTablas("datos")
+    datos = bd.obtenerTablas(table)
     bd.exit()
     return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros, atributos = atributos, datos = datos, table = table)
 
@@ -348,46 +348,49 @@ def Mfunciones():
     parametros = dict(session)['profile']
     return render_template('autoridades/funcionesMaestros.html', parametros = parametros)
 
-@app.route('/insnot/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
+@app.route('/insDat/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
 def agregar_noticia(nom=None):
     if request.method == 'POST':
         bd = Coneccion()
         atr = bd.obtenerAtributos(nom)
-        print("----------atr")
-        print(atr)
         datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
         bd.insertarRegistro(nom, datos)
         bd.exit()
-        return redirect(url_for('index'))
+        if nom == "noticias" or nom == "avisos" or nom == "concursos":
+            return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
+        else:
+            return redirect(url_for('/tabla/'+str(nom)))
     
     parametros = dict(session)['profile']
-    return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
-
-@app.route('/insDat/<string:tabla>/<string:no>', methods=['GET', 'POST'])
-def insDat(tabla, no):
-    if request.method == 'POST':
-        datos = []
-        for i in range(int(no)):
-            datos.append(request.form['ins'+str(i)])
-        bd = Coneccion()
-        bd.insertarRegistro(tabla, datos)
-        bd.exit()
-        return render_template()
-    return render_template()
+    if nom == "noticias" or nom == "avisos" or nom == "concursos":
+        return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
+    else:
+        return render_template('autoridades/funcionesAut/agregar.html', parametros = parametros, atributos = atr)
 
 @app.route('/edDat/<string:tabla>/<string:id>', methods=['GET', 'POST'])
 def edDat(tabla, id):
+    parametros = dict(session)['profile']
+    bd = Coneccion()
+    atr = bd.obtenerAtributos(tabla)
     if request.method == 'POST':
         datos = []
+        for i in range(len(atr)-1):
+            datos.append(request.form['A'+str(i)])
+        bd.actualizarRegistro(tabla,id,datos)
+        bd.exit()
+        return redirect(url_for('/tabla/'+str(tabla)))
+    datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(id))
+    bd.exit()
+    return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
 
 @app.route("/delDat/<string:tabla>/<string:id>")
 def delDat(tabla, id):
     bd = Coneccion()
     bd.eliminarRegistro(tabla, id)
     bd.exit()
-    return render_template()
+    return redirect(url_for('/tabla/'+str(tabla)))
 
 ####            PRUEBAS             ####
 

@@ -362,7 +362,7 @@ def agregar_noticia(nom=None):
         if nom == "noticias" or nom == "avisos" or nom == "concursos":
             return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
         else:
-            return redirect(url_for('/tabla/'+str(nom)))
+            return redirect(url_for('tabla', table = nom))
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:
@@ -371,10 +371,10 @@ def agregar_noticia(nom=None):
 @app.route('/edDat/<string:tabla>/<string:ide>', methods=['POST', 'GET'])
 def edDat(tabla, ide):
     parametros = dict(session)['profile']
+    datos = []
     bd = Coneccion()
     atr = bd.obtenerAtributos(tabla)
     if request.method == 'POST':
-        datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
         bd.actualizarRegistro(tabla,ide,datos)

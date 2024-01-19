@@ -43,24 +43,14 @@ table {
       <th>Salón</th>
       <th>Horarios</th>
     </tr>
+    {% for tuto in tutorias %}
     <tr>
-      <td>Matemáticas</td>
-      <td>Profesor A</td>
-      <td>Aula 101</td>
-      <td>Lunes 9:00 AM - 10:30 AM</td>
+      <td>{{tuto[4]}}</td>
+      <td>{{tuto[3]}}</td>
+      <td>{{tuto[1]}}</td>
+      <td>{{tuto[2]}}</td>
     </tr>
-    <tr>
-      <td>Ciencias</td>
-      <td>Profesor B</td>
-      <td>Aula 102</td>
-      <td>Miércoles 2:00 PM - 3:30 PM</td>
-    </tr>
-    <tr>
-      <td>Historia</td>
-      <td>Profesor C</td>
-      <td>Aula 103</td>
-      <td>Viernes 11:00 AM - 12:30 PM</td>
-    </tr>
+    {% endfor %}
   </table>
 
 

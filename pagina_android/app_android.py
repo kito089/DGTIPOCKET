@@ -203,12 +203,26 @@ def pagos():
 @app.route('/clubs')
 def clubs():
     parametros = dict(session)['profile']
-    return render_template('funciones/clubapp.html', parametros = parametros)
+    bd = Coneccion()
+    clubs = bd.obtenerTablas("clubs")
+    bd.exit()
+    return render_template('funciones/clubapp.html', parametros = parametros, clubs=clubs)
 
 @app.route('/tutorias')
 def tutorias():
     parametros = dict(session)['profile']
-    return render_template('funciones/tutoriasapp.html', parametros = parametros)
+    bd = Coneccion()
+    tut = bd.obtenerTablas("tutorias")
+    tuto = []
+    for i in tut:
+        tuto.append([])
+        for j in tut:
+            if str(j).isdigit():
+                tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j))[0][0])
+            else:
+                tuto.append(j)
+    bd.exit()
+    return render_template('funciones/tutoriasapp.html', parametros = parametros, tutorias = tuto)
 
 @app.route('/servicio')
 def servicio():

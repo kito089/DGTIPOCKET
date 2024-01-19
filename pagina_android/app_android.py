@@ -220,7 +220,7 @@ def tabla(table):
     parametros = dict(session)['profile']
     bd = Coneccion()
     atributos = bd.obtenerAtributos(table)
-    datos = bd.obtenerTablas("datos")
+    datos = bd.obtenerTablas(table)
     bd.exit()
     return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros, atributos = atributos, datos = datos, table = table)
 

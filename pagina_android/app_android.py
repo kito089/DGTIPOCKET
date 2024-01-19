@@ -379,7 +379,7 @@ def edDat(tabla, ide):
             datos.append(request.form['A'+str(i)])
         bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
-        return redirect(url_for('/tabla/'+str(tabla)))
+        return redirect(url_for('tabla',table=tabla))
     try:
         ide = int(ide)
         datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))

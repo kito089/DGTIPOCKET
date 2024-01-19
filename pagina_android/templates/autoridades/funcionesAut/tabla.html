@@ -75,6 +75,15 @@ table {
   th {
     background-color: #f2f2f2;
   }
+  .verde {
+    background-color: green; /* Cambia el color de fondo a verde */
+    color: white; /* Cambia el color del texto a blanco para mayor contraste */
+  }
+
+  .rojo {
+    background-color: red; /* Cambia el color de fondo a rojo */
+    color: white; /* Cambia el color del texto a blanco para mayor contraste */
+  }
 {%endblock%}
 
 
@@ -97,6 +106,8 @@ table {
           {% for dato in fila %}
             <td>{{ dato }}</td>
           {% endfor %}
+            <td class="verde"><a src=""></td>
+            <td class="rojo"><a src=""></td>
         </tr>
       {% endfor %}
     </tbody>

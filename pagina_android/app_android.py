@@ -215,10 +215,14 @@ def servicio():
     parametros = dict(session)['profile']
     return render_template('funciones/servicio.html', parametros = parametros)
 
-@app.route('/tabla')
-def tabla():
+@app.route('/tabla/<string:table>')
+def tabla(table):
     parametros = dict(session)['profile']
-    return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros)
+    bd = Coneccion()
+    atributos = bd.obtenerAtributos(table)
+    datos = bd.obtenerTablas("datos")
+    bd.exit()
+    return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros, atributos = atributos, datos = datos, table = table)
 
 @app.route('/historial')
 def historial():

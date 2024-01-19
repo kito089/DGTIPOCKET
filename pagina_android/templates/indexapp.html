@@ -44,7 +44,7 @@ INICIO
 
 /* Estilo para la clase aviso */
 .aviso {
-    background-color: #1e1e1e; /* Color de fondo azul claro */
+    background: #1e1e1e;
     padding: 15px; /* Espaciado interno */
     margin-bottom: 15px; /* Espaciado inferior entre avisos */
     border-radius: 5px; /* Bordes redondeados */
@@ -59,7 +59,7 @@ INICIO
 }
 
 /* Estilo para los párrafos p dentro de la clase aviso */
-.aviso p {
+.ep {
     color: #ffffff; /* Color del texto azul medio */
     margin: 5px 0; /* Espaciado interno superior e inferior */
 }
@@ -267,7 +267,7 @@ h1 {
         {% for aviso in avisos[-3::][::-1] %}
         <div class="aviso">
             <h2 class="h2">{{ aviso.1 }}</h2>
-            <p class="p">{{ aviso.2 }}</p>
+            <p class="ep">{{ aviso.2 }}</p>
             <p class="fecha">{{ aviso.3 }}</p>
         </div>
         {% endfor %}

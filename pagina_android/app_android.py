@@ -369,8 +369,8 @@ def agregar_noticia(nom=None):
     else:
         return render_template('autoridades/funcionesAut/agregar.html', parametros = parametros, atributos = atr)
 
-@app.route('/edDat/<string:tabla>/<string:id>', methods=['GET', 'POST'])
-def edDat(tabla, id):
+@app.route('/edDat/<string:tabla>/<string:ide>', methods=['GET', 'POST'])
+def edDat(tabla, ide):
     parametros = dict(session)['profile']
     bd = Coneccion()
     atr = bd.obtenerAtributos(tabla)
@@ -381,7 +381,7 @@ def edDat(tabla, id):
         bd.actualizarRegistro(tabla,id,datos)
         bd.exit()
         return redirect(url_for('/tabla/'+str(tabla)))
-    datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(id))
+    datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
     bd.exit()
     return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
 

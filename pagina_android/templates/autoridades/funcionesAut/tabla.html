@@ -5,59 +5,76 @@ insert noticias
 {% endblock %}
 {% block style %}
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0; /* Color de fondo general */
+
+.table-container {
+  width: 80%;
+  margin: 20px auto;
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 thead {
-  background-color: #333;
+  background-color: #3498db; /* Color de encabezado */
   color: #fff;
 }
 
-tbody {
-  background-color: #fff; /* Color de fondo para filas pares */
+th, td {
+  padding: 15px;
+  text-align: left;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f2f2f2; /* Color de fondo para filas impares */
+  background-color: #ecf0f1; /* Color de fila par */
 }
 
-.verde a {
-  color: #fff;
-  background-color: #4caf50; /* Color de fondo verde */
-  padding: 8px 12px;
-  border-radius: 5px;
-  text-decoration: none;
+tbody tr:nth-child(odd) {
+  background-color: #fff; /* Color de fila impar */
 }
 
-.rojo a {
+td.verde {
+  background-color: #2ecc71; /* Color de fondo para la clase verde */
   color: #fff;
-  background-color: #f44336; /* Color de fondo rojo */
-  padding: 8px 12px;
-  border-radius: 5px;
-  text-decoration: none;
 }
-  .verde {
-    background-color: green; /* Cambia el color de fondo a verde */
-    color: white; /* Cambia el color del texto a blanco para mayor contraste */
+
+td.rojo {
+  background-color: #e74c3c; /* Color de fondo para la clase rojo */
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  background-color: #34495e; /* Cambiar color al pasar el ratón */
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  .rojo {
-    background-color: red; /* Cambia el color de fondo a rojo */
-    color: white; /* Cambia el color del texto a blanco para mayor contraste */
+  th, td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
   }
+}
 {%endblock%}
 
 

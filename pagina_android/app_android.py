@@ -378,7 +378,7 @@ def edDat(tabla, ide):
         datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
-        bd.actualizarRegistro(tabla,id,datos)
+        bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
         return redirect(url_for('/tabla/'+str(tabla)))
     datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))

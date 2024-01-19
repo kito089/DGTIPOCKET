@@ -89,25 +89,25 @@ table {
 
 {% block content %}
   
-<h1 class="h1">TABLAAAAAASSSSSSSSSS???????????</h1>
+<h1 class="h1">{{ table }}<h1>
 <table>
     <thead>
       <tr>
-        <th>aaaaaaaaaaa</th>
-        <th>bbbbbbbbbbb</th>
-        {% for columna in columnas %}
-          <th>{{ columna }}</th>
+        {% for a in atributos[1:] %}
+          <th>{{ a }}</th>
         {% endfor %}
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       {% for fila in datos %}
         <tr>
-          {% for dato in fila %}
+          {% for dato in fila[1:] %}
             <td>{{ dato }}</td>
           {% endfor %}
-            <td class="verde"><a src=""></td>
-            <td class="rojo"><a src=""></td>
+            <td class="verde"><a src="/edDat/{{table}}/{{fila.0}}"></td>
+            <td class="rojo"><a src="/delDat/{{table}}/{{fila.0}}"></td>
         </tr>
       {% endfor %}
     </tbody>

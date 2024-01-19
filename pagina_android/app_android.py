@@ -368,7 +368,7 @@ def agregar_noticia(nom=None):
     else:
         return render_template('autoridades/funcionesAut/agregar.html', parametros = parametros, atributos = atr)
 
-@app.route('/edDat/<string:tabla>/<string:ide>', methods=['GET', 'POST'])
+@app.route('/edDat/<string:tabla>/<string:ide>', methods=['POST', 'GET'])
 def edDat(tabla, ide):
     parametros = dict(session)['profile']
     bd = Coneccion()

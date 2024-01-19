@@ -381,9 +381,9 @@ def edDat(tabla, ide):
         bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
         return redirect(url_for('/tabla/'+str(tabla)))
-    if str(ide) != "app.css" or str(ide) != "main.js":
+    if not(str(ide) == "app.css") or not(str(ide) == "main.js"):
+        print(str(ide))
         datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
-    print(ide)
     bd.exit()
     return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
 

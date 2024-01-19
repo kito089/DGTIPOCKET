@@ -106,8 +106,8 @@ table {
           {% for dato in fila[1:] %}
             <td>{{ dato }}</td>
           {% endfor %}
-            <td class="verde"><a src="/edDat/{{table}}/{{fila.0}}"></td>
-            <td class="rojo"><a src="/delDat/{{table}}/{{fila.0}}"></td>
+            <td class="verde"><a href="/edDat/{{table}}/{{fila.0}}">Editar</a></td>
+            <td class="rojo"><a href="/delDat/{{table}}/{{fila.0}}">Borrar</a></td>
         </tr>
       {% endfor %}
     </tbody>

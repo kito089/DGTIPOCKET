@@ -89,12 +89,10 @@ table {
 
 {% block content %}
   
-<h1 class="h1">editar???????????</h1>
-
-    
-        {% for dato in datos %}
-            <h2>{{ dato }}</h2>
-          <input type="text" value="{{ dato }}">
+<h1 class="h1">editar {{tabla}}</h1>
+        {% for i in range(1,atributos[1:]|length) %}
+            <h2>{{ atributos.i }}</h2>
+          <input type="text" value="{{ datos.i }}">
         {% endfor %}
 <input type="submit">Guardar</input>  
 

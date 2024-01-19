@@ -383,7 +383,7 @@ def edDat(tabla, id):
         return redirect(url_for('/tabla/'+str(tabla)))
     datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(id))
     bd.exit()
-    return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos)
+    return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
 
 @app.route("/delDat/<string:tabla>/<string:id>")
 def delDat(tabla, id):

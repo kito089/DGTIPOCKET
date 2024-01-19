@@ -160,10 +160,7 @@ class Coneccion:
                 print(query)
                 self.cursor.execute(query)
                 ejemplo = self.cursor.fetchall()
-                if len(ejemplo) == 1 and atributo=="contra":
-                    return ejemplo[0][0].encode('utf-8')
-                else:
-                    return ejemplo
+                return ejemplo
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
 

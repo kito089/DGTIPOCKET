@@ -388,7 +388,7 @@ def edDat(tabla, ide):
         print(str(ide)) 
     print(request.method)
     bd.exit()
-    return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
+    return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide)
 
 @app.route("/delDat/<string:tabla>/<string:id>")
 def delDat(tabla, id):

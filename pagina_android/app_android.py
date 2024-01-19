@@ -351,9 +351,9 @@ def Mfunciones():
 @app.route('/insDat/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
 def agregar_noticia(nom=None):
     parametros = dict(session)['profile']
+    bd = Coneccion()
+    atr = bd.obtenerAtributos(nom)
     if request.method == 'POST':
-        bd = Coneccion()
-        atr = bd.obtenerAtributos(nom)
         datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
@@ -363,6 +363,7 @@ def agregar_noticia(nom=None):
             return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
         else:
             return redirect(url_for('tabla', table = nom))
+    bd.exit()
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:

@@ -82,7 +82,7 @@
   --title-color: hsl(var(--hue), 12%, 15%);
   --text-color: hsl(var(--hue), 8%, 35%);
   --body-color: #81d6dc;
-  --container-color: #FFF;
+  --container-color: #ffffff;
 
   /*========== Font and typography ==========*/
   --body-font: 'Open Sans', sans-serif;

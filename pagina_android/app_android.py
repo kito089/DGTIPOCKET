@@ -366,7 +366,7 @@ def agregar_noticia(nom=None):
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:
-        return render_template('autoridades/funcionesAut/agregar.html', parametros = parametros, atributos = atr)
+        return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, tabla= nom)
 
 @app.route('/edDat/<string:tabla>/<string:ide>', methods=['POST', 'GET'])
 def edDat(tabla, ide):
@@ -394,7 +394,7 @@ def delDat(tabla, id):
     bd = Coneccion()
     bd.eliminarRegistro(tabla, id)
     bd.exit()
-    return redirect(url_for('/tabla/'+str(tabla)))
+    return redirect(url_for('tabla',table=tabla))
 
 ####            PRUEBAS             ####
 

@@ -77,11 +77,11 @@
   /*========== Colors ==========*/
   --hue: 174;
   --sat: 63%;
-  --first-color:#ac8b59;
+  --first-color:#194276;
   --first-color-alt: hsl(var(--hue), var(--sat), 36%);
   --title-color: hsl(var(--hue), 12%, 15%);
   --text-color: hsl(var(--hue), 8%, 35%);
-  --body-color: #fff5eb;
+  --body-color: #81d6dc;
   --container-color: #FFF;
 
   /*========== Font and typography ==========*/

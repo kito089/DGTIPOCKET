@@ -378,10 +378,12 @@ def edDat(tabla, ide):
         datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
-        bd.actualizarRegistro(tabla,id,datos)
+        bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
         return redirect(url_for('/tabla/'+str(tabla)))
-    datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
+    if ide != "app.css" or ide != "main.js":
+        datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
+    print(ide)
     bd.exit()
     return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
 

@@ -386,6 +386,7 @@ def edDat(tabla, ide):
         datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
     except:
         print(str(ide)) 
+    print(datos)
     bd.exit()
     return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
 

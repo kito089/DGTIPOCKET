@@ -89,11 +89,11 @@ table {
 
 {% block content %}
   
-<h1 class="h1">editar {{tabla}}</h1>
-<form action="/edDat/{{tabla}}/{{ide}}" method="POST">
+<h1 class="h1">{{tabla}}</h1>
+<form action="{%if datos%}/edDat/{{tabla}}/{{ide}}{%else%}/insDat/{{tabla}}{%endif%}" method="POST">
   {% for i in range(1,atributos[1:]|length+1) %}
       <h2>{{atributos[i]}}</h2>
-    <input type="text" value="{{datos[0][i]}}" name="A{{i-1}}">
+    <input type="text" {%if datos%} value="{{datos[0][i]}}" {%endif%} name="A{{i-1}}">
   {% endfor %} 
   <input type="submit" value="Guardar">
 </form>

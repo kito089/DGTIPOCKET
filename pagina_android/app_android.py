@@ -350,10 +350,10 @@ def Mfunciones():
 
 @app.route('/insDat/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
 def agregar_noticia(nom=None):
+    parametros = dict(session)['profile']
+    bd = Coneccion()
+    atr = bd.obtenerAtributos(nom)
     if request.method == 'POST':
-        parametros = dict(session)['profile']
-        bd = Coneccion()
-        atr = bd.obtenerAtributos(nom)
         datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
@@ -363,10 +363,11 @@ def agregar_noticia(nom=None):
             return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
         else:
             return redirect(url_for('tabla', table = nom))
+    bd.exit()
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:
-        return render_template('autoridades/funcionesAut/agregar.html', parametros = parametros, atributos = atr)
+        return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, tabla= nom)
 
 @app.route('/edDat/<string:tabla>/<string:ide>', methods=['POST', 'GET'])
 def edDat(tabla, ide):
@@ -394,7 +395,7 @@ def delDat(tabla, id):
     bd = Coneccion()
     bd.eliminarRegistro(tabla, id)
     bd.exit()
-    return redirect(url_for('/tabla/'+str(tabla)))
+    return redirect(url_for('tabla',table=tabla))
 
 ####            PRUEBAS             ####
 

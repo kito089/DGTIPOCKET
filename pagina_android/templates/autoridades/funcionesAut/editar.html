@@ -1,0 +1,101 @@
+{% extends "layouts/layoutD.html" %}
+
+{% block title %}
+insert noticias
+{% endblock %}
+{% block style %}
+
+
+.a {
+    color: #000000;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.h1 {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.center {
+    text-align: center;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+  .verde {
+    background-color: green; /* Cambia el color de fondo a verde */
+    color: white; /* Cambia el color del texto a blanco para mayor contraste */
+  }
+
+  .rojo {
+    background-color: red; /* Cambia el color de fondo a rojo */
+    color: white; /* Cambia el color del texto a blanco para mayor contraste */
+  }
+{%endblock%}
+
+
+{% block content %}
+  
+<h1 class="h1">editar???????????</h1>
+
+    
+        {% for dato in datos %}
+            <h2>{{ dato }}</h2>
+          <input type="text" value="{{ dato }}">
+        {% endfor %}
+<input type="submit">Guardar</input>  
+
+{% endblock %}

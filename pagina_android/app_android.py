@@ -381,8 +381,12 @@ def edDat(tabla, ide):
         bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
         return redirect(url_for('/tabla/'+str(tabla)))
-    print(str(ide))
-        #datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
+    try:
+        ide = int(ide)
+        datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
+    except:
+        print(str(ide)) 
+    print(datos)
     bd.exit()
     return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla)
 

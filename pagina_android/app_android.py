@@ -235,6 +235,22 @@ def tabla(table):
     bd = Coneccion()
     atributos = bd.obtenerAtributos(table)
     datos = bd.obtenerTablas(table)
+    tab2 = ""
+    datre = []
+
+    if "_id" in atributos[-1]:
+        for a in atributos[-1]:
+            if a != "_":
+                tab2 += a
+            else:
+                break
+
+        atributos.pop(-1)
+        atributos.append(tab2)
+
+        for dato in datos:
+            dato.append(bd.seleccion(tab2, "nombre", "id"+str(tab2)+"="+str(dato[-1]))[0][0])
+            dato.pop(-2)
     bd.exit()
     return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros, atributos = atributos, datos = datos, table = table)
 

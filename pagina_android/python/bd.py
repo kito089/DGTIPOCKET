@@ -32,7 +32,10 @@ class Coneccion:
                 query = "SELECT * FROM " + tabla
                 self.cursor.execute(query)
                 tablar = self.cursor.fetchall()
-                return tablar
+                tab = []
+                for t in tablar:
+                    tab.append(list(t))
+                return tab
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
 
@@ -40,10 +43,6 @@ class Coneccion:
         if self.conexion.open:
             try:
                 atributos = self.obtenerAtributos(tabla)
-                print("database")
-                print(datos)
-                print(atributos)
-                print(tabla)
                 atr = ""
                 dat = " "
                 for i in range(1, len(atributos)):
@@ -160,7 +159,10 @@ class Coneccion:
                 print(query)
                 self.cursor.execute(query)
                 ejemplo = self.cursor.fetchall()
-                return ejemplo
+                dat = []
+                for eje in ejemplo:
+                    dat.append(list(eje))
+                return dat
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
 
@@ -171,7 +173,10 @@ class Coneccion:
                 print(query)
                 self.cursor.execute(query)
                 ejemplo = self.cursor.fetchall()
-                return ejemplo
+                dat = []
+                for eje in ejemplo:
+                    dat.append(list(eje))
+                return dat
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
 

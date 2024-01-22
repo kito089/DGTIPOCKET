@@ -155,7 +155,7 @@ class Coneccion:
     def seleccion(self, tabla, atributo, wh):  #Retorna un select que pida quien lo llame
         if self.conexion.open:
             try:
-                query = "SELECT "+atributo+" FROM "+tabla+" WHERE "+wh
+                query = "SELECT {} FROM {} WHERE {}".format(atributo, tabla, wh)
                 print(query)
                 self.cursor.execute(query)
                 ejemplo = self.cursor.fetchall()

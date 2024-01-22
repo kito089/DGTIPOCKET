@@ -432,13 +432,9 @@ def edDat(tabla, ide):
         bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
         return redirect(url_for('tabla',table=tabla))
-    # try:
-    #     ide = int(ide)
     bd = Coneccion()
     datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
     bd.exit()
-    # except:
-    #     print("") 
     return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide)
 
 @app.route("/delDat/<string:tabla>/<string:id>")

@@ -154,12 +154,6 @@ class Coneccion:
 
     def seleccion(self, tabla, atributo, wh):  #Retorna un select que pida quien lo llame
         if self.conexion.open:
-
-            # Imprimir información de la conexión
-            print("Conectado a la base de datos:")
-            print("   - Host: {}".format(self.conexion.get_host_info()))
-            print("   - Usuario: {}".format(self.conexion.get_server_info()))
-            print("   - Base de datos: {}".format(self.conexion.db))
             try:
                 query = "SELECT {} FROM {} WHERE {}".format(atributo, tabla, wh)
                 print(query)

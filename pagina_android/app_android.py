@@ -424,18 +424,21 @@ def edDat(tabla, ide):
     datos = []
     bd = Coneccion()
     atr = bd.obtenerAtributos(tabla)
+    bd.exit()
     if request.method == 'POST':
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
+        bd = Coneccion()
         bd.actualizarRegistro(tabla,ide,datos)
         bd.exit()
         return redirect(url_for('tabla',table=tabla))
-    try:
-        ide = int(ide)
-        datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
-    except:
-        print("") 
+    # try:
+    #     ide = int(ide)
+    bd = Coneccion()
+    datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
     bd.exit()
+    # except:
+    #     print("") 
     return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide)
 
 @app.route("/delDat/<string:tabla>/<string:id>")

@@ -98,7 +98,7 @@ table {
   {% endfor %} 
   {% if comb %}
     <h2>{{atributos[-1]}}</h2>
-    <select name="A{{atributos|length-1}}">
+    <select name="A{{atributos|length-2}}">
     {% for c in comb %}
       <option value="{{c[0]}}">{{c[1]}}</option>
     {% endfor %}

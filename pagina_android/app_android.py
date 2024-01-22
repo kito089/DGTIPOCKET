@@ -385,28 +385,21 @@ def agregar_noticia(nom=None):
     bd = Coneccion()
     atr = bd.obtenerAtributos(nom)
     bd.exit()
-    print(request.method)
     if request.method == 'POST':
-        print("XD?")
         datos = []
         for i in range(len(atr)-1):
             print("obteniendo: A"+str(i))
             datos.append(request.form['A'+str(i)])
-        print("camino")
         bd = Coneccion()
         bd.insertarRegistro(nom, datos)
         bd.exit()
-        print("llegue")
         if nom == "noticias" or nom == "avisos" or nom == "concursos":
-            print("raro")
             return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
         else:
-            print("corecto")
             return redirect(url_for('tabla', table = nom))
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:
-        print("no c q hago aki unu")
         if "_id" in atr[-1]:
             for a in atr[-1]:
                 if a != "_":
@@ -427,6 +420,8 @@ def agregar_noticia(nom=None):
 def edDat(tabla, ide):
     parametros = dict(session)['profile']
     datos = []
+    tab2 = ""
+    comb = None
     bd = Coneccion()
     atr = bd.obtenerAtributos(tabla)
     bd.exit()
@@ -440,7 +435,22 @@ def edDat(tabla, ide):
     bd = Coneccion()
     datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
     bd.exit()
-    return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide)
+    if "_id" in atr[-1]:
+        for a in atr[-1]:
+            if a != "_":
+                tab2 += a
+            else:
+                break
+
+        atr.pop(-1)
+        atr.append(tab2)
+
+        bd = Coneccion()
+        comb = bd.seleccion(tab2, "id"+tab2+",nombre", "true")
+        bd.exit()
+        datos[0].pop(-1)
+        datos.append(comb[0][-1])
+    return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide, comb=comb)
 
 @app.route("/delDat/<string:tabla>/<string:id>")
 def delDat(tabla, id):

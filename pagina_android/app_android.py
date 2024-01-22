@@ -455,20 +455,15 @@ def pruebas():
     return render_template('prueba.html', parametros = parametros)
 
 def generate_plot():
-    # Datos de ejemplo
     x = ['Fisica 2', 'CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL',
          'INGLÉS V', 'CONSTRUYE BASES DE DATOS PARA APLICACIONES WEB',
          'DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
     y = [5, 7, 9, 8, 10, 9]
 
-    # Crear el gráfico
-    plt.plot(y)  # Solo necesitas los valores del eje y, no x
+    plt.bar(x, y, color='skyblue')
     plt.xlabel('Materias')
-    plt.ylabel('Eje Y')
-    plt.title('Gráfico de ejemplo  Promedio')
-
-    # Personalizar etiquetas del eje x con rotación diagonal
-    plt.xticks(range(len(x)), x, rotation=45, ha='right')
+    plt.ylabel('Promedio')
+    plt.title('Gráfico de Barras - Promedio')
 
     # Guardar el gráfico en un BytesIO para mostrarlo en la página HTML
     img = BytesIO()
@@ -480,6 +475,5 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
-
 if __name__ == '__main__':
     app.run(debug=True, ssl_context='adhoc', threaded=True)

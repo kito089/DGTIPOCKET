@@ -92,6 +92,7 @@ table {
 <h1 class="h1">{{tabla}}</h1>
 <form action="{%if datos%}/edDat/{{tabla}}/{{ide}}{%else%}/insDat/{{tabla}}{%endif%}" method="POST">
   {% set fin = 0 if comb else 1 %}
+  {{fin}}
   {% for i in range(1,atributos[1:]|length+fin) %}
     <h2>{{atributos[i]}}</h2>
     <input type="text" {%if datos%} value="{{datos[0][i]}}" {%endif%} name="A{{i-1}}">

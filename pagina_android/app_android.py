@@ -384,17 +384,18 @@ def agregar_noticia(nom=None):
     comb = None
     bd = Coneccion()
     atr = bd.obtenerAtributos(nom)
+    bd.exit()
     if request.method == 'POST':
         datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])
+        bd = Coneccion()
         bd.insertarRegistro(nom, datos)
         bd.exit()
         if nom == "noticias" or nom == "avisos" or nom == "concursos":
             return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
         else:
             return redirect(url_for('tabla', table = nom))
-    bd.exit()
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:

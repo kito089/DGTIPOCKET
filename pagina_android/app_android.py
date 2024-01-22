@@ -407,7 +407,7 @@ def agregar_noticia(nom=None):
 
             atr.pop(-1)
             atr.append(tab2)
-            print(tab2)
+            print("----------tab2? "+tab2)
             comb = bd.seleccion(tab2, "id"+tab2+",nombre", "true")
         
         return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, tabla= nom, comb=comb)

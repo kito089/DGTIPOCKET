@@ -386,6 +386,7 @@ def agregar_noticia(nom=None):
     atr = bd.obtenerAtributos(nom)
     bd.exit()
     if request.method == 'POST':
+        print("XD?")
         datos = []
         for i in range(len(atr)-1):
             datos.append(request.form['A'+str(i)])

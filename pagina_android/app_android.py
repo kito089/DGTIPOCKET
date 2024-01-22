@@ -236,7 +236,6 @@ def tabla(table):
     atributos = bd.obtenerAtributos(table)
     datos = bd.obtenerTablas(table)
     tab2 = ""
-    datre = []
 
     if "_id" in atributos[-1]:
         for a in atributos[-1]:
@@ -381,6 +380,8 @@ def Mfunciones():
 @app.route('/insDat/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
 def agregar_noticia(nom=None):
     parametros = dict(session)['profile']
+    tab2 = ""
+    comb = None
     bd = Coneccion()
     atr = bd.obtenerAtributos(nom)
     if request.method == 'POST':
@@ -397,7 +398,19 @@ def agregar_noticia(nom=None):
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:
-        return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, tabla= nom)
+        if "_id" in atr[-1]:
+            for a in atr[-1]:
+                if a != "_":
+                    tab2 += a
+                else:
+                    break
+
+            atr.pop(-1)
+            atr.append(tab2)
+
+            comb = bd.seleccion(tab2, "id"+tab2+",nombre", "true")
+        
+        return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, tabla= nom, comb=comb)
 
 @app.route('/edDat/<string:tabla>/<string:ide>', methods=['POST', 'GET'])
 def edDat(tabla, ide):
@@ -418,7 +431,7 @@ def edDat(tabla, ide):
         print(str(ide)) 
     print(request.method)
     bd.exit()
-    return render_template('autoridades/funcionesAut/editar.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide)
+    return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide)
 
 @app.route("/delDat/<string:tabla>/<string:id>")
 def delDat(tabla, id):

@@ -398,6 +398,7 @@ def agregar_noticia(nom=None):
     if nom == "noticias" or nom == "avisos" or nom == "concursos":
         return render_template('autoridades/funcionesAut/insnot.html', parametros = parametros)
     else:
+        print("atributo final: ",atr[-1])
         if "_id" in atr[-1]:
             for a in atr[-1]:
                 if a != "_":
@@ -407,6 +408,8 @@ def agregar_noticia(nom=None):
 
             atr.pop(-1)
             atr.append(tab2)
+            print("atributo final: ",atr[-1])
+
             print("----------tab2? "+tab2)
             comb = bd.seleccion(tab2, "id"+tab2+",nombre", "true")
         

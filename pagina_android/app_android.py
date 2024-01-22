@@ -428,8 +428,7 @@ def edDat(tabla, ide):
         ide = int(ide)
         datos = bd.seleccion(tabla,"*","id"+str(tabla)+" = "+str(ide))
     except:
-        print(str(ide)) 
-    print(request.method)
+        print("") 
     bd.exit()
     return render_template('autoridades/funcionesAut/agred.html', parametros = parametros, atributos = atr, datos = datos, tabla = tabla, ide = ide)
 

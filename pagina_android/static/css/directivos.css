@@ -379,6 +379,7 @@ h1{
 }
 #miDiv {
   height:25%; /* Altura deseada */
+  margin-bottom: 1rem;
 }
 
 

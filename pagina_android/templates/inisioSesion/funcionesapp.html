@@ -54,7 +54,11 @@ INICIO
     color: #fff;
 
   }
-  
+  .item{
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
 {% endblock %}
 
 {% block content %}
@@ -67,8 +71,7 @@ INICIO
         <a class="App-button" href="/agenda">Visitar</a>
 
       </div>
-</div>
-<div class="item">
+
     <div class="card">
        
       
@@ -77,8 +80,7 @@ INICIO
         <div class="titulo">Cuadernillo</div>
         <a class="App-button" href="/pagos">Visitar</a>
       </div>
-</div>
-<div class="item">
+
     <div class="card">
        
       
@@ -87,9 +89,7 @@ INICIO
         <div class="titulo">Pagos</div>
         <a class="App-button" href="/pagos">Visitar</a>
       </div>
-</div>
 
-<div class="item">
   <div class="card">
      
     
@@ -98,8 +98,7 @@ INICIO
       <div class="titulo">Clubs</div>
       <a class="App-button" href="/clubs">Visitar</a>
     </div>
-</div>
-<div class="item">
+
   <div class="card">
      
     
@@ -108,8 +107,7 @@ INICIO
       <div class="titulo">Tutorias</div>
       <a class="App-button" href="/tutorias">Visitar</a>
     </div>
-</div>
-<div class="item">
+
   <div class="card">
      
     
@@ -118,8 +116,7 @@ INICIO
       <div class="titulo">Servicio Social</div>
       <a class="App-button" href="/servicio">Visitar</a>
     </div>
-</div>
-<div class="item">
+
   <div class="card">
      
     

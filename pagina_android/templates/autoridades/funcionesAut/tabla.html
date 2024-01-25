@@ -117,13 +117,13 @@ a.agregar:hover {
         <tr>
           {% for i in range(1,fila[1:]|length) %}
             {% if atributos[i] == "turno" %}
-              {% if datos[i] == 0 %}
+              {% if fila[i] == 0 %}
                 <td>Matutino</td>
               {% else %}
                 <td>Vespertino</td>
               {% endif %}
             {% else %}
-              <td>{{ datos[i] }}</td>
+              <td>{{ fila[i] }}</td>
             {% endif %}
           {% endfor %}
           <td class="verde"><a class="a" href="/edDat/{{table}}/{{fila[0]}}">Editar</a></td>

@@ -200,64 +200,36 @@ def pagos():
     parametros = dict(session)['profile']
     return render_template('funciones/pagos.html', parametros = parametros)
 
-@app.route('/clubs')
-def clubs():
-    parametros = dict(session)['profile']
-    bd = Coneccion()
-    clubs = bd.obtenerTablas("clubs")
-    bd.exit()
-    return render_template('funciones/clubapp.html', parametros = parametros, clubs=clubs)
-
-@app.route('/tutorias')
-def tutorias():
-    parametros = dict(session)['profile']
-    bd = Coneccion()
-    tut = bd.obtenerTablas("tutorias")
-    tuto = []
-    for i in tut:
-        tuto.append([])
-        for j in tut:
-            if str(j).isdigit():
-                tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j))[0][0])
-            else:
-                tuto.append(j)
-    bd.exit()
-    return render_template('funciones/tutoriasapp.html', parametros = parametros, tutorias = tuto)
-
 @app.route('/servicio')
 def servicio():
     parametros = dict(session)['profile']
     return render_template('funciones/servicio.html', parametros = parametros)
-
-@app.route('/tabla/<string:table>')
-def tabla(table):
-    parametros = dict(session)['profile']
-    bd = Coneccion()
-    atributos = bd.obtenerAtributos(table)
-    datos = bd.obtenerTablas(table)
-    tab2 = ""
-
-    if "_id" in atributos[-1]:
-        for a in atributos[-1]:
-            if a != "_":
-                tab2 += a
-            else:
-                break
-
-        atributos.pop(-1)
-        atributos.append(tab2)
-
-        for dato in datos:
-            dato.append(bd.seleccion(tab2, "nombre", "id"+str(tab2)+"="+str(dato[-1]))[0][0])
-            dato.pop(-2)
-    bd.exit()
-    return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros, atributos = atributos, datos = datos, table = table)
 
 @app.route('/historial')
 def historial():
     plot_url = generate_plot()
     parametros = dict(session)['profile']
     return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
+
+@app.route('/actualizar_info', methods = ['POST', 'GET'])
+def actualizar():
+    parametros = dict(session)['profile']
+    db = Coneccion()
+    datos = db.seleccion("alumnos","*","no_control = "+parametros['email'].replace("@cetis155.edu.mx",""))
+    db.exit
+    if request.method == 'POST':
+        for i in range(3):
+            datos[i+2] = request.form['A'+str(i)]
+        db = Coneccion()
+        db.actualizarRegistro("alumnos",datos[0],datos[1:])
+        db.exit
+        return redirect(url_for("logout"))
+    db = Coneccion()
+    grupos = db.seleccion("grupo","idgrupo, letra","true")
+    db.exit()
+    return render_template('inisioSesion/cambio.html', parametros=parametros, grupos = grupos)
+    
+
 
 #######################################################################################
 @app.route('/planteles')                                                              #
@@ -316,6 +288,54 @@ def boleta():
         if os.path.exists(pdf):
             os.remove(pdf)
             print(f'Archivo {pdf} eliminado correctamente.')
+
+@app.route('/tabla/<string:table>')
+def tabla(table):
+    parametros = dict(session)['profile']
+    bd = Coneccion()
+    atributos = bd.obtenerAtributos(table)
+    datos = bd.obtenerTablas(table)
+    tab2 = ""
+
+    if "_id" in atributos[-1]:
+        for a in atributos[-1]:
+            if a != "_":
+                tab2 += a
+            else:
+                break
+
+        atributos.pop(-1)
+        atributos.append(tab2)
+
+        for dato in datos:
+            dato.append(bd.seleccion(tab2, "nombre", "id"+str(tab2)+"="+str(dato[-1]))[0][0])
+            dato.pop(-2)
+    bd.exit()
+    return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros, atributos = atributos, datos = datos, table = table)
+
+@app.route('/clubs')
+def clubs():
+    parametros = dict(session)['profile']
+    bd = Coneccion()
+    clubs = bd.obtenerTablas("clubs")
+    bd.exit()
+    return render_template('funciones/clubapp.html', parametros = parametros, clubs=clubs)
+
+@app.route('/tutorias')
+def tutorias():
+    parametros = dict(session)['profile']
+    bd = Coneccion()
+    tut = bd.obtenerTablas("tutorias")
+    tuto = []
+    for i in tut:
+        tuto.append([])
+        for j in tut:
+            if str(j).isdigit():
+                tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j))[0][0])
+            else:
+                tuto.append(j)
+    bd.exit()
+    return render_template('funciones/tutoriasapp.html', parametros = parametros, tutorias = tuto)
 
 @app.route('/noticias')                         #pendiente css
 def noticias():

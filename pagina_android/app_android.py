@@ -215,7 +215,7 @@ def historial():
 def actualizar():
     parametros = dict(session)['profile']
     db = Coneccion()
-    datos = db.seleccion("alumnos","*","no_control = "+parametros['email'].replace("@cetis155.edu.mx",""))
+    datos = db.seleccion("alumnos","*","no_control = '"+parametros['email'].replace("@cetis155.edu.mx","")+"'")
     db.exit
     if request.method == 'POST':
         for i in range(3):

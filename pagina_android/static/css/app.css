@@ -296,6 +296,10 @@ img {
   .nav__link:hover {
     color: var(--first-color);
   }
+  .item{
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 
   /* First design, remove if you choose the minimalist design */
   .active-link::before {

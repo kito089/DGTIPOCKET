@@ -64,7 +64,7 @@ def index():
     #print(toks)
 
     if parametros['persona'] == 'maestro':
-        return render_template('autoridades/indexMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
+        return render_template('autoridades/funcionesMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
     elif parametros['persona'] == 'programador':
         return render_template('autoridades/indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)
     else:

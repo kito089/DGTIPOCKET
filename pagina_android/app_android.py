@@ -216,6 +216,7 @@ def actualizar():
     parametros = dict(session)['profile']
     db = Coneccion()
     datos = db.seleccion("alumnos","*","no_control = '"+parametros['email'].replace("@cetis155.edu.mx","")+"'")
+    print(datos)
     db.exit
     if request.method == 'POST':
         for i in range(3):

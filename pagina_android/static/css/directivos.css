@@ -82,8 +82,8 @@
   --first-color-alt: hsl(var(--hue), var(--sat), 36%);
   --title-color: hsl(var(--hue), 12%, 15%);
   --text-color: hsl(var(--hue), 8%, 35%);
-  --body-color: #81d6dc;
-  --container-color: #ffffff;
+  --body-color: #ffffff;
+  --container-color: #006699;
   
 
   /*========== Font and typography ==========*/

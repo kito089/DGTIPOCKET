@@ -98,42 +98,6 @@
     <p>CURP: {{parametros['curp']}}</p>
     <a id="logout-link" href="/logout">Cerrar sesión </a>
 </div>
-
-
-<div id="container">
-<h2>Actualizar Informacion</h2>
-
-<form id="actualizar info" action="/actualizar_info" method="post">
-  <label for="curp">CURP existente:</label>
-  <input type="text" id="curp" name="curp" required value="{{parametros['curp']}}">
-  <label for="grado">Grado:</label>
-  <select id="grado" name="grado" required value=" {{parametros['grado']}}">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <!-- Agrega más opciones según tus necesidades -->
-  </select>
-
-  <label for="grupo">Grupo:</label>
-  <select id="grupo" name="grupo" required value="{{parametros['grupo'] }}">
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="C">C</option>
-    <option value="D">D</option>
-    <option value="E">E</option>
-    <option value="F">F</option>
-    <option value="G">G</option>
-    <option value="H">H</option>
-    <option value="I">I</option>
-    <option value="J">J</option>
-    <!-- Agrega más opciones según tus necesidades -->
-  </select>
-
-  <a id="logout-link" type="submit">Actualizar CURP</a>
-</form>
 </div>
 
 {% endblock %}

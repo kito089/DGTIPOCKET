@@ -118,7 +118,7 @@ a.agregar:hover {
       {% for fila in datos %}
         <tr>
           {% for dato in fila[1:] %}
-            {% if a == 1 %}
+            {% if turn == 1 %}
               {% if dato == 0%}
                 <td>Matutino</td>
               {% else %}

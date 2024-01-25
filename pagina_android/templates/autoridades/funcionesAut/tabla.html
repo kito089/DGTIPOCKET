@@ -107,6 +107,7 @@ a.agregar:hover {
       <tr>
         {% for a in atributos[1:] %}
           <th>{{ a }}</th>
+          {% set turn = 1 if a == "turno" else 0 %}
         {% endfor %}
         <th></th>
         <th></th>
@@ -117,7 +118,15 @@ a.agregar:hover {
       {% for fila in datos %}
         <tr>
           {% for dato in fila[1:] %}
-            <td>{{ dato }}</td>
+            {% if a == 1 %}
+              {% if dato == 0%}
+                <td>Matutino</td>
+              {% else %}
+                <td>Vespertino</td>
+              {% endif %}
+            {% else %}
+              <td>{{ dato }}</td>
+            {% endif %}
           {% endfor %}
             <td class="verde"><a class="a" href="/edDat/{{table}}/{{fila[0]}}">Editar</a></td>
             <td class="rojo"><a class="a" href="/delDat/{{table}}/{{fila[0]}}">Borrar</a></td>

@@ -78,7 +78,7 @@
   /*========== Colors ==========*/
   --hue: 174;
   --sat: 63%;
-  --first-color:#194276;
+  --first-color:#000000;
   --first-color-alt: hsl(var(--hue), var(--sat), 36%);
   --title-color: #fff;
   --text-color: hsl(var(--hue), 8%, 35%);

@@ -165,7 +165,7 @@ def insertainfo():
 def logout():
     for key in list(session.keys()):
         session.pop(key)
-    return redirect(url_for('login'))
+    return redirect(url_for('carga'))
 
 ###         FUNCIONES DE SESION         ###
 

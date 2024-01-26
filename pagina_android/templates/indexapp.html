@@ -249,7 +249,7 @@ h1 {
 
 <p class="usuario">Bienvenido, <strong>{{parametros['name']}}</strong></p>
 <br>
-<div class="item">
+
     <div class="carousel-containerA">
         <div class="carouselA">
             {% for aviso in avisos[-3::][::-1] %}
@@ -261,7 +261,7 @@ h1 {
             {% endfor %}
         </div>
     </div>
-</div>
+
 <br>
 <div class="div-lado-a-lado"></div>
 <h1>Horario <strong>{{parametros['grado']}}{{parametros['grupo']}}</strong></h1>
@@ -272,7 +272,7 @@ h1 {
 <br>
 <div class="div-lado-a-lado"></div>
 <br>
-<div class="item">
+
 
     <div class="carousel-container">
         <div class="carousel">
@@ -295,11 +295,10 @@ h1 {
             
         </div>
     </div>
-</div>
 <br>
 <div class="div-lado-a-lado"></div>
 <h1 class="center">Concursos</h1>
-<div class="item">
+
     <ul class="concursos-list">
         {% for concurso in concursos[-3::][::-1] %}
         <div class="concurso">
@@ -312,7 +311,6 @@ h1 {
         </div>
         {% endfor %}
     </ul>
-</div>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>

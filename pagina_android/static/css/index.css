@@ -104,13 +104,14 @@ html{
     background: #272B39;
     transition: 1s;
 }
-
 .intro img {
-    top: 80;
-    position: absolute;
-    width: 10%;
+    display: block; /* Hace que la imagen sea un bloque para aplicar margen automático */
+    margin: 0 auto; /* Centra horizontalmente */
+    top: 80; /* Asegúrate de agregar unidades, por ejemplo: 80px */
+    width: 30%;
     height: auto;
-}
+  }
+  
 
 .intro p{
     color: rgb(0, 0, 0);

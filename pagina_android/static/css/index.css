@@ -24,19 +24,19 @@ html{
     top: 0;
     width: 100%;
     height: 100vh;
-    background: #000000;
+    background: #272B39;
     transition: 1s;
 }
 
 .intro img {
     top: 30%;
     position: absolute;
-    width: 20%;
+    width: 50%;
     height: auto;
 }
 
 .intro p{
-    color: gray;
+    color: rgb(0, 0, 0);
     font-size: 1.6rem;
     margin-top: 10px;
 }

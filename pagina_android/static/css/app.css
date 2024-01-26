@@ -297,8 +297,9 @@ img {
     color: var(--first-color);
   }
   .item{
-    display: grid;
+    display: flex;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
   }
 
   /* First design, remove if you choose the minimalist design */

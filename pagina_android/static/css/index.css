@@ -147,6 +147,8 @@ html{
     width: 100%;
     padding: 50px;
     font-size: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {

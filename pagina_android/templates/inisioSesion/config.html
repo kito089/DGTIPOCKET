@@ -84,6 +84,25 @@
     cursor: pointer;
   }
 
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .button {
+    background-color: #2980b9;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .button:hover {
+    background-color: #216795; /* Cambia el color al pasar el mouse */
+  }
   
 {% endblock %}
 
@@ -98,7 +117,9 @@
     <p>CURP: {{parametros['curp']}}</p>
     <a id="logout-link" href="/logout">Cerrar sesión </a>
 </div>
-<a href="/actualizar_info">Actualizar Info</a>
+<div class="container">
+  <a href="/actualizar_info" class="button">Actualizar Info</a>
+</div>
 </div>
 
 {% endblock %}

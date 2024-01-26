@@ -106,9 +106,9 @@ html{
 }
 
 .intro img {
-    top: 100;
+    top: 80;
     position: absolute;
-    width: 50%;
+    width: 10%;
     height: auto;
 }
 

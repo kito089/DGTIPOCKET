@@ -153,8 +153,8 @@ html{
 
 .container {
     display: flex;
-    align-items: center; /* Centra verticalmente los elementos hijos */
-    
+   
+    justify-content: center;
   }
   
   img {

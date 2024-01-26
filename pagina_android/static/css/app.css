@@ -297,9 +297,11 @@ img {
     color: var(--first-color);
   }
   .item{
-    display: flex;
+    display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  align-items: center;
+  justify-content: center; /* Centra horizontalmente dentro del grid */
+  align-items: center;     /* Centra verticalmente dentro del grid */
+  text-align: center; 
   }
 
   /* First design, remove if you choose the minimalist design */

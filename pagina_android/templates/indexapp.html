@@ -126,8 +126,9 @@ INICIO
 }
 
 .carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    
 }
 
 .card {
@@ -265,6 +266,10 @@ h1 {
 
       .concurso {
         width:90%;
+    }
+    .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
     }
       
   }

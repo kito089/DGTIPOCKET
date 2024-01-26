@@ -153,7 +153,7 @@ html{
 
 .container {
 
-   
+    align-items: center; /* Centra verticalmente los elementos hijos */
     justify-content: center;
   }
   

@@ -262,6 +262,12 @@ h1 {
       }
       
   }
+  .ite{
+    
+        display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      
+  }
   
 
 
@@ -326,7 +332,7 @@ h1 {
 <br>
 <div class="div-lado-a-lado"></div>
 <h1 class="center">Concursos</h1>
-
+<div class="ite">
     <ul class="concursos-list">
         {% for concurso in concursos[-3::][::-1] %}
         <div class="concurso">
@@ -339,7 +345,7 @@ h1 {
         </div>
         {% endfor %}
     </ul>
-
+</div>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 

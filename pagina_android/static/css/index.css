@@ -108,8 +108,9 @@ html{
     display: block; /* Hace que la imagen sea un bloque para aplicar margen automático */
     margin: 0 auto; /* Centra horizontalmente */
     top: 80; /* Asegúrate de agregar unidades, por ejemplo: 80px */
-    width: 30%;
+    width: 20%;
     height: auto;
+    margin-bottom: 20px;
   }
   
 

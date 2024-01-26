@@ -84,6 +84,8 @@ INICIO
     padding: 10px; /* Espaciado interno */
     margin-bottom: 15px; /* Espaciado inferior entre concursos */
     background-color:#fff;
+    width:30%;
+    
 }
 
 /* Estilo para el título h2 dentro de la clase concurso */
@@ -260,9 +262,9 @@ h1 {
         color: #555; /* Color del texto */
         line-height: 1.6; /* Altura de línea para una mejor legibilidad */
       }
-      
+
       .concurso {
-        width:30%;
+        width:90%;
     }
       
   }
@@ -337,7 +339,7 @@ h1 {
 <div class="div-lado-a-lado"></div>
 <h1 class="center">Concursos</h1>
 <div class="ite">
-    <ul class="concursos-list">
+   
         {% for concurso in concursos[-3::][::-1] %}
         <div class="concurso">
             <h2 class='h2'>{{ concurso.1 }}</h2>
@@ -348,7 +350,7 @@ h1 {
             <p class="p">{{ concurso.2 }}</p>
         </div>
         {% endfor %}
-    </ul>
+    
 </div>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 	// Verifica si es un dispositivo móvil (ancho de pantalla <= 767px)
-	if (window.innerWidth <= 767) {
+	if (window.innerWidth >= 767) {
 	  return; // No activa la funcionalidad en dispositivos móviles
 	}
   
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   
-  
+
 document.addEventListener("DOMContentLoaded", function () {
 	
 	const carouselA = document.querySelector(".carouselA");

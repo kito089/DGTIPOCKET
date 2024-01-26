@@ -235,57 +235,32 @@ h1 {
 }
 
 @media (max-width: 768px) {
-    .carousel-containerA {
+    .concurso {
         width: 80%;
-        margin: 0 auto;
-        overflow: hidden;
-      }
-      
-      .carouselA {
-        display: flex;
-        flex-wrap: nowrap;
-        transition: transform 0.5s ease-in-out;
-      }
-      
-      .aviso {
-        width: 100%;
+        margin: 20px auto;
         padding: 20px;
         box-sizing: border-box;
-        background-color: #f5f5f5;
-        border-radius: 8px;
-        margin-right: 20px;
-        text-align: left;
+        background-color: #fff; /* Color de fondo del contenedor */
+        border: 1px solid #ddd; /* Borde del contenedor */
+        border-radius: 8px; /* Bordes redondeados */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
       }
       
       .h2 {
-        color: #3498db;
+        color: #3498db; /* Color del título */
       }
       
-      .ep {
-        color: #333;
+      .img {
+        max-width: 100%; /* Imagen ajustada al ancho del contenedor */
+        height: auto; /* Altura automática para mantener la proporción */
+        margin-bottom: 20px; /* Espaciado inferior */
       }
       
-      .fecha {
-        color: #777;
+      .p {
+        color: #555; /* Color del texto */
+        line-height: 1.6; /* Altura de línea para una mejor legibilidad */
       }
       
-      /* Estilo para navegación (flechas) si es necesario */
-      .carousel-containerA .arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 24px;
-        color: #3498db;
-        cursor: pointer;
-      }
-      
-      .carousel-containerA .prev {
-        left: 0;
-      }
-      
-      .carousel-containerA .next {
-        right: 0;
-      }
   }
   
 

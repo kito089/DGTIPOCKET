@@ -10,5 +10,5 @@ def login_required(f):
             #print("---------usuario encontrado")
             return f(*args, **kwargs)
         #print("----------usuario no encontrado, rediriguendo a login")
-        return redirect(url_for("login"))
+        return redirect(url_for("carga"))
     return decorated_function

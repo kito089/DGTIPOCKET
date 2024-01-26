@@ -72,6 +72,10 @@ def index():
 
 ###         INISIO DE SESION        ###
 
+@app.route('/carga')
+def carga():
+    return render_template("intro.html")
+
 @app.route('/login')
 def login():
     google = oauth.create_client('google')  # create the google oauth client

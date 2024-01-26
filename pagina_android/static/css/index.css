@@ -152,13 +152,22 @@ html{
 }
 
 .container {
-    text-align: center;
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos hijos */
+    justify-content: center;
   }
   
   img {
     max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
     height: auto;    /* Hace que la altura se ajuste automáticamente manteniendo la proporción */
   }
+
+
+
+
+
+
+
 
 
   button {

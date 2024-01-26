@@ -29,8 +29,10 @@ html{
 }
 
 .intro img {
-    top: 150px;
+    top: 30%;
     position: absolute;
+    width: 20%;
+    height: auto;
 }
 
 .intro p{

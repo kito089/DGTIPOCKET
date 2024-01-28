@@ -25,7 +25,8 @@ project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')
 load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
-
+app.config['UPLOAD_FOLDER'] = os.path.expanduser('~/DGTIPOCKET/editar_word')
+app.config['ALLOWED_EXTENSIONS'] = {'pdf', 'xls', 'xlsx'}
 app.secret_key = os.getenv("APP_SECRET_KEY")
 
 oauth = OAuth(app)
@@ -484,6 +485,27 @@ def delDat(tabla, id):
     bd.exit()
     return redirect(url_for('tabla',table=tabla))
 
+def extencion(arch):
+    return '.' in arch and arch.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+@app.route("/subirCal", methods = ['POST', 'GET'])
+def subibrCal():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return "No se encontro el archivo"
+
+        file = request.files['file']
+
+        if file.filename == '':
+            return "Archivo no seleccionado"
+
+        if file and extencion(file.filename):
+            file.save(f"{app.config['UPLOAD_FOLDER']}/{file.filename}")
+            return "Archivo guardado"
+        else:
+            return "Extension del archivo no permitida"
+    return render_template("autoridades/funcionesAut/insCal.html")
+
 ####            PRUEBAS             ####
 
 @app.route('/a') ### ???? carlin epico papu
@@ -517,5 +539,6 @@ def generate_plot():
     plot_url = base64.b64encode(img.getvalue()).decode()
 
     return plot_url
+
 if __name__ == '__main__':
     app.run(debug=True, ssl_context='adhoc', threaded=True)

@@ -503,7 +503,7 @@ def subibrCal():
         if file and extencion(file.filename):
             file.save(f"{app.config['UPLOAD_FOLDER']}/{file.filename}")
             print("moviendo para insertar calificaciones")
-            return redirect(url_for("leerCal"), nombre = file.filename)
+            return redirect(url_for("leerCal", nombre = file.filename))
         else:
             return "Extension del archivo no permitida"
     return render_template("autoridades/funcionesAut/insCal.html")

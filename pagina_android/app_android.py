@@ -331,7 +331,7 @@ def clubs():
 @app.route('/chamilo')
 def chamilo():
     parametros = dict(session)['profile']
-    return render_template('funciones/chamilo.html', parametros = parametros, clubs=clubs)
+    return render_template('funciones/chamilo.html', parametros = parametros)
 
 @app.route('/tutorias')
 def tutorias():

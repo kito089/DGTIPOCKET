@@ -47,19 +47,16 @@ class Coneccion:
                 dat = " "
                 for i in range(1, len(atributos)):
                     atr = atr + str(atributos[i]) + " ,"
-                    #print(datos[i-1])
                     if "'" in datos[i-1]:
                         datos[i-1] = datos[i-1].replace("'","´")
                     dat = dat + datos[i - 1] + "' ,'"
-                #print(atr)
                 query = "INSERT INTO " + tabla + " (" + atr + ") VALUES (" + dat + ")"
-                print(query)
                 query = query.replace(" ,)", ")")
                 query = query.replace(" ,')", ")")
                 query = query.replace("( ", "('")
                 print(query)
-                self.cursor.execute(query)
-                self.conexion.commit()
+                #self.cursor.execute(query)
+                #self.conexion.commit()
                 #print("Datos registrados >:)")
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
@@ -97,8 +94,8 @@ class Coneccion:
                 query = "UPDATE " + tabla + " SET " + atr + "WHERE " + str(atributos[0]) + " = " + str(pos)
                 query = query.replace(",W", "W")
                 print(query)
-                self.cursor.execute(query)
-                self.conexion.commit()
+                #self.cursor.execute(query)
+                #self.conexion.commit()
                 print("Tabla actualizada uwu")
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))

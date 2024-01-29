@@ -617,6 +617,7 @@ def leerCal(nombre):
                     return "materia no encontrada: "+str(datos_celda[12])
             pri = False
         db.exit()
+        return redirect(url_for("index_maestros"))
     else:
         print("No se encontró ninguna tabla en el xls.")
 

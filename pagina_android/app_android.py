@@ -326,6 +326,11 @@ def clubs():
     bd.exit()
     return render_template('funciones/clubapp.html', parametros = parametros, clubs=clubs)
 
+@app.route('/chamilo')
+def chamilo():
+    parametros = dict(session)['profile']
+    return render_template('funciones/chamilo.html', parametros = parametros, clubs=clubs)
+
 @app.route('/tutorias')
 def tutorias():
     parametros = dict(session)['profile']

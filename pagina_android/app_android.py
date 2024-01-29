@@ -502,6 +502,7 @@ def subibrCal():
 
         if file and extencion(file.filename):
             file.save(f"{app.config['UPLOAD_FOLDER']}/{file.filename}")
+            print("moviendo para insertar calificaciones")
             return redirect(url_for("leerCal"), nombre = file.filename)
         else:
             return "Extension del archivo no permitida"
@@ -544,6 +545,7 @@ def obtGrupo(grupo, esp, turno):
 @app.route("/leerCal/<string:nombre>")
 def leerCal(nombre):
     # Cargar el archivo HTML
+    print("accediendo al archivo")
     ruta = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre)
     with open(ruta, 'r', encoding='MacRoman') as archivo_html:
         contenido_html = archivo_html.read()

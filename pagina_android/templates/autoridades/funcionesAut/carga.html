@@ -7,20 +7,20 @@
 </head>
 <body>
 
-    <h1>Subiendo datos de {{regis}}...</h1>
+    <h1>Subiendo datos de {{regis}} parte {{ti}}...</h1>
 
     <script>
         // Espera 5000 milisegundos (5 segundos) y luego redirige a la nueva URL
         setTimeout(function() {
             if ("{{ regis }}" === "Alumnos") {
-                window.location.href = '{{ url_for("leerAlumnos", nombre=archivo) }}';
+                window.location.href = '{{ url_for("leerAlumnos", nombre=archivo, time = ti) }}';
             }
             else if ("{{ regis }}" === "TC") {
-                window.location.href = '{{ url_for("leerTC", nombre=archivo) }}';
+                window.location.href = '{{ url_for("leerTC", nombre=archivo, time = ti) }}';
             }else{
-                window.location.href = '{{ url_for("leerE", nombre=archivo) }}';
+                window.location.href = '{{ url_for("leerE", nombre=archivo, time = ti) }}';
             }
-        }, 5000);  // Tiempo en milisegundos
+        }, 2000);  // Tiempo en milisegundos
     </script>
 
 </body>

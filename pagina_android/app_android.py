@@ -627,7 +627,7 @@ def leerE(nombre, time):
                             db.insertarRegistro("evaluacion_e",datos)
                     else:
                         print("materia no encontrada: "+str(datos_celda[12]))
-                else:
+                elif cu > x:
                     return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
             cu += 1      
             pri = False
@@ -680,7 +680,7 @@ def leerTC(nombre, time):
                             db.insertarRegistro("evaluacion_tc",datos)
                     else:
                         print("materia no encontrada: "+str(datos_celda[12]))
-                else:
+                elif cu > x:
                     return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(int(time)+1)))
             cu += 1    
             pri = False

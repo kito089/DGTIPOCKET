@@ -58,11 +58,18 @@ INICIO
 
 {% block content %}
 
-<div class="meme">
-  <object data="https://campus.chamilo.org" width="600" height="400"></object>
+<div id="webview-container" style="width: 100%; height: 500px; border: 1px solid #ccc;"></div>
 
-</div>
+<script>
+    // Crea un iframe y establece la fuente (URL) que deseas cargar
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://campus.chamilo.org';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
 
+    // Agrega el iframe al contenedor
+    document.getElementById('webview-container').appendChild(iframe);
+</script>
 
 
 {% endblock %}

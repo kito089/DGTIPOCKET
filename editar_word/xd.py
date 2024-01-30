@@ -80,7 +80,7 @@ def obtGrupo(grupo, esp, turno):
         return grupo
     
 # Cargar el archivo HTML
-with open(r'C:\Users\jezar\Downloads\detalle_calificaciones (3).xls', 'r', encoding='MacRoman') as archivo_html:
+with open(r'/home/kito089/Descargas/detalle_calificaciones (3).xls', 'r', encoding='MacRoman') as archivo_html:
     contenido_html = archivo_html.read()
 
 # Crear un objeto BeautifulSoup

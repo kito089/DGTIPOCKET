@@ -4,64 +4,87 @@
 INICIO
 {% endblock %}
 {% block style %}
-.tarjeta {
-    width: 300px;
-    border: 2px solid #3498db; /* Contorno azul */
-    margin: 10px;
-    padding: 10px;
-    background-color: #fff; /* Fondo blanco */
-    border-radius: 10px; /* Márgenes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sutil sombra */
-    text-align: center;
-    margin-left: 10%;
+.card {
 
-  }
+  background-color: #fff;
+  border: 4px solid #659AD2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 30px 20px;
+  color: #659AD2;
+  border-radius: 45px;
+  margin:10px;
+}
 
-  .imagen {
-    width: 100%;
-    padding: 0;
-    border: 0;
-  }
+.App-logo {
+  pointer-events: none;
+  width: 140px;
+  margin-bottom: 20px;
+}
 
-  .imagen img {
-    width: 100%; /* Asegura que la imagen sea cuadrada */
-    height: 100%;
-    object-fit: cover;
-  }
+.App-button {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #659AD2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  border: 3px solid #659AD2;
+  border-radius: 5em;
+  margin-top: 20px;
+  transition: 0.2s;
+}
 
-  .titulo {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333; /* Texto negro */
-  }
+.App-button:hover {
+  color: #282c34;
+  background-color: #659AD2;
+}
+.fuc{
+  width:35%;
+  height:auto;
+  margin:20px;
+}
+.Titulo{
+  font-size: 1.5em;
+  margin-bottom: 10px; 
+  color: #fff;
 
-  .informacion {
-    font-size: 14px;
-    margin-top: 10px;
-    color: #333; /* Texto negro */
-  }
+}
+.item{
+  display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
 
-  .area-trabajo {
-    font-size: 12px;
-    margin-top: 10px;
-    color: #333
-  }
-  iframe{
-    height:100%;
-    whidth:100%;
-  }
-  .meme{
-    height:100%;
-    whidth:100%;
-  }
 {% endblock %}
 
 {% block content %}
 
-<div class="meme">
-  <iframe src="https://campus.chamilo.org" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
-</div>
+<div class="item">
+  <div class="card">
+     
+    
+    <img class="fuc" src="https://i.pinimg.com/originals/cc/45/03/cc4503c863a82e801b83c6de2247afec.png">
+      <div class="titulo">Clasroom</div>
+      <a class="App-button" href="https://classroom.google.com">Visitar</a>
 
+    </div>
+
+
+  <div class="card">
+     
+    
+    <img class="fuc" src="https://tomahost.com/wp-content/uploads/2022/01/icono_chamilo.svg">
+
+      <div class="titulo">Chamilo</div>
+      <a class="App-button" href="https://campus.chamilo.org">Visitar</a>
+    </div>
+
+
+</div>
 
 
 {% endblock %}

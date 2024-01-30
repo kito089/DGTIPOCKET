@@ -553,7 +553,7 @@ def obtGrupo(grupo, esp, turno):
 
 @app.route("/leerAlumnos/<string:nombre>")
 def leerAlumnos(nombre):
-    print("accediendo al archivo")
+    print("accediendo al archivo (alumnos)")
     ruta = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre)
     with open(ruta, 'r', encoding='MacRoman') as archivo_html:
         contenido_html = archivo_html.read()
@@ -588,7 +588,7 @@ def leerAlumnos(nombre):
 
 @app.route("/leerE/<string:nombre>")
 def leerE(nombre):
-    print("accediendo al archivo")
+    print("accediendo al archivo (especialidad)")
     ruta = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre)
     with open(ruta, 'r', encoding='MacRoman') as archivo_html:
         contenido_html = archivo_html.read()
@@ -636,7 +636,7 @@ def leerE(nombre):
 
 @app.route("/leerTC/<string:nombre>")
 def leerCal(nombre):
-    print("accediendo al archivo")
+    print("accediendo al archivo (tronco comun)")
     ruta = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre)
     with open(ruta, 'r', encoding='MacRoman') as archivo_html:
         contenido_html = archivo_html.read()

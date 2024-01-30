@@ -508,13 +508,13 @@ def subibrCal():
         if file and extencion(file.filename):
             file.save(f"{app.config['UPLOAD_FOLDER']}/{file.filename}")
             print("moviendo para insertar calificaciones")
-            return redirect(url_for("carga", archivo = file.filename, regis = "Alumnos"))
+            return redirect(url_for("cargaArch", archivo = file.filename, regis = "Alumnos"))
         else:
             return "Extension del archivo no permitida"
     return render_template("autoridades/funcionesAut/insCal.html")
 
-@app.route("/carga/<string:regis>/<string:archivo>")
-def carga(regis, archivo):
+@app.route("/cargaArch/<string:regis>/<string:archivo>")
+def cargaArch(regis, archivo):
     return render_template("autoridades/funcionesAut/carga.html", regis = regis, archivo=archivo)
 
 def obtGrupo(grupo, esp, turno):
@@ -582,7 +582,7 @@ def leerAlumnos(nombre):
                     print("alumnos en la bd")
             pri = False
         db.exit()
-        return redirect(url_for("carga", archivo = nombre, regis = "TC"))
+        return redirect(url_for("cargaArch", archivo = nombre, regis = "TC"))
     else:
         return "No se encontró ninguna tabla en el xls."
 
@@ -675,7 +675,7 @@ def leerCal(nombre):
                     print("materia no encontrada: "+str(datos_celda[12]))
             pri = False
         db.exit()
-        return redirect(url_for("carga", archivo = nombre, regis = "E"))
+        return redirect(url_for("cargaArch", archivo = nombre, regis = "E"))
     else:
         print("No se encontró ninguna tabla en el xls.")
 

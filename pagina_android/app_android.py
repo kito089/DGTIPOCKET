@@ -598,8 +598,8 @@ def leerCal(nombre):
                     if not(len(idm) > 0):
                         mod = db.seleccion("modulos","idmodulos","nombre = '"+datos_celda[12]+"'")
                 if (len(idm) > 0):
-                    #al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")
-                    al = 0
+                    al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")[0][0]
+                    #al = 0
                     if (int(datos_celda[7][1]) <= 2 and len(idm) > 1) or len(idm) > 0:
                         idm = idm[0][0]
                     else:

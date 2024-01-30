@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargando</title>
+</head>
+<body>
+
+    <h1>Subiendo datos de {{regis}}...</h1>
+
+    <script>
+        // Espera 5000 milisegundos (5 segundos) y luego redirige a la nueva URL
+        setTimeout(function() {
+            if ("{{ regis }}" === "Alumnos") {
+                window.location.href = '{{ url_for("leerAlumnos", nombre=archivo) }}';
+            }
+            else if ("{{ regis }}" === "TC") {
+                window.location.href = '{{ url_for("leerTC", nombre=archivo) }}';
+            }else{
+                window.location.href = '{{ url_for("leerE", nombre=archivo) }}';
+            }
+        }, 5000);  // Tiempo en milisegundos
+    </script>
+
+</body>
+</html>

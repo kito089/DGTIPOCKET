@@ -80,7 +80,7 @@ def obtGrupo(grupo, esp, turno):
         return grupo
     
 # Cargar el archivo HTML
-with open(r'C:\Users\jezar\Downloads\DGTIPOCKET\editar_word\detalle_calificaciones-copia.xls', 'r', encoding='MacRoman') as archivo_html:
+with open(r'C:\Users\jezar\Downloads\detalle_calificaciones (3).xls', 'r', encoding='MacRoman') as archivo_html:
     contenido_html = archivo_html.read()
 
 # Crear un objeto BeautifulSoup
@@ -129,8 +129,8 @@ if tabla:
                 if not(len(idm) > 0):
                     mod = db.seleccion("modulos","idmodulos","nombre = '"+datos_celda[12]+"'")
             if (len(idm) > 0):
-                #al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")
-                al = 0
+                al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")[0][0]
+                #al = 0
                 if (int(datos_celda[7][1]) <= 2 and len(idm) > 1) or len(idm) > 0:
                     idm = idm[0][0]
                 else:

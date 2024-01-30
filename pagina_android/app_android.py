@@ -596,7 +596,8 @@ def leerE(nombre, time):
     tabla = soup.find('table')
     pri = True
     x = int(time)*4000
-    cu = (int(time)-1)*4000
+    cu = (int(time)-1)*4000 
+    y = 0
     if tabla:
         db = Coneccion()
         for fila in tabla.find_all('tr'):
@@ -610,7 +611,7 @@ def leerE(nombre, time):
                 datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
                 datos_celda[6] = obtGrupo(datos_celda[6], datos_celda[2], datos_celda[4])
                 #print(datos_celda[2],datos_celda[4],datos_celda[6],datos_celda[7],datos_celda[11],datos_celda[12],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[17],datos_celda[20],datos_celda[21],datos_celda[22],datos_celda[24])
-                if cu <= x:
+                if cu <= x and y >= cu:
                     idm = db.seleccion("submodulos","idsubmodulos","nombre = '"+datos_celda[12]+"'")
                     if (len(idm) > 0):
                         al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")[0][0]
@@ -629,7 +630,10 @@ def leerE(nombre, time):
                         print("materia no encontrada: "+str(datos_celda[12]))
                 elif cu > x:
                     return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
-            cu += 1      
+            if y >= cu:
+                cu += 1
+            else:
+                y+=1      
             pri = False
         db.exit()
         if os.path.exists(ruta):

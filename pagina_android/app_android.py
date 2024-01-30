@@ -494,6 +494,10 @@ def delDat(tabla, id):
 def extencion(arch):
     return '.' in arch and arch.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
+@app.route("/cargaArch/<string:regis>/<string:archivo>")
+def cargaArch(regis, archivo):
+    return render_template("autoridades/funcionesAut/carga.html", regis = regis, archivo=archivo)
+
 @app.route("/subirCal", methods = ['POST', 'GET'])
 def subibrCal():
     if request.method == 'POST':
@@ -508,14 +512,10 @@ def subibrCal():
         if file and extencion(file.filename):
             file.save(f"{app.config['UPLOAD_FOLDER']}/{file.filename}")
             print("moviendo para insertar calificaciones")
-            return redirect(url_for("cargaArch", archivo = file.filename, regis = "Alumnos"))
+            return redirect(url_for("cargaArch",regis = "Alumnos", archivo = file.filename))
         else:
             return "Extension del archivo no permitida"
     return render_template("autoridades/funcionesAut/insCal.html")
-
-@app.route("/cargaArch/<string:regis>/<string:archivo>")
-def cargaArch(regis, archivo):
-    return render_template("autoridades/funcionesAut/carga.html", regis = regis, archivo=archivo)
 
 def obtGrupo(grupo, esp, turno):
     if esp == "PROGRAMACIÓN":
@@ -582,7 +582,7 @@ def leerAlumnos(nombre):
                     print("alumnos en la bd")
             pri = False
         db.exit()
-        return redirect(url_for("cargaArch", archivo = nombre, regis = "TC"))
+        return redirect(url_for("cargaArch", regis = "TC", archivo = nombre))
     else:
         return "No se encontró ninguna tabla en el xls."
 
@@ -635,7 +635,7 @@ def leerE(nombre):
         print("No se encontró ninguna tabla en el xls.")
 
 @app.route("/leerTC/<string:nombre>")
-def leerCal(nombre):
+def leerTC(nombre):
     print("accediendo al archivo (tronco comun)")
     ruta = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre)
     with open(ruta, 'r', encoding='MacRoman') as archivo_html:
@@ -675,7 +675,7 @@ def leerCal(nombre):
                     print("materia no encontrada: "+str(datos_celda[12]))
             pri = False
         db.exit()
-        return redirect(url_for("cargaArch", archivo = nombre, regis = "E"))
+        return redirect(url_for("cargaArch", regis = "E", archivo = nombre))
     else:
         print("No se encontró ninguna tabla en el xls.")
 

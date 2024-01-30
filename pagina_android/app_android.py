@@ -622,7 +622,7 @@ def leerE(nombre, time):
                                 datos_celda[17],datos_celda[24],str(idm),str(al)]
                         pre = db.seleccion("evaluacion_e","idevaluacion_e","periodo = '{}' and acreditacion = '{}' and submodulos_idsubmodulos = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
                         if len(pre) > 0:
-                            datos = [pre[0][0],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
+                            datos = [str(pre[0][0]),datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
                                 datos_celda[17],datos_celda[24],str(idm),str(al)]
                             db.actualizarRegistro("evaluacion_e",str(pre[0][0]),datos)
                         else:
@@ -685,7 +685,7 @@ def leerTC(nombre, time):
                                     datos_celda[17],datos_celda[24],str(idm),str(al)]
                             pre = db.seleccion("evaluacion_tc","idevaluacion_tc","periodo = '{}' and acreditacion = '{}' and materias_idmaterias = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
                             if len(pre) > 0:
-                                datos = [pre[0][0],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
+                                datos = [str(pre[0][0]),datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
                                     datos_celda[17],datos_celda[24],str(idm),str(al)]
                                 db.actualizarRegistro("evaluacion_tc",str(pre[0][0]),datos)
                             else:

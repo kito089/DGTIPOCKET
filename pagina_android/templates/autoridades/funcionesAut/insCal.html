@@ -1,4 +1,3 @@
-
 {% extends "layouts/layoutD.html" %}
 
 {% block title %}
@@ -59,11 +58,19 @@ insert noticias
         </svg>
         <p>Arrastra</p>
         <p>o</p>
-        <span class="browse-button">Buscar Excel<input type="file" name="file" accept=".xlsx, .xls" required></span>
+        <span class="browse-button">Buscar Excel</span>
       </div>
       <input type="file" name="file" accept=".xlsx, .xls" required>
     </label>
     <input type="submit" value="Subir">
   </form>
+
+
   
+  <h1>Subir Archivo Excel</h1>
+    <form action="/subirCal" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xlsx, .xls" required>
+        <input type="submit" value="Subir">
+    </form>
 {% endblock %}
+    

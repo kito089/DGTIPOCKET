@@ -498,6 +498,7 @@ def cargaArch(regis, archivo, ti):
 
 @app.route("/subirCal", methods = ['POST', 'GET'])
 def subibrCal():
+    parametros = dict(session)['profile']
     if request.method == 'POST':
         if 'file' not in request.files:
             return "No se encontro el archivo"
@@ -513,7 +514,7 @@ def subibrCal():
             return redirect(url_for("cargaArch", regis = "Alumnos", archivo = file.filename, ti=str(1)))
         else:
             return "Extension del archivo no permitida"
-    return render_template("autoridades/funcionesAut/insCal.html")
+    return render_template("autoridades/funcionesAut/insCal.html", parametros= parametros)
 
 def obtGrupo(grupo, esp, turno):
     if esp == "PROGRAMACIÓN":

@@ -601,11 +601,11 @@ def leerE(nombre, time):
         db = Coneccion()
         for fila in tabla.find_all('tr'):
             datos_celda = [celda.text.strip() for celda in fila.find_all(['th', 'td'])]
-            if cu <= x and y >= cu:
-                if pri:
-                    if datos_celda != ['CLV_CENTRO', 'PLANTEL', 'CARRERA', 'GENERACION', 'TURNO', 'SEMESTRE', 'GRUPO', 'NO CONTROL', 'NOMBRE', 'PATERNO', 'MATERNO', 'CURP', 'NOMBRE ASIGNATURA', 'PARCIAL 1', 'PARCIAL 2', 'PARCIAL 3', 'CALIFICACION', 'PERIODO', 'FIRMADO', 'FIRMA', 'ASISTENCIAS 1', 'ASISTENCIAS 2', 'ASISTENCIAS 3', 'TOTAL ASISTENICIAS', 'TIPO ACREDITACION']:
-                        return "Formato del excel no compatible"
-                else:
+            if pri:
+                if datos_celda != ['CLV_CENTRO', 'PLANTEL', 'CARRERA', 'GENERACION', 'TURNO', 'SEMESTRE', 'GRUPO', 'NO CONTROL', 'NOMBRE', 'PATERNO', 'MATERNO', 'CURP', 'NOMBRE ASIGNATURA', 'PARCIAL 1', 'PARCIAL 2', 'PARCIAL 3', 'CALIFICACION', 'PERIODO', 'FIRMADO', 'FIRMA', 'ASISTENCIAS 1', 'ASISTENCIAS 2', 'ASISTENCIAS 3', 'TOTAL ASISTENICIAS', 'TIPO ACREDITACION']:
+                    return "Formato del excel no compatible"
+            else:
+                if cu <= x and y >= cu:
                     caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
                     tabCam= str.maketrans(caracteres)
                     datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
@@ -630,8 +630,8 @@ def leerE(nombre, time):
                     else:
                         print("materia no encontrada: "+str(datos_celda[12]))
             if cu > x:
-                return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
                 print("fin de metodo: time: ", time)
+                return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
             if y >= cu:
                 cu += 1
             else:
@@ -665,11 +665,11 @@ def leerTC(nombre, time):
         db = Coneccion()
         for fila in tabla.find_all('tr'):
             datos_celda = [celda.text.strip() for celda in fila.find_all(['th', 'td'])]
-            if cu <= x and y >= cu:
-                if pri:
-                    if datos_celda != ['CLV_CENTRO', 'PLANTEL', 'CARRERA', 'GENERACION', 'TURNO', 'SEMESTRE', 'GRUPO', 'NO CONTROL', 'NOMBRE', 'PATERNO', 'MATERNO', 'CURP', 'NOMBRE ASIGNATURA', 'PARCIAL 1', 'PARCIAL 2', 'PARCIAL 3', 'CALIFICACION', 'PERIODO', 'FIRMADO', 'FIRMA', 'ASISTENCIAS 1', 'ASISTENCIAS 2', 'ASISTENCIAS 3', 'TOTAL ASISTENICIAS', 'TIPO ACREDITACION']:
-                        return "Formato del excel no compatible"
-                else:
+            if pri:
+                if datos_celda != ['CLV_CENTRO', 'PLANTEL', 'CARRERA', 'GENERACION', 'TURNO', 'SEMESTRE', 'GRUPO', 'NO CONTROL', 'NOMBRE', 'PATERNO', 'MATERNO', 'CURP', 'NOMBRE ASIGNATURA', 'PARCIAL 1', 'PARCIAL 2', 'PARCIAL 3', 'CALIFICACION', 'PERIODO', 'FIRMADO', 'FIRMA', 'ASISTENCIAS 1', 'ASISTENCIAS 2', 'ASISTENCIAS 3', 'TOTAL ASISTENICIAS', 'TIPO ACREDITACION']:
+                    return "Formato del excel no compatible"
+            else:
+                if cu <= x and y >= cu:
                     caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
                     tabCam= str.maketrans(caracteres)
                     datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]

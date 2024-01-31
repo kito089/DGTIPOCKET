@@ -49,8 +49,11 @@ input[type="file"] {
     font-size: 14px;
     color: #888;
 }
+input[type="file"] {
+    display: none;
+}
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 20px;
@@ -60,7 +63,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
     background-color: #45a049;
 }
 {%endblock%}

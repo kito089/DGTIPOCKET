@@ -16,7 +16,7 @@ form {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 100%;
+    margin: 0 auto; /* Añade esta línea para centrar el formulario horizontalmente */
 }
 
 input[type="file"] {
@@ -69,13 +69,14 @@ input[type="submit"]:hover {
 {% block content %}
 
 
-<h1>Subir Archivo Excel con Arrastrar y Soltar</h1>
+<h1>Subir Archivo Excel </h1>
     <form action="/subirCal" method="post" enctype="multipart/form-data">
         <div class="drag-area" id="dragArea">
             <div class="drag-text">Arrastra y suelta el archivo aquí o haz clic</div>
             <input type="file" name="file" accept=".xlsx, .xls" id="fileInput" required>
         </div>
         <div class="file-preview" id="filePreview"></div>
+        
         <input type="submit" value="Subir">
     </form>
 

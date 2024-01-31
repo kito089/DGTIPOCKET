@@ -577,7 +577,7 @@ def leerAlumnos(nombre):
                     db.insertarRegistro("alumnos", datos)
                     print(datos)
                 else:
-                    print("alumnos en la bd")
+                    print("------------------alumnos en la bd")
             pri = False
         db.exit()
         return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(1)))
@@ -593,7 +593,7 @@ def leerE(nombre, time):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
-    print(time)
+    print("time : ",time)
     x = int(time)*4000
     cu = (int(time)-1)*4000 
     y = 0
@@ -631,6 +631,7 @@ def leerE(nombre, time):
                         print("materia no encontrada: "+str(datos_celda[12]))
             if cu > x:
                 return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
+                print("fin de metodo: time: ", time)
             if y >= cu:
                 cu += 1
             else:
@@ -639,6 +640,7 @@ def leerE(nombre, time):
             print("cu: ", cu)
             print("y: ", y)
         db.exit()
+        print("fin de metodo: time: ", time)
         if os.path.exists(ruta):
             os.remove(ruta)
             print(f'Archivo {ruta} eliminado correctamente.')
@@ -655,7 +657,7 @@ def leerTC(nombre, time):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
-    print(time)
+    print("time : ",time)
     x = int(time)*4000
     cu = (int(time)-1)*4000
     y=0
@@ -693,6 +695,7 @@ def leerTC(nombre, time):
                         else:
                             print("materia no encontrada: "+str(datos_celda[12]))
             if cu > x:
+                print("fin de metodo: time: ", time)
                 return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(int(time)+1)))
             if y >= cu:
                 cu += 1
@@ -702,6 +705,7 @@ def leerTC(nombre, time):
             print("cu: ", cu)
             print("y: ", y)
         db.exit()
+        print("fin de metodo: time: ", time)
         return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(1)))
     else:
         print("No se encontró ninguna tabla en el xls.")

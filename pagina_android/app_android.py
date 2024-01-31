@@ -236,8 +236,6 @@ def actualizar():
     db.exit()
     return render_template('inisioSesion/cambio.html', parametros=parametros, grupos = grupos)
     
-
-
 #######################################################################################
 @app.route('/planteles')                                                              #
 def planteles1():                                                                     #
@@ -579,7 +577,7 @@ def leerAlumnos(nombre):
                     db.insertarRegistro("alumnos", datos)
                     print(datos)
                 else:
-                    print("alumnos en la bd")
+                    print("------------------alumnos en la bd")
             pri = False
         db.exit()
         return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(1)))
@@ -595,6 +593,7 @@ def leerE(nombre, time):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
+    print("time : ",time)
     x = int(time)*4000
     cu = (int(time)-1)*4000 
     y = 0
@@ -606,12 +605,12 @@ def leerE(nombre, time):
                 if datos_celda != ['CLV_CENTRO', 'PLANTEL', 'CARRERA', 'GENERACION', 'TURNO', 'SEMESTRE', 'GRUPO', 'NO CONTROL', 'NOMBRE', 'PATERNO', 'MATERNO', 'CURP', 'NOMBRE ASIGNATURA', 'PARCIAL 1', 'PARCIAL 2', 'PARCIAL 3', 'CALIFICACION', 'PERIODO', 'FIRMADO', 'FIRMA', 'ASISTENCIAS 1', 'ASISTENCIAS 2', 'ASISTENCIAS 3', 'TOTAL ASISTENICIAS', 'TIPO ACREDITACION']:
                     return "Formato del excel no compatible"
             else:
-                caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
-                tabCam= str.maketrans(caracteres)
-                datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
-                datos_celda[6] = obtGrupo(datos_celda[6], datos_celda[2], datos_celda[4])
-                #print(datos_celda[2],datos_celda[4],datos_celda[6],datos_celda[7],datos_celda[11],datos_celda[12],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[17],datos_celda[20],datos_celda[21],datos_celda[22],datos_celda[24])
                 if cu <= x and y >= cu:
+                    caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
+                    tabCam= str.maketrans(caracteres)
+                    datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
+                    datos_celda[6] = obtGrupo(datos_celda[6], datos_celda[2], datos_celda[4])
+                    #print(datos_celda[2],datos_celda[4],datos_celda[6],datos_celda[7],datos_celda[11],datos_celda[12],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[17],datos_celda[20],datos_celda[21],datos_celda[22],datos_celda[24])
                     idm = db.seleccion("submodulos","idsubmodulos","nombre = '"+datos_celda[12]+"'")
                     if (len(idm) > 0):
                         al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")[0][0]
@@ -621,21 +620,27 @@ def leerE(nombre, time):
                             idm = idm[0][1] 
                         datos = [datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
                                 datos_celda[17],datos_celda[24],str(idm),str(al)]
-                        pre = db.seleccion("evaluacion_e","idevaluacion_e","periodo = '{}' and acreditacion = '{}' and materias_idmaterias = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
+                        pre = db.seleccion("evaluacion_e","idevaluacion_e","periodo = '{}' and acreditacion = '{}' and submodulos_idsubmodulos = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
                         if len(pre) > 0:
+                            datos = [str(pre[0][0]),datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
+                                datos_celda[17],datos_celda[24],str(idm),str(al)]
                             db.actualizarRegistro("evaluacion_e",str(pre[0][0]),datos)
                         else:
                             db.insertarRegistro("evaluacion_e",datos)
                     else:
                         print("materia no encontrada: "+str(datos_celda[12]))
-                elif cu > x:
-                    return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
+            if cu > x:
+                print("fin de metodo: time: ", time)
+                return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
             if y >= cu:
                 cu += 1
             else:
                 y+=1      
             pri = False
+            print("cu: ", cu)
+            print("y: ", y)
         db.exit()
+        print("fin de metodo: time: ", time)
         if os.path.exists(ruta):
             os.remove(ruta)
             print(f'Archivo {ruta} eliminado correctamente.')
@@ -652,8 +657,10 @@ def leerTC(nombre, time):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
+    print("time : ",time)
     x = int(time)*4000
     cu = (int(time)-1)*4000
+    y=0
     if tabla:
         db = Coneccion()
         for fila in tabla.find_all('tr'):
@@ -662,33 +669,43 @@ def leerTC(nombre, time):
                 if datos_celda != ['CLV_CENTRO', 'PLANTEL', 'CARRERA', 'GENERACION', 'TURNO', 'SEMESTRE', 'GRUPO', 'NO CONTROL', 'NOMBRE', 'PATERNO', 'MATERNO', 'CURP', 'NOMBRE ASIGNATURA', 'PARCIAL 1', 'PARCIAL 2', 'PARCIAL 3', 'CALIFICACION', 'PERIODO', 'FIRMADO', 'FIRMA', 'ASISTENCIAS 1', 'ASISTENCIAS 2', 'ASISTENCIAS 3', 'TOTAL ASISTENICIAS', 'TIPO ACREDITACION']:
                     return "Formato del excel no compatible"
             else:
-                caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
-                tabCam= str.maketrans(caracteres)
-                datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
-                datos_celda[6] = obtGrupo(datos_celda[6], datos_celda[2], datos_celda[4])
-                #print(datos_celda[2],datos_celda[4],datos_celda[6],datos_celda[7],datos_celda[11],datos_celda[12],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[17],datos_celda[20],datos_celda[21],datos_celda[22],datos_celda[24])
-                if cu <= x:
-                    idm = db.seleccion("materias","idmaterias","nombre = '"+datos_celda[12]+"'")
-                    if (len(idm) > 0):
-                        al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")[0][0]
-                        if (int(datos_celda[7][1]) <= 2 and len(idm) > 1) or len(idm) > 0:
-                            idm = idm[0][0]
+                if cu <= x and y >= cu:
+                    caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
+                    tabCam= str.maketrans(caracteres)
+                    datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
+                    datos_celda[6] = obtGrupo(datos_celda[6], datos_celda[2], datos_celda[4])
+                    #print(datos_celda[2],datos_celda[4],datos_celda[6],datos_celda[7],datos_celda[11],datos_celda[12],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[17],datos_celda[20],datos_celda[21],datos_celda[22],datos_celda[24])
+                    if cu <= x:
+                        idm = db.seleccion("materias","idmaterias","nombre = '"+datos_celda[12]+"'")
+                        if (len(idm) > 0):
+                            al = db.seleccion("alumnos","idalumnos","no_control = '"+datos_celda[7]+"'")[0][0]
+                            if (int(datos_celda[7][1]) <= 2 and len(idm) > 1) or len(idm) > 0:
+                                idm = idm[0][0]
+                            else:
+                                idm = idm[0][1] 
+                            datos = [datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
+                                    datos_celda[17],datos_celda[24],str(idm),str(al)]
+                            pre = db.seleccion("evaluacion_tc","idevaluacion_tc","periodo = '{}' and acreditacion = '{}' and materias_idmaterias = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
+                            if len(pre) > 0:
+                                datos = [str(pre[0][0]),datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
+                                    datos_celda[17],datos_celda[24],str(idm),str(al)]
+                                db.actualizarRegistro("evaluacion_tc",str(pre[0][0]),datos)
+                            else:
+                                db.insertarRegistro("evaluacion_tc",datos)
                         else:
-                            idm = idm[0][1] 
-                        datos = [datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
-                                datos_celda[17],datos_celda[24],str(idm),str(al)]
-                        pre = db.seleccion("evaluacion_tc","idevaluacion_tc","periodo = '{}' and acreditacion = '{}' and materias_idmaterias = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
-                        if len(pre) > 0:
-                            db.actualizarRegistro("evaluacion_tc",str(pre[0][0]),datos)
-                        else:
-                            db.insertarRegistro("evaluacion_tc",datos)
-                    else:
-                        print("materia no encontrada: "+str(datos_celda[12]))
-                elif cu > x:
-                    return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(int(time)+1)))
-            cu += 1    
+                            print("materia no encontrada: "+str(datos_celda[12]))
+            if cu > x:
+                print("fin de metodo: time: ", time)
+                return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(int(time)+1)))
+            if y >= cu:
+                cu += 1
+            else:
+                y+=1      
             pri = False
+            print("cu: ", cu)
+            print("y: ", y)
         db.exit()
+        print("fin de metodo: time: ", time)
         return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(1)))
     else:
         print("No se encontró ninguna tabla en el xls.")

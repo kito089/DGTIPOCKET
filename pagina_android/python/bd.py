@@ -55,8 +55,8 @@ class Coneccion:
                 query = query.replace(" ,')", ")")
                 query = query.replace("( ", "('")
                 print(query)
-                self.cursor.execute(query)
-                self.conexion.commit()
+                #self.cursor.execute(query)
+                #self.conexion.commit()
                 #print("Datos registrados >:)")
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
@@ -94,8 +94,8 @@ class Coneccion:
                 query = "UPDATE " + tabla + " SET " + atr + "WHERE " + str(atributos[0]) + " = " + str(pos)
                 query = query.replace(",W", "W")
                 print(query)
-                self.cursor.execute(query)
-                self.conexion.commit()
+                #self.cursor.execute(query)
+                #self.conexion.commit()
                 print("Tabla actualizada uwu")
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))

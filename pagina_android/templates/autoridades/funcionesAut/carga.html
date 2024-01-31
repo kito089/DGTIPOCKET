@@ -13,7 +13,7 @@
         // Espera 5000 milisegundos (5 segundos) y luego redirige a la nueva URL
         setTimeout(function() {
             if ("{{ regis }}" === "Alumnos") {
-                window.location.href = '{{ url_for("leerAlumnos", nombre=archivo, time = ti) }}';
+                window.location.href = '{{ url_for("leerAlumnos", nombre=archivo) }}';
             }
             else if ("{{ regis }}" === "TC") {
                 window.location.href = '{{ url_for("leerTC", nombre=archivo, time = ti) }}';

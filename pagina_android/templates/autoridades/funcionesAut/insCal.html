@@ -15,8 +15,8 @@ form {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    max-width: 100%;
+    width: 80%;
+    margin: 0 auto; /* Añade esta línea para centrar el formulario horizontalmente */
 }
 
 input[type="file"] {
@@ -49,8 +49,14 @@ input[type="file"] {
     font-size: 14px;
     color: #888;
 }
+input{
+    margin:10px;
+}
+input[type="file"] {
+    display: none;
+}
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 20px;
@@ -60,7 +66,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
     background-color: #45a049;
 }
 {%endblock%}
@@ -68,8 +74,7 @@ input[type="submit"]:hover {
 
 {% block content %}
 
-
-<h1>Subir Archivo Excel con Arrastrar y Soltar</h1>
+<h1>Subir Archivo Excel con Botón</h1>
     <form action="/subirCal" method="post" enctype="multipart/form-data">
         <div class="drag-area" id="dragArea">
             <div class="drag-text">Arrastra y suelta el archivo aquí o haz clic</div>
@@ -77,6 +82,7 @@ input[type="submit"]:hover {
         </div>
         <div class="file-preview" id="filePreview"></div>
         <input type="submit" value="Subir">
+        <input type="button" value="Seleccionar Archivo" onclick="document.getElementById('fileInput').click()">
     </form>
 
     <script>

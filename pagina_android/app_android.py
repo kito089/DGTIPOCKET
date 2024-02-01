@@ -623,9 +623,7 @@ def leerE(nombre, time):
                                 datos_celda[17],datos_celda[24],str(idm),str(al)]
                         pre = db.seleccion("evaluacion_e","idevaluacion_e","periodo = '{}' and acreditacion = '{}' and submodulos_idsubmodulos = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
                         if len(pre) > 0:
-                            datos = [str(pre[0][0]),datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
-                                datos_celda[17],datos_celda[24],str(idm),str(al)]
-                            db.actualizarRegistro("evaluacion_e",str(pre[0][0]),datos)
+                            print("calificacion ya en la bd")
                         else:
                             db.insertarRegistro("evaluacion_e",datos)
                     else:
@@ -635,6 +633,7 @@ def leerE(nombre, time):
                 return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(int(time)+1)))
             if y >= cu:
                 cu += 1
+                y+=1
             else:
                 y+=1      
             pri = False
@@ -688,9 +687,7 @@ def leerTC(nombre, time):
                                     datos_celda[17],datos_celda[24],str(idm),str(al)]
                             pre = db.seleccion("evaluacion_tc","idevaluacion_tc","periodo = '{}' and acreditacion = '{}' and materias_idmaterias = '{}' and alumnos_idalumnos = '{}'".format(datos_celda[17],datos_celda[24],idm,al))
                             if len(pre) > 0:
-                                datos = [str(pre[0][0]),datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[20],datos_celda[21],datos_celda[22],
-                                    datos_celda[17],datos_celda[24],str(idm),str(al)]
-                                db.actualizarRegistro("evaluacion_tc",str(pre[0][0]),datos)
+                                print("calificacion ya en la bd")
                             else:
                                 db.insertarRegistro("evaluacion_tc",datos)
                         else:
@@ -700,6 +697,7 @@ def leerTC(nombre, time):
                 return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(int(time)+1)))
             if y >= cu:
                 cu += 1
+                y+=1
             else:
                 y+=1      
             pri = False

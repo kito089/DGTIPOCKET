@@ -100,6 +100,22 @@ class Coneccion:
             except pymysql.Error as e:
                 print("Error en la conexión: {0}".format(e))
 
+    def actualizarDatosV(self, tabla, pos, datos, atributos):
+        if self.conexion.open:
+            try:
+                atr = ""
+                atri = self.obtenerAtributos(tabla)
+                for i in range(len(atributos)):
+                    atr = atr + str(atributos[i]) + " = '" + str(datos[i]) + "' ,"
+                query = "UPDATE " + tabla + " SET " + atr + "WHERE " + str(atri[0]) + " = " + str(pos)
+                query = query.replace(",W", "W")
+                print(query)
+                self.cursor.execute(query)
+                self.conexion.commit()
+                print("Tabla actualizada uwu")
+            except pymysql.Error as e:
+                print("Error en la conexión: {0}".format(e))
+
     def actualizarDato(self, tabla, pos, dato, atributo):
         if self.conexion.open:
             try:

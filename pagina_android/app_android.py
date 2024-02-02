@@ -538,7 +538,7 @@ def leerAlumnos(nombre, time):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
-    print("time : ",time)
+    #print("time : ",time)
     x = int(time)*1000
     cu = (int(time)-1)*1000 
     y = 0
@@ -578,8 +578,8 @@ def leerAlumnos(nombre, time):
             else:
                 y+=1      
             pri = False
-            print("cu: ", cu)
-            print("y: ", y)
+            #print("cu: ", cu)
+            #print("y: ", y)
         db.exit()
         return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(1)))
     else:
@@ -594,7 +594,7 @@ def leerE(nombre, time):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
-    print("time : ",time)
+    #print("time : ",time)
     x = int(time)*1000
     cu = (int(time)-1)*1000 
     y = 0
@@ -637,8 +637,8 @@ def leerE(nombre, time):
             else:
                 y+=1      
             pri = False
-            print("cu: ", cu)
-            print("y: ", y)
+            #print("cu: ", cu)
+            #print("y: ", y)
         db.exit()
         print("fin de metodo: time: ", time)
         if os.path.exists(ruta):
@@ -657,7 +657,7 @@ def leerTC(nombre, time):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
-    print("time : ",time)
+    #print("time : ",time)
     x = int(time)*1000
     cu = (int(time)-1)*1000
     y=0
@@ -701,8 +701,8 @@ def leerTC(nombre, time):
             else:
                 y+=1      
             pri = False
-            print("cu: ", cu)
-            print("y: ", y)
+            #print("cu: ", cu)
+            #print("y: ", y)
         db.exit()
         print("fin de metodo: time: ", time)
         return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(1)))

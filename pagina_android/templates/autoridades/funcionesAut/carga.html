@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+
     <title>Cargando</title>
     <style>
-        .loader {
-            --background: linear-gradient(135deg, #23C4F8, #275EFE);
-            --shadow: rgba(39, 94, 254, 0.28);
-            --text: #6C7486;
-            --page: rgba(255, 255, 255, 0.36);
-            --page-fold: rgba(255, 255, 255, 0.52);
-            --duration: 3s;
-            width: 200px;
-            height: 140px;
-            position: relative;
-          }
+      .loader {
+        --background: linear-gradient(135deg, #23C4F8, #275EFE);
+        --shadow: rgba(39, 94, 254, 0.28);
+        --text: #6C7486;
+        --page: rgba(255, 255, 255, 0.36);
+        --page-fold: rgba(255, 255, 255, 0.52);
+        --duration: 3s;
+        width: 200px;
+        height: 140px;
+        position: relative;
+        text-align: center;
+        margin: 0 auto; /* Esto centra horizontalmente el elemento */
+      }
+      
           
           .loader:before, .loader:after {
             --r: -6deg;
@@ -194,10 +199,27 @@
               transform: rotateY(0deg);
             }
           }
+          .container {
+            margin-top:20%;
+            text-align: center;
+          }
+
+          h1 {
+            font-family: 'Poppins', sans-serif; /* Aplica la fuente Poppins a la etiqueta h1 */
+            font-size: 24px; /* Tamaño de la fuente, ajusta según sea necesario */
+            font-weight: 700; /* Peso de la fuente, 700 es semibold, ajusta según sea necesario */
+            color: #333; /* Color del texto, ajusta según sea necesario */
+            margin: 0; /* Elimina el margen predeterminado para mayor precisión */
+          }
+      
           
     </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Tu contenido aquí -->
+    
+ 
     <div class="loader">
         <div>
           <ul>
@@ -232,12 +254,12 @@
               </svg>
             </li>
           </ul>
-        </div><span>Loading</span></div>
+        </div></div>
 
 
 
     <h1>Subiendo datos de {{regis}} parte {{ti}}...</h1>
-
+ </div>
     <script>
         // Espera 5000 milisegundos (5 segundos) y luego redirige a la nueva URL
         setTimeout(function() {

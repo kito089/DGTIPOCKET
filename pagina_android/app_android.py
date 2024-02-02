@@ -579,7 +579,7 @@ def leerAlumnos(nombre):
                     print(datos)
                 else:
                     igg = db.seleccion("alumnos","idalumnos, grado, grupo_idgrupo", "no_control = '"+datos_celda[7]+"'")[0]
-                    gru = db.seleccion("grupo","letra","idgrupo = '"+str(igg[2]))[0][0]
+                    gru = db.seleccion("grupo","letra","idgrupo = '"+str(igg[2])+"'")[0][0]
                     if int(igg[1]) != int(datos_celda[6][0]):
                         db.actualizarDato("alumnos",str(igg[0]),datos_celda[6][0],"grado")
                     if str(gru) != datos_celda[6][1]:

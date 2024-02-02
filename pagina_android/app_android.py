@@ -1,17 +1,9 @@
 from flask import Flask, render_template,redirect,url_for, request, session, send_file
 from authlib.integrations.flask_client import OAuth
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import Flow
-from googleapiclient.discovery import build
-from google.auth.transport.requests import Request
-from googleapiclient.errors import HttpError
-import google.auth.exceptions
 import os
 import os.path
 from python.bd import *
 from python.pywopd import *
-import datetime
-import json
 import matplotlib.pyplot as plt
 
 from io import BytesIO
@@ -88,23 +80,11 @@ def authorize():
     google = oauth.create_client('google')  # create the google oauth client
     token = google.authorize_access_token()  # Access token from google (needed to get user info)
     tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"), 'token_uri': 'https://oauth2.googleapis.com/token'}
-    # tokens = {
-    #     'token': token['access_token'],
-    #     'refresh_token': 'your_refresh_token',
-    #     'token_uri': 'https://oauth2.googleapis.com/token',
-    #     'client_id': os.getenv("GOOGLE_CLIENT_ID"),
-    #     'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"),
-    #     'scopes': token['scope'].split(),
-    #     'expiry': 'expiry_timestamp',
-    #     'id_token': token['id_token'],
-    # }
     resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
     user_info = resp.json()
     token.pop('userinfo')
     tokens.update(token)
     session['tok_info'] = tokens
-    #print("---------------toks")
-    #print(tokens)
     with open("token.txt", "w") as tok:
         tok.write(str(tokens))
     #print("fin")
@@ -113,7 +93,6 @@ def authorize():
         user_info.update({'persona':'alumno'})
         session['profile'] = user_info
         return redirect('/terminar')
-    
     else:
         user_info.update({'persona':'maestro'})
         session['profile'] = user_info

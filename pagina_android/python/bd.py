@@ -120,7 +120,7 @@ class Coneccion:
         if self.conexion.open:
             try:
                 atributos = self.obtenerAtributos(tabla)
-                query = "UPDATE "+str(tabla)+" SET "+str(atributo)+" = "+str(dato)+"WHERE "+str(atributos[0])+" = "+str(pos)
+                query = "UPDATE "+str(tabla)+" SET "+str(atributo)+" = '"+str(dato)+"' WHERE "+str(atributos[0])+" = '"+str(pos)+"'"
                 print(query)
                 self.cursor.execute(query)
                 self.conexion.commit()

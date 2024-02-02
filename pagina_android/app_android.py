@@ -583,7 +583,7 @@ def leerAlumnos(nombre):
                     if int(igg[1]) != int(datos_celda[6][0]):
                         db.actualizarDato("alumnos",str(igg[0]),datos_celda[6][0],"grado")
                     if str(gru) != datos_celda[6][1]:
-                        db.actualizarDato("alumnos", str(igg[0]), datos_celda[6][1])
+                        db.actualizarDato("alumnos", str(igg[0]), datos_celda[6][1], "grupo")
                     print("------------------alumnos en la bd")
             pri = False
         db.exit()

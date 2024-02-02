@@ -85,8 +85,8 @@ def authorize():
     token.pop('userinfo')
     tokens.update(token)
     session['tok_info'] = tokens
-    with open("token.txt", "w") as tok:
-        tok.write(str(tokens))
+    #with open("token.txt", "w") as tok:
+    #    tok.write(str(tokens))
     #print("fin")
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     if str.isnumeric(user_info['email'][0]):

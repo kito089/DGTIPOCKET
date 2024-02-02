@@ -550,8 +550,8 @@ def obtGrupo(grupo, esp, turno):
     else:
         return grupo
 
-@app.route("/leerAlumnos/<string:nombre>")
-def leerAlumnos(nombre):
+@app.route("/leerAlumnos/<string:nombre>/<string:time>")
+def leerAlumnos(nombre, time):
     print("accediendo al archivo (alumnos)")
     ruta = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre)
     with open(ruta, 'r', encoding='MacRoman') as archivo_html:
@@ -559,6 +559,10 @@ def leerAlumnos(nombre):
     soup = BeautifulSoup(contenido_html, 'html.parser')
     tabla = soup.find('table')
     pri = True
+    print("time : ",time)
+    x = int(time)*1000
+    cu = (int(time)-1)*1000 
+    y = 0
     if tabla:
         db = Coneccion()
         for fila in tabla.find_all('tr'):
@@ -567,25 +571,36 @@ def leerAlumnos(nombre):
                 if datos_celda != ['CLV_CENTRO', 'PLANTEL', 'CARRERA', 'GENERACION', 'TURNO', 'SEMESTRE', 'GRUPO', 'NO CONTROL', 'NOMBRE', 'PATERNO', 'MATERNO', 'CURP', 'NOMBRE ASIGNATURA', 'PARCIAL 1', 'PARCIAL 2', 'PARCIAL 3', 'CALIFICACION', 'PERIODO', 'FIRMADO', 'FIRMA', 'ASISTENCIAS 1', 'ASISTENCIAS 2', 'ASISTENCIAS 3', 'TOTAL ASISTENICIAS', 'TIPO ACREDITACION']:
                     return "Formato del excel no compatible"
             else:
-                caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
-                tabCam= str.maketrans(caracteres)
-                datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
-                datos_celda[6] = obtGrupo(datos_celda[6], datos_celda[2], datos_celda[4])
-                #print(datos_celda[2],datos_celda[4],datos_celda[6],datos_celda[7],datos_celda[11],datos_celda[12],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[17],datos_celda[20],datos_celda[21],datos_celda[22],datos_celda[24])
-                if not(len(db.seleccion("alumnos","*","no_control = '"+datos_celda[7]+"'")) > 0):
-                    grupo = db.seleccion("grupo","idgrupo","letra = '"+datos_celda[6][1]+"'")[0][0]
-                    datos = [datos_celda[7],datos_celda[11],datos_celda[6][0],str(grupo)]
-                    db.insertarRegistro("alumnos", datos)
-                    print(datos)
-                else:
-                    igg = db.seleccion("alumnos","idalumnos, grado, grupo_idgrupo", "no_control = '"+datos_celda[7]+"'")[0]
-                    gru = db.seleccion("grupo","letra","idgrupo = '"+str(igg[2])+"'")[0][0]
-                    if int(igg[1]) != int(datos_celda[6][0]):
-                        db.actualizarDato("alumnos",str(igg[0]),datos_celda[6][0],"grado")
-                    if str(gru) != datos_celda[6][1]:
-                        db.actualizarDato("alumnos", str(igg[0]), datos_celda[6][1], "grupo")
-                    print("------------------alumnos en la bd")
+                if cu <= x and y >= cu:
+                    caracteres = {"”": "Ó", "Õ": "Í", "¡": "Á", "…": "É", "⁄": "Ú", "—": "Ñ"}
+                    tabCam= str.maketrans(caracteres)
+                    datos_celda = [cadena.translate(tabCam) for cadena in datos_celda]
+                    datos_celda[6] = obtGrupo(datos_celda[6], datos_celda[2], datos_celda[4])
+                    #print(datos_celda[2],datos_celda[4],datos_celda[6],datos_celda[7],datos_celda[11],datos_celda[12],datos_celda[13],datos_celda[14],datos_celda[15],datos_celda[17],datos_celda[20],datos_celda[21],datos_celda[22],datos_celda[24])
+                    if not(len(db.seleccion("alumnos","*","no_control = '"+datos_celda[7]+"'")) > 0):
+                        grupo = db.seleccion("grupo","idgrupo","letra = '"+datos_celda[6][1]+"'")[0][0]
+                        datos = [datos_celda[7],datos_celda[11],datos_celda[6][0],str(grupo)]
+                        db.insertarRegistro("alumnos", datos)
+                        print(datos)
+                    else:
+                        igg = db.seleccion("alumnos","idalumnos, grado, grupo_idgrupo", "no_control = '"+datos_celda[7]+"'")[0]
+                        gru = db.seleccion("grupo","letra","idgrupo = '"+str(igg[2])+"'")[0][0]
+                        if int(igg[1]) != int(datos_celda[6][0]):
+                            db.actualizarDato("alumnos",str(igg[0]),datos_celda[6][0],"grado")
+                        if str(gru) != datos_celda[6][1]:
+                            db.actualizarDato("alumnos", str(igg[0]), datos_celda[6][1], "grupo")
+                        print("------------------alumnos en la bd")
+            if cu > x:
+                print("fin de metodo: time: ", time)
+                return redirect(url_for("cargaArch", regis = "Alumnos", archivo = nombre, ti = str(int(time)+1)))
+            if y >= cu:
+                cu += 1
+                y+=1
+            else:
+                y+=1      
             pri = False
+            print("cu: ", cu)
+            print("y: ", y)
         db.exit()
         return redirect(url_for("cargaArch", regis = "TC", archivo = nombre, ti = str(1)))
     else:
@@ -601,8 +616,8 @@ def leerE(nombre, time):
     tabla = soup.find('table')
     pri = True
     print("time : ",time)
-    x = int(time)*2000
-    cu = (int(time)-1)*2000 
+    x = int(time)*1000
+    cu = (int(time)-1)*1000 
     y = 0
     if tabla:
         db = Coneccion()
@@ -664,8 +679,8 @@ def leerTC(nombre, time):
     tabla = soup.find('table')
     pri = True
     print("time : ",time)
-    x = int(time)*2000
-    cu = (int(time)-1)*2000
+    x = int(time)*1000
+    cu = (int(time)-1)*1000
     y=0
     if tabla:
         db = Coneccion()

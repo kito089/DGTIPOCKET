@@ -601,8 +601,8 @@ def leerE(nombre, time):
     tabla = soup.find('table')
     pri = True
     print("time : ",time)
-    x = int(time)*4000
-    cu = (int(time)-1)*4000 
+    x = int(time)*2000
+    cu = (int(time)-1)*2000 
     y = 0
     if tabla:
         db = Coneccion()
@@ -664,8 +664,8 @@ def leerTC(nombre, time):
     tabla = soup.find('table')
     pri = True
     print("time : ",time)
-    x = int(time)*4000
-    cu = (int(time)-1)*4000
+    x = int(time)*2000
+    cu = (int(time)-1)*2000
     y=0
     if tabla:
         db = Coneccion()

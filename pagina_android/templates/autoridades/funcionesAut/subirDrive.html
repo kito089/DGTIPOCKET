@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Cuadernillo</title>
+</head>
+<body>
+    <h1>Subir Cuadernillo</h1>
+    <form action="/driveMas" method="post" enctype="multipart/form-data">
+        <input type="file" name="Cuader" required>
+        
+        <select name="grado">
+            {% for i in range(6) %}
+                <option value="g{{i+1}}">{{i+1}}</option>
+            {% endfor %}
+                <option value="0">Todos</option>
+        </select>
+        <select name="grupo">
+            {% for l in letras %}
+                <option value="{{l[0]}}">{{l[1]}}</option>
+            {% endfor %}
+            <option value="nada">Todos</option>
+        </select>
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>

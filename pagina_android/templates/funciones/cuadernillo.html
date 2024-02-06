@@ -12,33 +12,34 @@ iframe {
     height: 100vh; /* 100% de la altura de la ventana visible */
     border: 0; /* Eliminar el borde del iframe */
   }
+  .card {
+    width: 300px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100px;
+}
 {% endblock %}
 
-
-
 {% block content %}
-<div id="web-view-container"></div>
-
-<script>
-    // URL de la página web externa que quieres mostrar
-    var url = 'https://www.google.com';
-
-    // Función para cargar el contenido de la página web externa y mostrarlo en tu página
-    function cargarWebView(url, contenedor) {
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                contenedor.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error al cargar la página web:', error);
-            });
-    }
-
-    // Obtén el contenedor donde deseas mostrar la página web
-    var contenedorWebView = document.getElementById('web-view-container');
-
-    // Llama a la función para cargar el contenido de la página web externa
-    cargarWebView(url, contenedorWebView);
-</script>
+<div id="fileList">
+    {% for file in files %}
+        <div class="card">
+            {% if file.thumbnailLink %}
+                <img src="{{ file.thumbnailLink }}" alt="{{ file.name }}">
+            {% else %}
+                <i class="material-icons">insert_drive_file</i>
+            {% endif %}
+            <p>{{ file.name }}</p>
+            <button onclick="{{ url_for('descargar', archivo=file.ruta) }}">Descargar</button>
+            <button onclick="window.open('{{ file.webViewLink }}', '_blank')">Previsualizar</button>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

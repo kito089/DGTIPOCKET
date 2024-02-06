@@ -1,44 +1,47 @@
 from flask import Flask, render_template,redirect,url_for, request, session, send_file
-from authlib.integrations.flask_client import OAuth
-import os
-import os.path
-from python.bd import *
-from python.pywopd import *
-import matplotlib.pyplot as plt
+import requests
+import json
 
 from io import BytesIO
+import matplotlib.pyplot as plt
 import base64
 from bs4 import BeautifulSoup
 
-from python.funciones_auth import login_required
+from python.bd import *
+from python.pywopd import *
+from python.funciones_auth import *
 
+import os
+import os.path
 from dotenv import load_dotenv
 
-project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')
+from pip._vendor import cachecontrol
+from google.oauth2 import id_token
+from google_auth_oauthlib.flow import Flow
+import google.auth.transport.requests
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
+import io
+
+#project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')
+project_folder = 'C:/Users/jezar/Downloads/DGTIPOCKET/pagina_android'
 load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.expanduser('~/DGTIPOCKET/editar_word')
-app.config['ALLOWED_EXTENSIONS'] = {'pdf', 'xls', 'xlsx'}
+app.config['ALLOWED_EXTENSIONS'] = set()
 app.secret_key = os.getenv("APP_SECRET_KEY")
 
-oauth = OAuth(app)
+client_secrets_file = os.path.join(project_folder, "client_secret.json")
 
-google = oauth.register(
-    name='google',
-    client_id= os.getenv("GOOGLE_CLIENT_ID"),
-    client_secret= os.getenv("GOOGLE_CLIENT_SECRET"),
-    authorize_url='https://accounts.google.com/o/oauth2/auth',#auth_url,
-    # authorize_params=None,
-    # authorize_callback=None,
-    # authorize_response=None,
-    token_url='https://oauth2.googleapis.com/token',
-    # token_params=None,
-    # token_response=None,
-    api_base_url='https://www.googleapis.com/oauth2/v1/',
-    #--userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
-    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={'scope': 'openid email profile https://www.googleapis.com/auth/calendar.readonly'},
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=["openid", "https://www.googleapis.com/auth/userinfo.email", 
+            "https://www.googleapis.com/auth/userinfo.profile", 
+            "https://www.googleapis.com/auth/calendar.readonly", 
+            "https://www.googleapis.com/auth/drive.file"],
+    redirect_uri="https://127.0.0.1:5000/authorize"
 )
 
 @app.route('/')
@@ -49,13 +52,7 @@ def index():
     avisos = bd.obtenerTablas("avisos")
     concursos = bd.obtenerTablas("concursos")
     bd.exit()
-    #print("---------------sesion")
-    #print(dict(session))
     parametros = dict(session)['profile']
-    toks = dict(session)['tok_info']
-
-    #print("session token")
-    #print(toks)
 
     if parametros['persona'] == 'maestro':
         return render_template('autoridades/funcionesMaestros.html', parametros=parametros, noticias=noticias, avisos=avisos)
@@ -72,31 +69,56 @@ def carga():
 
 @app.route('/login')
 def login():
-    google = oauth.create_client('google')  # create the google oauth client
-    return google.authorize_redirect(url_for('authorize', _external=True), access_type='offline', prompt='consent')
+    authorization_url, state = flow.authorization_url()
+    session["state"] = state
+    print("state-------",state)
+    return redirect(authorization_url)
 
-@app.route('/authorize')
+def credentials_to_dict(credentials):
+  return {'token': credentials.token,
+          'refresh_token': credentials.refresh_token,
+          'token_uri': credentials.token_uri,
+          'client_id': credentials.client_id,
+          'client_secret': credentials.client_secret,
+          'scopes': credentials.scopes}
+
+@app.route("/authorize")
 def authorize():
-    google = oauth.create_client('google')  # create the google oauth client
-    token = google.authorize_access_token()  # Access token from google (needed to get user info)
-    tokens = {'client_id':os.getenv("GOOGLE_CLIENT_ID"),'client_secret': os.getenv("GOOGLE_CLIENT_SECRET"), 'token_uri': 'https://oauth2.googleapis.com/token'}
-    resp = google.get('userinfo')  # userinfo contains stuff u specificed in the scrope
-    user_info = resp.json()
-    token.pop('userinfo')
-    tokens.update(token)
-    session['tok_info'] = tokens
-    #with open("token.txt", "w") as tok:
-    #    tok.write(str(tokens))
-    #print("fin")
+    flow.fetch_token(authorization_response=request.url)
+
+    if not session["state"] == request.args["state"]:
+        print("State does not match!")
+
+    credentials = flow.credentials
+    request_session = requests.session()
+    cached_session = cachecontrol.CacheControl(request_session)
+    token_request = google.auth.transport.requests.Request(session=cached_session)
+
+    id_info = id_token.verify_oauth2_token(
+        id_token=credentials._id_token,
+        request=token_request,
+        audience=os.getenv("GOOGLE_CLIENT_ID"), 
+        clock_skew_in_seconds=15
+    )
+
+    session['credentials'] = credentials_to_dict(credentials)
     #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
-    if str.isnumeric(user_info['email'][0]):
-        user_info.update({'persona':'alumno'})
-        session['profile'] = user_info
+    print("sesion --------",session)
+    print("--------------------------------------")
+    print(id_info['email'][0])
+    if str.isnumeric(id_info['email'][0]):
+        id_info.update({'persona':'alumno'})
+        session['profile'] = id_info
         return redirect('/terminar')
     else:
-        user_info.update({'persona':'maestro'})
-        session['profile'] = user_info
+        id_info.update({'persona':'maestro'})
+        session['profile'] = id_info
         return redirect('/m')
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
 
 ###         PRIMER REGISTRO DE SESION       ###
 
@@ -142,8 +164,8 @@ def insertainfo():
 
 ###     CIERRE DE SESION        ###
 
-@app.route('/logout')
-def logout():
+# @app.route('/logout')
+# def logout():
     for key in list(session.keys()):
         session.pop(key)
     return redirect(url_for('carga'))
@@ -174,11 +196,6 @@ def agenda():
     print("------------------")
     print(horario)
     return render_template('funciones/agenda.html', parametros = parametros,archivo=horario)
-
-@app.route('/cuadernillo')
-def cuadernillo():
-    parametros = dict(session)['profile']
-    return render_template('funciones/cuadernillo.html', parametros = parametros)
 
 @app.route('/pagos')
 def pagos():
@@ -229,6 +246,15 @@ def organigrama():                                                              
 
 ###         FUNCIONES DETALLADAS        ###
 
+@app.route('/descargar/<string:archivo>')
+def descargar(archivo):
+    try:
+        return send_file(archivo, as_attachment=True)
+    finally:
+        if os.path.exists(archivo):
+            os.remove(archivo)
+            print(f'Archivo {archivo} eliminado correctamente.')
+
 @app.route('/boleta')
 def boleta():
     parametros = dict(session)['profile']
@@ -266,12 +292,13 @@ def boleta():
     docx2pdf(word)
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    try:
-        return send_file(pdf, as_attachment=True)
-    finally:
-        if os.path.exists(pdf):
-            os.remove(pdf)
-            print(f'Archivo {pdf} eliminado correctamente.')
+    return redirect(url_for("/descargar", archivo = pdf))
+    # try:
+    #     return send_file(pdf, as_attachment=True)
+    # finally:
+    #     if os.path.exists(pdf):
+    #         os.remove(pdf)
+    #         print(f'Archivo {pdf} eliminado correctamente.')
 
 @app.route('/tabla/<string:table>')
 def tabla(table):
@@ -334,6 +361,44 @@ def noticias():
     parametros = dict(session)['profile']
     return render_template('funciones/noticiasapp.html', noticias=noticias, parametros = parametros)
 
+@app.route('/cuadernillo')
+@creds_required
+def cuadernillo():
+    parametros = dict(session)['profile']
+    try:
+        credentials = google.oauth2.credentials.Credentials(**session['credentials'])
+        drive = build("drive", "v3", credentials=credentials)
+        print("entre al servicio uwu")
+        folder_id = '1BYer5YZOkOlOScbfMyPz9XRe_rRe-yzl'
+        results = drive.files().list(q="trashed=false",
+                                   fields="files(id, name, mimeType, thumbnailLink, webViewLink)").execute()
+        files = results.get('files', [])
+        if not files:
+            print('No files found in the specified folder.')
+            return render_template('funciones/cuadernillo.html', parametros = parametros, cuadernillos = "Vacio")
+        else:
+            print('Files in the folder:')
+            print(files)
+            cuadernillos = []
+            bd = Coneccion()
+            for file in files:
+                gg = bd.seleccion("cuadernillos","grado, grupo_idgrupo","nombre = '"+str(file['name'])+"' and idcuad = '"+str(file[id])+"'")
+                print(gg)
+                if len(gg) > 0:
+                    le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[1])+"'")
+                    if (int(gg[0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le) > 0 or str(gg[1]) == "NULL"):
+                        ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
+                        cuadernillos.append([file, ruta])
+                else:
+                    print("cuadernillo no agregado a la bd")
+            bd.exit()
+            print(cuadernillos)
+            return render_template('funciones/cuadernillo.html', parametros = parametros, cuadernillos=cuadernillos)
+    except HttpError as error:
+        # TODO(developer) - Handle errors from drive API.
+        print(f"An error occurred: {error}")
+        return f"An error occurred: {error}"
+
 ####        AUTORIDADES         ####
 
 @app.route('/m')
@@ -347,12 +412,6 @@ def index_maestros():
     print("---------------sesion")
     print(dict(session))
     parametros = dict(session)['profile']
-    toks = dict(session)['tok_info']
-
-    print("session token")
-    print(toks)
-    
-    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
 
     return render_template('autoridades/indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
@@ -387,7 +446,7 @@ def Mfunciones():
     return render_template('autoridades/funcionesMaestros.html', parametros = parametros)
 
 @app.route('/insDat/<string:nom>', methods=['GET', 'POST']) ### INSERTAR NOTICIAS AVISOS CONCURSOS
-def agregar_noticia(nom=None):
+def insDat(nom=None):
     parametros = dict(session)['profile']
     tab2 = ""
     comb = None
@@ -469,7 +528,10 @@ def delDat(tabla, id):
     return redirect(url_for('tabla',table=tabla))
 
 def extencion(arch):
-    return '.' in arch and arch.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+    if '.' not in arch:
+        return False
+    ext = arch.rsplit('.', 1)[1].lower()
+    return ext in {'xls', 'xlsx'}
 
 @app.route("/cargaArch/<string:regis>/<string:archivo>/<string:ti>")
 def cargaArch(regis, archivo, ti):
@@ -708,6 +770,48 @@ def leerTC(nombre, time):
         return redirect(url_for("cargaArch", regis = "E", archivo = nombre, ti = str(1)))
     else:
         print("No se encontró ninguna tabla en el xls.")
+
+@app.route("/driveMas", methods = ['POST', 'GET'])
+@creds_required
+def driveMas():
+    if request.method == 'POST':
+        cuader = request.files['file']
+        if cuader.filename == '':
+            return "Archivo no seleccionado"
+        if cuader:
+            file_path = f"{app.config['UPLOAD_FOLDER']}/{cuader.filename}"
+            cuader.save(file_path)
+
+        try:
+            credentials = google.oauth2.credentials.Credentials(**session['credentials'])
+            drive = build("drive", "v3", credentials=credentials)
+            print("entre al servicio uwu")
+
+            #'https://drive.google.com/drive/folders/1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR?usp=sharing'
+            folder_id = '1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR'
+
+            file_metadata = {'name': cuader.filename, 'parents': [folder_id]}
+            media = MediaFileUpload(file_path, mimetype='application/octet-stream')
+            file = drive.files().create(body=file_metadata, media_body=media, fields='id').execute()
+            print(f"File '{cuader.filename}' uploaded. ID: {file['id']}")
+
+            if request.form['grupo'] == "nada":
+                datos = [str(file['id']),str(cuader.filename),str(request.form['grado']), "NULL"]
+            else:
+                datos = [str(file['id']),str(cuader.filename),str(request.form['grado']), str(request.form['grupo'])]
+            bd = Coneccion()
+            bd.insertarRegistro("cuadernillos",datos)
+            bd.exit()
+
+            return redirect(url_for("index_maestros"))
+        except HttpError as error:
+            print(f"An error occurred: {error}")
+            return f"An error occurred: {error}"
+        
+    bd = Coneccion()
+    letras = bd.obtenerTablas("grupos")
+    bd.exit()
+    return render_template("subirDrive", letras = letras)
 
 ####            PRUEBAS             ####
 

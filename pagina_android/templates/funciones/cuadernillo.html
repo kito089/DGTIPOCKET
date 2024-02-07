@@ -29,16 +29,18 @@ img {
 
 {% block content %}
 <div id="fileList">
-    {% for file in files %}
+    {% for file in cuadernillos %}
         <div class="card">
-            {% if file.thumbnailLink %}
-                <img src="{{ file.thumbnailLink }}" alt="{{ file.name }}">
+            {% if file[0] %}
+                <img src="{{ file[0] }}" alt="{{ file[1] }}">
             {% else %}
                 <i class="material-icons">insert_drive_file</i>
             {% endif %}
             <p>{{ file.name }}</p>
-            <button onclick="{{ url_for('descargar', archivo=file.ruta) }}">Descargar</button>
-            <button onclick="window.open('{{ file.webViewLink }}', '_blank')">Previsualizar</button>
+            <a href="/descargarDrive/{{file[3]}}/{{file[1]}}">
+                <button>Descargar</button>
+            </a>
+            <button onclick="window.open('{{ file[2] }}', '_blank')">Previsualizar</button>
         </div>
     {% endfor %}
 </div>

@@ -1,6 +1,7 @@
-from flask import Flask, render_template,redirect,url_for, request, session, send_file
+from flask import Flask, render_template,redirect,url_for, request, session, send_file, send_from_directory
 import requests
 import json
+import time
 
 from io import BytesIO
 import matplotlib.pyplot as plt
@@ -29,7 +30,8 @@ project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')
 load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.expanduser('~/DGTIPOCKET/editar_word')
+app.config['UPLOAD_FOLDER'] = 'C:/Users/jezar/Downloads/DGTIPOCKET/editar_word'
+#app.config['UPLOAD_FOLDER'] = os.path.expanduser('~/DGTIPOCKET/editar_word')
 app.config['ALLOWED_EXTENSIONS'] = set()
 app.secret_key = os.getenv("APP_SECRET_KEY")
 
@@ -39,7 +41,8 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["openid", "https://www.googleapis.com/auth/userinfo.email", 
             "https://www.googleapis.com/auth/userinfo.profile", 
-            "https://www.googleapis.com/auth/calendar.readonly", 
+            "https://www.googleapis.com/auth/calendar.readonly",
+            "https://www.googleapis.com/auth/drive.readonly", 
             "https://www.googleapis.com/auth/drive.file"],
     redirect_uri="https://127.0.0.1:5000/authorize"
 )
@@ -98,7 +101,7 @@ def authorize():
         id_token=credentials._id_token,
         request=token_request,
         audience=os.getenv("GOOGLE_CLIENT_ID"), 
-        clock_skew_in_seconds=15
+        clock_skew_in_seconds=60
     )
 
     session['credentials'] = credentials_to_dict(credentials)
@@ -361,6 +364,32 @@ def noticias():
     parametros = dict(session)['profile']
     return render_template('funciones/noticiasapp.html', noticias=noticias, parametros = parametros)
 
+@app.route('/descargarDrive/<string:idC>/<string:nom>')
+def descargarDrive(idC, nom):
+    credentials = google.oauth2.credentials.Credentials(**session['credentials'])
+    drive = build("drive", "v3", credentials=credentials)
+    print("entre al servicio uwu")
+
+    file_path = file_path = f"{app.config['UPLOAD_FOLDER']}/{nom}"
+    try:
+        request = drive.files().get_media(fileId=idC)
+        with io.FileIO(file_path, 'wb') as fh:
+            downloader = MediaIoBaseDownload(fh, request)
+
+            done = False
+            while not done:
+                status, done = downloader.next_chunk()
+
+        print(f"File '{nom}' downloaded and saved to '{file_path}'.")
+        # Asegúrate de que la función descargar no sea llamada aquí
+    except Exception as e:
+        print(f"Error during file download: {e}")
+        # Maneja cualquier error que pueda ocurrir durante la descarga
+
+    # Si necesitas hacer algo más después de descargar, agrégalo aquí
+
+    return send_from_directory(app.config['UPLOAD_FOLDER'], nom, as_attachment=True)
+
 @app.route('/cuadernillo')
 @creds_required
 def cuadernillo():
@@ -369,9 +398,12 @@ def cuadernillo():
         credentials = google.oauth2.credentials.Credentials(**session['credentials'])
         drive = build("drive", "v3", credentials=credentials)
         print("entre al servicio uwu")
-        folder_id = '1BYer5YZOkOlOScbfMyPz9XRe_rRe-yzl'
-        results = drive.files().list(q="trashed=false",
-                                   fields="files(id, name, mimeType, thumbnailLink, webViewLink)").execute()
+        #'https://drive.google.com/drive/folders/1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR?usp=sharing'
+        folder_id = '1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR'
+
+        # Lista de archivos en el folder
+        results = drive.files().list(q=f"'{folder_id}' in parents", 
+                                       fields="files(id, name, mimeType, thumbnailLink, webViewLink)").execute()
         files = results.get('files', [])
         if not files:
             print('No files found in the specified folder.')
@@ -382,17 +414,19 @@ def cuadernillo():
             cuadernillos = []
             bd = Coneccion()
             for file in files:
-                gg = bd.seleccion("cuadernillos","grado, grupo_idgrupo","nombre = '"+str(file['name'])+"' and idcuad = '"+str(file[id])+"'")
+                gg = bd.seleccion("cuadernillos","grado, grupo_idgrupo","nombre = '"+str(file['name'])+"' and idcuad = '"+str(file['id'])+"'")[0]
                 print(gg)
                 if len(gg) > 0:
                     le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[1])+"'")
-                    if (int(gg[0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le) > 0 or str(gg[1]) == "NULL"):
+                    print("le: ",le, len(le))
+                    if (int(gg[0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le[0]) > 0 or str(gg[1]) == "None"):
+                        print("condiciones cumplidas :D")
                         ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
-                        cuadernillos.append([file, ruta])
+                        cuadernillos.append([file['thumbnailLink'], file['name'], file['webViewLink'], file['id'], ruta])
                 else:
                     print("cuadernillo no agregado a la bd")
             bd.exit()
-            print(cuadernillos)
+            print("cuadernillos: ",cuadernillos)
             return render_template('funciones/cuadernillo.html', parametros = parametros, cuadernillos=cuadernillos)
     except HttpError as error:
         # TODO(developer) - Handle errors from drive API.
@@ -775,7 +809,7 @@ def leerTC(nombre, time):
 @creds_required
 def driveMas():
     if request.method == 'POST':
-        cuader = request.files['file']
+        cuader = request.files['Cuader']
         if cuader.filename == '':
             return "Archivo no seleccionado"
         if cuader:
@@ -796,22 +830,25 @@ def driveMas():
             print(f"File '{cuader.filename}' uploaded. ID: {file['id']}")
 
             if request.form['grupo'] == "nada":
-                datos = [str(file['id']),str(cuader.filename),str(request.form['grado']), "NULL"]
+                datos = [str(file['id']),str(cuader.filename),str(request.form['grado']), "@NULL"]
             else:
                 datos = [str(file['id']),str(cuader.filename),str(request.form['grado']), str(request.form['grupo'])]
             bd = Coneccion()
             bd.insertarRegistro("cuadernillos",datos)
             bd.exit()
 
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                print(f'Archivo {file_path} eliminado correctamente.')
             return redirect(url_for("index_maestros"))
         except HttpError as error:
             print(f"An error occurred: {error}")
             return f"An error occurred: {error}"
         
     bd = Coneccion()
-    letras = bd.obtenerTablas("grupos")
+    letras = bd.obtenerTablas("grupo")
     bd.exit()
-    return render_template("subirDrive", letras = letras)
+    return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras)
 
 ####            PRUEBAS             ####
 

@@ -390,7 +390,7 @@ def descargarDrive(idC, nom):
 
     return send_from_directory(app.config['UPLOAD_FOLDER'], nom, as_attachment=True)
 
-@app.route('/cuadernillos')
+@app.route('/cuadernillo')
 @creds_required
 def cuadernillo():
     parametros = dict(session)['profile']

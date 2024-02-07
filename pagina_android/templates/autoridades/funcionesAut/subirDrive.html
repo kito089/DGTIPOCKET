@@ -62,18 +62,18 @@ insert noticias
       </div>
       <input type="file" name="file" required>
     </label>
-            <select name="grado">
-                {% for i in range(6) %}
-                    <option value="{{i+1}}">{{i+1}}</option>
-                {% endfor %}
-                    <option value="0">Todos</option>
-            </select>
-            <select name="grupo">
-                {% for l in letras %}
-                    <option value="{{l[0]}}">{{l[1]}}</option>
-                {% endfor %}
-                <option value="nada">Todos</option>
-            </select>
+    <select name="grado">
+        {% for i in range(6) %}
+            <option value="{{i+1}}">{{i+1}}</option>
+        {% endfor %}
+            <option value="0">Todos</option>
+    </select>
+    <select name="grupo">
+        {% for l in letras %}
+            <option value="{{l[0]}}">{{l[1]}}</option>
+        {% endfor %}
+        <option value="nada">Todos</option>
+    </select>
     <input type="submit" value="Subir">
   </form>
   

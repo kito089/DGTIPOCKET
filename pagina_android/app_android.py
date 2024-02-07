@@ -850,7 +850,8 @@ def driveMas():
     bd = Coneccion()
     letras = bd.obtenerTablas("grupo")
     bd.exit()
-    return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras)
+    parametros = dict(session)['profile']
+    return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras, parametros=parametros)
 
 ####            PRUEBAS             ####
 

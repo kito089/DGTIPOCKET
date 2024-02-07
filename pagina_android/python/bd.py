@@ -49,7 +49,12 @@ class Coneccion:
                     atr = atr + str(atributos[i]) + " ,"
                     if "'" in datos[i-1]:
                         datos[i-1] = datos[i-1].replace("'","´")
-                    dat = dat + datos[i - 1] + "' ,'"
+                    if "@" in datos[i-1]:
+                        dat = dat[:-1]
+                        dat = dat + datos[i - 1] + " ,'"
+                        dat = dat.replace("@","")
+                    else:
+                        dat = dat + datos[i - 1] + "' ,'"
                 query = "INSERT INTO " + tabla + " (" + atr + ") VALUES (" + dat + ")"
                 query = query.replace(" ,)", ")")
                 query = query.replace(" ,')", ")")

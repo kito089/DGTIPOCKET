@@ -167,14 +167,6 @@ def insertainfo():
 
     return redirect(url_for("index"))
 
-###     CIERRE DE SESION        ###
-
-# @app.route('/logout')
-# def logout():
-    for key in list(session.keys()):
-        session.pop(key)
-    return redirect(url_for('carga'))
-
 ###         FUNCIONES DE SESION         ###
 
 @app.route('/config')

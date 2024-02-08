@@ -9,19 +9,11 @@
     <h1>Subir Cuadernillo</h1>
     <form action="/driveMas" method="post" enctype="multipart/form-data">
         <input type="file" name="Cuader" required>
-        
-        <select name="grado">
-            {% for i in range(6) %}
-                <option value="{{i+1}}">{{i+1}}</option>
-            {% endfor %}
-                <option value="0">Todos</option>
-        </select>
-        <select name="grupo">
             {% for l in letras %}
-                <option value="{{l[0]}}">{{l[1]}}</option>
+                {% for i in range(6) %}
+                    <input type="checkbox" name="{{str(i+1)+str(l[0])}}" value="True"> {{str(i)+str(l[1])}}
+                {% endfor %}
             {% endfor %}
-            <option value="nada">Todos</option>
-        </select>
         <input type="submit" value="Upload">
     </form>
 </body>

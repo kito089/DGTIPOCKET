@@ -414,7 +414,9 @@ def cuadernillo():
             cuadernillos = []
             bd = Coneccion()
             for file in files:
-                gg = bd.seleccion("cuadernillos","grado, grupo_idgrupo","nombre = '"+str(file['name'])+"' and idcuad = '"+str(file['id'])+"'")[0]
+                idc = bd.seleccion("cuadernillos", "idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
+                gg = bd.seleccion("cuadernillos_has_grupo","grado, grupo_idgrupo",
+                                  "cuadernillos_idcuadernillos = '"+str(idc)+"'")[0]
                 print(gg)
                 if len(gg) > 0:
                     le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[1])+"'")
@@ -808,6 +810,9 @@ def leerTC(nombre, time):
 @app.route("/driveMas", methods = ['POST', 'GET'])
 @creds_required
 def driveMas():
+    bd = Coneccion()
+    letras = bd.obtenerTablas("grupo")
+    bd.exit()
     if request.method == 'POST':
         cuader = request.files['Cuader']
         if cuader.filename == '':
@@ -829,14 +834,17 @@ def driveMas():
             file = drive.files().create(body=file_metadata, media_body=media, fields='id').execute()
             print(f"File '{cuader.filename}' uploaded. ID: {file['id']}")
 
-            if request.form['grupo'] == "nada":
-                datos = [str(file['id']),str(cuader.filename),str(request.form['grado']), "@NULL"]
-            else:
-                datos = [str(file['id']),str(cuader.filename),str(request.form['grado']), str(request.form['grupo'])]
+            datos = [str(file['id']),str(cuader.filename)]
             bd = Coneccion()
             bd.insertarRegistro("cuadernillos",datos)
-            bd.exit()
+            idc = bd.seleccion("cuadernillos","idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
+            for l in letras:
+                for i in range(6):
+                    check = request.form.get(str(i+1)+str(l[0])) == 'True'
+                    if check:
+                        bd.insertarRegistro("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])
 
+            bd.exit()
             if os.path.exists(file_path):
                 os.remove(file_path)
                 print(f'Archivo {file_path} eliminado correctamente.')
@@ -845,9 +853,6 @@ def driveMas():
             print(f"An error occurred: {error}")
             return f"An error occurred: {error}"
         
-    bd = Coneccion()
-    letras = bd.obtenerTablas("grupo")
-    bd.exit()
     return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras)
 
 ####            PRUEBAS             ####

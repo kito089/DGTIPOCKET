@@ -83,7 +83,7 @@ insert noticias
     </label>
             {% for l in letras %}
                 {% for i in range(6) %}
-                    <input type="checkbox" name="{{str(i+1)+str(l[0])}}" value="True"> {{str(i)+str(l[1])}}
+                    <input type="checkbox" name="{{i+1}}{{l[0]}}" value="True"> {{i+1}}{{l[1]}}"
                 {% endfor %}
             {% endfor %}
     <input type="submit" value="Subir">

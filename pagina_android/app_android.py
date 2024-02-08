@@ -448,10 +448,6 @@ def index_maestros():
     parametros = dict(session)['profile']
 
     return render_template('autoridades/indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
-
-@app.route('/p')#+++++++++++++++++++++++++++++++++++++++++++++++index programador algo bien 
-@login_required
-def index_Programadores():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     avisos = bd.obtenerTablas("avisos")
@@ -808,6 +804,7 @@ def leerTC(nombre, time):
 @app.route("/driveMas", methods = ['POST', 'GET'])
 @creds_required
 def driveMas():
+    parametros = dict(session)['profile']
     bd = Coneccion()
     letras = bd.obtenerTablas("grupo")
     bd.exit()
@@ -851,7 +848,7 @@ def driveMas():
             print(f"An error occurred: {error}")
             return f"An error occurred: {error}"
         
-    return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras)
+    return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras, parametros = parametros)
 
 ####            PRUEBAS             ####
 

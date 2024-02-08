@@ -808,6 +808,7 @@ def leerTC(nombre, time):
 @app.route("/driveMas", methods = ['POST', 'GET'])
 @creds_required
 def driveMas():
+    parametros = dict(session)['profile']
     bd = Coneccion()
     letras = bd.obtenerTablas("grupo")
     bd.exit()
@@ -851,7 +852,7 @@ def driveMas():
             print(f"An error occurred: {error}")
             return f"An error occurred: {error}"
         
-    return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras)
+    return render_template("autoridades/funcionesAut/subirDrive.html", letras = letras, parametros = parametros)
 
 ####            PRUEBAS             ####
 

@@ -448,10 +448,6 @@ def index_maestros():
     parametros = dict(session)['profile']
 
     return render_template('autoridades/indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
-
-@app.route('/p')#+++++++++++++++++++++++++++++++++++++++++++++++index programador algo bien 
-@login_required
-def index_Programadores():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
     avisos = bd.obtenerTablas("avisos")

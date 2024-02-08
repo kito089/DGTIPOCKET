@@ -364,7 +364,7 @@ def descargarDrive(idC, nom):
     drive = build("drive", "v3", credentials=credentials)
     print("entre al servicio uwu")
 
-    file_path = file_path = f"{app.config['UPLOAD_FOLDER']}/{nom}"
+    file_path = f"{app.config['UPLOAD_FOLDER']}/{nom}"
     try:
         request = drive.files().get_media(fileId=idC)
         with io.FileIO(file_path, 'wb') as fh:
@@ -381,8 +381,12 @@ def descargarDrive(idC, nom):
         # Maneja cualquier error que pueda ocurrir durante la descarga
 
     # Si necesitas hacer algo más después de descargar, agrégalo aquí
-
-    return send_from_directory(app.config['UPLOAD_FOLDER'], nom, as_attachment=True)
+    try:
+        return send_from_directory(app.config['UPLOAD_FOLDER'], nom, as_attachment=True)
+    finally:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            print(f'Archivo {file_path} eliminado correctamente.')
 
 @app.route('/cuadernillo')
 @creds_required
@@ -836,7 +840,7 @@ def driveMas():
                 for i in range(6):
                     check = request.form.get(str(i+1)+str(l[0])) == 'True'
                     if check:
-                        bd.insertarRegistro("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])
+                        bd.insertarRegistroConID("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])
 
             bd.exit()
             if os.path.exists(file_path):

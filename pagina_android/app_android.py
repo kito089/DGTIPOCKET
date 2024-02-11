@@ -25,9 +25,9 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 import io
 
-#project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')
+project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')
 #project_folder = 'C:/Users/jezar/Downloads/DGTIPOCKET/pagina_android'
-project_folder = '/home/kito089/kito089/prepa/prototipos/DGTIPOCKET/pagina_android'
+#project_folder = '/home/kito089/kito089/prepa/prototipos/DGTIPOCKET/pagina_android'
 load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)

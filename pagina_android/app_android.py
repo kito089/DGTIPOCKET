@@ -32,8 +32,8 @@ load_dotenv(os.path.join(project_folder, '.env'))
 
 app = Flask(__name__)
 #app.config['UPLOAD_FOLDER'] = 'C:/Users/jezar/Downloads/DGTIPOCKET/editar_word'
-app.config['UPLOAD_FOLDER'] = '/home/kito089/kito089/prepa/prototipos/DGTIPOCKET/editar_word'
-#app.config['UPLOAD_FOLDER'] = os.path.expanduser('~/DGTIPOCKET/editar_word')
+#app.config['UPLOAD_FOLDER'] = '/home/kito089/kito089/prepa/prototipos/DGTIPOCKET/editar_word'
+app.config['UPLOAD_FOLDER'] = os.path.expanduser('~/DGTIPOCKET/editar_word')
 app.config['ALLOWED_EXTENSIONS'] = set()
 app.secret_key = os.getenv("APP_SECRET_KEY")
 

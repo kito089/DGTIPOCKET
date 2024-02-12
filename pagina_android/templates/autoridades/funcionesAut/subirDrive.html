@@ -55,6 +55,8 @@ input[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  align-self: flex-end;
+  margin-top: 10px;
 }
 
 input[type="submit"]:hover {
@@ -128,7 +130,7 @@ input[type="submit"]:hover {
 }
 .label {
   margin-right: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   display: flex;
   align-items: center;
 }
@@ -159,7 +161,7 @@ input[type="checkbox"] {
     <input type="submit" value="Subir">
 
     <div class="checkbox-section">
-      <h2>Opciones</h2>
+      <h2>Selecciona los salones deseados</h2>
       <div class="checkbox-container">
     {% for i in range(6)  %}
     <label class="label">

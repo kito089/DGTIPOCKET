@@ -112,6 +112,8 @@ def authorize():
     print("--------------------------------------")
     print(id_info['email'][0])
     if str.isnumeric(id_info['email'][0]):
+        if "�" in id_info["name"]:
+            id_info["name"] = id_info["name"].replace("�","Ñ")
         id_info.update({'persona':'alumno'})
         session['profile'] = id_info
         return redirect('/terminar')

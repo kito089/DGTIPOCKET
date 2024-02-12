@@ -204,12 +204,6 @@ def servicio():
     parametros = dict(session)['profile']
     return render_template('funciones/servicio.html', parametros = parametros)
 
-@app.route('/historial')
-def historial():
-    plot_url = generate_plot()
-    parametros = dict(session)['profile']
-    return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
-
 @app.route('/actualizar_info', methods = ['POST', 'GET'])
 def actualizar():
     parametros = dict(session)['profile']
@@ -290,12 +284,13 @@ def boleta():
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
     return redirect(url_for("/descargar", archivo = pdf))
-    # try:
-    #     return send_file(pdf, as_attachment=True)
-    # finally:
-    #     if os.path.exists(pdf):
-    #         os.remove(pdf)
-    #         print(f'Archivo {pdf} eliminado correctamente.')
+
+@app.route('/historial')
+def historial():
+    plot_url = generate_plot()
+    parametros = dict(session)['profile']
+
+    return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
 
 @app.route('/tabla/<string:table>')
 def tabla(table):

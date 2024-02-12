@@ -100,6 +100,26 @@ input[type="submit"]:hover {
   transition: all 0.3s ease-in-out;
 }
 
+
+.checkbox-section {
+  margin: 20px 0;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.label {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 {%endblock%}
 
 
@@ -118,15 +138,24 @@ input[type="submit"]:hover {
       </div>
       <input type="file" name="file" id="file" accept="image/*" required>
     </label>
-            {% for i in range(6)  %}
-                {% for l in letras %}
-
-                    <label class="cyberpunk-checkbox-label">
-                      <input type="checkbox" class="cyberpunk-checkbox " name="{{i+1}}{{l[0]}}">
-                      {{i+1}}{{l[1]}}</label>
-                {% endfor %}
-            {% endfor %}
+            
     <input type="submit" value="Subir">
+
+    <div class="checkbox-section">
+      <h2>Opciones</h2>
+      <div class="checkbox-container">
+    {% for i in range(6)  %}
+    <label class="label">
+        {% for l in letras %}
+            <label class="cyberpunk-checkbox-label">
+              <input type="checkbox" class="cyberpunk-checkbox " name="{{i+1}}{{l[0]}}">
+              {{i+1}}{{l[1]}}</label>
+        {% endfor %}
+      </label>
+    {% endfor %}    
+
+  </div>
+</div>
   </form>
   
 

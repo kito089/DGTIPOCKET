@@ -238,13 +238,14 @@ def organigrama():                                                              
 ###         FUNCIONES DETALLADAS        ###
 
 @app.route('/descargar/<string:archivo>')
-def descargar(archivo):
+def descargar(archivo):    
+    file_path = f"{app.config['UPLOAD_FOLDER']}/{archivo}"
     try:
-        return send_file(archivo, as_attachment=True)
+        return send_from_directory(app.config['UPLOAD_FOLDER'], archivo, as_attachment=True)
     finally:
-        if os.path.exists(archivo):
-            os.remove(archivo)
-            print(f'Archivo {archivo} eliminado correctamente.')
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            print(f'Archivo {file_path} eliminado correctamente.')
 
 @app.route('/boleta')
 def boleta():
@@ -283,7 +284,7 @@ def boleta():
     docx2pdf(word)
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    return redirect(url_for("/descargar", archivo = pdf))
+    return redirect(url_for("/descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
 
 @app.route('/historial')
 def historial():

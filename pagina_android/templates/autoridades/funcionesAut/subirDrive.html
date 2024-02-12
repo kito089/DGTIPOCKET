@@ -67,6 +67,7 @@ input[type="submit"]:hover {
   padding: 20px;
   border-radius: 8px;
   cursor: pointer;
+  height:30%;
 }
 
 #drop-area:hover {
@@ -156,9 +157,10 @@ input[type="checkbox"] {
         <p>o</p>
         <span class="browse-button">Buscar Archivo</span>
       </div>
-      <input type="file" name="file" id="file" accept="image/*" required>
+      <input type="file" name="file" id="file" required>
     </label>
             
+    <p id="fileNameDisplay"></p>
     <input type="submit" value="Subir">
 
     <div class="checkbox-section">
@@ -220,7 +222,16 @@ input[type="checkbox"] {
         highlightDropArea(false);
       });
     });
+
+    
   </script>
+  <script>
+    document.getElementById('fileInput').addEventListener('change', function() {
+        var fileName = this.value.split('\\').pop();  // Obtener el nombre del archivo seleccionado
+        document.getElementById('fileNameDisplay').innerText = 'Archivo seleccionado: ' + fileName;
+    });
+</script>
+
   
 
 {% endblock %}

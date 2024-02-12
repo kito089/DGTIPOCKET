@@ -47,9 +47,6 @@ input[type="file"] {
   display: none;
 }
 
-input[type="checkbox"] {
-  margin-right: 5px;
-}
 
 input[type="submit"] {
   background-color: #3498db;
@@ -73,6 +70,56 @@ input[type="submit"]:hover {
 #drop-area:hover {
   background-color: #f0f8ff; /* Puedes cambiar el color de fondo al arrastrar archivos */
 }
+
+
+
+.cyberpunk-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #30cfd0;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.cyberpunk-checkbox:before {
+  content: "";
+  background-color: #30cfd0;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.checkbox-section {
+  margin: 20px 0;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.label {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 {%endblock%}
 
 
@@ -91,13 +138,70 @@ input[type="submit"]:hover {
       </div>
       <input type="file" name="file" id="file" accept="image/*" required>
     </label>
-            {% for l in letras %}
-                {% for i in range(6) %}
-                    <input type="checkbox" name="{{i+1}}{{l[0]}}" value="True"> {{i+1}}{{l[1]}}"
-                {% endfor %}
-            {% endfor %}
+            
     <input type="submit" value="Subir">
+
+    <div class="checkbox-section">
+      <h2>Opciones</h2>
+      <div class="checkbox-container">
+    {% for i in range(6)  %}
+    <label class="label">
+        {% for l in letras %}
+            <label class="cyberpunk-checkbox-label">
+              <input type="checkbox" class="cyberpunk-checkbox " name="{{i+1}}{{l[0]}}">
+              {{i+1}}{{l[1]}}</label>
+        {% endfor %}
+      </label>
+    {% endfor %}    
+
+  </div>
+</div>
   </form>
   
+
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropArea = document.getElementById('drop-area');
+      var fileInput = document.getElementById('file');
+  
+      // Manejar el evento cuando se suelta el archivo
+      dropArea.addEventListener('drop', function (e) {
+        e.preventDefault();
+        fileInput.files = e.dataTransfer.files;
+        highlightDropArea(false);
+      });
+  
+      // Evitar que el navegador abra el archivo al soltarlo
+      dropArea.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        highlightDropArea(true);
+      });
+  
+      // Restaurar el estilo predeterminado al salir del área de soltar
+      dropArea.addEventListener('dragleave', function () {
+        highlightDropArea(false);
+      });
+  
+      // Mostrar el estilo resaltado cuando se está arrastrando sobre el área
+      function highlightDropArea(isDragging) {
+        dropArea.style.background = isDragging ? '#f0f8ff' : '';
+      }
+  
+      // También puedes agregar la lógica para el botón "Buscar Archivo"
+      document.querySelector('.browse-button').addEventListener('click', function () {
+        fileInput.click();
+      });
+  
+      // Restaurar el estilo predeterminado cuando se selecciona un archivo
+      fileInput.addEventListener('change', function () {
+        highlightDropArea(false);
+      });
+    });
+  </script>
+  
+
 {% endblock %}
     

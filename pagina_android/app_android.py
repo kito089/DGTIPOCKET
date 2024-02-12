@@ -284,7 +284,7 @@ def boleta():
     docx2pdf(word)
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    return redirect(url_for("/descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
+    return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
 
 @app.route('/historial')
 def historial():
@@ -377,12 +377,7 @@ def descargarDrive(idC, nom):
         # Maneja cualquier error que pueda ocurrir durante la descarga
 
     # Si necesitas hacer algo más después de descargar, agrégalo aquí
-    try:
-        return send_from_directory(app.config['UPLOAD_FOLDER'], nom, as_attachment=True)
-    finally:
-        if os.path.exists(file_path):
-            os.remove(file_path)
-            print(f'Archivo {file_path} eliminado correctamente.')
+    return redirect(url_for("descargar", archivo = nom))
 
 @app.route('/cuadernillo')
 @creds_required

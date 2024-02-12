@@ -286,7 +286,7 @@ def boleta():
     
     return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
 
-@app.route('/historial'):
+@app.route('/historial')
 def historial():
     plot_url = generate_plot()
     parametros = dict(session)['profile']

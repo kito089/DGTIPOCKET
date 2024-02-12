@@ -25,6 +25,49 @@ img {
     max-width: 100%;
     max-height: 100px;
 }
+#fileList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.card button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.card button:hover {
+    background-color: #45a049;
+}
+
+.material-icons {
+    font-size: 24px;
+    color: #2196F3;
+}
 {% endblock %}
 
 {% block content %}

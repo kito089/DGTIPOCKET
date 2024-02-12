@@ -72,7 +72,6 @@ input[type="submit"]:hover {
 }
 
 
-
 .cyberpunk-checkbox {
   appearance: none;
   width: 20px;
@@ -98,6 +97,19 @@ input[type="submit"]:hover {
   height: 10px;
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
+}
+
+.cyberpunk-checkbox:checked:before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cyberpunk-checkbox-label {
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
 }
 
 

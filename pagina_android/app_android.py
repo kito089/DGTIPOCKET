@@ -253,8 +253,6 @@ def descargar(archivo):
 def boleta():
     parametros = dict(session)['profile']
     nombre = parametros["name"]
-    if "�" in nombre:
-        nombre = nombre.replace("�","Ñ")
     nom = nombre.split(" ")
     nombr = []
     nombr.append(nom[-2])
@@ -264,6 +262,36 @@ def boleta():
         nombr.append(nom[-3])
     else:
         nombr.append(nom[-3])
+
+    bd = Coneccion()
+
+    turesp = bd.llamar("turesp({0})".format(parametros["email"].replace("@cetis155.edu.mx","")))
+
+    datosG = [parametros["email"],parametros["grado"]+parametros["grupo"],turesp[0][0],nombr,turesp[0][1]]
+
+    ida = bd.seleccion("alumnos","idalumnos, grado","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
+
+    tc = bd.llamar("boleta_tc({0},{1})".format(ida[0][0],ida[0][1]))
+    m = bd.llamar("boleta_m({0},{1})".format(ida[0][0],ida[0][1]))
+    e = bd.llamar("boleta_e({0},{1})".format(ida[0][0],ida[0][1]))
+
+    bd.exit()
+
+    datosC = conv(tc,e,m)
+
+    genboletadocx(datosC, datosG)
+    word = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
+    docx2pdf(word)
+    pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
+    
+    return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
+
+@app.route('/historial')
+def historial():
+    plot_url = generate_plot()
+
+    parametros = dict(session)['profile']
+    nombr = parametros["name"]
 
     bd = Coneccion()
 
@@ -287,12 +315,6 @@ def boleta():
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
     return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
-
-@app.route('/historial')
-def historial():
-    plot_url = generate_plot()
-    parametros = dict(session)['profile']
-
     return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
 
 @app.route('/tabla/<string:table>')

@@ -36,6 +36,8 @@ def genboletadocx(datosC, datosG):
     for i in range(len(datosG[3])):
         nombr = nombr +datosG[3][i]+" "
     
+    print("datos c: ", datosC)
+
     context = { 
         'control' : control,
         'nombre' : nombr,

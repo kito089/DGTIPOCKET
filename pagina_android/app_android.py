@@ -286,8 +286,15 @@ def boleta():
     
     return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
 
-@app.route('/historial')
+@app.route('/historial'):
 def historial():
+    plot_url = generate_plot()
+    parametros = dict(session)['profile']
+
+    return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
+
+@app.route('/historialAcademico')
+def historialAcademico():
     plot_url = generate_plot()
 
     parametros = dict(session)['profile']
@@ -314,8 +321,6 @@ def historial():
     docx2pdf(word)
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
-    return render_template('funciones/historial.html', parametros = parametros,plot_url=plot_url)
 
 @app.route('/tabla/<string:table>')
 def tabla(table):

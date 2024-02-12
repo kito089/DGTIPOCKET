@@ -99,5 +99,50 @@ input[type="submit"]:hover {
     <input type="submit" value="Subir">
   </form>
   
+
+
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropArea = document.getElementById('drop-area');
+      var fileInput = document.getElementById('file');
+  
+      // Manejar el evento cuando se suelta el archivo
+      dropArea.addEventListener('drop', function (e) {
+        e.preventDefault();
+        fileInput.files = e.dataTransfer.files;
+        highlightDropArea(false);
+      });
+  
+      // Evitar que el navegador abra el archivo al soltarlo
+      dropArea.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        highlightDropArea(true);
+      });
+  
+      // Restaurar el estilo predeterminado al salir del área de soltar
+      dropArea.addEventListener('dragleave', function () {
+        highlightDropArea(false);
+      });
+  
+      // Mostrar el estilo resaltado cuando se está arrastrando sobre el área
+      function highlightDropArea(isDragging) {
+        dropArea.style.background = isDragging ? '#f0f8ff' : '';
+      }
+  
+      // También puedes agregar la lógica para el botón "Buscar Archivo"
+      document.querySelector('.browse-button').addEventListener('click', function () {
+        fileInput.click();
+      });
+  
+      // Restaurar el estilo predeterminado cuando se selecciona un archivo
+      fileInput.addEventListener('change', function () {
+        highlightDropArea(false);
+      });
+    });
+  </script>
+  
+
 {% endblock %}
     

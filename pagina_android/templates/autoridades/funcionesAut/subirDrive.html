@@ -215,6 +215,13 @@ function handleFiles(files) {
     console.log(files);
 }
 
+// Función para simular la carga del archivo al hacer clic en "Subir"
+function uploadFile() {
+    // Puedes agregar la lógica para enviar el archivo al servidor aquí
+    alert('Archivo subido con éxito');
+}
+
+
 document.getElementById('fileInput').addEventListener('change', function () {
   var files = this.files;
   handleFiles(files);

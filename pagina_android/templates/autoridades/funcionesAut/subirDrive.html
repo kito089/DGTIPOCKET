@@ -5,65 +5,69 @@ insert noticias
 {% endblock %}
 {% block style %}
 
-.file-upload-form {
- 
-  width: 80%; /* Ajusta el ancho según sea necesario */
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+form {
+  background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  text-align: center;
-}
-
-.file-upload-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.file-upload-design {
-  border: 2px dashed #3498db;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  background-color: #ffffff;
-}
-
-.file-upload-design p {
-  color: #3498db;
-  margin: 5px 0;
-  font-size: 16px;
-}
-
-.browse-button {
-  display: inline-block;
-  background-color: #3498db;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.browse-button:hover {
-  background-color: #2980b9;
+  width: 80%;
+  margin: 0 auto; /* Añade esta línea para centrar el formulario horizontalmente */
 }
 
 input[type="file"] {
   display: none;
 }
 
-input[type="submit"] {
-  background-color: #3498db;
-  color: #ffffff;
+.drag-area {
+  width: 100%;
+  height: 150px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.drag-area:hover {
+  background-color: #f9f9f9;
+}
+
+.drag-text {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+.file-preview {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #888;
+}
+input{
+  margin:10px;
+}
+input[type="file"] {
+  display: none;
+}
+
+input[type="submit"], input[type="button"] {
+  background-color: #4caf50;
+  color: #fff;
   padding: 10px 20px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-input[type="submit"]:hover {
-  background-color: #2980b9;
+input[type="submit"]:hover, input[type="button"]:hover {
+  background-color: #45a049;
 }
 
 
@@ -142,25 +146,20 @@ input[type="submit"]:hover {
 
 
 {% block content %}
-<form class="file-upload-form" action="/driveMas" method="post" enctype="multipart/form-data">
-  <label for="file" class="file-upload-label" id="dropArea">
-      <div class="file-upload-design">
-          <svg viewBox="0 0 640 512" height="1em">
-              <!-- Icono de archivo -->
-          </svg>
-          <p>Arrastra y suelta tu archivo aquí</p>
-          <p>o</p>
-          <span class="browse-button">Buscar Excel</span>
-      </div>
-      <input type="file" name="file" id="fileInput" required>
-  </label>
 
-  <span id="fileLabel">Ningún archivo seleccionado</span>
-  <input type="submit" value="Subir" onclick="uploadFile()">
+<h1>Subir Archivo Excel con Botón</h1>
+    <form action="/subirCal" method="post" enctype="multipart/form-data">
+        <div class="drag-area" id="dragArea">
+            <div class="drag-text">Arrastra y suelta el archivo aquí o haz clic</div>
+            <input type="file" name="file" accept=".xlsx, .xls" id="fileInput" required>
+        </div>
+        <div class="file-preview" id="filePreview"></div>
+        <input type="submit" value="Subir">
 
-    
-    <div class="checkbox-section">
-      <h2>Selecciona los salones deseados</h2>
+
+        <input type="button" value="Seleccionar Archivo" onclick="document.getElementById('fileInput').click()">
+
+        <h2>Selecciona los salones deseados</h2>
       <div class="checkbox-container">
     {% for i in range(6)  %}
     <label class="label">
@@ -171,62 +170,45 @@ input[type="submit"]:hover {
         {% endfor %}
       </label>
     {% endfor %}    
+    </form>
 
-  </form>
+    <script>
+        const dragArea = document.getElementById('dragArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
 
+        dragArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dragArea.classList.add('drag-over');
+        });
 
-  <script>
- // Manejar el evento de arrastrar y soltar
-var dropArea = document.getElementById('dropArea');
+        dragArea.addEventListener('dragleave', () => {
+            dragArea.classList.remove('drag-over');
+        });
 
-dropArea.addEventListener('dragover', function (e) {
-    e.preventDefault();
-    dropArea.style.border = '2px dashed #2980b9';
-});
+        dragArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragArea.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
 
-dropArea.addEventListener('dragleave', function () {
-    dropArea.style.border = '2px dashed #3498db';
-});
+            if (files.length > 0) {
+                fileInput.files = files;
+                updateFilePreview();
+            }
+        });
 
-dropArea.addEventListener('drop', function (e) {
-    e.preventDefault();
-    dropArea.style.border = '2px dashed #3498db';
+        fileInput.addEventListener('change', () => {
+            updateFilePreview();
+        });
 
-    var files = e.dataTransfer.files;
-    handleFiles(files);
-});
-
-// Manejar la selección de archivos al hacer clic en "Buscar Excel"
-document.querySelector('.browse-button').addEventListener('click', function () {
-    document.getElementById('fileInput').click();
-});
-
-// Manejar la selección de archivos
-document.getElementById('fileInput').addEventListener('change', function () {
-    var files = this.files;
-    handleFiles(files);
-    document.getElementById('fileLabel').innerText = files[0].name;
-});
-
-// Función para manejar los archivos seleccionados o arrastrados
-function handleFiles(files) {
-    // Aquí puedes realizar cualquier lógica que necesites con los archivos
-    console.log(files);
-}
-
-// Función para simular la carga del archivo al hacer clic en "Subir"
-function uploadFile() {
-    // Puedes agregar la lógica para enviar el archivo al servidor aquí
-    alert('Archivo subido con éxito');
-}
+        function updateFilePreview() {
+            const fileName = fileInput.files[0].name;
+            filePreview.textContent = `Archivo seleccionado: ${fileName}`;
+        }
+    </script>
+      
 
 
-document.getElementById('fileInput').addEventListener('change', function () {
-  var files = this.files;
-  handleFiles(files);
-  document.getElementById('fileLabel').innerText = files[0].name;
-});
-  </script>
 {% endblock %}
     
 

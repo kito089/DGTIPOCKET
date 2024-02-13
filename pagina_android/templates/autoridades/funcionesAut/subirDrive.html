@@ -5,6 +5,70 @@ insert noticias
 {% endblock %}
 {% block style %}
 
+.file-upload-form {
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-upload-design {
+  border: 2px dashed #3498db;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.file-upload-design p {
+  color: #3498db;
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.browse-button {
+  display: inline-block;
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.browse-button:hover {
+  background-color: #2980b9;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+input[type="submit"] {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+
+
+
+
   .cyberpunk-checkbox {
     appearance: none;
     width: 20px;
@@ -107,7 +171,7 @@ insert noticias
 
   </form>
 
-  
+
   <script>
     // Manejar el evento de arrastrar y soltar
 var dropArea = document.getElementById('dropArea');

@@ -153,6 +153,8 @@ input[type="submit"]:hover {
       </div>
       <input type="file" name="file" id="fileInput" required>
   </label>
+
+  <span id="fileLabel">Ningún archivo seleccionado</span>
   <input type="submit" value="Subir" onclick="uploadFile()">
 
     
@@ -215,7 +217,11 @@ function uploadFile() {
     // Puedes agregar la lógica para enviar el archivo al servidor aquí
     alert('Archivo subido con éxito');
 }
-
+document.getElementById('fileInput').addEventListener('change', function () {
+  var files = this.files;
+  handleFiles(files);
+  document.getElementById('fileLabel').innerText = files[0].name;
+});
   </script>
 {% endblock %}
     

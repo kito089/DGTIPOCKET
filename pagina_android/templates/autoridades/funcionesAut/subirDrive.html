@@ -7,6 +7,7 @@ insert noticias
 
 .file-upload-form {
   max-width: 400px;
+  width: 80%; /* Ajusta el ancho según sea necesario */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -212,11 +213,6 @@ function handleFiles(files) {
     console.log(files);
 }
 
-// Función para simular la carga del archivo al hacer clic en "Subir"
-function uploadFile() {
-    // Puedes agregar la lógica para enviar el archivo al servidor aquí
-    alert('Archivo subido con éxito');
-}
 document.getElementById('fileInput').addEventListener('change', function () {
   var files = this.files;
   handleFiles(files);

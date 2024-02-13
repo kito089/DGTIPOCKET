@@ -177,6 +177,7 @@ input[type="submit"]:hover {
 
   <script>
     // Manejar el evento de arrastrar y soltar
+// Manejar el evento de arrastrar y soltar
 var dropArea = document.getElementById('dropArea');
 
 dropArea.addEventListener('dragover', function (e) {
@@ -205,6 +206,7 @@ document.querySelector('.browse-button').addEventListener('click', function () {
 document.getElementById('fileInput').addEventListener('change', function () {
     var files = this.files;
     handleFiles(files);
+    document.getElementById('fileLabel').innerText = files[0].name;
 });
 
 // Función para manejar los archivos seleccionados o arrastrados

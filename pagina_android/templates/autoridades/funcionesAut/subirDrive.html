@@ -106,7 +106,53 @@ insert noticias
     {% endfor %}    
 
   </form>
+
   
+  <script>
+    // Manejar el evento de arrastrar y soltar
+var dropArea = document.getElementById('dropArea');
+
+dropArea.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    dropArea.style.border = '2px dashed #2980b9';
+});
+
+dropArea.addEventListener('dragleave', function () {
+    dropArea.style.border = '2px dashed #3498db';
+});
+
+dropArea.addEventListener('drop', function (e) {
+    e.preventDefault();
+    dropArea.style.border = '2px dashed #3498db';
+
+    var files = e.dataTransfer.files;
+    handleFiles(files);
+});
+
+// Manejar la selección de archivos al hacer clic en "Buscar Excel"
+document.querySelector('.browse-button').addEventListener('click', function () {
+    document.getElementById('fileInput').click();
+});
+
+// Manejar la selección de archivos
+document.getElementById('fileInput').addEventListener('change', function () {
+    var files = this.files;
+    handleFiles(files);
+});
+
+// Función para manejar los archivos seleccionados o arrastrados
+function handleFiles(files) {
+    // Aquí puedes realizar cualquier lógica que necesites con los archivos
+    console.log(files);
+}
+
+// Función para simular la carga del archivo al hacer clic en "Subir"
+function uploadFile() {
+    // Puedes agregar la lógica para enviar el archivo al servidor aquí
+    alert('Archivo subido con éxito');
+}
+
+  </script>
 {% endblock %}
     
 

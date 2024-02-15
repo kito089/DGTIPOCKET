@@ -874,10 +874,11 @@ def driveMas():
             bd = Coneccion()
             bd.insertarRegistro("cuadernillos",datos)
             idc = bd.seleccion("cuadernillos","idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
+            print("letras",letras)
             for l in letras:
                 for i in range(6):
                     check = request.form.get(str(i+1)+str(l[0])) == 'True'
-                    print(l,i)
+                    print("grupo y grado: ",l,i)
                     print(check)
                     if check:
                         bd.insertarRegistroConID("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])

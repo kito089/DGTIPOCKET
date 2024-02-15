@@ -143,7 +143,7 @@ table {
   /* Estilos responsivos para pantallas pequeñas */
   @media only screen and (max-width: 600px) {
     table {
-        font-size: 5px;
+        font-size: 8px;
         width: 50%;
         border-collapse: collapse;
         margin: 5px 0;
@@ -165,6 +165,12 @@ table {
       background-color: #fff; /* Fondo blanco para filas impares */
     }
   }
+
+  #miDiv {
+    width: 20%;
+    height: 20%; /* Puedes ajustar la altura según tus necesidades */
+    
+}
 {% endblock %}
 
 
@@ -202,6 +208,7 @@ table {
             <!-- Filas del calendario se generarán dinámicamente con JavaScript -->
         </tbody>
     </table>
+    <div id="miDiv"></div>
 </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

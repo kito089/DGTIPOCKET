@@ -474,11 +474,8 @@ def cuadernillo():
                 gragru = bd.seleccion("cuadernillos_has_grupo","grado, grupo_idgrupo",
                                   "cuadernillos_idcuadernillos = '"+str(idc)+"'")
                 for gg in gragru:
-                    print("gg1: ",gg)
                     if len(gg) > 0:
-                        print("gg: ",gg)
-                        le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
-                        print("le: ",le)
+                        le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[1])+"'")
                         if (int(gg[0][0]) == int(parametros['grado'])) and (len(le[0]) > 0):
                             print("condiciones cumplidas :D")
                             ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"

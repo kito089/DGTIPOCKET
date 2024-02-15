@@ -455,12 +455,12 @@ def cuadernillo():
             for file in files:
                 idc = bd.seleccion("cuadernillos", "idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
                 gg = bd.seleccion("cuadernillos_has_grupo","grado, grupo_idgrupo",
-                                  "cuadernillos_idcuadernillos = '"+str(idc)+"'")[0]
+                                  "cuadernillos_idcuadernillos = '"+str(idc)+"'")
                 print(gg)
                 if len(gg) > 0:
-                    le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[1])+"'")
+                    le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
                     print("le: ",le, len(le))
-                    if (int(gg[0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le[0]) > 0 or str(gg[1]) == "None"):
+                    if (int(gg[0][0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le[0]) > 0 or str(gg[1]) == "None"):
                         print("condiciones cumplidas :D")
                         ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
                         cuadernillos.append([file['thumbnailLink'], file['name'], file['webViewLink'], file['id'], ruta])
@@ -850,19 +850,14 @@ def driveMas():
     letras = bd.obtenerTablas("grupo")
     bd.exit()
     if request.method == 'POST':
-        print("almenos llego aki :(")
         cuader = request.files['Cuader']
         if cuader.filename == '':
-            print("sin archivo")
             return "Archivo no seleccionado"
         if cuader:
-            print("guardando archivo")
             file_path = f"{app.config['UPLOAD_FOLDER']}/{cuader.filename}"
             cuader.save(file_path)
-            print("archivo guardado")
 
         try:
-            print("obteniendo credentiales")
             credentials = google.oauth2.credentials.Credentials(**session['credentials'])
             drive = build("drive", "v3", credentials=credentials)
             print("entre al servicio uwu")
@@ -870,14 +865,12 @@ def driveMas():
             #'https://drive.google.com/drive/folders/1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR?usp=sharing'
             folder_id = '1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR'
 
-            print("subiendo archivo de drive")
             file_metadata = {'name': cuader.filename, 'parents': [folder_id]}
             media = MediaFileUpload(file_path, mimetype='application/octet-stream')
             file = drive.files().create(body=file_metadata, media_body=media, fields='id').execute()
             print(f"File '{cuader.filename}' uploaded. ID: {file['id']}")
 
             datos = [str(file['id']),str(cuader.filename)]
-            print("cuadernillo: ", datos)
             bd = Coneccion()
             bd.insertarRegistro("cuadernillos",datos)
             idc = bd.seleccion("cuadernillos","idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]

@@ -69,28 +69,59 @@ p {
     </a>
 
 <div class='item'>
-    <div class="calendario-responsive">
-        <h1>Calendario</h1>
-    <p>
-        <a href="{{ url_for('show_month', year=year, month=month-1) }}">Mes anterior</a> |
-        <a href="{{ url_for('show_month', year=year, month=month+1) }}">Mes siguiente</a>
-    </p>
-    <table>
+    <h2>Calendario</h2>
+
+    <table id="calendario">
         <thead>
             <tr>
+                <th>Domingo</th>
                 <th>Lunes</th>
                 <th>Martes</th>
                 <th>Miércoles</th>
                 <th>Jueves</th>
                 <th>Viernes</th>
                 <th>Sábado</th>
-                <th>Domingo</th>
             </tr>
         </thead>
         <tbody>
-            {{ month_calendar }}
+            <!-- Filas del calendario se generarán dinámicamente con JavaScript -->
         </tbody>
     </table>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            generarCalendario();
+        });
+
+        function generarCalendario() {
+            var fecha = new Date();
+            var year = fecha.getFullYear();
+            var month = fecha.getMonth();
+
+            var diasEnMes = new Date(year, month + 1, 0).getDate();
+            var primerDiaSemana = new Date(year, month, 1).getDay();
+
+            var tableBody = document.getElementById("calendario").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = "";
+
+            var fila = tableBody.insertRow();
+
+            for (var i = 0; i < primerDiaSemana; i++) {
+                fila.insertCell();
+            }
+
+            for (var i = 1; i <= diasEnMes; i++) {
+                var cell = fila.insertCell();
+                cell.innerHTML = i;
+
+                if ((i + primerDiaSemana) % 7 === 0) {
+                    fila = tableBody.insertRow();
+                }
+            }
+        }
+    </script>
+
 
 
         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FMexico_City&showTitle=1&showNav=1&showPrint=0&showTabs=0&showCalendars=0&hl=es&showTz=0&src=OTkyY2NlYzZjZWUyYTBhY2M3OGE1MjU2MmRmZGU5MGQwYzMwOGE1ODI5ZTYyNjI0MmU3ZDEzMjdkMDBlZWZkMkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>

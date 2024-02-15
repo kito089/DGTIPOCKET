@@ -470,13 +470,13 @@ def cuadernillo():
             cuadernillos = []
             bd = Coneccion()
             for file in files:
+                print("files: ",file)
                 idc = bd.seleccion("cuadernillos", "idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
                 gg = bd.seleccion("cuadernillos_has_grupo","grado, grupo_idgrupo",
                                   "cuadernillos_idcuadernillos = '"+str(idc)+"'")
                 print(gg)
                 if len(gg) > 0:
                     le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
-                    print("le: ",le, len(le))
                     if (int(gg[0][0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le[0]) > 0 or str(gg[1]) == "None"):
                         print("condiciones cumplidas :D")
                         ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
@@ -895,8 +895,6 @@ def driveMas():
             for l in letras:
                 for i in range(6):
                     check = request.form.get(str(i+1)+str(l[0]))
-                    print("grupo y grado: ",l,i)
-                    print(check)
                     if check == 'True':
                         bd.insertarRegistroConID("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])
             

@@ -1,0 +1,338 @@
+{% extends "layouts/layoutD.html" %}
+
+{% block title %}
+INICIO
+{% endblock %}
+{% block style %}
+.calendario-responsive {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* Puedes ajustar este valor según tus necesidades para controlar la relación de aspecto */
+    margin-top:20px;
+    
+}
+
+.calendario-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    border: 0;
+    border-radius:30px;
+}
+/* Estilo básico para la horario */
+.horario {
+  width: 100%;
+  height: auto; /* Para mantener la proporción de la imagen */
+  display: block; /* Elimina el espacio adicional debajo de la imagen */
+  margin: 0 auto; /* Centra la imagen en su contenedor si es necesario */
+  max-width: 100%; /* Garantiza que la imagen no sea más grande que su contenedor */
+}
+
+
+/* Estilo para la tabla del calendario */
+
+.cl {
+    width: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #333;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para los enlaces de navegación */
+p {
+    margin-top: 10px;
+}
+
+
+.event-day {
+    background-color: #9af57a; /* Color de fondo para los días con eventos */
+}
+.event-title {
+    font-weight: bold;
+    color: #007bff; /* Color del texto para los títulos de eventos */
+}
+
+.current-day {
+    background-color: #d3d3d3; /* Color gris claro para el día actual */
+}
+
+
+h2 {
+    color:#ffffff;
+    background-color: #2980b9;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h3 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #34495e;
+    color: #ffffff;
+    cursor: pointer;
+}
+.a {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #34495e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ffffff;
+    
+}
+
+th {
+    background-color: #2980b9;
+}
+
+td {
+    background-color: #ffffff;
+}
+
+
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  /* Estilos de las celdas y encabezados */
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  /* Estilos para filas impares */
+  tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos responsivos para pantallas pequeñas */
+  @media only screen and (max-width: 600px) {
+    table {
+        font-size: 6px;
+        width: 50%;
+        border-collapse: collapse;
+        margin: 5px 0;
+        
+      }
+    th, td {
+      
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    /* Alineación del texto en las celdas */
+    th, td {
+      text-align: center;
+    }
+    
+    /* Estilos alternativos para filas impares en pantallas pequeñas */
+    tr:nth-child(odd) {
+      background-color: #fff; /* Fondo blanco para filas impares */
+    }
+  }
+
+  .miDiv {
+    width: 200px;
+    height: 200px; /* Puedes ajustar la altura según tus necesidades */
+    
+}
+.boton {
+    text-decoration: none;
+    color: #3498db;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .boton:hover {
+    color: #2980b9;
+  }
+{% endblock %}
+
+
+
+{% block content %}
+
+
+    <h2>Calendario con Eventos</h2>
+
+    <h3 id="mes-anio"></h3>
+
+    <div class="nav-buttons">
+        <button onclick="cambiarMes(-1)">Mes Anterior</button>
+        <button onclick="cambiarMes(1)">Mes Siguiente</button>
+    </div>
+<div class="cl">
+    <table id="calendario">
+        <thead>
+            <tr>
+                <th>Domingo</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miércoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+                <th>Sábado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filas del calendario se generarán dinámicamente con JavaScript -->
+        </tbody>
+    </table>
+    
+</div>
+
+    <div class="miDiv"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            generarCalendario();
+        });
+
+        var fecha = new Date();
+        var eventos = {{ eventos | tojson | safe }};
+
+        function cambiarMes(delta) {
+            fecha.setMonth(fecha.getMonth() + delta);
+            generarCalendario();
+        }
+
+        function generarCalendario() {
+            var year = fecha.getFullYear();
+            var month = fecha.getMonth();
+            var day = fecha.getDate(); // Obtener el día actual
+
+            var nombreMes = obtenerNombreMes(month);
+
+            var diasEnMes = new Date(year, month + 1, 0).getDate();
+            var primerDiaSemana = new Date(year, month, 1).getDay();
+
+            var tableBody = document.getElementById("calendario").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = "";
+
+            var fila = tableBody.insertRow();
+
+            for (var i = 0; i < primerDiaSemana; i++) {
+                fila.insertCell();
+            }
+
+            for (var i = 1; i <= diasEnMes; i++) {
+                var cell = fila.insertCell();
+                var dayLink = document.createElement("a");
+                dayLink.href = construirURLDia(i, month, year); // Construir la URL según el día, mes y año
+                dayLink.innerHTML = i;
+                cell.appendChild(dayLink);
+
+                // Verificar si hay eventos para resaltar el día
+                if (tieneEventos(i, month, year)) {
+                    cell.classList.add("event-day");
+                    agregarEventosEnCelda(cell, i, month, year);
+                }
+
+                // Resaltar el día actual solo si estamos en el mes actual y es el día de hoy
+                if (i == day && month == fecha.getMonth()) {
+                    cell.classList.add("current-day");
+                }
+
+                if ((i + primerDiaSemana) % 7 === 0) {
+                    fila = tableBody.insertRow();
+                }
+            }
+
+            // Actualizar el elemento h6 con el nombre del mes y año actual
+            document.getElementById("mes-anio").innerText = nombreMes + " - Año: " + year;
+        }
+
+        function obtenerNombreMes(numeroMes) {
+            var meses = [
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ];
+            return meses[numeroMes];
+        }
+
+        function tieneEventos(dia, mes, anio) {
+            for (var i = 0; i < eventos.length; i++) {
+                var evento = eventos[i];
+                var eventoDate = new Date(evento.start);
+                if (eventoDate.getDate() === dia && eventoDate.getMonth() === mes && eventoDate.getFullYear() === anio) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function agregarEventosEnCelda(cell, dia, mes, anio) {
+            var eventosEnCelda = eventos.filter(function (evento) {
+                var eventoDate = new Date(evento.start);
+                return eventoDate.getDate() === dia && eventoDate.getMonth() === mes && eventoDate.getFullYear() === anio;
+            });
+
+            eventosEnCelda.forEach(function (evento) {
+                var tituloElemento = document.createElement("div");
+                tituloElemento.classList.add("event-title");
+                tituloElemento.innerText = evento.title;
+
+                //var descripcionElemento = document.createElement("div");
+                //descripcionElemento.innerText = evento.description;
+
+                cell.appendChild(tituloElemento);
+                //cell.appendChild(descripcionElemento);
+            });
+        }
+
+        function construirURLDia(dia, mes, anio) {
+            
+            return "https://patotipo.pythonanywhere.com/nuevoEv/" + anio + "/" + mes + "/" + dia;
+        }
+    </script>
+    
+    
+    </div>
+</div> 
+{% endblock %}

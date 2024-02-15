@@ -861,6 +861,7 @@ def driveMas():
         if cuader:
             file_path = f"{app.config['UPLOAD_FOLDER']}/{cuader.filename}"
             cuader.save(file_path)
+            print("archivo guardado")
 
         try:
             credentials = google.oauth2.credentials.Credentials(**session['credentials'])

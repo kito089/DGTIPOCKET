@@ -33,6 +33,10 @@ INICIO
 
 
 /* Estilo para la tabla del calendario */
+
+.cl {
+    width: 100%;
+}
 table {
     width: 100%;
     border-collapse: collapse;
@@ -92,16 +96,17 @@ button {
 }
 
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin-top: 20px;
+    border-radius: 5px;
 }
 
 th, td {
     padding: 15px;
     text-align: center;
     border: 1px solid #ffffff;
-    border-radius: 5px;
+    
 }
 
 th {
@@ -109,7 +114,7 @@ th {
 }
 
 td {
-    background-color: #3498db;
+    background-color: #ffffff;
 }
 {% endblock %}
 
@@ -131,7 +136,7 @@ td {
         <button onclick="cambiarMes(-1)">Mes Anterior</button>
         <button onclick="cambiarMes(1)">Mes Siguiente</button>
     </div>
-
+<div class="cl">
     <table id="calendario">
         <thead>
             <tr>
@@ -148,7 +153,7 @@ td {
             <!-- Filas del calendario se generarán dinámicamente con JavaScript -->
         </tbody>
     </table>
-
+</div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             generarCalendario();

@@ -68,9 +68,11 @@ p {
         Descargar PDF
     </a>
 
-<div class='item'>
+
     <h2>Calendario</h2>
-    
+
+    <h6 id="mes-anio"></h6>
+
     <div class="nav-buttons">
         <button onclick="cambiarMes(-1)">Mes Anterior</button>
         <button onclick="cambiarMes(1)">Mes Siguiente</button>
@@ -93,18 +95,17 @@ p {
         </tbody>
     </table>
 
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             generarCalendario();
         });
 
+        var fecha = new Date();
+
         function cambiarMes(delta) {
             fecha.setMonth(fecha.getMonth() + delta);
             generarCalendario();
         }
-
-        var fecha = new Date();
 
         function generarCalendario() {
             var year = fecha.getFullYear();
@@ -130,9 +131,11 @@ p {
                     fila = tableBody.insertRow();
                 }
             }
+
+            // Actualizar el elemento h6 con el año y mes actual
+            document.getElementById("mes-anio").innerText = "Mes: " + (month + 1) + " - Año: " + year;
         }
     </script>
-
 
     
     

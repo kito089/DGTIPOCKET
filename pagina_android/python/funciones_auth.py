@@ -7,7 +7,7 @@ def login_required(f):
         user = dict(session).get('profile', None)
         if user:
             print("---------usuario encontrado")
-            #print(user)
+            print(user['name'])
             return f(*args, **kwargs)
         #print("----------usuario no encontrado, rediriguendo a login")
         return redirect(url_for("carga"))

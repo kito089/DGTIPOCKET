@@ -117,12 +117,47 @@ td {
     background-color: #ffffff;
 }
 
-@media only screen and (max-width: 600px) {
+
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  /* Estilos de las celdas y encabezados */
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  /* Estilos para filas impares */
+  tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos responsivos para pantallas pequeñas */
+  @media only screen and (max-width: 600px) {
     th, td {
-        padding: 10px;
-        font-size: 12px;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
     }
-}
+    
+    /* Alineación del texto en las celdas */
+    th, td {
+      text-align: center;
+    }
+    
+    /* Estilos alternativos para filas impares en pantallas pequeñas */
+    tr:nth-child(odd) {
+      background-color: #fff; /* Fondo blanco para filas impares */
+    }
+  }
 {% endblock %}
 
 

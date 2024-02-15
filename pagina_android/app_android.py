@@ -214,7 +214,7 @@ def agenda():
             }
             all_events.append(event_data)
     
-    return render_template("funciones/agenda.html", parametros=parametros,eventos=all_events)
+    return render_template("funciones/agenda.html", parametros=parametros,eventos=all_events,horario=horario)
 
 @app.route('/pagos')
 def pagos():

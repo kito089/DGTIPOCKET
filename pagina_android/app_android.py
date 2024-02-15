@@ -188,9 +188,8 @@ def funciones():
 
 ###         FUNCIONES SIMPLES       ###
 
-
-
 @app.route('/agenda', methods = ['POST', 'GET'])
+@creds_required
 def agenda():
     parametros = dict(session)['profile']
     horario = str(parametros['grado']) + str(parametros['grupo']) 

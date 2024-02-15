@@ -202,7 +202,7 @@ def agenda():
     print("entre al calendario :v")
 
     calendars = calendario.calendarList().list().execute().get('items', [])
-    print("obteniendo todos los calendarios")
+    print("obteniendo todos los calendarios: ", calendars)
 
     all_events = []
     for calendar in calendars:

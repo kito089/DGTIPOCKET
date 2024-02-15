@@ -3,6 +3,8 @@ import requests
 import json
 import time
 
+import calendar
+
 from io import BytesIO
 import matplotlib.pyplot as plt
 import base64
@@ -190,11 +192,45 @@ def funciones():
 
 @app.route('/agenda')
 def agenda():
+    
+    return render_template('funciones/agenda.html', parametros = parametros,archivo=horario)
+
+@app.route('/agenda')
+def agenda():
     parametros = dict(session)['profile']
     horario = str(parametros['grado']) + str(parametros['grupo']) 
     print("------------------")
     print(horario)
-    return render_template('funciones/agenda.html', parametros = parametros,archivo=horario)
+    
+    
+    parametros = dict(session)['profile']
+    # Obtener el año y mes actual
+    year = 2024
+    month = 2
+
+    # Crear un objeto calendario
+    cal = calendar.TextCalendar()
+
+    # Obtener el calendario del mes actual
+    month_calendar = cal.formatmonth(year, month)
+
+    return render_template('funciones/agenda.html.html', year=year, month=month, month_calendar=month_calendar, parametros = parametros,archivo=horario)
+
+@app.route('/<int:year>/<int:month>')
+def show_month(year, month):
+    horario = str(parametros['grado']) + str(parametros['grupo']) 
+    print("------------------")
+    print(horario)
+    parametros = dict(session)['profile']
+    # Crear un objeto calendario
+    cal = calendar.TextCalendar()
+
+    # Obtener el calendario del mes actual
+    month_calendar = cal.formatmonth(year, month)
+
+    return render_template('funciones/agenda.html.html', year=year, month=month, month_calendar=month_calendar, parametros = parametros,archivo=horario)
+
+
 
 @app.route('/pagos')
 def pagos():
@@ -240,7 +276,8 @@ def organigrama():                                                              
 ###         FUNCIONES DETALLADAS        ###
 
 @app.route('/descargar/<string:archivo>')
-def descargar(archivo):    
+def descargar(archivo):
+        
     file_path = f"{app.config['UPLOAD_FOLDER']}/{archivo}"
     try:
         return send_from_directory(app.config['UPLOAD_FOLDER'], archivo, as_attachment=True)

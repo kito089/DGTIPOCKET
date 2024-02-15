@@ -192,16 +192,13 @@ def funciones():
 @creds_required
 def agenda():
     parametros = dict(session)['profile']
-    horario = str(parametros['grado']) + str(parametros['grupo']) 
-    print("------------------")
-    print(horario)
+    horario = str(parametros['grado']) + str(parametros['grupo'])
     
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
     calendario = build('calendar', 'v3', credentials=credentials)
     print("entre al calendario :v")
 
     calendars = calendario.calendarList().list().execute().get('items', [])
-    print("obteniendo todos los calendarios: ", calendars)
 
     all_events = []
     for calendar in calendars:
@@ -216,8 +213,6 @@ def agenda():
                 "description": event.get('description', '')
             }
             all_events.append(event_data)
-
-    print("todos los eventos: ",all_events) 
     
     return render_template("funciones/agenda.html", parametros=parametros,eventos=all_events)
 

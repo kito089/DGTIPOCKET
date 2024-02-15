@@ -190,10 +190,7 @@ def funciones():
 
 ###         FUNCIONES SIMPLES       ###
 
-@app.route('/agenda')
-def agenda():
-    
-    return render_template('funciones/agenda.html', parametros = parametros,archivo=horario)
+
 
 @app.route('/agenda')
 def agenda():

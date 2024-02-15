@@ -199,11 +199,9 @@ def agenda():
     print("------------------")
     print(horario)
     
-    
-    parametros = dict(session)['profile']
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
     calendario = build('calendar', 'v3', credentials=credentials)
-    print("entre al servicio :v")
+    print("entre al calendario :v")
 
     calendars = calendario.calendarList().list().execute().get('items', [])
     print("obteniendo todos los calendarios")

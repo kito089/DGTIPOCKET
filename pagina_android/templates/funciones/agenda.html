@@ -267,7 +267,10 @@ table {
 
             for (var i = 1; i <= diasEnMes; i++) {
                 var cell = fila.insertCell();
-                cell.innerHTML = i;
+                var dayLink = document.createElement("a");
+                dayLink.href = construirURLDia(i, month, year); // Construir la URL según el día, mes y año
+                dayLink.innerHTML = i;
+                cell.appendChild(dayLink);
 
                 // Verificar si hay eventos para resaltar el día
                 if (tieneEventos(i, month, year)) {
@@ -325,6 +328,12 @@ table {
                 cell.appendChild(tituloElemento);
                 //cell.appendChild(descripcionElemento);
             });
+        }
+
+        function construirURLDia(dia, mes, anio) {
+            // Aquí puedes construir la URL según tus requisitos
+            // Por ejemplo, podrías redirigir a una página específica para cada día, mes y año
+            return "https://tupagina.com/eventos/" + anio + "/" + mes + "/" + dia;
         }
     </script>
     

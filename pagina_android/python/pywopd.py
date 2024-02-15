@@ -3,6 +3,25 @@ from decimal import Decimal
 from docx import Document
 import os
 import subprocess
+from datetime import datetime
+
+def fecha_actual():
+    # Obtener la fecha actual
+    fecha_actual = datetime.now()
+
+    # Definir los nombres de los meses en español
+    meses = [
+        "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
+        "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"
+    ]
+
+    # Obtener los componentes de la fecha
+    dia = fecha_actual.day
+    mes = meses[fecha_actual.month - 1]  # Restamos 1 porque los índices de la lista comienzan en 0
+    año = fecha_actual.year
+
+    # Imprimir la fecha en el formato deseado
+    return f"A LOS {dia} DIAS DEL MES DE {mes} DEL AÑO DOS MIL {str(año)[2:]}"
 
 def conv(tc,e,m):
     tcl = [list(tupla) for tupla in tc]
@@ -24,6 +43,29 @@ def conv(tc,e,m):
     el = [[int(float(str(elemento))) if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
     datosC = tcl+ml+el
     return datosC
+
+def genHAdocx(datosC, datosG, avances):
+    doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_HA_mamalon.docx'))
+
+    control = datosG[0].replace("@cetis155.edu.mx","")
+
+    ava = avances
+    if int(control[1]) > 1:
+        avances.append("404","12",p,p,p,"44",p)
+    else:
+        avances.append("340","20",p,p,p,"31",p)
+    context = { 
+        'curp' : datosG[1],
+        'control' : control,
+        'nombre' : datosG[3],
+        'carrera': datosG[2],
+        'fecha': fecha_actual(),
+        'a': avances,
+        'ha': datosC
+    }
+        
+    doc.render(context)
+    doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.docx'))
 
 def genboletadocx(datosC, datosG):
     doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))

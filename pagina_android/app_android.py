@@ -232,7 +232,7 @@ def agenda():
     # Obtener el calendario del mes actual
     month_calendar = cal.formatmonth(year, month)
 
-    return render_template('funciones/agenda.html', year=year, month=month, month_calendar=month_calendar, parametros = parametros,archivo=horario)
+    return render_template('funciones/agenda.html', year=year, month=month, month_calendar=month_calendar, parametros = parametros,archivo=horario,eventos=all_events)
 
 @app.route('/<int:year>/<int:month>')
 def show_month(year, month):
@@ -246,7 +246,7 @@ def show_month(year, month):
     # Obtener el calendario del mes actual
     month_calendar = cal.formatmonth(year, month)
 
-    return render_template('funciones/agenda.html', year=year, month=month, month_calendar=month_calendar, parametros = parametros,archivo=horario)
+    return render_template('funciones/agenda.html', year=year, month=month, month_calendar=month_calendar, parametros = parametros,archivo=horario,eventos=all_events)
 
 
 

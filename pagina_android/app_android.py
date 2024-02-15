@@ -878,21 +878,26 @@ def driveMas():
             #'https://drive.google.com/drive/folders/1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR?usp=sharing'
             folder_id = '1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR'
 
-            file_metadata = {'name': cuader.filename, 'parents': [folder_id]}
-            media = MediaFileUpload(file_path, mimetype='application/octet-stream')
-            file = drive.files().create(body=file_metadata, media_body=media, fields='id').execute()
-            print(f"File '{cuader.filename}' uploaded. ID: {file['id']}")
-
             datos = [str(file['id']),str(cuader.filename)]
             bd = Coneccion()
             bd.insertarRegistro("cuadernillos",datos)
             idc = bd.seleccion("cuadernillos","idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
+            mini = False
             for l in letras:
                 for i in range(6):
                     check = request.form.get(str(i+1)+str(l[0])) == 'True'
                     if check:
+                        mini = True
                         bd.insertarRegistroConID("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])
 
+            if mini:
+                file_metadata = {'name': cuader.filename, 'parents': [folder_id]}
+                media = MediaFileUpload(file_path, mimetype='application/octet-stream')
+                file = drive.files().create(body=file_metadata, media_body=media, fields='id').execute()
+                print(f"File '{cuader.filename}' uploaded. ID: {file['id']}")
+            else:
+                return("ningun grupo seleccionado :v")
+            
             bd.exit()
             if os.path.exists(file_path):
                 os.remove(file_path)

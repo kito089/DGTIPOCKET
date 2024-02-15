@@ -884,6 +884,7 @@ def driveMas():
                         bd.insertarRegistroConID("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])
 
             if mini:
+                print("subiendo archivo de drive")
                 file_metadata = {'name': cuader.filename, 'parents': [folder_id]}
                 media = MediaFileUpload(file_path, mimetype='application/octet-stream')
                 file = drive.files().create(body=file_metadata, media_body=media, fields='id').execute()

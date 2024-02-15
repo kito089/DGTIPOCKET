@@ -65,86 +65,51 @@ p {
 
 
 h2 {
-    color: #333;
+    background-color: #2980b9;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 h6 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    overflow-x: auto;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    width: 14.28%; /* Ajusta el ancho para 7 columnas en una fila */
-    padding: 15px;
-    box-sizing: border-box;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-th {
-    background-color: #3498db;
-    color: #fff;
-}
-
-td {
-    background-color: #fff;
-    height: 80px; /* Ajusta la altura según sea necesario */
+    margin-top: 10px;
+    text-align: center;
 }
 
 .nav-buttons {
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
 }
 
 button {
     padding: 10px;
-    background-color: #3498db;
-    color: #fff;
     border: none;
     border-radius: 5px;
+    background-color: #34495e;
+    color: #ffffff;
     cursor: pointer;
-    margin-right: 10px;
 }
 
-.button:hover {
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+th {
     background-color: #2980b9;
 }
 
-.event-day {
-    background-color: #9af57a;
-}
-
-.event-title {
-    font-weight: bold;
-    color: #007bff;
-    font-size: 14px;
-}
-
-/* Redondeos bonitos para las celdas del calendario */
-th:first-child, td:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-th:last-child, td:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-/* Hacer la tabla más responsive */
-@media (max-width: 600px) {
-    th, td {
-        width: 100%; /* Hacer que las celdas ocupen todo el ancho en dispositivos pequeños */
-    }
+td {
+    background-color: #3498db;
 }
 {% endblock %}
 

@@ -67,6 +67,10 @@ p {
     color: #007bff; /* Color del texto para los títulos de eventos */
 }
 
+.current-day {
+    background-color: #d3d3d3; /* Color gris claro para el día actual */
+}
+
 
 h2 {
     background-color: #2980b9;
@@ -167,8 +171,8 @@ table {
   }
 
   .miDiv {
-    width: 20%;
-    height: 20%; /* Puedes ajustar la altura según tus necesidades */
+    width: 200px;
+    height: 200px; /* Puedes ajustar la altura según tus necesidades */
     
 }
 {% endblock %}
@@ -210,94 +214,101 @@ table {
     </table>
     <div class="miDiv"></div>
 </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            generarCalendario();
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        generarCalendario();
+    });
+
+    var fecha = new Date();
+    var eventos =  {{ eventos | tojson | safe }};
+    
+
+    function cambiarMes(delta) {
+        fecha.setMonth(fecha.getMonth() + delta);
+        generarCalendario();
+    }
+
+    function generarCalendario() {
+        var year = fecha.getFullYear();
+        var month = fecha.getMonth();
+        var day = fecha.getDate(); // Obtener el día actual
+
+        var nombreMes = obtenerNombreMes(month);
+
+        var diasEnMes = new Date(year, month + 1, 0).getDate();
+        var primerDiaSemana = new Date(year, month, 1).getDay();
+
+        var tableBody = document.getElementById("calendario").getElementsByTagName("tbody")[0];
+        tableBody.innerHTML = "";
+
+        var fila = tableBody.insertRow();
+
+        for (var i = 0; i < primerDiaSemana; i++) {
+            fila.insertCell();
+        }
+
+        for (var i = 1; i <= diasEnMes; i++) {
+            var cell = fila.insertCell();
+            cell.innerHTML = i;
+
+            // Verificar si hay eventos para resaltar el día
+            if (tieneEventos(i, month, year)) {
+                cell.classList.add("event-day");
+                agregarEventosEnCelda(cell, i, month, year);
+            }
+
+            // Resaltar el día actual
+            if (i === day) {
+                cell.classList.add("current-day");
+            }
+
+            if ((i + primerDiaSemana) % 7 === 0) {
+                fila = tableBody.insertRow();
+            }
+        }
+
+        // Actualizar el elemento h6 con el nombre del mes y año actual
+        document.getElementById("mes-anio").innerText = nombreMes + " - Año: " + year;
+    }
+
+    function obtenerNombreMes(numeroMes) {
+        var meses = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+        return meses[numeroMes];
+    }
+
+    function tieneEventos(dia, mes, anio) {
+        for (var i = 0; i < eventos.length; i++) {
+            var evento = eventos[i];
+            var eventoDate = new Date(evento.start);
+            if (eventoDate.getDate() === dia && eventoDate.getMonth() === mes && eventoDate.getFullYear() === anio) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function agregarEventosEnCelda(cell, dia, mes, anio) {
+        var eventosEnCelda = eventos.filter(function (evento) {
+            var eventoDate = new Date(evento.start);
+            return eventoDate.getDate() === dia && eventoDate.getMonth() === mes && eventoDate.getFullYear() === anio;
         });
 
-        var fecha = new Date();
-        var eventos = {{ eventos | tojson | safe }};
+        eventosEnCelda.forEach(function (evento) {
+            var tituloElemento = document.createElement("div");
+            tituloElemento.classList.add("event-title");
+            tituloElemento.innerText = evento.title;
 
-        function cambiarMes(delta) {
-            fecha.setMonth(fecha.getMonth() + delta);
-            generarCalendario();
-        }
+            var descripcionElemento = document.createElement("div");
+            descripcionElemento.innerText = evento.description;
 
-        function generarCalendario() {
-            var year = fecha.getFullYear();
-            var month = fecha.getMonth();
-            var nombreMes = obtenerNombreMes(month);
-
-            var diasEnMes = new Date(year, month + 1, 0).getDate();
-            var primerDiaSemana = new Date(year, month, 1).getDay();
-
-            var tableBody = document.getElementById("calendario").getElementsByTagName("tbody")[0];
-            tableBody.innerHTML = "";
-
-            var fila = tableBody.insertRow();
-
-            for (var i = 0; i < primerDiaSemana; i++) {
-                fila.insertCell();
-            }
-
-            for (var i = 1; i <= diasEnMes; i++) {
-                var cell = fila.insertCell();
-                cell.innerHTML = i;
-
-                // Verificar si hay eventos para resaltar el día
-                if (tieneEventos(i, month, year)) {
-                    cell.classList.add("event-day");
-                    agregarEventosEnCelda(cell, i, month, year);
-                }
-
-                if ((i + primerDiaSemana) % 7 === 0) {
-                    fila = tableBody.insertRow();
-                }
-            }
-
-            // Actualizar el elemento h6 con el nombre del mes y año actual
-            document.getElementById("mes-anio").innerText = nombreMes + " - Año: " + year;
-        }
-
-        function obtenerNombreMes(numeroMes) {
-            var meses = [
-                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-            ];
-            return meses[numeroMes];
-        }
-
-        function tieneEventos(dia, mes, anio) {
-            for (var i = 0; i < eventos.length; i++) {
-                var evento = eventos[i];
-                var eventoDate = new Date(evento.start);
-                if (eventoDate.getDate() === dia && eventoDate.getMonth() === mes && eventoDate.getFullYear() === anio) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function agregarEventosEnCelda(cell, dia, mes, anio) {
-            var eventosEnCelda = eventos.filter(function (evento) {
-                var eventoDate = new Date(evento.start);
-                return eventoDate.getDate() === dia && eventoDate.getMonth() === mes && eventoDate.getFullYear() === anio;
-            });
-
-            eventosEnCelda.forEach(function (evento) {
-                var tituloElemento = document.createElement("div");
-                tituloElemento.classList.add("event-title");
-                tituloElemento.innerText = evento.title;
-
-                //var descripcionElemento = document.createElement("div");
-                //descripcionElemento.innerText = evento.description;
-
-                cell.appendChild(tituloElemento);
-                //cell.appendChild(descripcionElemento);
-            });
-        }
-    </script>
-    
+            cell.appendChild(tituloElemento);
+            cell.appendChild(descripcionElemento);
+        });
+    }
+</script>
     
     
     </div>

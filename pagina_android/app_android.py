@@ -476,9 +476,8 @@ def cuadernillo():
                 for gg in gragru:
                     print("gg1: ",gg)
                     if len(gg) > 0:
-                        print("entre?")
-                        le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
                         print("gg: ",gg)
+                        le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
                         print("le: ",le)
                         if (int(gg[0][0]) == int(parametros['grado'])) and (len(le[0]) > 0):
                             print("condiciones cumplidas :D")

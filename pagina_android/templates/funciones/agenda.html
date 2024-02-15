@@ -63,6 +63,72 @@ p {
     color: #007bff; /* Color del texto para los títulos de eventos */
 }
 
+h2 {
+    color: #333;
+}
+
+h6 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+td {
+    background-color: #fff;
+}
+
+.nav-buttons {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+.event-day {
+    background-color: #9af57a;
+}
+
+.event-title {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Redondeos bonitos para las celdas del calendario */
+th:first-child, td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+th:last-child, td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 
 {% endblock %}
 

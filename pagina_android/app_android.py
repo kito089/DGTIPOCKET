@@ -323,19 +323,24 @@ def historialAcademico():
 
     bd = Coneccion()
 
-    turesp = bd.llamar("turesp({0})".format(parametros["email"].replace("@cetis155.edu.mx","")))
+    ide = bd.seleccion("grupo","especialidad_idespecialidad","letra = '"+str(parametros['grupo'])+"'")[0][0]
+    carr = bd.seleccion("especialidad","nombre","idespecialidad = '"+str(ide)+"'")[0][0]
 
-    datosG = [parametros["email"],parametros["grado"]+parametros["grupo"],turesp[0][0],nombr,turesp[0][1]]
+    datosG = [parametros["email"],parametros["curp"],carr,nombr]
 
-    ida = bd.seleccion("alumnos","idalumnos","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
+    ida = bd.seleccion("alumnos","idalumnos, grado","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
 
-    tc = bd.llamar("boleta_tc({0})".format(ida[0][0]))
-    m = bd.llamar("boleta_m({0})".format(ida[0][0]))
-    e = bd.llamar("boleta_e({0})".format(ida[0][0]))
+
+    datosC = []
+    for i in range(int(ida[0][1])):
+        tc = bd.llamar("boleta_tc({0},{1})".format(ida[0][0],i+1))
+        m = bd.llamar("boleta_m({0},{1})".format(ida[0][0],i+1))
+        e = bd.llamar("boleta_e({0},{1})".format(ida[0][0],i+1))
+        datosC.append(conv(tc,e,m))
 
     bd.exit()
 
-    datosC = conv(tc,e,m)
+    print("datos C: ", datosC)
 
     genboletadocx(datosC, datosG)
     word = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')

@@ -409,6 +409,7 @@ def noticias():
     return render_template('funciones/noticiasapp.html', noticias=noticias, parametros = parametros)
 
 @app.route('/descargarDrive/<string:idC>/<string:nom>')
+@creds_required
 def descargarDrive(idC, nom):
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
     drive = build("drive", "v3", credentials=credentials)

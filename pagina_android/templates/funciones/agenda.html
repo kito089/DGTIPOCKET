@@ -55,6 +55,10 @@ p {
 }
 
 
+.event-day {
+    background-color: #9af57a; /* Color de fondo para los días con eventos */
+}
+
 
 {% endblock %}
 
@@ -69,82 +73,104 @@ p {
     </a>
 
 
-    <h2>Calendario</h2>
+    <body>
 
-    <h6 id="mes-anio"></h6>
-
-    <div class="nav-buttons">
-        <button onclick="cambiarMes(-1)">Mes Anterior</button>
-        <button onclick="cambiarMes(1)">Mes Siguiente</button>
-    </div>
-
-    <table id="calendario">
-        <thead>
-            <tr>
-                <th>Domingo</th>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miércoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
-                <th>Sábado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Filas del calendario se generarán dinámicamente con JavaScript -->
-        </tbody>
-    </table>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            generarCalendario();
-        });
-
-        var fecha = new Date();
-
-        function cambiarMes(delta) {
-            fecha.setMonth(fecha.getMonth() + delta);
-            generarCalendario();
-        }
-
-        function generarCalendario() {
-            var year = fecha.getFullYear();
-            var month = fecha.getMonth();
-            var nombreMes = obtenerNombreMes(month);
-
-            var diasEnMes = new Date(year, month + 1, 0).getDate();
-            var primerDiaSemana = new Date(year, month, 1).getDay();
-
-            var tableBody = document.getElementById("calendario").getElementsByTagName("tbody")[0];
-            tableBody.innerHTML = "";
-
-            var fila = tableBody.insertRow();
-
-            for (var i = 0; i < primerDiaSemana; i++) {
-                fila.insertCell();
-            }
-
-            for (var i = 1; i <= diasEnMes; i++) {
-                var cell = fila.insertCell();
-                cell.innerHTML = i;
-
-                if ((i + primerDiaSemana) % 7 === 0) {
-                    fila = tableBody.insertRow();
-                }
-            }
-
-            // Actualizar el elemento h6 con el nombre del mes y año actual
-            document.getElementById("mes-anio").innerText = nombreMes + " - Año: " + year;
-        }
-
-        function obtenerNombreMes(numeroMes) {
-            var meses = [
-                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        <h2>Calendario con Eventos</h2>
+    
+        <h6 id="mes-anio"></h6>
+    
+        <div class="nav-buttons">
+            <button onclick="cambiarMes(-1)">Mes Anterior</button>
+            <button onclick="cambiarMes(1)">Mes Siguiente</button>
+        </div>
+    
+        <table id="calendario">
+            <thead>
+                <tr>
+                    <th>Domingo</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Sábado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas del calendario se generarán dinámicamente con JavaScript -->
+            </tbody>
+        </table>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                generarCalendario();
+            });
+    
+            var fecha = new Date();
+            var eventos = [
+                { dia: 5, mes: 2, anio: 2024, descripcion: "Evento 1" },
+                { dia: 15, mes: 2, anio: 2024, descripcion: "Evento 2" },
+                // Puedes agregar más eventos según sea necesario
             ];
-            return meses[numeroMes];
-        }
-    </script>
+    
+            function cambiarMes(delta) {
+                fecha.setMonth(fecha.getMonth() + delta);
+                generarCalendario();
+            }
+    
+            function generarCalendario() {
+                var year = fecha.getFullYear();
+                var month = fecha.getMonth();
+                var nombreMes = obtenerNombreMes(month);
+    
+                var diasEnMes = new Date(year, month + 1, 0).getDate();
+                var primerDiaSemana = new Date(year, month, 1).getDay();
+    
+                var tableBody = document.getElementById("calendario").getElementsByTagName("tbody")[0];
+                tableBody.innerHTML = "";
+    
+                var fila = tableBody.insertRow();
+    
+                for (var i = 0; i < primerDiaSemana; i++) {
+                    fila.insertCell();
+                }
+    
+                for (var i = 1; i <= diasEnMes; i++) {
+                    var cell = fila.insertCell();
+                    cell.innerHTML = i;
+    
+                    // Verificar si hay eventos para resaltar el día
+                    if (tieneEventos(i, month, year)) {
+                        cell.classList.add("event-day");
+                    }
+    
+                    if ((i + primerDiaSemana) % 7 === 0) {
+                        fila = tableBody.insertRow();
+                    }
+                }
+    
+                // Actualizar el elemento h6 con el nombre del mes y año actual
+                document.getElementById("mes-anio").innerText = nombreMes + " - Año: " + year;
+            }
+    
+            function obtenerNombreMes(numeroMes) {
+                var meses = [
+                    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                ];
+                return meses[numeroMes];
+            }
+    
+            function tieneEventos(dia, mes, anio) {
+                for (var i = 0; i < eventos.length; i++) {
+                    var evento = eventos[i];
+                    if (evento.dia === dia && evento.mes === mes && evento.anio === anio) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        </script>
     
     
     </div>

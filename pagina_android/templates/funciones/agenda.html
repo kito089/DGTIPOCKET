@@ -110,6 +110,7 @@ p {
         function generarCalendario() {
             var year = fecha.getFullYear();
             var month = fecha.getMonth();
+            var nombreMes = obtenerNombreMes(month);
 
             var diasEnMes = new Date(year, month + 1, 0).getDate();
             var primerDiaSemana = new Date(year, month, 1).getDay();
@@ -132,11 +133,18 @@ p {
                 }
             }
 
-            // Actualizar el elemento h6 con el año y mes actual
-            document.getElementById("mes-anio").innerText = "Mes: " + (month + 1) + " - Año: " + year;
+            // Actualizar el elemento h6 con el nombre del mes y año actual
+            document.getElementById("mes-anio").innerText = nombreMes + " - Año: " + year;
+        }
+
+        function obtenerNombreMes(numeroMes) {
+            var meses = [
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ];
+            return meses[numeroMes];
         }
     </script>
-
     
     
     </div>

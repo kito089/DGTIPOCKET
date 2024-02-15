@@ -190,9 +190,15 @@ def funciones():
 
 @app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')
 def obtener_fecha(anio, mes, dia):
+    meses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+    parametros = dict(session)['profile']
+    nombre_mes = meses[mes - 1] if 1 <= mes <= 12 else "Mes no válido"
     
-    
-    return f"Fecha recibida: Año {anio}, Mes {mes}, Día {dia}"
+    return render_template("funciones/nuevoE.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio)
+
 
 @app.route('/agenda', methods = ['POST', 'GET'])
 @creds_required

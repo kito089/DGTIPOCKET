@@ -236,7 +236,7 @@ def agendaD():
             }
             all_events.append(event_data)
     
-    return render_template('autoridades/funcionesAut/agenda.html', parametros=parametros,eventos=all_events)
+    return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
 
 @app.route('/agenda', methods = ['POST', 'GET'])
 @creds_required

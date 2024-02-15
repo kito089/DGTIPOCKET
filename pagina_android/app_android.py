@@ -858,13 +858,16 @@ def driveMas():
         print("almenos llego aki :(")
         cuader = request.files['Cuader']
         if cuader.filename == '':
+            print("sin archivo")
             return "Archivo no seleccionado"
         if cuader:
+            print("guardando archivo")
             file_path = f"{app.config['UPLOAD_FOLDER']}/{cuader.filename}"
             cuader.save(file_path)
             print("archivo guardado")
 
         try:
+            print("obteniendo credentiales")
             credentials = google.oauth2.credentials.Credentials(**session['credentials'])
             drive = build("drive", "v3", credentials=credentials)
             print("entre al servicio uwu")
@@ -873,6 +876,7 @@ def driveMas():
             folder_id = '1qTATX3XvoeQUGmlDSyNwZtcQehbuxRAR'
 
             datos = [str(file['id']),str(cuader.filename)]
+            print("cuadernillo: ", datos)
             bd = Coneccion()
             bd.insertarRegistro("cuadernillos",datos)
             idc = bd.seleccion("cuadernillos","idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
@@ -898,6 +902,7 @@ def driveMas():
                 print(f'Archivo {file_path} eliminado correctamente.')
             return redirect(url_for("index_maestros"))
         except HttpError as error:
+            print("alch no c q passa alvvvv")
             print(f"An error occurred: {error}")
             return f"An error occurred: {error}"
         

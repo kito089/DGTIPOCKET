@@ -474,7 +474,7 @@ def cuadernillo():
                 gragru = bd.seleccion("cuadernillos_has_grupo","grado, grupo_idgrupo",
                                   "cuadernillos_idcuadernillos = '"+str(idc)+"'")
                 for gg in gragru:
-                    print(gg)
+                    print("gg1: ",gg)
                     if len(gg) > 0:
                         le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
                         print("gg: ",gg)

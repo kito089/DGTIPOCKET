@@ -201,7 +201,7 @@ def obtener_fecha(anio, mes, dia):
 
 
 @app.route('/nuevoEv/<int:anio>/<int:mes>/<int:dia>')
-def obtener_fecha(anio, mes, dia):
+def obtener_fechaD(anio, mes, dia):
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]

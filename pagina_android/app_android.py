@@ -877,10 +877,10 @@ def driveMas():
             print("letras",letras)
             for l in letras:
                 for i in range(6):
-                    check = request.form.get(str(i+1)+str(l[0])) == 'True'
+                    check = request.form.get(str(i+1)+str(l[0]))
                     print("grupo y grado: ",l,i)
                     print(check)
-                    if check:
+                    if check == 'True':
                         bd.insertarRegistroConID("cuadernillos_has_grupo",[str(idc),str(i+1),str(l[0])])
             
             bd.exit()

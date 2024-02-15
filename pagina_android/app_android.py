@@ -476,10 +476,10 @@ def cuadernillo():
                 for gg in gragru:
                     print(gg)
                     if len(gg) > 0:
+                        le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
                         print(gg)
                         print(le)
-                        le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
-                        if (int(gg[0][0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le[0]) > 0 or str(gg[1]) == "None"):
+                        if (int(gg[0][0]) == int(parametros['grado'])) and (len(le[0]) > 0):
                             print("condiciones cumplidas :D")
                             ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
                             cuadernillos.append([file['thumbnailLink'], file['name'], file['webViewLink'], file['id'], ruta])

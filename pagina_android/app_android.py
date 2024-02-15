@@ -220,7 +220,7 @@ def agenda():
 
     print("todos los eventos: ",all_events) 
     
-    return render_template("funciones/agenda.html", parametros=parametros)
+    return render_template("funciones/agenda.html", parametros=parametros,eventos=all_events)
 
 @app.route('/pagos')
 def pagos():

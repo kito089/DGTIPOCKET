@@ -267,7 +267,10 @@ table {
 
             for (var i = 1; i <= diasEnMes; i++) {
                 var cell = fila.insertCell();
-                cell.innerHTML = i;
+                var dayLink = document.createElement("a");
+                dayLink.href = construirURLDia(i, month, year); // Construir la URL según el día, mes y año
+                dayLink.innerHTML = i;
+                cell.appendChild(dayLink);
 
                 // Verificar si hay eventos para resaltar el día
                 if (tieneEventos(i, month, year)) {
@@ -276,7 +279,7 @@ table {
                 }
 
                 // Resaltar el día actual solo si estamos en el mes actual y es el día de hoy
-                if (i === day && month === fecha.getMonth()) {
+                if (i == day && month == fecha.getMonth()) {
                     cell.classList.add("current-day");
                 }
 
@@ -325,6 +328,11 @@ table {
                 cell.appendChild(tituloElemento);
                 //cell.appendChild(descripcionElemento);
             });
+        }
+
+        function construirURLDia(dia, mes, anio) {
+            
+            return "https://patotipo.pythonanywhere.com/nuevoE/" + anio + "/" + mes + "/" + dia;
         }
     </script>
     

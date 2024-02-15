@@ -188,6 +188,12 @@ def funciones():
 
 ###         FUNCIONES SIMPLES       ###
 
+@app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')
+def obtener_fecha(anio, mes, dia):
+    
+    
+    return f"Fecha recibida: Año {anio}, Mes {mes}, Día {dia}"
+
 @app.route('/agenda', methods = ['POST', 'GET'])
 @creds_required
 def agenda():

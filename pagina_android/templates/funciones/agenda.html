@@ -75,8 +75,8 @@ h6 {
 table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 100%; /* Establece un ancho máximo para evitar que el calendario se vuelva demasiado ancho */
-    margin: 0 auto; /* Centra la tabla en la pantalla */
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 th, td {
@@ -132,6 +132,12 @@ th:last-child, td:last-child {
     border-bottom-right-radius: 10px;
 }
 
+/* Hacer la tabla más responsive */
+@media (max-width: 600px) {
+    th, td {
+        padding: 10px;
+    }
+}
 {% endblock %}
 
 

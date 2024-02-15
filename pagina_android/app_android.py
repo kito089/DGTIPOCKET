@@ -203,8 +203,10 @@ def agenda():
     parametros = dict(session)['profile']
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
     calendario = build('calendar', 'v3', credentials=credentials)
+    print("entre al servicio :v")
 
     calendars = calendario.calendarList().list().execute().get('items', [])
+    print("obteniendo todos los calendarios")
 
     all_events = []
     for calendar in calendars:
@@ -220,7 +222,7 @@ def agenda():
             }
             all_events.append(event_data)
 
-    print(all_events) ## en teoria deveria de jalar :v
+    print("todos los eventos: ",all_events) ## en teoria deveria de jalar :v
 
     # Obtener el año y mes actual
     year = 2024

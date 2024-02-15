@@ -186,11 +186,7 @@ th:last-child, td:last-child {
         });
 
         var fecha = new Date();
-        var eventos = [
-            {'title': 'cumple quique', 'start': '2023-11-20T00:00:00-06:00', 'description': ''},
-            {'title': 'Tarea: Actividad 1. Competencias', 'start': '2022-08-15T18:59:00Z', 'description': 'https://classroom.google.com/c/NTM4NjEyMDU5ODcy/a/NTM4NjE3MTk4MTAz/details'}
-            // Puedes agregar más eventos según sea necesario
-        ];
+        var eventos = {{ eventos | tojson | safe }};
 
         function cambiarMes(delta) {
             fecha.setMonth(fecha.getMonth() + delta);

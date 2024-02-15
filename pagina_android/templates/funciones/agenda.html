@@ -63,6 +63,7 @@ p {
     color: #007bff; /* Color del texto para los títulos de eventos */
 }
 
+
 h2 {
     color: #333;
 }
@@ -82,8 +83,12 @@ table {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 10px; /* Ajusta el tamaño de las celdas */
-    text-align: center;
+    width: 14.28%; /* Ajusta el ancho para 7 columnas en una fila */
+    padding: 15px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 th {
@@ -93,7 +98,7 @@ th {
 
 td {
     background-color: #fff;
-    height: 80px; /* Ajusta la altura de las celdas según sea necesario */
+    height: 80px; /* Ajusta la altura según sea necesario */
 }
 
 .nav-buttons {
@@ -121,7 +126,7 @@ button {
 .event-title {
     font-weight: bold;
     color: #007bff;
-    font-size: 12px; /* Ajusta el tamaño del texto para dispositivos móviles */
+    font-size: 14px;
 }
 
 /* Redondeos bonitos para las celdas del calendario */
@@ -138,11 +143,7 @@ th:last-child, td:last-child {
 /* Hacer la tabla más responsive */
 @media (max-width: 600px) {
     th, td {
-        padding: 5px; /* Ajusta el tamaño de las celdas para dispositivos móviles */
-    }
-
-    .event-title {
-        font-size: 10px; /* Ajusta el tamaño del texto para dispositivos móviles */
+        width: 100%; /* Hacer que las celdas ocupen todo el ancho en dispositivos pequeños */
     }
 }
 {% endblock %}

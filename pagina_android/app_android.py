@@ -477,8 +477,8 @@ def cuadernillo():
                     print(gg)
                     if len(gg) > 0:
                         le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
-                        print(gg)
-                        print(le)
+                        print("gg: ",gg)
+                        print("le: ",le)
                         if (int(gg[0][0]) == int(parametros['grado'])) and (len(le[0]) > 0):
                             print("condiciones cumplidas :D")
                             ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"

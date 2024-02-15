@@ -58,6 +58,10 @@ p {
 .event-day {
     background-color: #9af57a; /* Color de fondo para los días con eventos */
 }
+.event-title {
+    font-weight: bold;
+    color: #007bff; /* Color del texto para los títulos de eventos */
+}
 
 
 {% endblock %}
@@ -76,7 +80,7 @@ p {
     <body>
 
         <h2>Calendario con Eventos</h2>
-    
+
         <h6 id="mes-anio"></h6>
     
         <div class="nav-buttons">
@@ -108,8 +112,8 @@ p {
     
             var fecha = new Date();
             var eventos = [
-                { dia: 5, mes: 2, anio: 2024, descripcion: "Evento 1" },
-                { dia: 15, mes: 2, anio: 2024, descripcion: "Evento 2" },
+                { dia: 5, mes: 2, anio: 2024, titulo: "Evento 1", descripcion: "Descripción del evento 1" },
+                { dia: 15, mes: 2, anio: 2024, titulo: "Evento 2", descripcion: "Descripción del evento 2" },
                 // Puedes agregar más eventos según sea necesario
             ];
     
@@ -142,6 +146,7 @@ p {
                     // Verificar si hay eventos para resaltar el día
                     if (tieneEventos(i, month, year)) {
                         cell.classList.add("event-day");
+                        agregarEventosEnCelda(cell, i, month, year);
                     }
     
                     if ((i + primerDiaSemana) % 7 === 0) {
@@ -170,7 +175,26 @@ p {
                 }
                 return false;
             }
+    
+            function agregarEventosEnCelda(cell, dia, mes, anio) {
+                var eventosEnCelda = eventos.filter(function (evento) {
+                    return evento.dia === dia && evento.mes === mes && evento.anio === anio;
+                });
+    
+                eventosEnCelda.forEach(function (evento) {
+                    var tituloElemento = document.createElement("div");
+                    tituloElemento.classList.add("event-title");
+                    tituloElemento.innerText = evento.titulo;
+    
+                    var descripcionElemento = document.createElement("div");
+                    descripcionElemento.innerText = evento.descripcion;
+    
+                    cell.appendChild(tituloElemento);
+                    cell.appendChild(descripcionElemento);
+                });
+            }
         </script>
+    
     
     
     </div>

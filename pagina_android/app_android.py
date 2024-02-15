@@ -201,6 +201,27 @@ def agenda():
     
     
     parametros = dict(session)['profile']
+    credentials = google.oauth2.credentials.Credentials(**session['credentials'])
+    calendario = build('calendar', 'v3', credentials=credentials)
+
+    calendars = calendario.calendarList().list().execute().get('items', [])
+
+    all_events = []
+    for calendar in calendars:
+        calendar_id = calendar['id']
+        events_result = calendario.events().list(calendarId=calendar_id).execute()
+        events = events_result.get('items', [])
+
+        for event in events:
+            event_data = {
+                "title": event['summary'],
+                "start": event['start'].get('dateTime', event['start'].get('date')),
+                "description": event.get('description', '')
+            }
+            all_events.append(event_data)
+
+    print(all_events) ## en teoria deveria de jalar :v
+
     # Obtener el año y mes actual
     year = 2024
     month = 2
@@ -355,7 +376,6 @@ def historialAcademico():
     docx2pdf(word)
     pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-
 @app.route('/tabla/<string:table>')
 def tabla(table):
     parametros = dict(session)['profile']

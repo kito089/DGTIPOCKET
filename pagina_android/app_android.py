@@ -850,6 +850,7 @@ def leerTC(nombre, time):
 @app.route("/driveMas", methods = ['POST', 'GET'])
 @creds_required
 def driveMas():
+    print("almenos llego añi :(")
     parametros = dict(session)['profile']
     bd = Coneccion()
     letras = bd.obtenerTablas("grupo")

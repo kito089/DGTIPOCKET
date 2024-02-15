@@ -4,7 +4,6 @@
 INICIO
 {% endblock %}
 {% block style %}
-
 form {
     background-color: #ffffff;
     padding: 20px;
@@ -22,7 +21,7 @@ label {
     color: #333;
 }
 
-input[type="text"], select {
+input[type="text"], textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 16px;
@@ -43,25 +42,25 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #2980b9;
 }
-
-
-
 {% endblock %}
 
 {% block content %}
-
 <form>
-    <h2>Agendar Cita</h2>
-    <label for="dia">Día:{{dia}}</label>
-    <input type="text" id="dia" name="dia" placeholder="Ingrese el día" required>
+    <h2>Insertar Evento en Calendario</h2>
+    
+    <!-- Campos ocultos para día, mes y año -->
+    <h2>{{dia}}del mes {{mes}}del año{{anio}}</h2>
+    <input type="hidden" id="dia" name="dia" value="{{dia}}">
+    <input type="hidden" id="mes" name="mes" value="{{mes}}">
+    <input type="hidden" id="anio" name="anio" value="{{anio}}">
 
-    <label for="mes">Mes:{{mes}}</label>
-    <input type="text" id="mes" name="mes" placeholder="Ingrese el mes" required>
+    <label for="titulo">Título del evento:</label>
+    <input type="text" id="titulo" name="titulo" placeholder="Ingrese el título" required>
 
-    <label for="anio">Año:{{anio}}</label>
-    <input type="text" id="anio" name="anio" placeholder="Ingrese el año" required>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" placeholder="Ingrese la descripción"></textarea>
 
-    <input type="submit" value="Agendar Cita">
+    <input type="submit" value="Insertar Evento">
 </form>
 
 

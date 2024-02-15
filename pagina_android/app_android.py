@@ -218,7 +218,9 @@ def agenda():
             }
             all_events.append(event_data)
 
-    print("todos los eventos: ",all_events) ## en teoria deveria de jalar :v
+    print("todos los eventos: ",all_events) 
+    
+    return render_template("funciones/agenda.html", parametros=parametros)
 
 @app.route('/pagos')
 def pagos():

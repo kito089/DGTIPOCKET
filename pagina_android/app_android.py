@@ -476,6 +476,7 @@ def cuadernillo():
                 for gg in gragru:
                     print("gg1: ",gg)
                     if len(gg) > 0:
+                        print("entre?")
                         le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
                         print("gg: ",gg)
                         print("le: ",le)

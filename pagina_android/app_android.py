@@ -472,17 +472,18 @@ def cuadernillo():
             for file in files:
                 print("files: ",file)
                 idc = bd.seleccion("cuadernillos", "idcuadernillos","idcuad = '"+str(file['id'])+"'")[0][0]
-                gg = bd.seleccion("cuadernillos_has_grupo","grado, grupo_idgrupo",
+                gragru = bd.seleccion("cuadernillos_has_grupo","grado, grupo_idgrupo",
                                   "cuadernillos_idcuadernillos = '"+str(idc)+"'")
-                print(gg)
-                if len(gg) > 0:
-                    le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
-                    if (int(gg[0][0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le[0]) > 0 or str(gg[1]) == "None"):
-                        print("condiciones cumplidas :D")
-                        ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
-                        cuadernillos.append([file['thumbnailLink'], file['name'], file['webViewLink'], file['id'], ruta])
-                else:
-                    print("cuadernillo no agregado a la bd")
+                for gg in gragru:
+                    print(gg)
+                    if len(gg) > 0:
+                        le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[0][1])+"'")
+                        if (int(gg[0][0]) == int(parametros['grado']) or int(parametros['grado']) == 0) and (len(le[0]) > 0 or str(gg[1]) == "None"):
+                            print("condiciones cumplidas :D")
+                            ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
+                            cuadernillos.append([file['thumbnailLink'], file['name'], file['webViewLink'], file['id'], ruta])
+                    else:
+                        print("cuadernillo no agregado a la bd")
             bd.exit()
             print("cuadernillos: ",cuadernillos)
             return render_template('funciones/cuadernillo.html', parametros = parametros, cuadernillos=cuadernillos)

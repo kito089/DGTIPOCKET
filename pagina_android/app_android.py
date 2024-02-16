@@ -221,7 +221,7 @@ def create_event():
     mes=request.form['mes']
     anio=request.form['anio']
     
-    fecha=str(anio+"-"+mes+"-"+dia+"T16:30:00-05:00")
+    fecha=str(anio+"-"+mes+"-"+dia)#+"T16:30:00-05:00"
     
     summary=request.form['titulo']
     # Crear un nuevo evento

@@ -254,8 +254,12 @@ def editar_evento():
             
         elif 'borrar' in request.form:
             borrar_evento(request.form['id'])
-            
-    return
+    parametros = dict(session)['profile']
+    all_events=obtenerEventos()
+    if parametros['persona'] == 'maestro':
+        return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
+    else:
+        return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
 
     
 @app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')

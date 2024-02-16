@@ -74,21 +74,22 @@ button[name="borrar"] {
                 <input type="hidden" id="id" name="id" value="{{ evento.id }}" readonly>
 
                 <label for="title">Título:{{ evento.title }}</label>
-                <input type="text" id="title" name="title" value="{{ evento.title }}" readonly>
+                <input type="text" id="title" name="title" value="{{ evento.title }}" >
 
                 <label for="start">Fecha de Inicio:{{ evento.start }}</label>
                 <input type="text" id="start" name="start" value="{{ evento.start }}" readonly>
 
-                <label for="description">Descripción:</label>
-                <textarea id="description" name="description" readonly>{{ evento.description }}</textarea>
+                
             </div>
        
 
         <!-- Puedes agregar más campos según sea necesario -->
 
                     <!-- Botón de tipo submit para la acción de actualizar -->
-                <input type="submit" name="actualizar">Actualizar</input>
-                <input type="submit" name="borrar">Borrar</input>
+                <button type="submit" name="actualizar">Actualizar</button>
+
+                <!-- Botón de tipo submit para la acción de borrar -->
+                <button type="submit" name="borrar">Borrar</button>
 
 
     </form>

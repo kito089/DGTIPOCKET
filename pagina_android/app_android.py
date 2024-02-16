@@ -217,15 +217,15 @@ def obtener_fechaD(anio, mes, dia):
 def create_event():
     creds =   google.oauth2.credentials.Credentials(**session['credentials'])
     service = build('calendar', 'v3', credentials=creds)
-    dia=request.form['dia']
-    mes=request.form['mes']
-    anio=request.form['anio']
+    dia=str(request.form['dia'])
+    mes=str(request.form['mes'])
+    anio=str(request.form['anio'])
     
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     posicion = meses.index(mes)
-    fecha = str(anio + "-" + posicion + "-" + dia + "T00:00:00Z")
+    fecha = anio + "-" + posicion + "-" + dia + "T10:00:00Z"
 
     
     summary=request.form['titulo']

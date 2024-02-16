@@ -44,6 +44,7 @@ flow = Flow.from_client_secrets_file(
     scopes=["openid", "https://www.googleapis.com/auth/userinfo.email", 
             "https://www.googleapis.com/auth/userinfo.profile", 
             "https://www.googleapis.com/auth/calendar.readonly",
+            "https://www.googleapis.com/auth/calendar",
             "https://www.googleapis.com/auth/drive.readonly", 
             "https://www.googleapis.com/auth/drive.file"],
     redirect_uri="https://patotipo.pythonanywhere.com/authorize"

@@ -227,7 +227,7 @@ def obtener_fecha(anio, mes, dia):
     return render_template("funciones/nuevoE.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio,actuales=actuales)
 
 
-@app.route('/nuevoEv/<str:anio>/<str:mes>/<str:dia>')
+@app.route('/nuevoEv/<int:anio>/<int:mes>/<int:dia>')
 def obtener_fechaD(anio, mes, dia):
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -241,7 +241,7 @@ def obtener_fechaD(anio, mes, dia):
     parametros = dict(session)['profile']
     nombre_mes = meses[mes] if 1 <= mes <= 12 else "Mes no válido"
     
-    return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=mes,anio=anio,actuales=actuales)
+    return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio,actuales=actuales)
 
 @app.route('/agregarE', methods=['GET', 'POST'])
 @creds_required

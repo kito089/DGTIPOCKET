@@ -27,6 +27,10 @@ def conv(tc,e,m):
     tcl = [list(tupla) for tupla in tc]
     ml = [list(tupla) for tupla in m]
     el = [list(tupla) for tupla in e]
+
+    tcl2 = []
+    el2 = []
+
     for i in range(len(tcl)):
         for j in range(len(tcl[i])):
             if tcl[i][j] is None:
@@ -39,10 +43,37 @@ def conv(tc,e,m):
         for j in range(len(el[i])):
             if el[i][j] is None:
                 el[i][j] = ""
-    tcl = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
-    el = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
 
-    datosC = tcl+ml+el
+    for t1 in tcl:
+        print(t1)
+        tcl2.append([])
+        for t in t1:
+            print(t)
+            if isinstance(t, str):
+                tcl2[-1].append(t)
+            else:
+                if t.is_integer():
+                    tcl2[-1].append(int(t))
+                else:
+                    tcl2[-1].append(format(float(t), '.1f'))
+
+    for e1 in el:
+        print(e1)
+        el2.append([])
+        for e in e1:
+            print(e)
+            if isinstance(e, str):
+                el2[-1].append(e)
+            else:
+                if e.is_integer():
+                    el2[-1].append(int(e))
+                else:
+                    el2[-1].append(format(float(e), '.1f'))
+
+    #tcl = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
+    #el = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
+
+    datosC = tcl2+ml+el2
     return datosC
 
 def genHAdocx(datosC, datosG, avances):

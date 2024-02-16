@@ -245,21 +245,14 @@ def borrar_evento(event_id):
     else:
         return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
 
-@app.route('/editarE')
+@app.route('/editarE', methods=['GET', 'POST'])
 def editar_evento():
     if request.method == 'POST':
         if 'actualizar' in request.form:
-            actualizar_evento(request.form['id'],request.form['title'])
-            
-            
+            return actualizar_evento(request.form['id'],request.form['title'])
         elif 'borrar' in request.form:
-            borrar_evento(request.form['id'])
-    parametros = dict(session)['profile']
-    all_events=obtenerEventos()
-    if parametros['persona'] == 'maestro':
-        return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
-    else:
-        return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
+            return borrar_evento(request.form['id'])
+    
 
     
 @app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')

@@ -246,7 +246,7 @@ def agendaD():
                 "start": event['start'].get('dateTime', event['start'].get('date')),
                 "description": event.get('description', '')
             }
-            all_events.append(event_data)
+            all_events.append(events)
             
             
     print(all_events)

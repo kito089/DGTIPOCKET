@@ -451,7 +451,6 @@ def historialAcademico():
 
     ida = bd.seleccion("alumnos","idalumnos, grado","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
 
-
     datosC = []
     for i in range(int(ida[0][1])):
         tc = bd.llamar("boleta_tc({0},{1})".format(ida[0][0],i+1))
@@ -462,11 +461,13 @@ def historialAcademico():
     bd.exit()
 
     print("datos C: ", datosC)
-
-    genboletadocx(datosC, datosG)
-    word = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
+    avances = [296,0,296+0,26,0,26+0,9.9]
+    genHAdocx(datosC, datosG, avances)
+    word = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr+'.docx')
     docx2pdf(word)
-    pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
+    pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr+'.pdf')
+
+    return redirect(url_for("descargar", archivo = (str(nombr)+'.pdf')))
     
 @app.route('/tabla/<string:table>')
 def tabla(table):

@@ -224,9 +224,10 @@ def create_event():
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-    posicion = meses.index(mes)+1
+    posicion = meses.index(mes)
+    mes=str(posicion+1)
     print(posicion,"----------------------------------------------------------")
-    fecha = anio + "-" + posicion + "-" + dia + "T10:00:00Z"
+    fecha = anio + "-" + mes + "-" + dia + "T10:00:00Z"
 
     
     summary=request.form['titulo']

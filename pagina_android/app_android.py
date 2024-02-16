@@ -221,9 +221,11 @@ def create_event():
     mes=request.form['mes']
     anio=request.form['anio']
     
-    mes = datetime.strptime(mes, '%B')
-    mes = mes.month
-    fecha = str(anio + "-" + mes + "-" + dia + "T00:00:00Z")
+    meses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    posicion = meses.index(mes)
+    fecha = str(anio + "-" + posicion + "-" + dia + "T00:00:00Z")
 
     
     summary=request.form['titulo']

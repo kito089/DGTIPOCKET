@@ -252,6 +252,7 @@ def editar_evento():
             return actualizar_evento(request.form['id'],request.form['title'])
         elif 'borrar' in request.form:
             return borrar_evento(request.form['id'])
+    return
 
     
 @app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')

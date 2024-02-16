@@ -231,8 +231,11 @@ def create_event():
         'end': {'dateTime': fecha, 'timeZone': 'UTC'},
     }
     
-    created_event = service.events().insert(calendarId='primary', body=evento).execute()
-    print(f'Evento creado: {created_event["htmlLink"]}')
+    try:
+        created_event = service.events().insert(calendarId='primary', body=evento).execute()
+        print(f'Evento creado: {created_event["htmlLink"]}')
+    except Exception as e:
+        print(f'Error al crear el evento: {e}')
     
     parametros = dict(session)['profile']
     

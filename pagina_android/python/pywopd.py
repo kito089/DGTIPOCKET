@@ -39,8 +39,8 @@ def conv(tc,e,m):
         for j in range(len(el[i])):
             if el[i][j] is None:
                 el[i][j] = ""
-    tcl = [[int(float(str(elemento))) if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
-    el = [[int(float(str(elemento))) if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
+    tcl = [[format(float(str(elemento)), ".1f") if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
+    el = [[format(float(str(elemento)), ".1f") if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
     datosC = tcl+ml+el
     return datosC
 

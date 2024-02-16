@@ -417,11 +417,11 @@ def boleta():
 
     datosG = [parametros["email"],parametros["grado"]+parametros["grupo"],turesp[0][0],nombr,turesp[0][1]]
 
-    ida = bd.seleccion("alumnos","idalumnos, grado","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
+    ida = bd.seleccion("alumnos","idalumnos","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
 
-    tc = bd.llamar("boleta_tc({0},{1})".format(ida[0][0],ida[0][1]))
-    m = bd.llamar("boleta_m({0},{1})".format(ida[0][0],ida[0][1]))
-    e = bd.llamar("boleta_e({0},{1})".format(ida[0][0],ida[0][1]))
+    tc = bd.llamar("boleta_tc({0})".format(ida[0][0]))
+    m = bd.llamar("boleta_m({0})".format(ida[0][0]))
+    e = bd.llamar("boleta_e({0})".format(ida[0][0]))
 
     bd.exit()
 

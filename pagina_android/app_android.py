@@ -223,7 +223,9 @@ def create_event():
     
     fecha = str(anio + "-" + mes + "-" + dia + "T00:00:00Z")
 
-    
+    from datetime import datetime
+
+    fecha = datetime(int(anio), int(mes), int(dia), 0, 0, 0).isoformat() + 'Z'
     summary=request.form['titulo']
     # Crear un nuevo evento
     evento = {
@@ -233,6 +235,7 @@ def create_event():
     }
     
     try:
+        
         created_event = service.events().insert(calendarId='primary', body=evento).execute()
         print(f'Evento creado: {created_event["htmlLink"]}')
     except Exception as e:

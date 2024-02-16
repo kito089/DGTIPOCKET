@@ -27,6 +27,10 @@ def conv(tc,e,m):
     tcl = [list(tupla) for tupla in tc]
     ml = [list(tupla) for tupla in m]
     el = [list(tupla) for tupla in e]
+
+    tcl2 = []
+    el2 = []
+
     for i in range(len(tcl)):
         for j in range(len(tcl[i])):
             if tcl[i][j] is None:
@@ -39,10 +43,29 @@ def conv(tc,e,m):
         for j in range(len(el[i])):
             if el[i][j] is None:
                 el[i][j] = ""
-    tcl = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
-    el = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
 
-    datosC = tcl+ml+el
+    for t in tcl:
+        if isinstance(t, str):
+            tcl2.append(t)
+        else:
+            if t.is_integer():
+                tcl2.append(int(t))
+            else:
+                tcl2.format(float(t), '.1f')
+
+    for e in el:
+        if isinstance(e, str):
+            el2.append(e)
+        else:
+            if e.is_integer():
+                el2.append(int(e))
+            else:
+                el2.format(float(e), '.1f')
+
+    #tcl = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
+    #el = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
+
+    datosC = tcl2+ml+el2
     return datosC
 
 def genHAdocx(datosC, datosG, avances):

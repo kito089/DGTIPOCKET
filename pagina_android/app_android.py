@@ -211,6 +211,54 @@ def obtener_fechaD(anio, mes, dia):
     
     return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio)
 
+@app.route('/agregarE', methods=['GET', 'POST'])
+def create_event():
+    creds =  google.oauth2.credentials.Credentials(**session['credentials'])
+    service = build('calendar', 'v3', credentials=creds)
+    dia=request.form['dia']
+    mes=request.form['mes']
+    anio=request.form['anio']
+    
+    summary=request.form['titulo']
+    # Crear un nuevo evento
+    evento = {
+        'summary': summary,
+        'start': {'dateTime': anio+mes+dia, 'timeZone': 'UTC'},
+        'end': {'dateTime': anio+mes+dia, 'timeZone': 'UTC'},
+    }
+    try:
+        created_event = service.events().insert(calendarId='primary', body=evento).execute()
+        print(f'Evento creado: {created_event["htmlLink"]}')
+    except :
+        print("valio verga y no se inserto el evento ")
+    parametros = dict(session)['profile']
+    
+    credentials = google.oauth2.credentials.Credentials(**session['credentials'])
+    calendario = build('calendar', 'v3', credentials=credentials)
+    print("entre al calendario :v")
+
+    calendars = calendario.calendarList().list().execute().get('items', [])
+
+    all_events = []
+    for calendar in calendars:
+        calendar_id = calendar['id']
+        events_result = calendario.events().list(calendarId=calendar_id).execute()
+        events = events_result.get('items', [])
+
+        for event in events:
+            event_data = {
+                "id":event['id'],
+                "title": event['summary'],
+                "start": event['start'].get('dateTime', event['start'].get('date')),
+                "description": event.get('description', '')
+            }
+            all_events.append(event_data)
+            
+            
+    
+    
+    return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
+
 
     
     

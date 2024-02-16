@@ -218,13 +218,13 @@ def create_event():
     dia=request.form['dia']
     mes=request.form['mes']
     anio=request.form['anio']
-    
+    fecha=str(anio+"-"+mes+"-"+dia)
     summary=request.form['titulo']
     # Crear un nuevo evento
     evento = {
         'summary': summary,
-        'start': {'dateTime': anio+mes+dia, 'timeZone': 'UTC'},
-        'end': {'dateTime': anio+mes+dia, 'timeZone': 'UTC'},
+        'start': {'dateTime': fecha, 'timeZone': 'UTC'},
+        'end': {'dateTime': fecha, 'timeZone': 'UTC'},
     }
     try:
         created_event = service.events().insert(calendarId='primary', body=evento).execute()

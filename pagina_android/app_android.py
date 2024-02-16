@@ -237,11 +237,9 @@ def obtener_fechaD(anio, mes, dia):
     me=str(mes)
     di=str(dia)
     fecha_predeterminada = ani+"-"+me+"-"+di
-    print(eventos)
-    fecha_busqueda = datetime.strptime(fecha_predeterminada, '%Y-%m-%d')
-
+    print(fecha_predeterminada)
 # Filtrar eventos con la fecha específica
-    eventos_filtrados = [evento for evento in eventos if datetime.strptime(evento['start'][:10], '%Y-%m-%d') == fecha_busqueda]
+    eventos_filtrados = [evento for evento in eventos if evento['start'].startswith(fecha_predeterminada)]
     print(eventos_filtrados,"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     actuales = [evento for evento in eventos if 'start' in evento and evento['start'].split('T')[0] == fecha_predeterminada]
     print(actuales)

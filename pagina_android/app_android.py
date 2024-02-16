@@ -300,7 +300,9 @@ def create_event():
     dia=str(request.form['dia'])
     mes=str(request.form['mes'])
     anio=str(request.form['anio'])
-    
+    anio=str(request.form['anio'])
+    hora=str(request.form['hora'])
+
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]

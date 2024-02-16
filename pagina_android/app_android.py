@@ -246,10 +246,10 @@ def agendaD():
                 "start": event['start'].get('dateTime', event['start'].get('date')),
                 "description": event.get('description', '')
             }
-            all_events.append(events)
+            all_events.append(event_data)
             
             
-    print(all_events)
+    print(events)
     
     return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
 

@@ -71,6 +71,69 @@ def conv(tc,e,m):
     datosC = tcl2+ml+el2
     return datosC
 
+
+def convHA(tc,e,atc,ae):
+    tcl = [list(tupla) for tupla in tc]
+    if len(e) > 0:
+        el = [list(tupla) for tupla in e]
+
+    tcl2 = []
+    el2 = []
+    cred = 0
+    acredi = 0
+    noacredi = 0
+    s = 1
+    calf = 0
+    no = 0
+    datosC = []
+
+    if len(e) > 0:
+        for e1 in el:
+            el2.append(["Profesional",e1[0],e1[1],e1[2],e1[3],str(e1[4])+" / "+str(int(e1[4])*2),e1[5]])
+            cred += int(e1[4]*2)
+            if e1[3].is_integer():
+                calf += int(e1[3])
+                no += 1
+
+    for t1 in tcl:
+        if t1[1] == s: 
+            datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
+            if t1[3].is_integer():
+                calf += int(t1[3])
+                no += 1
+        else:
+            s += 1
+            if s > 2 and len(e) > 0:
+                for e in el2:
+                    if e[2] == s-1:
+                        datosC.append(e)
+            datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
+            if t1[3].is_integer():
+                calf += int(t1[3])
+                no += 1
+        cred += int(t1[4]*2)
+
+    print("atc: ",atc)
+    print("ate: ", ae)
+
+    for acr in atc:
+        if acr == 'A':
+            acredi += 1
+        else:
+            noacredi += 1
+    # s = 0
+    # for a in ae:
+    #     if s == a[0]:
+    #         s = a[0]
+    #         if a[1] == 'A':
+    #             acredi += 1
+    #         else:
+    #             noacredi += 1
+    #     else:
+    #         s = a[0]
+
+    return datosC , [cred,0,cred,acredi,noacredi,acredi+noacredi]
+
 def genHAdocx(datosC, datosG, avances):
     doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_HA_mamalon.docx'))
 
@@ -90,7 +153,7 @@ def genHAdocx(datosC, datosG, avances):
         'a': avances,
         'ha': datosC
     }
-        
+
     doc.render(context)
     doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.docx'))
 

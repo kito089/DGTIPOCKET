@@ -422,13 +422,12 @@ def historialAcademico():
 
     ida = bd.seleccion("alumnos","idalumnos, grado","no_control = {0}".format(parametros["email"].replace("@cetis155.edu.mx","")))
 
-    datosC = []
-    for i in range(int(ida[0][1])):
-        tc = bd.llamar("boleta_tc({0},{1})".format(ida[0][0],i+1))
-        m = bd.llamar("boleta_m({0},{1})".format(ida[0][0],i+1))
-        e = bd.llamar("boleta_e({0},{1})".format(ida[0][0],i+1))
-        datosC.append(conv(tc,e,m))
-
+    tc = bd.llamar("ha_tc({0})".format(ida[0][0]))
+    e = bd.llamar("ha_e({0})".format(ida[0][0]))
+    atc = bd.seleccion("evaluacion_tc","acreditacion","alumnos_idalumnos = '"+ida[0][0]+"'")
+    ae = bd.seleccion("evaluacion_e","submodulos_idsubmodulos,acreditacion","alumnos_idalumnos = '"+ida[0][0]+"'")
+    datosC, avances = convHA(tc,e,atc,ae)
+    
     bd.exit()
 
     print("datos C: ", datosC)

@@ -42,31 +42,56 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #2980b9;
 }
+/* Estilo general para los botones */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    color: #fff;
+}
+
+/* Estilo para el botón de actualizar */
+button[name="actualizar"] {
+    background-color: #4CAF50;  /* Color verde */
+}
+
+/* Estilo para el botón de borrar */
+button[name="borrar"] {
+    background-color: #f44336;  /* Color rojo */
+}
 {% endblock %}
 
 {% block content %}
 <h1>Formulario de Eventos    <h2>{{dia}} del mes {{mes}} del año {{anio}}</h2></h1>
 {% for evento in actuales %}
-    <form>
+    <form action="/editarE" method="POST">
         
             <div class="evento">
-                <label for="id">ID:</label>
-                <input type="text" id="id" name="id" value="{{ evento.id }}" readonly>
+                
+                <input type="hidden" id="id" name="id" value="{{ evento.id }}" readonly>
 
-                <label for="title">Título:</label>
-                <input type="text" id="title" name="title" value="{{ evento.title }}" readonly>
+                <label for="title">Título:{{ evento.title }}</label>
+                <input type="text" id="title" name="title" value="{{ evento.title }}" >
 
-                <label for="start">Fecha de Inicio:</label>
+                <label for="start">Fecha de Inicio:{{ evento.start }}</label>
                 <input type="text" id="start" name="start" value="{{ evento.start }}" readonly>
 
-                <label for="description">Descripción:</label>
-                <textarea id="description" name="description" readonly>{{ evento.description }}</textarea>
+                
             </div>
        
 
         <!-- Puedes agregar más campos según sea necesario -->
 
-        <input type="submit" value="Enviar">
+                    <!-- Botón de tipo submit para la acción de actualizar -->
+                <button type="submit" name="actualizar">Actualizar</button>
+
+                <!-- Botón de tipo submit para la acción de borrar -->
+                <button type="submit" name="borrar">Borrar</button>
+
+
     </form>
     {% endfor %}
 <form action="/agregarE" method="POST">

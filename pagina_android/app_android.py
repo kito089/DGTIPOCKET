@@ -209,7 +209,52 @@ def obtenerEventos():
                 "description": event.get('description', '')
             }
             all_events.append(event_data)
-    return all_events       
+    return all_events  
+
+def actualizar_evento(event_id, titulo):
+    
+    parametros = dict(session)['profile']
+    eventos=obtenerEventos()
+    creds = google.oauth2.credentials.Credentials(**session['credentials'])
+    service = build('calendar', 'v3', credentials=creds)
+
+    # Actualizar el resumen de un evento existente
+    event = service.events().get(calendarId='primary', eventId=event_id).execute()
+    event['summary'] = titulo
+
+    updated_event = service.events().update(calendarId='primary', eventId=event_id, body=event).execute()
+    print(f'Evento actualizado: {updated_event["htmlLink"]}')
+    all_events=obtenerEventos()
+    if parametros['persona'] == 'maestro':
+        return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
+    else:
+        return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
+
+def borrar_evento(event_id):
+    parametros = dict(session)['profile']
+
+    creds = google.oauth2.credentials.Credentials(**session['credentials'])
+    service = build('calendar', 'v3', credentials=creds)
+
+    # Eliminar un evento existente
+    service.events().delete(calendarId='primary', eventId=event_id).execute()
+    print(f'Evento eliminado: {event_id}')     
+    all_events=obtenerEventos()
+    if parametros['persona'] == 'maestro':
+        return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
+    else:
+        return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
+
+@app.route('/editarE', methods=['GET', 'POST'])
+def editar_evento():
+    if request.method == 'POST':
+        if 'actualizar' in request.form:
+            return actualizar_evento(request.form['id'],request.form['title'])
+        elif 'borrar' in request.form:
+            return borrar_evento(request.form['id'])
+    
+
+    
 @app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')
 def obtener_fecha(anio, mes, dia):
     meses = [

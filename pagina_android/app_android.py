@@ -233,11 +233,11 @@ def obtener_fechaD(anio, mes, dia):
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     eventos=obtenerEventos()
-    fecha_predeterminada = f'{anio}-{mes}-{dia}'
-
+    fecha_predeterminada = ("f'{anio}-{mes}-{dia}'")
+    print(fecha_predeterminada)
     # Filtrar las entradas con la fecha predeterminada
     actuales = [evento for evento in eventos if 'start' in evento and evento['start'].startswith(fecha_predeterminada)]
-
+    print(actuales)
     parametros = dict(session)['profile']
     nombre_mes = meses[mes] if 1 <= mes <= 12 else "Mes no válido"
     

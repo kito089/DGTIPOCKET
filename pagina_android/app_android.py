@@ -218,7 +218,9 @@ def create_event():
     dia=request.form['dia']
     mes=request.form['mes']
     anio=request.form['anio']
+    
     fecha=str(anio+"-"+mes+"-"+dia)
+    
     summary=request.form['titulo']
     # Crear un nuevo evento
     evento = {

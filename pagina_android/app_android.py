@@ -212,8 +212,9 @@ def obtener_fechaD(anio, mes, dia):
     return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio)
 
 @app.route('/agregarE', methods=['GET', 'POST'])
+@creds_required
 def create_event():
-    creds =  google.oauth2.credentials.Credentials(**session['credentials'])
+    creds =   google.oauth2.credentials.Credentials(**session['credentials'])
     service = build('calendar', 'v3', credentials=creds)
     dia=request.form['dia']
     mes=request.form['mes']
@@ -228,11 +229,10 @@ def create_event():
         'start': {'dateTime': fecha, 'timeZone': 'UTC'},
         'end': {'dateTime': fecha, 'timeZone': 'UTC'},
     }
-    try:
-        created_event = service.events().insert(calendarId='primary', body=evento).execute()
-        print(f'Evento creado: {created_event["htmlLink"]}')
-    except :
-        print("valio verga y no se inserto el evento ")
+    
+    created_event = service.events().insert(calendarId='primary', body=evento).execute()
+    print(f'Evento creado: {created_event["htmlLink"]}')
+    
     parametros = dict(session)['profile']
     
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])

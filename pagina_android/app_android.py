@@ -216,11 +216,13 @@ def obtener_fecha(anio, mes, dia):
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     eventos=obtenerEventos()
-    fecha_predeterminada = f'{anio}-{mes}-{dia}'
-
-    # Filtrar las entradas con la fecha predeterminada
-    actuales = [evento for evento in eventos if 'start' in evento and evento['start'].startswith(fecha_predeterminada)]
-
+    ani=str(anio)
+    me=str(mes+1).zfill(2)
+    di=str(dia).zfill(2)
+    fecha_predeterminada = ani+"-"+me+"-"+di
+# Filtrar eventos con la fecha específica
+    eventos_filtrados = [evento for evento in eventos if evento['start'].startswith(fecha_predeterminada)]
+    actuales = [evento for evento in eventos if 'start' in evento and evento['start'].split('T')[0] == fecha_predeterminada]
     parametros = dict(session)['profile']
     nombre_mes = meses[mes] if 1 <= mes <= 12 else "Mes no válido"
     
@@ -237,12 +239,9 @@ def obtener_fechaD(anio, mes, dia):
     me=str(mes+1).zfill(2)
     di=str(dia).zfill(2)
     fecha_predeterminada = ani+"-"+me+"-"+di
-    print(fecha_predeterminada)
 # Filtrar eventos con la fecha específica
     eventos_filtrados = [evento for evento in eventos if evento['start'].startswith(fecha_predeterminada)]
-    print(eventos_filtrados,"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     actuales = [evento for evento in eventos if 'start' in evento and evento['start'].split('T')[0] == fecha_predeterminada]
-    print(actuales)
     parametros = dict(session)['profile']
     nombre_mes = meses[mes] if 1 <= mes <= 12 else "Mes no válido"
     

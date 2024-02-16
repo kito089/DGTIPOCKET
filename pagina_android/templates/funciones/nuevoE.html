@@ -46,6 +46,31 @@ input[type="submit"]:hover {
 
 {% block content %}
 
+<h1>Formulario de Eventos    <h2>{{dia}} del mes {{mes}} del año {{anio}}</h2></h1>
+
+{% for evento in actuales %}
+    <form>
+        
+            <div class="evento">
+                
+                <input type="hidden" id="id" name="id" value="{{ evento.id }}" readonly>
+
+                <label for="title">Título:{{ evento.title }}</label>
+                <input type="hidden" id="title" name="title" value="{{ evento.title }}" readonly>
+
+                <label for="start">Fecha de Inicio:{{ evento.start }}</label>
+                <input type="hyden" id="start" name="start" value="{{ evento.start }}" readonly>
+
+                <label for="description">Descripción:</label>
+                <textarea id="description" name="description" readonly>{{ evento.description }}</textarea>
+            </div>
+       
+
+        <!-- Puedes agregar más campos según sea necesario -->
+
+        <input type="submit" value="Enviar">
+    </form>
+    {% endfor %} 
 <form action="/agregarE" method="POST">
     
     <h2>{{dia}} del mes {{mes}} del año {{anio}}</h2>

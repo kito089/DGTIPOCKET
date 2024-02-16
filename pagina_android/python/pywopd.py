@@ -45,8 +45,10 @@ def conv(tc,e,m):
                 el[i][j] = ""
 
     for t1 in tcl:
+        print(t1)
         tcl2.append([])
         for t in t1:
+            print(t)
             if isinstance(t, str):
                 tcl2[-1].append(t)
             else:
@@ -56,8 +58,10 @@ def conv(tc,e,m):
                     tcl2[-1].append(format(float(t), '.1f'))
 
     for e1 in el:
+        print(e1)
         el2.append([])
         for e in e1:
+            print(e)
             if isinstance(e, str):
                 el2[-1].append(e)
             else:

@@ -275,9 +275,12 @@ table {
                 }
 
                 // Resaltar el día actual solo si estamos en el mes actual y es el día de hoy
-                if (i == day && month == fecha.getMonth()) {
+                if (i === day && month === fecha.getMonth()) {
                     console.log(fecha.getMonth(),"------------------------------------------");
                     cell.classList.add("current-day");
+                }
+                else{
+                    cell.classList.add("");
                 }
 
                 if ((i + primerDiaSemana) % 7 === 0) {

@@ -211,6 +211,18 @@ def obtener_fechaD(anio, mes, dia):
     
     return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio)
 
+
+    
+    
+    
+@app.route('/agregarE' ,methods = ['POST', 'GET'])
+def agregarE():
+    parametros = dict(session)['profile']
+    
+    
+    
+    return render_template("autoridades/funcionesAut/agregarE.html", parametros=parametros)
+
 @app.route('/agendaD', methods = ['POST', 'GET'])
 @creds_required
 def agendaD():
@@ -235,6 +247,9 @@ def agendaD():
                 "description": event.get('description', '')
             }
             all_events.append(event_data)
+            
+            
+    print(all_events)
     
     return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
 

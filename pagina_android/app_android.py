@@ -274,12 +274,13 @@ def agenda():
 
         for event in events:
             event_data = {
+                "id":event['id'],
                 "title": event['summary'],
                 "start": event['start'].get('dateTime', event['start'].get('date')),
                 "description": event.get('description', '')
             }
             all_events.append(event_data)
-    
+    print(all_events)
     return render_template("funciones/agenda.html", parametros=parametros,eventos=all_events,horario=horario)
 
 @app.route('/pagos')

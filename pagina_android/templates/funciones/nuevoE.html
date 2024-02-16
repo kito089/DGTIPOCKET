@@ -9,7 +9,6 @@ form {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin:20px;
 }
 
 h2 {
@@ -69,34 +68,35 @@ button[name="borrar"] {
 
 <h1>Formulario de Eventos    <h2>{{dia}} del mes {{mes}} del año {{anio}}</h2></h1>
 
+<h1>Formulario de Eventos    <h2>{{dia}} del mes {{mes}} del año {{anio}}</h2></h1>
 {% for evento in actuales %}
-<form action="/editarE" method="POST">
+    <form action="/editarE" method="POST">
         
-    <div class="evento">
-        
-        <input type="hidden" id="id" name="id" value="{{ evento.id }}" readonly>
+            <div class="evento">
+                
+                <input type="hidden" id="id" name="id" value="{{ evento.id }}" readonly>
 
-        <label for="title">Título:{{ evento.title }}</label>
-        <input type="text" id="title" name="title" value="{{ evento.title }}" >
+                <label for="title">Título:{{ evento.title }}</label>
+                <input type="text" id="title" name="title" value="{{ evento.title }}" >
 
-        <label for="start">Fecha de Inicio:{{ evento.start }}</label>
-        <input type="text" id="start" name="start" value="{{ evento.start }}" readonly>
+                <label for="start">Fecha de Inicio:{{ evento.start }}</label>
+                <input type="text" id="start" name="start" value="{{ evento.start }}" readonly>
 
-        
-    </div>
+                
+            </div>
+       
+
+        <!-- Puedes agregar más campos según sea necesario -->
+
+                    <!-- Botón de tipo submit para la acción de actualizar -->
+                <button type="submit" name="actualizar">Actualizar</button>
+
+                <!-- Botón de tipo submit para la acción de borrar -->
+                <button type="submit" name="borrar">Borrar</button>
 
 
-<!-- Puedes agregar más campos según sea necesario -->
-
-            <!-- Botón de tipo submit para la acción de actualizar -->
-        <button type="submit" name="actualizar">Actualizar</button>
-
-        <!-- Botón de tipo submit para la acción de borrar -->
-        <button type="submit" name="borrar">Borrar</button>
-
-
-</form>
-    {% endfor %} 
+    </form>
+    {% endfor %}
 <form action="/agregarE" method="POST">
     
     <h2>{{dia}} del mes {{mes}} del año {{anio}}</h2>

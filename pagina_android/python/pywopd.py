@@ -45,33 +45,28 @@ def conv(tc,e,m):
                 el[i][j] = ""
 
     for t1 in tcl:
-        print(t1)
         tcl2.append([])
         for t in t1:
-            print(t)
             if isinstance(t, str):
                 tcl2[-1].append(t)
+            elif isinstance(t, int):
+                tcl2[-1].append(t)
+            elif t % 1 == 0:  # Verifica si el Decimal es un entero
+                tcl2[-1].append(int(t))
             else:
-                if t.is_integer():
-                    tcl2[-1].append(int(t))
-                else:
-                    tcl2[-1].append(format(float(t), '.1f'))
+                tcl2[-1].append(format(float(t), '.1f'))
 
     for e1 in el:
-        print(e1)
         el2.append([])
         for e in e1:
-            print(e)
             if isinstance(e, str):
                 el2[-1].append(e)
+            elif isinstance(e, int):
+                el2[-1].append(e)
+            elif e % 1 == 0:  # Verifica si el Decimal es un entero
+                el2[-1].append(int(e))
             else:
-                if e.is_integer():
-                    el2[-1].append(int(e))
-                else:
-                    el2[-1].append(format(float(e), '.1f'))
-
-    #tcl = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
-    #el = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]
+                el2[-1].append(format(float(e), '.1f'))
 
     datosC = tcl2+ml+el2
     return datosC

@@ -188,17 +188,43 @@ def funciones():
     return render_template('inisioSesion/funcionesapp.html', parametros = parametros)
 
 ###         FUNCIONES SIMPLES       ###
+def obtenerEventos():
+    credentials = google.oauth2.credentials.Credentials(**session['credentials'])
+    calendario = build('calendar', 'v3', credentials=credentials)
+    print("entre al calendario :v")
 
+    calendars = calendario.calendarList().list().execute().get('items', [])
+
+    all_events = []
+    for calendar in calendars:
+        calendar_id = calendar['id']
+        events_result = calendario.events().list(calendarId=calendar_id).execute()
+        events = events_result.get('items', [])
+
+        for event in events:
+            event_data = {
+                "id":event['id'],
+                "title": event['summary'],
+                "start": event['start'].get('dateTime', event['start'].get('date')),
+                "description": event.get('description', '')
+            }
+            all_events.append(event_data)
+    return all_events       
 @app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')
 def obtener_fecha(anio, mes, dia):
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    eventos=obtenerEventos()
+    fecha_predeterminada = f'{anio}-{mes}-{dia}'
+
+    # Filtrar las entradas con la fecha predeterminada
+    actuales = [evento for evento in eventos if 'start' in evento and evento['start'].startswith(fecha_predeterminada)]
 
     parametros = dict(session)['profile']
     nombre_mes = meses[mes] if 1 <= mes <= 12 else "Mes no válido"
     
-    return render_template("funciones/nuevoE.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio)
+    return render_template("funciones/nuevoE.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio,actuales=actuales)
 
 
 @app.route('/nuevoEv/<int:anio>/<int:mes>/<int:dia>')
@@ -206,11 +232,16 @@ def obtener_fechaD(anio, mes, dia):
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    eventos=obtenerEventos()
+    fecha_predeterminada = f'{anio}-{mes}-{dia}'
+
+    # Filtrar las entradas con la fecha predeterminada
+    actuales = [evento for evento in eventos if 'start' in evento and evento['start'].startswith(fecha_predeterminada)]
 
     parametros = dict(session)['profile']
     nombre_mes = meses[mes] if 1 <= mes <= 12 else "Mes no válido"
     
-    return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio)
+    return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio,actuales=actuales)
 
 @app.route('/agregarE', methods=['GET', 'POST'])
 @creds_required
@@ -247,29 +278,7 @@ def create_event():
     
     parametros = dict(session)['profile']
     
-    credentials = google.oauth2.credentials.Credentials(**session['credentials'])
-    calendario = build('calendar', 'v3', credentials=credentials)
-    print("entre al calendario :v")
-
-    calendars = calendario.calendarList().list().execute().get('items', [])
-
-    all_events = []
-    for calendar in calendars:
-        calendar_id = calendar['id']
-        events_result = calendario.events().list(calendarId=calendar_id).execute()
-        events = events_result.get('items', [])
-
-        for event in events:
-            event_data = {
-                "id":event['id'],
-                "title": event['summary'],
-                "start": event['start'].get('dateTime', event['start'].get('date')),
-                "description": event.get('description', '')
-            }
-            all_events.append(event_data)
-            
-            
-    
+    all_events=obtenerEventos()
     if parametros['persona'] == 'maestro':
         return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
     else:
@@ -277,45 +286,12 @@ def create_event():
 
 
 
-    
-    
-    
-@app.route('/agregarE' ,methods = ['POST', 'GET'])
-def agregarE():
-    parametros = dict(session)['profile']
-    
-    
-    
-    return render_template("autoridades/funcionesAut/agregarE.html", parametros=parametros)
-
 @app.route('/agendaD', methods = ['POST', 'GET'])
 @creds_required
 def agendaD():
     parametros = dict(session)['profile']
     
-    credentials = google.oauth2.credentials.Credentials(**session['credentials'])
-    calendario = build('calendar', 'v3', credentials=credentials)
-    print("entre al calendario :v")
-
-    calendars = calendario.calendarList().list().execute().get('items', [])
-
-    all_events = []
-    for calendar in calendars:
-        calendar_id = calendar['id']
-        events_result = calendario.events().list(calendarId=calendar_id).execute()
-        events = events_result.get('items', [])
-
-        for event in events:
-            event_data = {
-                "id":event['id'],
-                "title": event['summary'],
-                "start": event['start'].get('dateTime', event['start'].get('date')),
-                "description": event.get('description', '')
-            }
-            all_events.append(event_data)
-            
-            
-    print(all_events)
+    all_events=obtenerEventos()
     
     return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
 
@@ -325,27 +301,7 @@ def agenda():
     parametros = dict(session)['profile']
     horario = str(parametros['grado']) + str(parametros['grupo'])
     
-    credentials = google.oauth2.credentials.Credentials(**session['credentials'])
-    calendario = build('calendar', 'v3', credentials=credentials)
-    print("entre al calendario :v")
-
-    calendars = calendario.calendarList().list().execute().get('items', [])
-
-    all_events = []
-    for calendar in calendars:
-        calendar_id = calendar['id']
-        events_result = calendario.events().list(calendarId=calendar_id).execute()
-        events = events_result.get('items', [])
-
-        for event in events:
-            event_data = {
-                "id":event['id'],
-                "title": event['summary'],
-                "start": event['start'].get('dateTime', event['start'].get('date')),
-                "description": event.get('description', '')
-            }
-            all_events.append(event_data)
-    print(all_events)
+    all_events=obtenerEventos()
     return render_template("funciones/agenda.html", parametros=parametros,eventos=all_events,horario=horario)
 
 @app.route('/pagos')

@@ -233,10 +233,10 @@ def obtener_fechaD(anio, mes, dia):
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     eventos=obtenerEventos()
-    anio=str(anio)
-    mes=str(mes)
-    dia=str(dia)
-    fecha_predeterminada = anio+"-"+mes+"-"+dia
+    ani=str(anio)
+    me=str(mes)
+    di=str(dia)
+    fecha_predeterminada = ani+"-"+me+"-"+di
     print(fecha_predeterminada,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     # Filtrar las entradas con la fecha predeterminada
     actuales = [evento for evento in eventos if 'start' in evento and evento['start'].startswith(fecha_predeterminada)]

@@ -233,15 +233,18 @@ def obtener_fechaD(anio, mes, dia):
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     eventos=obtenerEventos()
-    fecha_predeterminada = str(anio+"-"+mes+"-"+dia)
-    print(fecha_predeterminada)
+    anio=str(anio)
+    mes=str(mes)
+    dia=str(dia)
+    fecha_predeterminada = anio+"-"+mes+"-"+dia
+    print(fecha_predeterminada,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     # Filtrar las entradas con la fecha predeterminada
     actuales = [evento for evento in eventos if 'start' in evento and evento['start'].startswith(fecha_predeterminada)]
     print(actuales)
     parametros = dict(session)['profile']
     nombre_mes = meses[mes] if 1 <= mes <= 12 else "Mes no válido"
     
-    return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio,actuales=actuales)
+    return render_template("autoridades/funcionesAut/nuevoEv.html", parametros=parametros,dia=dia,mes=mes,anio=anio,actuales=actuales)
 
 @app.route('/agregarE', methods=['GET', 'POST'])
 @creds_required

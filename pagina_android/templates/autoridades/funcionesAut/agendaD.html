@@ -275,7 +275,8 @@ table {
                 }
 
                 // Resaltar el día actual solo si estamos en el mes actual y es el día de hoy
-                if (month == fecha.getMonth()) {
+                if (i == day && month == fecha.getMonth()) {
+                    consol.log(month)
                     cell.classList.add("current-day");
                 }
 

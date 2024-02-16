@@ -227,14 +227,17 @@ def obtener_fecha(anio, mes, dia):
     return render_template("funciones/nuevoE.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio,actuales=actuales)
 
 
-@app.route('/nuevoEv/<str:anio>/<str:mes>/<str:dia>')
+@app.route('/nuevoEv/<int:anio>/<int:mes>/<int:dia>')
 def obtener_fechaD(anio, mes, dia):
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     eventos=obtenerEventos()
+    anio=str(anio)
+    mes=str(mes)
+    dia=str(dia)
     fecha_predeterminada = anio+"-"+mes+"-"+dia
-    print(fecha_predeterminada)
+    print(fecha_predeterminada,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     # Filtrar las entradas con la fecha predeterminada
     actuales = [evento for evento in eventos if 'start' in evento and evento['start'].startswith(fecha_predeterminada)]
     print(actuales)

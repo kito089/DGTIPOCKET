@@ -226,7 +226,7 @@ def create_event():
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     posicion = meses.index(mes)
     mes=str(posicion+1)
-    print(posicion,"----------------------------------------------------------")
+    #print(posicion,"----------------------------------------------------------")
     fecha = anio + "-" + mes + "-" + dia + "T10:00:00Z"
 
     
@@ -270,8 +270,11 @@ def create_event():
             
             
     
-    
-    return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
+    if parametros['persona'] == 'maestro':
+        return render_template('autoridades/funcionesAut/agendaD.html', parametros=parametros,eventos=all_events)
+    else:
+        return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
+
 
 
     

@@ -44,23 +44,27 @@ def conv(tc,e,m):
             if el[i][j] is None:
                 el[i][j] = ""
 
-    for t in tcl:
-        if isinstance(t, str):
-            tcl2.append(t)
-        else:
-            if t.is_integer():
-                tcl2.append(int(t))
+    for t1 in tcl:
+        tcl2.append([])
+        for t in t1:
+            if isinstance(t, str):
+                tcl2[-1].append(t)
             else:
-                tcl2.format(float(t), '.1f')
+                if t.is_integer():
+                    tcl2[-1].append(int(t))
+                else:
+                    tcl2[-1].append(format(float(t), '.1f'))
 
-    for e in el:
-        if isinstance(e, str):
-            el2.append(e)
-        else:
-            if e.is_integer():
-                el2.append(int(e))
+    for e1 in el:
+        el2.append([])
+        for e in e1:
+            if isinstance(e, str):
+                el2[-1].append(e)
             else:
-                el2.format(float(e), '.1f')
+                if e.is_integer():
+                    el2[-1].append(int(e))
+                else:
+                    el2[-1].append(format(float(e), '.1f'))
 
     #tcl = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in tcl]
     #el = [[int(elemento) if isinstance(elemento, (int, float)) else format(float(elemento), '.1f') if isinstance(elemento, Decimal) else elemento for elemento in sublista] for sublista in el]

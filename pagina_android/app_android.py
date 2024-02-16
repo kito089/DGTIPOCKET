@@ -234,7 +234,7 @@ def obtener_fechaD(anio, mes, dia):
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     eventos=obtenerEventos()
     ani=str(anio)
-    me=str(mes).zfill(2)
+    me=str(mes+1).zfill(2)
     di=str(dia).zfill(2)
     fecha_predeterminada = ani+"-"+me+"-"+di
     print(fecha_predeterminada)

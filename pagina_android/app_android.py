@@ -221,11 +221,11 @@ def create_event():
     mes=request.form['mes']
     anio=request.form['anio']
     
+    mes = datetime.strptime(mes, '%B')
+    mes = mes.month
     fecha = str(anio + "-" + mes + "-" + dia + "T00:00:00Z")
 
-    from datetime import datetime
-
-    fecha = datetime(int(anio), int(mes), int(dia), 0, 0, 0).isoformat() + 'Z'
+    
     summary=request.form['titulo']
     # Crear un nuevo evento
     evento = {

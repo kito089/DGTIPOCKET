@@ -224,7 +224,7 @@ def create_event():
     meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-    posicion = meses.index(mes)
+    posicion = meses.index(mes)+1
     print(posicion,"----------------------------------------------------------")
     fecha = anio + "-" + posicion + "-" + dia + "T10:00:00Z"
 

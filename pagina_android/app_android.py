@@ -242,7 +242,7 @@ def obtener_fechaD(anio, mes, dia):
 
 # Filtrar eventos con la fecha específica
     eventos_filtrados = [evento for evento in eventos if datetime.strptime(evento['start'][:10], '%Y-%m-%d') == fecha_busqueda]
-    print(eventos_filtrados."eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    print(eventos_filtrados,"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     actuales = [evento for evento in eventos if 'start' in evento and evento['start'].split('T')[0] == fecha_predeterminada]
     print(actuales)
     parametros = dict(session)['profile']

@@ -249,9 +249,12 @@ def borrar_evento(event_id):
 def editar_evento():
     if request.method == 'POST':
         if 'actualizar' in request.form:
-            return actualizar_evento(request.form['id'],request.form['title'])
+            actualizar_evento(request.form['id'],request.form['title'])
+            
+            
         elif 'borrar' in request.form:
-            return borrar_evento(request.form['id'])
+            borrar_evento(request.form['id'])
+            
     return
 
     

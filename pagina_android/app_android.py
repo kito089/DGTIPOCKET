@@ -470,7 +470,7 @@ def historialAcademico():
     tc = bd.llamar("ha_tc({0})".format(ida[0][0]))
     e = bd.llamar("ha_e({0})".format(ida[0][0]))
     atc = bd.seleccion("evaluacion_tc","acreditacion","alumnos_idalumnos = '"+ida[0][0]+"'")
-    ae = bd.seleccion("evaluacion_e","submodulos_idsubmodulos,acreditacion","alumnos_idalumnos = '"+ida[0][0]+"'")
+    ae = bd.seleccion("evaluacion_e","modulos_idmodulos,acreditacion","alumnos_idalumnos = '"+ida[0][0]+"'")
     datosC, avances = convHA(tc,e,atc,ae)
     
     bd.exit()

@@ -92,7 +92,7 @@ h3 {
 }
 
 button {
-    padding: 10px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     background-color: #34495e;
@@ -100,7 +100,7 @@ button {
     cursor: pointer;
 }
 .a {
-    padding: 10px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     background-color: #34495e;
@@ -155,21 +155,26 @@ table {
   
   /* Estilos responsivos para pantallas pequeñas */
   @media only screen and (max-width: 600px) {
+    .tabla-responsive {
+        overflow-x: auto;
+    }
     table {
-        font-size: 6px;
-        width: 50%;
+        font-size: 5px;
+        width: 10%;
+        max-width: 100%;
         border-collapse: collapse;
-        margin: 5px 0;
+        margin: 0;
         
       }
     th, td {
-      
-      width: 100%;
+    word-wrap: break-word; 
+      width: 10%;
       box-sizing: border-box;
     }
     
     /* Alineación del texto en las celdas */
     th, td {
+        word-wrap: break-word; 
       text-align: center;
     }
     
@@ -209,6 +214,7 @@ table {
         <button onclick="cambiarMes(1)">Mes Siguiente</button>
     </div>
 <div class="cl">
+    <div class="tabla-responsive">>
     <table id="calendario">
         <thead>
             <tr>
@@ -225,7 +231,7 @@ table {
             <!-- Filas del calendario se generarán dinámicamente con JavaScript -->
         </tbody>
     </table>
-    
+</div>
 </div>
 
     <div class="miDiv"></div>
@@ -275,9 +281,11 @@ table {
                 }
 
                 // Resaltar el día actual solo si estamos en el mes actual y es el día de hoy
-                if (i == day && month == fecha.getMonth()) {
+                if (i === day && month === fecha.getMonth()) {
+                    console.log(fecha.getMonth(),"------------------------------------------");
                     cell.classList.add("current-day");
                 }
+                
 
                 if ((i + primerDiaSemana) % 7 === 0) {
                     fila = tableBody.insertRow();

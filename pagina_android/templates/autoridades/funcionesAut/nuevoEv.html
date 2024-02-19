@@ -73,11 +73,11 @@ button[name="borrar"] {
                 
                 <input type="hidden" id="id" name="id" value="{{ evento.id }}" readonly>
 
-                <label for="title">Título:{{ evento.title }}</label>
-                <input type="text" id="title" name="title" value="{{ evento.title }}" >
-
-                <label for="start">Fecha de Inicio:{{ evento.start }}</label>
-                <input type="text" id="start" name="start" value="{{ evento.start }}" readonly>
+                <label for="title"><h2>{{ evento.title }}</h2></label>
+                <input type="text" id="title" name="title" value="{{ evento.title }}"  >
+                <label for="titulo">Hora del evento(24 hrs):{{ evento.start }}</label>
+                <input type="text" id="hora" name="hora" placeholder="Ingrese la hora" >
+                
 
                 
             </div>
@@ -105,6 +105,9 @@ button[name="borrar"] {
 
     <label for="titulo">Título del evento:</label>
     <input type="text" id="titulo" name="titulo" placeholder="Ingrese el título" required>
+
+    <label for="titulo">Hora del evento(24 hrs):</label>
+    <input type="text" id="hora" name="hora" placeholder="Ingrese la hora" required>
 
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" name="descripcion" placeholder="Ingrese la descripción"></textarea>

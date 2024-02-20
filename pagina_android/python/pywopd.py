@@ -121,16 +121,16 @@ def convHA(tc,e,atc,ae):
             acredi += 1
         else:
             noacredi += 1
-    # s = 0
-    # for a in ae:
-    #     if s == a[0]:
-    #         s = a[0]
-    #         if a[1] == 'A':
-    #             acredi += 1
-    #         else:
-    #             noacredi += 1
-    #     else:
-    #         s = a[0]
+    s = 0
+    for a in ae:
+        if s == a[0]:
+            s = a[0]
+            if a[1] == 'A':
+                acredi += 1
+            else:
+                noacredi += 1
+        else:
+            s = a[0]
 
     return datosC , [cred,0,cred,acredi,noacredi,acredi+noacredi]
 

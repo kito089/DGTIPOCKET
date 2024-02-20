@@ -123,7 +123,13 @@ a.agregar:hover {
                 <td>Vespertino</td>
               {% endif %}
             {% else %}
-              <td>{{ fila[i] }}</td>
+              <td>
+                {% if atributos[i] == "img" %}
+                  <img src="{{ fila[i] }}" alt="Imagen">
+                  {% else %}
+                  {{ fila[i] }}
+                {% endif %}
+              </td>
             {% endif %}
           {% endfor %}
           <td class="verde"><a class="a" href="/edDat/{{table}}/{{fila[0]}}">Editar</a></td>

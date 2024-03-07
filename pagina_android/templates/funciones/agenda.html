@@ -45,8 +45,52 @@ INICIO
     background-color:#87CEFA;
     color:#fff;
   }
+  /* Estilos responsivos para pantallas pequeñas */
+  @media only screen and (max-width: 600px) {
+    .tabla-responsive {
+        overflow-x: auto;
+    }
+    table {
+        font-size: 5px;
+        width: 10%;
+        max-width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        
+      }
+    th, td {
+    word-wrap: break-word; 
+      width: 10%;
+      box-sizing: border-box;
+    }
+    
+    /* Alineación del texto en las celdas */
+    th, td {
+        word-wrap: break-word; 
+      text-align: center;
+    }
+    
+    /* Estilos alternativos para filas impares en pantallas pequeñas */
+    tr:nth-child(odd) {
+      background-color: #fff; /* Fondo blanco para filas impares */
+    }
+
+  .miDiv {
+    width: 200px;
+    height: 200px; /* Puedes ajustar la altura según tus necesidades */
+    
+}
+.boton {
+    text-decoration: none;
+    color: #3498db;
+    transition: color 0.3s ease-in-out;
+  }
   
-  
+  .boton:hover {
+    color: #2980b9;
+  }
+
+}
 
 {% endblock %}
 

@@ -4,11 +4,7 @@
 INICIO
 {% endblock %}
 {% block style %}
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-  }
-  
+
   table {
     width: 80%;
     margin: 20px auto;
@@ -33,8 +29,20 @@ body {
     background-color: #ecf0f1;
   }
   
-  table tbody tr:hover {
+  table tbody td:hover {
     background-color: #bdc3c7;
+  }
+  .event-day{
+    background-color: #ADD8E6;
+  }
+
+  .event-day{
+    background-color: #ADD8E6;
+  }
+
+  .current-day{
+    background-color:#001F3F;
+    color:#fff;
   }
   
   
@@ -125,7 +133,7 @@ body {
                 }
 
                 // Resaltar el día actual solo si estamos en el mes actual y es el día de hoy
-                if (i == day && month == fecha.getMonth()) {
+                if ( month === fecha.getMonth() && i === day ) {
                     cell.classList.add("current-day");
                 }
 

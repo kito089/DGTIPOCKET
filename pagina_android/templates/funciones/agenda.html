@@ -4,7 +4,39 @@
 INICIO
 {% endblock %}
 {% block style %}
-
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
+  table tbody tr:nth-child(even) {
+    background-color: #ecf0f1;
+  }
+  
+  table tbody tr:hover {
+    background-color: #bdc3c7;
+  }
+  
   
 
 {% endblock %}

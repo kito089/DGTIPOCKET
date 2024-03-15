@@ -1,9 +1,9 @@
-import sys
-import numpy as np
-sys.path.append('C:/Users/jezar/Downloads/DGTIPOCKET/')
-from pagina_android.python.pywopd import *
-from pagina_android.python.bd import *
-import xlrd
+# import sys
+# import numpy as np
+# sys.path.append('C:/Users/jezar/Downloads/DGTIPOCKET/')
+# from pagina_android.python.pywopd import *
+# from pagina_android.python.bd import *
+# import xlrd
 
 # # Ruta al archivo Excel (xls)
 # archivo_excel = r'C:\Users\jezar\Downloads\DGTIPOCKET\editar_word\detalle_calificaciones-arreglo.xls'

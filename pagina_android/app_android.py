@@ -1071,4 +1071,4 @@ def generate_plot():
     return plot_url
 
 if __name__ == '__main__':
-    app.run(debug=True, ssl_context='adhoc', threaded=True, host='0.0.0.0')
+    app.run(debug=True, ssl_context=('/etc/letsencrypt/live/cetis155.edu.mx/fullchain.pem', '/etc/letsencrypt/live/cetis155.edu.mx/privkey.pem'), threaded=True, host='0.0.0.0')

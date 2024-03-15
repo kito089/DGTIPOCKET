@@ -3,7 +3,7 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 
-project_folder = os.path.expanduser('~/DGTIPOCKET/pagina_android')  # adjust as appropriate
+project_folder = os.path.expanduser('~/html/DGTIPOCKET/pagina_android')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
 
 

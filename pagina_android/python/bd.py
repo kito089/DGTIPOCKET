@@ -11,17 +11,17 @@ class Coneccion:
     def __init__(self):
         try:
             self.conexion = pymysql.connect(  #Se conecta a la base de datos
-                # host=os.getenv("HOST"),
-                # port=3306,
-                # user=os.getenv("USER"),
-                # password='',#os.getenv("PASSWORD"),
-                # db=os.getenv("DB")
-                
-                host='localhost',
+                host=os.getenv("HOST"),
                 port=3306,
-                user='root',
-                password='',
-                db='prototipos'
+                user=os.getenv("USER"),
+                password='',#os.getenv("PASSWORD"),
+                db=os.getenv("DB")
+                
+                # host='localhost',
+                # port=3306,
+                # user='root',
+                # password='',
+                # db='prototipos'
             )
             self.cursor = self.conexion.cursor()
         except pymysql.Error as e:

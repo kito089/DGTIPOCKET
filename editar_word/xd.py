@@ -60,44 +60,6 @@ except pymysql.Error as e:
 try:
     conexion2 = pymysql.connect(  
                 
-                host='ubntsvr02',
-                port=3306,
-                user='root',
-                password='',
-                db='prototipos'
-            )
-except pymysql.Error as e:
-            print("Error en la conexión 2: {0}".format(e))
-
-
-try:
-    conexion2 = pymysql.connect(  
-                
-                host='localhost',
-                port=3306,
-                user='edulife',
-                password='X30zaxac',
-                db='prototipos'
-            )
-except pymysql.Error as e:
-            print("Error en la conexión 3: {0}".format(e))
-
-try:
-    conexion2 = pymysql.connect(  
-                
-                host='ubntsvr02',
-                port=3306,
-                user='edulife',
-                password='X30zaxac',
-                db='prototipos'
-            )
-except pymysql.Error as e:
-            print("Error en la conexión 4: {0}".format(e))
-
-
-try:
-    conexion2 = pymysql.connect(  
-                
                 host='localhost',
                 port=3306,
                 user='root',
@@ -105,4 +67,4 @@ try:
                 db='root$prototipos'
             )
 except pymysql.Error as e:
-            print("Error en la conexión 5: {0}".format(e))
+            print("Error en la conexión 2: {0}".format(e))

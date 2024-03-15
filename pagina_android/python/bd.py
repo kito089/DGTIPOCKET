@@ -13,7 +13,7 @@ class Coneccion:
             self.conexion = pymysql.connect(  #Se conecta a la base de datos
                 host=os.getenv("HOST"),
                 user=os.getenv("USER"),
-                password=os.getenv("PASSWORD"),
+                #password=os.getenv("PASSWORD"),
                 db=os.getenv("DB")
                 
                 # host='localhost',

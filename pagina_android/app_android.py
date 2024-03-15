@@ -47,7 +47,7 @@ flow = Flow.from_client_secrets_file(
             "https://www.googleapis.com/auth/calendar",
             "https://www.googleapis.com/auth/drive.readonly", 
             "https://www.googleapis.com/auth/drive.file"],
-    redirect_uri="https://patotipo.pythonanywhere.com/authorize"
+    redirect_uri="https://www.cetis155.edu.mx:5000/authorize"
 )
 
 @app.route('/')

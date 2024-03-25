@@ -71,13 +71,11 @@ def conv(tc,e,m):
     datosC = tcl2+ml+el2
     return datosC
 
-
 def convHA(tc,e,atc,ae):
     tcl = [list(tupla) for tupla in tc]
     if len(e) > 0:
         el = [list(tupla) for tupla in e]
 
-    tcl2 = []
     el2 = []
     cred = 0
     acredi = 0

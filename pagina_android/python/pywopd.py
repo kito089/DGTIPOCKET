@@ -2,7 +2,7 @@ from docxtpl import DocxTemplate
 from decimal import Decimal
 from docx import Document
 import os
-import subprocess
+import docx2pdf
 from datetime import datetime
 
 def fecha_actual():
@@ -135,7 +135,7 @@ def convHA(tc,e,atc,ae):
     return datosC , [cred,0,cred,acredi,noacredi,acredi+noacredi]
 
 def genHAdocx(datosC, datosG, avances):
-    doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_HA_mamalon.docx'))
+    doc = DocxTemplate(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/plantilla_HA_mamalon.docx'))
 
     control = datosG[0].replace("@cetis155.edu.mx","")
 
@@ -155,7 +155,7 @@ def genHAdocx(datosC, datosG, avances):
     }
 
     doc.render(context)
-    doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.docx'))
+    doc.save(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.docx'))
 
 def genboletadocx(datosC, datosG):
     doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
@@ -185,12 +185,9 @@ def genboletadocx(datosC, datosG):
     print(nombre)
     doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
-def docx2pdf(input):
-    command = ['abiword', '--to=pdf', input]
+def docx2pdf(inputs):
+    input_file = inputs
 
-    try:
-        subprocess.run(command, check=True)
-        os.remove(input)
-        print(f'Se ha convertido correctamente.')
-    except subprocess.CalledProcessError as e:
-        print(f'Error al convertir el archivo: {e}')
+    output_file = inputs.replace(".docx",".pdf")
+
+    docx2pdf.convert(input_file, output_file)

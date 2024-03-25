@@ -3,9 +3,8 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 
-project_folder = os.path.expanduser('~/html/DGTIPOCKET/pagina_android')  # adjust as appropriate
+project_folder = os.path.expanduser('/var/www/html/DGTIPOCKET/pagina_android')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
-
 
 class Coneccion:
     def __init__(self):
@@ -14,14 +13,8 @@ class Coneccion:
                 host=os.getenv("HOST"),
                 port=3306,
                 user=os.getenv("USER"),
-                password='',#os.getenv("PASSWORD"),
+                password='',
                 db=os.getenv("DB")
-                
-                # host='localhost',
-                # port=3306,
-                # user='root',
-                # password='',
-                # db='prototipos'
             )
             self.cursor = self.conexion.cursor()
         except pymysql.Error as e:

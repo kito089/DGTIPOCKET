@@ -33,7 +33,7 @@ load_dotenv(os.path.join(project_folder, '.env'))
 app = Flask(__name__)
 #app.config['UPLOAD_FOLDER'] = 'C:/Users/jezar/Downloads/DGTIPOCKET/editar_word'
 #app.config['UPLOAD_FOLDER'] = '/home/kito089/kito089/prepa/prototipos/DGTIPOCKET/editar_word'
-app.config['UPLOAD_FOLDER'] = os.path.expanduser('~/DGTIPOCKET/editar_word')
+app.config['UPLOAD_FOLDER'] = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word')
 app.config['ALLOWED_EXTENSIONS'] = set()
 app.secret_key = os.getenv("APP_SECRET_KEY")
 
@@ -88,7 +88,7 @@ def credentials_to_dict(credentials):
           'client_secret': credentials.client_secret,
           'scopes': credentials.scopes}
 
-@app.route("/authorize")
+@app.route("/authorize") ### validar si es dominio cetis y edu
 def authorize():
     flow.fetch_token(authorization_response=request.url)
 
@@ -108,7 +108,7 @@ def authorize():
     )
 
     session['credentials'] = credentials_to_dict(credentials)
-    #session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
+    session.permanent = True  # make the session permanant so it keeps existing after broweser gets closed
     print("sesion --------",session)
     print("--------------------------------------")
     print(id_info['email'][0])
@@ -128,7 +128,7 @@ def logout():
     session.clear()
     return redirect("/")
 
-###         PRIMER REGISTRO DE SESION       ###
+###         PRIMER REGISTRO DE SESION     QUITARLO ALV###
 
 @app.route('/terminar')
 @login_required
@@ -187,7 +187,8 @@ def funciones():
     parametros = dict(session)['profile']
     return render_template('inisioSesion/funcionesapp.html', parametros = parametros)
 
-###         FUNCIONES SIMPLES       ###
+###         FUNCIONES SIMPLES       HACER FUNCIONAR EL CALENDARIO       ###
+@creds_required
 def obtenerEventos():
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
     calendario = build('calendar', 'v3', credentials=credentials)
@@ -211,8 +212,8 @@ def obtenerEventos():
             all_events.append(event_data)
     return all_events  
 
+@creds_required
 def actualizar_evento(event_id, titulo):
-    
     parametros = dict(session)['profile']
     eventos=obtenerEventos()
     creds = google.oauth2.credentials.Credentials(**session['credentials'])
@@ -230,6 +231,7 @@ def actualizar_evento(event_id, titulo):
     else:
         return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
 
+@creds_required
 def borrar_evento(event_id):
     parametros = dict(session)['profile']
 
@@ -253,8 +255,7 @@ def editar_evento():
         elif 'borrar' in request.form:
             return borrar_evento(request.form['id'])
     
-
-    
+@creds_required
 @app.route('/nuevoE/<int:anio>/<int:mes>/<int:dia>')
 def obtener_fecha(anio, mes, dia):
     meses = [
@@ -273,7 +274,7 @@ def obtener_fecha(anio, mes, dia):
     
     return render_template("funciones/nuevoE.html", parametros=parametros,dia=dia,mes=nombre_mes,anio=anio,actuales=actuales)
 
-
+@creds_required
 @app.route('/nuevoEv/<int:anio>/<int:mes>/<int:dia>')
 def obtener_fechaD(anio, mes, dia):
     meses = [
@@ -335,8 +336,6 @@ def create_event():
     else:
         return render_template('funciones/agenda.html', parametros=parametros,eventos=all_events)
 
-
-
 @app.route('/agendaD', methods = ['POST', 'GET'])
 @creds_required
 def agendaD():
@@ -355,17 +354,17 @@ def agenda():
     all_events=obtenerEventos()
     return render_template("funciones/agenda.html", parametros=parametros,eventos=all_events,horario=horario)
 
-@app.route('/pagos')
+@app.route('/pagos') #### PAGOS CONFORME A PROMEDIO
 def pagos():
     parametros = dict(session)['profile']
     return render_template('funciones/pagos.html', parametros = parametros)
 
-@app.route('/servicio')
+@app.route('/servicio') ### TABLA DE AFILIALES
 def servicio():
     parametros = dict(session)['profile']
     return render_template('funciones/servicio.html', parametros = parametros)
 
-@app.route('/actualizar_info', methods = ['POST', 'GET'])
+@app.route('/actualizar_info', methods = ['POST', 'GET']) ### QUITARLO ALV
 def actualizar():
     parametros = dict(session)['profile']
     db = Coneccion()
@@ -440,9 +439,9 @@ def boleta():
     datosC = conv(tc,e,m)
 
     genboletadocx(datosC, datosG)
-    word = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
+    word = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.docx')
     docx2pdf(word)
-    pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
+    pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
     return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
 
@@ -480,9 +479,9 @@ def historialAcademico():
     print("datos C: ", datosC)
     avances = [296,0,296+0,26,0,26+0,9.9]
     genHAdocx(datosC, datosG, avances)
-    word = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr+'.docx')
+    word = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr+'.docx')
     docx2pdf(word)
-    pdf = os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombr+'.pdf')
+    pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr+'.pdf')
 
     return redirect(url_for("descargar", archivo = (str(nombr)+'.pdf')))
     
@@ -539,7 +538,7 @@ def tutorias():
     bd.exit()
     return render_template('funciones/tutoriasapp.html', parametros = parametros, tutorias = tuto)
 
-@app.route('/noticias')                         #pendiente css
+@app.route('/noticias')
 def noticias():
     bd = Coneccion()
     noticias = bd.obtenerTablas("noticias")
@@ -547,7 +546,7 @@ def noticias():
     parametros = dict(session)['profile']
     return render_template('funciones/noticiasapp.html', noticias=noticias, parametros = parametros)
 
-@app.route('/descargarDrive/<string:idC>/<string:nom>')
+@app.route('/descargarDrive/<string:idC>/<string:nom>') ### ARREGLAR QUE UNA PERSONA SOLO PUEDA SUBIR UN ARCHIVO
 @creds_required
 def descargarDrive(idC, nom):
     credentials = google.oauth2.credentials.Credentials(**session['credentials'])
@@ -632,22 +631,6 @@ def index_maestros():
     parametros = dict(session)['profile']
 
     return render_template('autoridades/indexMaestros.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
-    bd = Coneccion()
-    noticias = bd.obtenerTablas("noticias")
-    avisos = bd.obtenerTablas("avisos")
-    concursos = bd.obtenerTablas("concursos")
-    bd.exit()
-    print("---------------sesion")
-    print(dict(session))
-    parametros = dict(session)['profile']
-    toks = dict(session)['tok_info']
-
-    print("session token")
-    print(toks)
-    
-    #archivo = str(parametros['grado']) + str(parametros['grupo']) 
-
-    return render_template('autoridades/indexP.html', parametros = parametros,noticias=noticias, avisos=avisos, concursos=concursos)#,archivo=archivo)
 
 @app.route('/Mconfig')
 def Mconfig():
@@ -1038,7 +1021,7 @@ def driveMas():
 
 ####            PRUEBAS             ####
 
-@app.route('/a') ### ???? carlin epico papu
+@app.route('/a') ### ???? carlin epico papu HACER FUNCIONAR A MANZANA UWU
 def a():
     parametros = dict(session)['profile']
     return render_template('pruebas/a.html', parametros = parametros)
@@ -1048,7 +1031,7 @@ def pruebas():
     parametros = dict(session)['profile']
     return render_template('prueba.html', parametros = parametros)
 
-def generate_plot():
+def generate_plot(): ### GRAFICA CON RESPECTO A CALIFICACIONES
     x = ['Fisica 2', 'CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL',
          'INGLÉS V', 'CONSTRUYE BASES DE DATOS PARA APLICACIONES WEB',
          'DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']

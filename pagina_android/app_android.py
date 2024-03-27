@@ -476,9 +476,9 @@ def historialAcademico():
 
     print("datos C: ", datosC)
     genHAdocx(datosC, datosG, avances)
-    word = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr+'.docx')
+    word = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.docx')
     docx2pdf(word)
-    pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr+'.pdf')
+    pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.pdf')
 
     return redirect(url_for("descargar", archivo = (str(nombr)+'.pdf')))
     

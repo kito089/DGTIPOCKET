@@ -120,7 +120,6 @@ def convHA(tc,e,con):
     for calificacion in datosC:
         materia = calificacion[3]
         aprobada = calificacion[4] != "NA" and calificacion[4] != "NP"
-        print("--------calf: ",materia," ",aprobada," ", calificacion[4])
         
         materia_en_registro = next((elem for elem in registro if elem[0] == materia), None)
         
@@ -129,7 +128,6 @@ def convHA(tc,e,con):
         else:
             registro.append([materia, aprobada])
 
-    print("------registro: ", registro)
     acredi = sum(1 for elem in registro if elem[1])
     noacredi = len(registro) - acredi
 

@@ -1032,10 +1032,8 @@ def pruebas():
     return render_template('prueba.html', parametros = parametros)
 
 def generate_plot(): ### GRAFICA CON RESPECTO A CALIFICACIONES
-    x = ['Fisica 2', 'CIENCIA, TECNOLOGÍA, SOCIEDAD Y VALORES', 'CÁLCULO INTEGRAL',
-         'INGLÉS V', 'CONSTRUYE BASES DE DATOS PARA APLICACIONES WEB',
-         'DESARROLLA APLICACIONES WEB CON CONEXIÓN A BASES DE DATOS']
-    y = [5, 7, 9, 8, 10, 9]
+    x = ['Parcial 1','Parcial 2','Parcial 3']
+    y = [9.5, 10, 10]
 
     plt.bar(x, y, color='skyblue')
     plt.xlabel('Materias')

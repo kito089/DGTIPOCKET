@@ -485,9 +485,9 @@ def historialAcademico():
 @app.route('/tabla/<string:table>')
 def tabla(table):
     parametros = dict(session)['profile']
-    bd = Coneccion()
-    atributos = bd.obtenerAtributos(table)
-    datos = bd.obtenerTablas(table)
+    tab = Coneccion()
+    atributos = tab.obtenerAtributos(table)
+    datos = tab.obtenerTablas(table)
     tab2 = ""
 
     print("------atributos: ",atributos)
@@ -502,9 +502,9 @@ def tabla(table):
         atributos.append(tab2)
 
         for dato in datos:
-            dato.append(bd.seleccion(tab2, "nombre", "id"+str(tab2)+"="+str(dato[-1]))[0][0])
+            dato.append(tab.seleccion(tab2, "nombre", "id"+str(tab2)+"="+str(dato[-1]))[0][0])
             dato.pop(-2)
-    bd.exit()
+    tab.exit()
     return render_template('autoridades/funcionesAut/tabla.html', parametros = parametros, atributos = atributos, datos = datos, table = table)
 
 @app.route('/clubs')
@@ -529,10 +529,12 @@ def tutorias():
     for i in tut:
         tuto.append([])
         for j in tut:
+            print(j)
             if str(j).isdigit():
                 tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j))[0][0])
             else:
                 tuto.append(j)
+    print(tuto)
     bd.exit()
     return render_template('funciones/tutoriasapp.html', parametros = parametros, tutorias = tuto)
 

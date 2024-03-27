@@ -118,7 +118,7 @@ def convHA(tc,e,con):
                 datosC.append(["Básica",t1[0],t1[1],t1[2],t1[6],str(t1[4])+" / --",t1[5]])
         
     for calificacion in datosC:
-        materia = calificacion[2]
+        materia = calificacion[3]
         aprobada = calificacion[4] != "NA" and calificacion[4] != "NP"
         print("--------calf: ",materia," ",aprobada," ", calificacion[4])
         

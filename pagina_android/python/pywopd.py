@@ -184,7 +184,7 @@ def genboletadocx(datosC, datosG):
         
     doc.render(context)
     print(nombre)
-    doc.save(os.path.expanduser('~/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
+    doc.save(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
 def docx2pdf(inputs):
     input_file = inputs

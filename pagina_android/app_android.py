@@ -444,7 +444,8 @@ def boleta():
     pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
     try:
-        return send_from_directory(app.config['UPLOAD_FOLDER'], pdf, as_attachment=True)
+        print("enviando archivo")
+        return send_from_directory(app.config['UPLOAD_FOLDER'], nombr[0]+"_"+nombr[1]+'.pdf', as_attachment=True)
     finally:
         if os.path.exists(pdf):
             os.remove(pdf)

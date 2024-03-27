@@ -528,7 +528,7 @@ def tutorias():
     tuto = []
     for i in tut:
         tuto.append([])
-        for j in tut:
+        for j in i:
             print("jota     ")
             print(j)
             if str(j).isdigit():

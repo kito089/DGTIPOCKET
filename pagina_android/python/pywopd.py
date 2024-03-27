@@ -2,7 +2,7 @@ from docxtpl import DocxTemplate
 from decimal import Decimal
 from docx import Document
 import os
-from docx2pdf import convert
+import pypandoc
 from datetime import datetime
 
 def fecha_actual():
@@ -187,8 +187,7 @@ def genboletadocx(datosC, datosG):
     doc.save(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
 def docx2pdf(inputs):
-    input_file = inputs
 
     output_file = inputs.replace(".docx",".pdf")
-
-    convert(input_file, output_file)
+    
+    output = pypandoc.convert_file(inputs, 'pdf', outputfile=output_file)

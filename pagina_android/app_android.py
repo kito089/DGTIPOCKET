@@ -525,10 +525,11 @@ def tutorias():
     parametros = dict(session)['profile']
     bd = Coneccion()
     tut = bd.obtenerTablas("tutorias")
+    print(tut)
     tuto = []
     for j in tut:
         bas = []
-        bas.append(bd.seleccion("materias","nombre","idmaterias = "+str(j[0]))[0][0])
+        bas.append(bd.seleccion("materias","nombre","idmaterias = "+str(j[-1]))[0][0])
         bas.extend(j[:-1])
         tuto.append(bas)
     print("completo    ")

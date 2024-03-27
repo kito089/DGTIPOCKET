@@ -159,7 +159,7 @@ def genHAdocx(datosC, datosG, avances):
     doc.save(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.docx'))
 
 def genboletadocx(datosC, datosG):
-    doc = DocxTemplate(os.path.expanduser('~/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
+    doc = DocxTemplate(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/plantilla_boleta_mamalona.docx'))
 
     nombre=datosG[3][0]+" "+datosG[3][1]
 

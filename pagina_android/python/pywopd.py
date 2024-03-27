@@ -2,7 +2,7 @@ from docxtpl import DocxTemplate
 from decimal import Decimal
 from docx import Document
 import os
-import pypandoc
+import subprocess
 from datetime import datetime
 
 def fecha_actual():
@@ -186,8 +186,11 @@ def genboletadocx(datosC, datosG):
     print(nombre)
     doc.save(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombre.replace(" ","_")+'.docx'))
 
-def docx2pdf(inputs):
-
-    output_file = inputs.replace(".docx",".pdf")
-    
-    output = pypandoc.convert_file(inputs, 'pdf', outputfile=output_file)
+def docx2pdf(inputs):   
+    try:
+        # Comando para ejecutar LibreOffice en modo de línea de comandos y convertir el archivo .docx a PDF
+        cmd = ['libreoffice', '--headless', '--convert-to', 'pdf', inputs, '--outdir', '/tmp']
+        subprocess.run(cmd, check=True)
+        print(f"El archivo {inputs} se ha convertido exitosamente a PDF.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error al convertir {inputs} a PDF:", e)

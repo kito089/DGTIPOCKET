@@ -189,7 +189,7 @@ def genboletadocx(datosC, datosG):
 def docx2pdf(inputs):
     output = inputs.replace(".docx",".pdf")   
     try:
-        subprocess.run(['pandoc', inputs, '-o', output, '--pdf-engine=xelatex'], check=True)
+        subprocess.run(['pandoc', inputs, '-o', output, '--pdf-engine=pdflatex'], check=True)
         print(f"El archivo {inputs} se ha convertido exitosamente a PDF.")
     except subprocess.CalledProcessError as e:
         print(f"Error al convertir {inputs} a PDF:", e)

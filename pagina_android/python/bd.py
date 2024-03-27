@@ -8,10 +8,6 @@ load_dotenv(os.path.join(project_folder, '.env'))
 
 class Coneccion:
     def __init__(self):
-        print(f"HOST: {os.getenv('HOST')}")
-        print(f"USER: {os.getenv('USERS')}")
-        print(f"PASSWORD: {os.getenv('PASSWORD')}")
-        print(f"DB: {os.getenv('DB')}")
         try:
             self.conexion = pymysql.connect(
                 host=os.getenv("HOST"),

@@ -71,77 +71,80 @@ def conv(tc,e,m):
     datosC = tcl2+ml+el2
     return datosC
 
-def convHA(tc,e,atc,ae):
+def convHA(tc,e,con):
     tcl = [list(tupla) for tupla in tc]
     if len(e) > 0:
         el = [list(tupla) for tupla in e]
 
     el2 = []
     cred = 0
-    acredi = 0
-    noacredi = 0
     s = 1
     calf = 0
     no = 0
     datosC = []
+    registro = []
 
     if len(e) > 0:
         for e1 in el:
-            el2.append(["Profesional",e1[0],e1[1],e1[2],e1[3],str(e1[4])+" / "+str(int(e1[4])*2),e1[5]])
-            cred += int(e1[4]*2)
-            if e1[3].is_integer():
-                calf += int(e1[3])
+            if e1[6] == "A":
+                el2.append(["Profesional",e1[0],e1[1],e1[2],e1[3],str(e1[4])+" / "+str(int(e1[4])*2),e1[5]])
+                cred += int(e1[4]*2)
+                calf += float(e1[3])
                 no += 1
+            else:
+                el2.append(["Profesional",e1[0],e1[1],e1[2],e1[6],str(e1[4])+" / --",e1[5]])
 
     for t1 in tcl:
         if t1[1] == s: 
-            datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
-            if t1[3].is_integer():
-                calf += int(t1[3])
+            if t1 == "A":
+                datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
+                cred += int(t1[4]*2)
+                calf += float(t1[3])
                 no += 1
+            else:
+                datosC.append(["Básica",t1[0],t1[1],t1[2],t1[6],str(t1[4])+" / --",t1[5]])
         else:
             s += 1
             if s > 2 and len(e) > 0:
                 for e in el2:
                     if e[2] == s-1:
                         datosC.append(e)
-            datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
-            if t1[3].is_integer():
-                calf += int(t1[3])
+            if t1 == "A":
+                datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
+                cred += int(t1[4]*2)
+                calf += float(t1[3])
                 no += 1
-        cred += int(t1[4]*2)
-
-    print("atc: ",atc)
-    print("ate: ", ae)
-
-    for acr in atc:
-        if acr == 'A':
-            acredi += 1
-        else:
-            noacredi += 1
-    s = 0
-    for a in ae:
-        if s == a[0]:
-            s = a[0]
-            if a[1] == 'A':
-                acredi += 1
             else:
-                noacredi += 1
+                datosC.append(["Básica",t1[0],t1[1],t1[2],t1[6],str(t1[4])+" / --",t1[5]])
+        
+    for calificacion in datosC:
+        materia = calificacion[2]
+        aprobada = calificacion[2] != "NA" and calificacion[2] != "NP"
+        
+        materia_en_registro = next((elem for elem in registro if elem[0] == materia), None)
+        
+        if materia_en_registro:
+            materia_en_registro[1] = aprobada
         else:
-            s = a[0]
+            registro.append([materia, aprobada])
 
-    return datosC , [cred,0,cred,acredi,noacredi,acredi+noacredi]
+    acredi = sum(1 for elem in registro if elem[1])
+    noacredi = len(registro) - acredi
+
+    control = con.replace("@cetis155.edu.mx","")
+    avances = [cred,0,cred,acredi,noacredi,acredi+noacredi,str(round(float(calf/no),1))]
+    if int(control[1]) > 1:
+        avances.append("44",str(((acredi+noacredi)*100)/44),"404","12","416",str(int((cred*100)/404)),0,"44",str(int((cred*100)/416)))
+    else:
+        avances.append("31",str(((acredi+noacredi)*100)/31),"340","20","360",str(int((cred*100)/340)),0,"31",str(int((cred*100)/360)))
+
+    return datosC , avances
 
 def genHAdocx(datosC, datosG, avances):
     doc = DocxTemplate(os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/plantilla_HA_mamalon.docx'))
 
     control = datosG[0].replace("@cetis155.edu.mx","")
 
-    ava = avances
-    if int(control[1]) > 1:
-        avances.append("404","12",p,p,p,"44",p)
-    else:
-        avances.append("340","20",p,p,p,"31",p)
     context = { 
         'curp' : datosG[1],
         'control' : control,

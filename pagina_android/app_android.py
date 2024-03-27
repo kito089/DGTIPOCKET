@@ -470,20 +470,17 @@ def historialAcademico():
 
     tc = bd.llamar("ha_tc({0})".format(ida[0][0]))
     e = bd.llamar("ha_e({0})".format(ida[0][0]))
-    atc = bd.seleccion("evaluacion_tc","acreditacion","alumnos_idalumnos = '"+ida[0][0]+"'")
-    ae = bd.seleccion("evaluacion_e","modulos_idmodulos,acreditacion","alumnos_idalumnos = '"+ida[0][0]+"'")
-    datosC, avances = convHA(tc,e,atc,ae)
+    datosC, avances = convHA(tc,e,parametros["email"])
     
     bd.exit()
 
     print("datos C: ", datosC)
-    avances = [296,0,296+0,26,0,26+0,9.9]
     genHAdocx(datosC, datosG, avances)
-    word = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr+'.docx')
+    word = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.docx')
     docx2pdf(word)
-    pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr+'.pdf')
+    pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.pdf')
 
-    return redirect(url_for("descargar", archivo = (str(nombr)+'.pdf')))
+    return redirect(url_for("descargar", archivo = (datosG[3].replace(" ","_")+'.pdf')))
     
 @app.route('/tabla/<string:table>')
 def tabla(table):

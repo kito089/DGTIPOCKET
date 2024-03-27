@@ -119,7 +119,7 @@ def convHA(tc,e,con):
         
     for calificacion in datosC:
         materia = calificacion[2]
-        aprobada = calificacion[2] != "NA" and calificacion[2] != "NP"
+        aprobada = calificacion[4] != "NA" and calificacion[4] != "NP"
         
         materia_en_registro = next((elem for elem in registro if elem[0] == materia), None)
         

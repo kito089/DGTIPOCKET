@@ -602,7 +602,10 @@ def cuadernillo():
                         if (int(gg[0][0]) == int(parametros['grado'])) and (len(le[0]) > 0):
                             print("condiciones cumplidas :D")
                             ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
-                            cuadernillos.append([file['thumbnailLink'], file['name'], file['webViewLink'], file['id'], ruta])
+                            try:
+                                cuadernillos.append([file['thumbnailLink'], file['name'], file['webViewLink'], file['id'], ruta])
+                            except:
+                                cuadernillos.append(["https://github.com/Yael200206/EduLife-pdf/tree/main/imagenes/miniatura.jpg", file['name'], file['webViewLink'], file['id'], ruta])
                     else:
                         print("cuadernillo no agregado a la bd")
             bd.exit()

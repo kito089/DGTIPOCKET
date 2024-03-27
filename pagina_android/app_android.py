@@ -600,12 +600,7 @@ def cuadernillo():
                 for gg in gragru:
                     if len(gg) > 0:
                         le = bd.seleccion("grupo","letra","idgrupo = '"+str(gg[1])+"'")
-                        print("asdasdadad")
-                        print(gg)
-                        print(le)
-                        print(parametros['grado'])
-                        print(parametros['grupo'])
-                        if (int(gg[0][0]) == int(parametros['grado'])) and (len(le[0]) > 0):
+                        if (int(gg[0][0]) == int(parametros['grado'])) and (le[0][0] == parametros['grupo']):
                             print("condiciones cumplidas :D")
                             ruta = f"{app.config['UPLOAD_FOLDER']}/{file['name']}"
                             try:

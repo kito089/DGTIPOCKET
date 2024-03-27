@@ -526,15 +526,9 @@ def tutorias():
     bd = Coneccion()
     tut = bd.obtenerTablas("tutorias")
     tuto = []
-    for i in tut:
-        tuto.append([])
-        for j in i:
-            print("jota     ")
-            print(j)
-            if str(j).isdigit():
-                tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j))[0][0])
-            else:
-                tuto.append(j)
+    for j in tut:
+        tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j[0]))[0][0])
+        tuto.extend(j[1:])
     print("completo    ")
     print(tuto)
     bd.exit()

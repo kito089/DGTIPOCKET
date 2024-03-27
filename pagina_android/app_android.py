@@ -527,8 +527,10 @@ def tutorias():
     tut = bd.obtenerTablas("tutorias")
     tuto = []
     for j in tut:
-        tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j[0]))[0][0])
-        tuto.extend(j[1:])
+        bas = []
+        bas.append(bd.seleccion("materias","nombre","idmaterias = "+str(j[0]))[0][0])
+        bas.extend(j[:-1])
+        tuto.append(bas)
     print("completo    ")
     print(tuto)
     bd.exit()

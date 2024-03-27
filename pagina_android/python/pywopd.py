@@ -134,9 +134,9 @@ def convHA(tc,e,con):
     control = con.replace("@cetis155.edu.mx","")
     avances = [cred,0,cred,acredi,noacredi,acredi+noacredi,str(round(float(calf/no),1))]
     if int(control[1]) > 1:
-        avances.append("44",str(((acredi+noacredi)*100)/44),"404","12","416",str(int((cred*100)/404)),0,"44",str(int((cred*100)/416)))
+        avances.extend(["44",str(((acredi+noacredi)*100)/44),"404","12","416",str(int((cred*100)/404)),0,"44",str(int((cred*100)/416))])
     else:
-        avances.append("31",str(((acredi+noacredi)*100)/31),"340","20","360",str(int((cred*100)/340)),0,"31",str(int((cred*100)/360)))
+        avances.extend(["31",str(((acredi+noacredi)*100)/31),"340","20","360",str(int((cred*100)/340)),0,"31",str(int((cred*100)/360))])
 
     return datosC , avances
 

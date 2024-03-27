@@ -96,7 +96,7 @@ def convHA(tc,e,con):
 
     for t1 in tcl:
         if t1[1] == s: 
-            if t1 == "A":
+            if t1[6] == "A":
                 datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
                 cred += int(t1[4]*2)
                 calf += float(t1[3])
@@ -109,7 +109,7 @@ def convHA(tc,e,con):
                 for e in el2:
                     if e[2] == s-1:
                         datosC.append(e)
-            if t1 == "A":
+            if t1[6] == "A":
                 datosC.append(["Básica",t1[0],t1[1],t1[2],t1[3],str(t1[4])+" / "+str(int(t1[4])*2),t1[5]])
                 cred += int(t1[4]*2)
                 calf += float(t1[3])

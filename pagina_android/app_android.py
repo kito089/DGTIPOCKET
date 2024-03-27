@@ -530,7 +530,7 @@ def tutorias():
     for j in tut:
         bas = []
         bas.append(bd.seleccion("materias","nombre","idmaterias = "+str(j[-1]))[0][0])
-        bas.extend(j[:-1])
+        bas.extend(j[1:-1])
         tuto.append(bas)
     print("completo    ")
     print(tuto)

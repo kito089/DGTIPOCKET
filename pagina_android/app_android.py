@@ -480,7 +480,7 @@ def historialAcademico():
     docx2pdf(word)
     pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+datosG[3].replace(" ","_")+'.pdf')
 
-    return redirect(url_for("descargar", archivo = (str(nombr)+'.pdf')))
+    return redirect(url_for("descargar", archivo = (datosG[3].replace(" ","_")+'.pdf')))
     
 @app.route('/tabla/<string:table>')
 def tabla(table):

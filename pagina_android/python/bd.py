@@ -13,7 +13,7 @@ class Coneccion:
                 host=os.getenv("HOST"),
                 port=3306,
                 user=os.getenv("USER"),
-                password='',
+                password=os.getenv("PASSWORD"),
                 db=os.getenv("DB")
             )
             self.cursor = self.conexion.cursor()

@@ -443,7 +443,12 @@ def boleta():
     docx2pdf(word)
     pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
+    try:
+        return send_from_directory(app.config['UPLOAD_FOLDER'], pdf, as_attachment=True)
+    finally:
+        if os.path.exists(pdf):
+            os.remove(pdf)
+            print(f'Archivo {pdf} eliminado correctamente.')
 
 @app.route('/historial')
 def historial():

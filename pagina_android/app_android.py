@@ -443,7 +443,7 @@ def boleta():
     docx2pdf(word)
     pdf = os.path.expanduser('/var/www/html/DGTIPOCKET/editar_word/'+nombr[0]+"_"+nombr[1]+'.pdf')
     
-    return redirect(url_for("descargar", archivo = (str(nombr)+'.pdf')))
+    return redirect(url_for("descargar", archivo = (nombr[0]+"_"+nombr[1]+'.pdf')))
 
 @app.route('/historial')
 def historial():

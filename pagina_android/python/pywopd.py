@@ -2,7 +2,7 @@ from docxtpl import DocxTemplate
 from decimal import Decimal
 from docx import Document
 import os
-import docx2pdf
+from docx2pdf import convert
 from datetime import datetime
 
 def fecha_actual():
@@ -191,4 +191,4 @@ def docx2pdf(inputs):
 
     output_file = inputs.replace(".docx",".pdf")
 
-    docx2pdf.convert(input_file, output_file)
+    convert(input_file, output_file)

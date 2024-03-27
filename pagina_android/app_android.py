@@ -529,11 +529,13 @@ def tutorias():
     for i in tut:
         tuto.append([])
         for j in tut:
+            print("jota     ")
             print(j)
             if str(j).isdigit():
                 tuto.append(bd.seleccion("materias","nombre","idmaterias = "+str(j))[0][0])
             else:
                 tuto.append(j)
+    print("completo    ")
     print(tuto)
     bd.exit()
     return render_template('funciones/tutoriasapp.html', parametros = parametros, tutorias = tuto)

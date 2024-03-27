@@ -490,6 +490,7 @@ def tabla(table):
     datos = bd.obtenerTablas(table)
     tab2 = ""
 
+    print("------atributos: ",atributos)
     if "_id" in atributos[-1]:
         for a in atributos[-1]:
             if a != "_":

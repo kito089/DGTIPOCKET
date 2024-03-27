@@ -9,7 +9,7 @@ load_dotenv(os.path.join(project_folder, '.env'))
 class Coneccion:
     def __init__(self):
         try:
-            self.conexion = pymysql.connect(  #Se conecta a la base de datos
+            self.conexion = pymysql.connect(
                 host=os.getenv("HOST"),
                 port=3306,
                 user=os.getenv("USER"),

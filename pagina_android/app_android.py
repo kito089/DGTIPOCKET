@@ -445,7 +445,7 @@ def boleta():
     
     try:
         print("enviando archivo")
-        return send_from_directory(app.config['UPLOAD_FOLDER'], nombr[0]+"_"+nombr[1]+'.pdf', as_attachment=True)
+        return send_from_directory(app.config['UPLOAD_FOLDER'], nombr[0]+"_"+nombr[1]+'.docx', as_attachment=True)
     finally:
         if os.path.exists(pdf):
             os.remove(pdf)
